@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomShapeAppearance">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">16dp</item>
+        <item name="neumorph_cornerSizeTopLeft">64dp</item>
+        <item name="neumorph_cornerSizeTopRight">64dp</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+        <!--        <item name="android:backgroundDimEnabled">false</item>-->
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <declare-styleable name="TitleBar">
+        <attr name="titlebar_background" format="reference|integer" />
+        <attr name="title" format="string" />
+        <attr name="title_color" format="color" />
+        <attr name="left_button_background" format="reference|integer" />
+        <attr name="right_button_background" format="reference|integer" />
+        <attr name="left_button_icon" format="reference" />
+        <attr name="right_button_icon" format="reference" />
+        <attr name="left_button_visibility" format="boolean" />
+        <attr name="right_button_visibility" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SettingItem">
+        <attr name="setting_item_simple_mode" format="boolean"/>
+        <attr name="setting_item_background" format="reference|integer" />
+        <attr name="setting_item_title" format="string" />
+        <attr name="setting_item_title_color" format="color" />
+        <attr name="setting_item_left_icon_background" format="reference|integer" />
+        <attr name="setting_item_right_icon_background" format="reference|integer" />
+        <attr name="setting_item_left_icon" format="reference" />
+        <attr name="setting_item_right_icon" format="reference" />
+        <attr name="setting_item_tip" format="string" />
+        <attr name="setting_item_tip_color" format="color" />
+        <attr name="setting_item_left_icon_visibility" format="boolean" />
+        <attr name="setting_item_right_icon_visibility" format="boolean" />
+        <attr name="setting_item_top_radius_enable" format="boolean"/>
+        <attr name="setting_item_bottom_radius_enable" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="CheckBoxItem">
+        <attr name="checkbox_item_background" format="reference|integer" />
+        <attr name="checkbox_item_title" format="string" />
+        <attr name="checkbox_item_title_color" format="color" />
+        <attr name="checkbox_item_checked" format="boolean" />
+        <attr name="checkbox_item_top_radius_enable" format="boolean"/>
+        <attr name="checkbox_item_bottom_radius_enable" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="ChatterItem">
+        <attr name="chatter_item_name" format="string" />
+        <attr name="chatter_item_name_color" format="color" />
+        <attr name="chatter_item_tag" format="string" />
+        <attr name="chatter_item_tag_color" format="color" />
+        <attr name="chatter_item_tag_visibility" format="boolean" />
+        <attr name="chatter_item_tag_background_color" format="color" />
+        <attr name="chatter_item_time" format="string" />
+        <attr name="chatter_item_time_color" format="color" />
+        <attr name="chatter_item_content" format="string" />
+        <attr name="chatter_item_content_color" format="color" />
+        <attr name="chatter_item_avatar" format="reference" />
+        <attr name="chatter_item_splitter_enable" format="boolean" />
+        <attr name="chatter_item_top_radius_enable" format="boolean"/>
+        <attr name="chatter_item_bottom_radius_enable" format="boolean"/>
+    </declare-styleable>
+
+    <style name="AnimActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/anim_fade</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/tab_color_selector</item>
+    </style>
+    <style name="anim_fade" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_fade_out</item>
+    </style>
+</resources>

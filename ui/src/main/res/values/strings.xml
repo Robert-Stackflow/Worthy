@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm_remind">确认服药</string>
+    <string name="medicine_name_sample">药品名称</string>
+    <string name="medicine_dosewithunit_sample">2粒</string>
+    <string name="doctor_orders_sample">注意事项：不要饮酒，注意冲服</string>
+    <string name="splitter_description">splitter</string>
+    <string name="card_widget_title_sample">标题</string>
+    <string name="create_remind_page_title">新建服药提醒</string>
+    <string name="medicine_unit_sample">单位</string>
+    <string name="medicine_dose_sample">剂量</string>
+    <string name="app_notification_sample">APP通知</string>
+    <string name="alarm_sample">闹钟提醒</string>
+    <string name="repeat_by_week_sample">按周重复</string>
+    <string name="repeat_by_interval_sample">按天数间隔重复</string>
+    <string name="username_sample">未登录</string>
+    <string name="entry_profile_sample">个人信息</string>
+    <string name="entry_security_sample">安全设置</string>
+    <string name="entry_history_sample">服药历史</string>
+    <string name="entry_note_sample">每日小记</string>
+    <string name="entry_setting_sample">通用设置</string>
+    <string name="entry_privacy_sample">隐私政策</string>
+    <string name="entry_service_sample">服务条款</string>
+    <string name="entry_about_sample">关于APP</string>
+    <string name="logout_sample">退出登录</string>
+    <string name="entry_feedback_sample">意见反馈</string>
+    <string name="entry_help_sample">使用指南</string>
+    <string name="entry_statistics_sample">统计推送</string>
+    <string name="entry_notice_sample">漏服提醒</string>
+    <string name="entry_system_sample">系统通知</string>
+    <string name="entry_article_sample">推文推送</string>
+    <string name="entry_message_sample">消息通知</string>
+</resources>

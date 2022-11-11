@@ -1,0 +1,4 @@
+include ':neumorphism'
+include ':app'
+include ':ui'
+enableFeaturePreview("VERSION_CATALOGS")

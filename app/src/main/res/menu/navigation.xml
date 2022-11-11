@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:checked="true"
+        android:icon="@drawable/ic_light_home"
+        android:title="发现" />
+    <item
+        android:id="@+id/map"
+        android:icon="@drawable/ic_light_heart"
+        android:title="关注" />
+    <item
+        android:id="@+id/add"
+        android:icon="@drawable/ic_light_navigation"
+        android:title="地图" />
+    <item
+        android:id="@+id/message"
+        android:icon="@drawable/ic_light_message"
+        android:title="消息" />
+    <item
+        android:id="@+id/personal"
+        android:icon="@drawable/ic_light_user"
+        android:title="我的" />
+</menu>
