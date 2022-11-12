@@ -13,16 +13,18 @@ import com.cloudchewie.client.domin.User;
 import com.cloudchewie.client.request.UserRequest;
 import com.cloudchewie.client.service.UserService;
 import com.cloudchewie.client.util.LocalStorage;
+import com.cloudchewie.client.util.StatusBarUtil;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setMargin(this);
         setContentView(R.layout.activity_login);
         findViewById(R.id.titlebar_left_button).setOnClickListener(this);
         findViewById(R.id.login_confirm).setOnClickListener(this);

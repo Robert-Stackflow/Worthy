@@ -7,12 +7,14 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.util.StatusBarUtil;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
+public class SettingsActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.setMargin(this);
         setContentView(R.layout.activity_settings);
         findViewById(R.id.entry_account).setOnClickListener(this);
         findViewById(R.id.entry_notification).setOnClickListener(this);

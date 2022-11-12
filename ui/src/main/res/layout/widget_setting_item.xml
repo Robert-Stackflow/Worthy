@@ -5,9 +5,9 @@
     android:id="@+id/setting_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="20dp"
+    android:paddingStart="12dp"
     android:paddingTop="12dp"
-    android:paddingEnd="15dp"
+    android:paddingEnd="12dp"
     android:paddingBottom="12dp">
 
     <ImageView

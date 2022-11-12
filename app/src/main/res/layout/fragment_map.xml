@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:focusable="true" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/map_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/titlebar_background"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
 
-        <TextView
-            style="@style/TextAppearance.AppCompat.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/titlebar_background"
-            android:text="地图"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/map_search"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@color/titlebar_background"
-            android:clickable="true"
-            android:contentDescription="搜索"
-            android:focusable="true"
-            android:src="@drawable/ic_light_search"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+        <com.cloudchewie.search.SearchLayout
+            android:id="@+id/map_search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:search_bg="@drawable/shape_card_round_shadow"
+            app:search_color="@color/color_accent"
+            app:search_hint="搜索地点"
+            app:search_text_cursor="@drawable/shape_cursor" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/goto_mylocation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_card_round"
+        android:clickable="true"
+        android:contentDescription="定位至我的位置"
+        android:focusable="true"
         android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@id/map_titlebar">
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:src="@drawable/ic_light_location" />
+</RelativeLayout>

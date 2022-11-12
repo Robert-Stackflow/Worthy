@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/titlebar_background"
-        android:padding="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -59,11 +60,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/messaga_entry_comment_layout"
+                android:id="@+id/message_entry_comment_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/messaga_entry_thumbup_layout"
+                app:layout_constraintEnd_toStartOf="@id/message_entry_thumbup_layout"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +74,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <ImageButton
-                        android:id="@+id/messaga_entry_comment_icon"
+                        android:id="@+id/message_entry_comment_icon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@android:color/transparent"
@@ -88,7 +89,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/messaga_entry_comment_text"
+                    android:id="@+id/message_entry_comment_text"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,19 +97,16 @@
                     android:focusable="true"
                     android:text="评论回复"
                     android:textAlignment="center"
-                    android:textColor="@color/text_color_fast_entry"
-                    app:layout_constraintBottom_toBottomOf="@id/avatar"
-                    app:layout_constraintStart_toEndOf="@id/avatar"
-                    app:layout_constraintTop_toTopOf="@id/avatar" />
+                    android:textColor="@color/text_color_fast_entry" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/messaga_entry_thumbup_layout"
+                android:id="@+id/message_entry_thumbup_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/messaga_entry_fans_layout"
-                app:layout_constraintStart_toEndOf="@id/messaga_entry_comment_layout">
+                app:layout_constraintEnd_toStartOf="@id/message_entry_fans_layout"
+                app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -117,7 +115,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <ImageButton
-                        android:id="@+id/messaga_entry_thumbup_icon"
+                        android:id="@+id/message_entry_thumbup_icon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@android:color/transparent"
@@ -132,7 +130,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/messaga_entry_thumbup_text"
+                    android:id="@+id/message_entry_thumbup_text"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,19 +138,16 @@
                     android:focusable="true"
                     android:text="点赞收藏"
                     android:textAlignment="center"
-                    android:textColor="@color/text_color_fast_entry"
-                    app:layout_constraintBottom_toBottomOf="@id/avatar"
-                    app:layout_constraintStart_toEndOf="@id/avatar"
-                    app:layout_constraintTop_toTopOf="@id/avatar" />
+                    android:textColor="@color/text_color_fast_entry" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/messaga_entry_fans_layout"
+                android:id="@+id/message_entry_fans_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/messaga_entry_system_layout"
-                app:layout_constraintStart_toEndOf="@id/messaga_entry_thumbup_layout">
+                app:layout_constraintEnd_toStartOf="@id/message_entry_system_layout"
+                app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -161,7 +156,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <ImageButton
-                        android:id="@+id/messaga_entry_fans_icon"
+                        android:id="@+id/message_entry_fans_icon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@android:color/transparent"
@@ -176,7 +171,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/messaga_entry_fans_text"
+                    android:id="@+id/message_entry_fans_text"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -184,19 +179,16 @@
                     android:focusable="true"
                     android:text="新的关注"
                     android:textAlignment="center"
-                    android:textColor="@color/text_color_fast_entry"
-                    app:layout_constraintBottom_toBottomOf="@id/avatar"
-                    app:layout_constraintStart_toEndOf="@id/avatar"
-                    app:layout_constraintTop_toTopOf="@id/avatar" />
+                    android:textColor="@color/text_color_fast_entry" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/messaga_entry_system_layout"
+                android:id="@+id/message_entry_system_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/messaga_entry_fans_layout">
+                app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -204,7 +196,7 @@
                     app:layout_constraintStart_toStartOf="parent">
 
                     <ImageButton
-                        android:id="@+id/messaga_entry_system_icon"
+                        android:id="@+id/message_entry_system_icon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@android:color/transparent"
@@ -219,7 +211,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/messaga_entry_system_text"
+                    android:id="@+id/message_entry_system_text"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -227,10 +219,7 @@
                     android:focusable="true"
                     android:text="系统通知"
                     android:textAlignment="center"
-                    android:textColor="@color/text_color_fast_entry"
-                    app:layout_constraintBottom_toBottomOf="@id/avatar"
-                    app:layout_constraintStart_toEndOf="@id/avatar"
-                    app:layout_constraintTop_toTopOf="@id/avatar" />
+                    android:textColor="@color/text_color_fast_entry" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

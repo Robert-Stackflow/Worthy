@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.SettingsActivity;
+import com.cloudchewie.client.util.StatusBarUtil;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     View mainView;
@@ -25,6 +26,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_user, null);
+        StatusBarUtil.setMargin(mainView.findViewById(R.id.user_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.user_settings).setOnClickListener(this);
         mainView.findViewById(R.id.switch_daynight).setOnClickListener(this);
         return mainView;

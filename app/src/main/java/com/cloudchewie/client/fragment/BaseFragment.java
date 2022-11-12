@@ -28,7 +28,7 @@ public class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(getContext(), R.layout.frag_base, null);
+        View view = View.inflate(getContext(), R.layout.fragment_base, null);
         ((TextView) view.findViewById(R.id.tv_title)).setText(title);
         return view;
     }

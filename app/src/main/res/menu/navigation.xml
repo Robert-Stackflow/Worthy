@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
-        android:checked="true"
-        android:icon="@drawable/ic_light_home"
-        android:title="发现" />
-    <item
         android:id="@+id/map"
-        android:icon="@drawable/ic_light_heart"
-        android:title="关注" />
-    <item
-        android:id="@+id/add"
-        android:icon="@drawable/ic_light_navigation"
+        android:checked="true"
+        android:icon="@drawable/ic_light_map"
         android:title="地图" />
+    <item
+        android:id="@+id/discover"
+        android:icon="@drawable/ic_light_navigation"
+        android:title="发现" />
+    <!--    <item-->
+    <!--        android:id="@+id/add"-->
+    <!--        android:icon="@drawable/ic_light_plus"-->
+    <!--        android:title="" />-->
     <item
         android:id="@+id/message"
         android:icon="@drawable/ic_light_message"

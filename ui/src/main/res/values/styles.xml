@@ -30,7 +30,7 @@
     </declare-styleable>
 
     <declare-styleable name="SettingItem">
-        <attr name="setting_item_simple_mode" format="boolean"/>
+        <attr name="setting_item_simple_mode" format="boolean" />
         <attr name="setting_item_background" format="reference|integer" />
         <attr name="setting_item_title" format="string" />
         <attr name="setting_item_title_color" format="color" />
@@ -42,8 +42,8 @@
         <attr name="setting_item_tip_color" format="color" />
         <attr name="setting_item_left_icon_visibility" format="boolean" />
         <attr name="setting_item_right_icon_visibility" format="boolean" />
-        <attr name="setting_item_top_radius_enable" format="boolean"/>
-        <attr name="setting_item_bottom_radius_enable" format="boolean"/>
+        <attr name="setting_item_top_radius_enable" format="boolean" />
+        <attr name="setting_item_bottom_radius_enable" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="CheckBoxItem">
@@ -51,8 +51,8 @@
         <attr name="checkbox_item_title" format="string" />
         <attr name="checkbox_item_title_color" format="color" />
         <attr name="checkbox_item_checked" format="boolean" />
-        <attr name="checkbox_item_top_radius_enable" format="boolean"/>
-        <attr name="checkbox_item_bottom_radius_enable" format="boolean"/>
+        <attr name="checkbox_item_top_radius_enable" format="boolean" />
+        <attr name="checkbox_item_bottom_radius_enable" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="ChatterItem">
@@ -68,19 +68,29 @@
         <attr name="chatter_item_content_color" format="color" />
         <attr name="chatter_item_avatar" format="reference" />
         <attr name="chatter_item_splitter_enable" format="boolean" />
-        <attr name="chatter_item_top_radius_enable" format="boolean"/>
-        <attr name="chatter_item_bottom_radius_enable" format="boolean"/>
+        <attr name="chatter_item_top_radius_enable" format="boolean" />
+        <attr name="chatter_item_bottom_radius_enable" format="boolean" />
     </declare-styleable>
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
 
     <style name="AnimActivity" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/anim_fade</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="textAllCaps">false</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/tab_color_selector</item>
     </style>
+
     <style name="anim_fade" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/anim_fade_in</item>
         <item name="android:activityOpenExitAnimation">@anim/anim_fade_out</item>

@@ -8,8 +8,6 @@
     </style>
 
     <style name="AppTheme" parent="Platform.Theme.Neumorphism">
-        <item name="colorPrimary">@color/card_background</item>
-        <item name="colorPrimaryDark">@color/card_background</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/background</item>

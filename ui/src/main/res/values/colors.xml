@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="color_accent">#000000</color>
-    <color name="background">#FAFAFA</color>
+    <color name="background">#F6F6F6</color>
     <color name="icon_color">#060606</color>
-    <color name="titlebar_background">#FFFFFF</color>
+    <color name="titlebar_background">#F6F6F6</color>
     <color name="text_color_fast_entry">#444444</color>
     <color name="text_color_gray">#999999</color>
     <color name="text_color_light_gray">#BFBFBF</color>
     <color name="divider_color">#E6E6E6</color>
     <color name="checked_color">#0066FF</color>
     <color name="card_background">#FFFFFF</color>
+    <color name="tag_background">#F1F1F1</color>
     <color name="card_pressed_background">#E5E5E5</color>
 </resources>

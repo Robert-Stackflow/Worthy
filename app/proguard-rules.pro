@@ -22,3 +22,7 @@
 -keepclasseswithmembers class * {
     public <init>(android.content.Context);
 }
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-keep class com.baidu.vi.** {*;}
+-dontwarn com.baidu.**
