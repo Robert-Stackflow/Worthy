@@ -1,4 +1,4 @@
-package com.cloudchewie.client.maputil;
+package com.cloudchewie.client.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;

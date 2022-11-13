@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -61,8 +60,9 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.PoiItemAdapter;
-import com.cloudchewie.client.maputil.Utils;
+import com.cloudchewie.client.util.LocationUtil;
 import com.cloudchewie.client.util.StatusBarUtil;
+import com.cloudchewie.client.util.Utils;
 import com.cloudchewie.search.SearchLayout;
 
 import org.jetbrains.annotations.Contract;
@@ -73,6 +73,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -113,39 +114,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     private MyTextWatcher myTextWatcher = new MyTextWatcher();
     private static final String CUSTOM_FILE_NAME_GRAY = "custom_blacknight.sty";
     private static final String CUSTOM_FILE_NAME_WHITE = "custom_trip.sty";
-    String[] provinces = {"北京市", "天津市", "上海市", "广东省", "河南省", "重庆市", "河北省", "山西省", "辽宁省", "吉林省", "黑龙江省", "江苏省", "浙江省", "安徽省", "福建省",
-            "江西省", "山东省", "湖北省", "湖南省", "海南省", "四川省", "贵州省", "云南省", "陕西省", "甘肃省", "青海省", "台湾省"};
-    String[][] cities = new String[][]{
-            {"北京市"},
-            {"天津市"},
-            {"上海市"},
-            {"广州", "深圳", "韶关", "珠海", "汕头", "佛山", "湛江", "肇庆", "江门", "茂名", "惠州", "梅州", "汕尾", "河源", "阳江", "清远", "东莞", "中山", "潮州", "揭阳", "云浮"},
-            {"郑州市", "开封市", "洛阳市", "平顶山市", "许昌市"},
-    };
-    String[][][] counties = new String[][][]{
-            {
-                    {"东城区", "西城区", "崇文区", "宣武区", "朝阳区", "海淀区", "丰台区", "石景山区", "门头沟区", "房山区", "通州区", "顺义区", "大兴区", "昌平区", "平谷区", "怀柔区", "密云县", "延庆县"}
-            },
-            {
-                    {"和平区", "河东区", "河西区", "南开区", "河北区", "红桥区", "塘沽区", "汉沽区", "大港区", "东丽区"}
-            },
-            {
-                    {"长宁区", "静安区", "普陀区", "闸北区", "虹口区"}
-            },
-            {
-                    {"海珠区", "荔湾区", "越秀区", "白云区", "萝岗区", "天河区", "黄埔区", "花都区", "从化市", "增城市", "番禺区", "南沙区"},
-                    {"宝安区", "福田区", "龙岗区", "罗湖区", "南山区", "盐田区"},
-                    {"武江区", "浈江区", "曲江区", "乐昌市", "南雄市", "始兴县", "仁化县", "翁源县", "新丰县", "乳源县"},
-                    {"无"}
-            },
-            {
-                    {"中原区", "二七区", "管城区", "金水区", "上街区", "惠济区", "巩义市", "荥阳市", "新密市", "新郑市", "登封市", "中牟县"},
-                    {"鼓楼区", "龙亭区", "顺河区", "禹王台", "金明区", "杞县", "通许县", "尉氏县", "开封县", "兰考县"},
-                    {"西工区", "老城区", "瀍河区", "涧西区", "吉利区", "洛龙区", "偃师市", "孟津县", "新安县", "栾川县", "嵩县", "汝阳县", "宜阳县", "洛宁县", "伊川县"},
-                    {"新华区", "卫东区", "湛河区", "石龙区", "舞钢市", "汝州市", "宝丰县", "叶 县", "鲁山县", "郏县"},
-                    {"魏都区", "禹州市", "长葛市", "许昌县", "鄢陵县", "襄城县"}
-            },
-    };
+    ArrayList<String> provinces;
+    ArrayList<ArrayList<String>> cities;
+    ArrayList<ArrayList<ArrayList<String>>> counties;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -225,9 +196,16 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     }
 
     void initSpinner() {
-        adapter_province = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, provinces);
-        adapter_city = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, cities[0]);
-        adapter_county = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, counties[0][0]);
+        LocationUtil.initJsonData(getActivity());
+        provinces = LocationUtil.getProvices();
+        cities = LocationUtil.getCities();
+        counties = LocationUtil.getCounties();
+        adapter_province = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, provinces);
+        adapter_province.setDropDownViewResource(R.layout.widget_spinner_item);
+        adapter_city = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, cities.get(0));
+        adapter_city.setDropDownViewResource(R.layout.widget_spinner_item);
+        adapter_county = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, counties.get(0).get(0));
+        adapter_county.setDropDownViewResource(R.layout.widget_spinner_item);
         provinceSpinner.setAdapter(adapter_province);
         provinceSpinner.setSelection(0);
         citySpinner.setAdapter(adapter_city);
@@ -238,9 +216,10 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 province_postion = i;
-                adapter_city = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, cities[i]);
+                adapter_city = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, cities.get(i));
+                adapter_city.setDropDownViewResource(R.layout.widget_spinner_item);
                 citySpinner.setAdapter(adapter_city);
-                seletced_province = provinces[i];
+                seletced_province = provinces.get(i);
             }
 
             @Override
@@ -252,10 +231,10 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 city_postion = i;
-                adapter_county = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, counties[province_postion][city_postion]);
+                adapter_county = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, new ArrayList<>(new HashSet<>(counties.get(province_postion).get(city_postion))));
+                adapter_county.setDropDownViewResource(R.layout.widget_spinner_item);
                 countySpinner.setAdapter(adapter_county);
-                seletced_city = cities[province_postion][i];
-
+                seletced_city = cities.get(province_postion).get(i);
             }
 
             @Override
@@ -266,8 +245,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         countySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                seletced_county = counties[province_postion][city_postion][i];
-                Log.d("xuruida", seletced_province + "-" + seletced_city + "-" + seletced_county);
+                seletced_county = counties.get(province_postion).get(city_postion).get(i);
             }
 
             @Override
