@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:right_button_visibility="false"
-        app:title="消息通知" />
+        app:title="@string/entry_notification" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,30 +32,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                app:checkbox_item_title="推送消息"
+                app:checkbox_item_title="@string/switch_recommend"
                 app:checkbox_item_top_radius_enable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.cloudchewie.client.ui.CheckBoxItem
-                android:id="@+id/switch_system"
+                android:id="@+id/switch_system_notification"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 app:checkbox_item_bottom_radius_enable="true"
-                app:checkbox_item_title="系统通知"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/switch_recommend" />
-
-            <com.cloudchewie.client.ui.CheckBoxItem
-                android:id="@+id/switch_notdisturb"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                app:checkbox_item_checked="false"
-                app:checkbox_item_title="勿扰模式"
+                app:checkbox_item_title="@string/switch_system_notification"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/switch_recommend" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -73,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                app:checkbox_item_title="被关注通知"
+                app:checkbox_item_title="@string/switch_new_follower"
                 app:checkbox_item_top_radius_enable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                app:checkbox_item_title="被点赞通知"
+                app:checkbox_item_title="@string/switch_new_thumbup"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/switch_new_follower" />
 
@@ -95,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 app:checkbox_item_bottom_radius_enable="true"
-                app:checkbox_item_title="被收藏通知"
+                app:checkbox_item_title="@string/switch_new_collection"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/switch_new_thumbup" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -113,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                app:checkbox_item_title="关注的人通知"
+                app:checkbox_item_title="@string/switch_following_new_content"
                 app:checkbox_item_top_radius_enable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -124,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                app:checkbox_item_title="关注的地点通知"
+                app:checkbox_item_title="@string/switch_place_new_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/switch_following_new_content" />
 
@@ -135,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 app:checkbox_item_bottom_radius_enable="true"
-                app:checkbox_item_title="关注的话题通知"
+                app:checkbox_item_title="@string/switch_topic_new_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/switch_place_new_content" />
         </androidx.constraintlayout.widget.ConstraintLayout>

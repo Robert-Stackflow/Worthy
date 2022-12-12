@@ -93,7 +93,7 @@ public class SettingItem extends ConstraintLayout {
         if (visibility)
             left_icon.setVisibility(View.VISIBLE);
         else
-            left_icon.setVisibility(View.INVISIBLE);
+            left_icon.setVisibility(View.GONE);
         left_icon.setImageResource(iconId);
         left_icon.setBackgroundColor(backgroundColor);
     }
@@ -114,7 +114,7 @@ public class SettingItem extends ConstraintLayout {
         if (visibility)
             right_icon.setVisibility(View.VISIBLE);
         else
-            right_icon.setVisibility(View.INVISIBLE);
+            right_icon.setVisibility(View.GONE);
         right_icon.setImageResource(iconId);
         right_icon.setBackgroundColor(backgroundColor);
     }

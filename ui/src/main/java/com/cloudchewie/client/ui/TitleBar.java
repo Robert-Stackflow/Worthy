@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-public class TitleBar extends ConstraintLayout {
+public class TitleBar extends ConstraintLayout implements View.OnClickListener {
     private ImageButton left_button;
     private ImageButton right_button;
     private TextView title_view;
@@ -61,6 +61,14 @@ public class TitleBar extends ConstraintLayout {
         }
     }
 
+    public void setLeftButtonClickListener(LeftButtonClickListener listener) {
+        left_button.setOnClickListener(listener);
+    }
+
+    public void setRightButtonClickListener(LeftButtonClickListener listener) {
+        right_button.setOnClickListener(listener);
+    }
+
     private void setLeftButton(boolean visibility, int iconId, int backgroundColor) {
         if (visibility)
             left_button.setVisibility(View.VISIBLE);
@@ -82,5 +90,20 @@ public class TitleBar extends ConstraintLayout {
     private void setTitle(String title, int titleColor) {
         title_view.setText(title);
         title_view.setTextColor(titleColor);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    public interface LeftButtonClickListener extends OnClickListener {
+        @Override
+        void onClick(View view);
+    }
+
+    public interface RightButtonClickListener extends OnClickListener {
+        @Override
+        void onClick(View view);
     }
 }

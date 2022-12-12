@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:right_button_visibility="false"
-        app:title="@string/entry_account" />
+        app:title="@string/entry_about" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,65 +20,50 @@
         app:layout_constraintTop_toBottomOf="@id/about_titlebar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/account_layout"
+            android:id="@+id/logo_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_change_password"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/logo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:setting_item_left_icon="@drawable/ic_light_password"
-                app:setting_item_title="@string/entry_change_password"
-                app:setting_item_top_radius_enable="true" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_change_phone"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/appname"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
+                android:text="@string/appname"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_change_password"
-                app:setting_item_left_icon="@drawable/ic_light_phone"
-                app:setting_item_title="@string/entry_change_phone" />
+                app:layout_constraintTop_toBottomOf="@id/logo" />
 
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_bind_wechat"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
+                android:text="@string/version"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_change_phone"
-                app:setting_item_bottom_radius_enable="true"
-                app:setting_item_left_icon="@drawable/ic_light_wechat"
-                app:setting_item_title="@string/entry_bind_wechat" />
-
+                app:layout_constraintTop_toBottomOf="@id/appname" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/account_operation_layout"
+            android:id="@+id/about_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/account_layout">
+            app:layout_constraintTop_toBottomOf="@id/logo_layout">
 
             <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_cancelaccount"
-                style="@style/TextAppearance.AppCompat.Body1"
+                android:id="@+id/entry_privacy_policy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -86,10 +71,47 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setting_item_bottom_radius_enable="true"
-                app:setting_item_left_icon="@drawable/ic_light_cancel"
-                app:setting_item_title="@string/entry_cancelaccount"
+                app:setting_item_left_icon="@drawable/ic_light_security"
+                app:setting_item_title="@string/entry_privacy_policy"
                 app:setting_item_top_radius_enable="true" />
+
+            <com.cloudchewie.client.ui.SettingItem
+                android:id="@+id/entry_update_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/entry_privacy_policy"
+                app:setting_item_left_icon="@drawable/ic_light_operation"
+                app:setting_item_title="@string/entry_update_history" />
+
+            <com.cloudchewie.client.ui.SettingItem
+                android:id="@+id/entry_service_terms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/entry_update_history"
+                app:setting_item_left_icon="@drawable/ic_light_service"
+                app:setting_item_title="@string/entry_service_terms" />
+
+            <com.cloudchewie.client.ui.SettingItem
+                android:id="@+id/entry_third_party"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/entry_service_terms"
+                app:setting_item_bottom_radius_enable="true"
+                app:setting_item_left_icon="@drawable/ic_light_third_party"
+                app:setting_item_title="@string/entry_third_party" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

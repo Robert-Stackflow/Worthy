@@ -6,13 +6,12 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.ui.TitleBar;
 import com.cloudchewie.client.util.StatusBarUtil;
 
-public class AccountSettingsActivity extends BaseActivity {
-
+public class PrivacySettingsActivity  extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.setMargin(this);
-        setContentView(R.layout.activity_account_settings);
-        ((TitleBar) findViewById(R.id.about_titlebar)).setLeftButtonClickListener(v -> finish());
+        setContentView(R.layout.activity_privacy_settings);
+        ((TitleBar) findViewById(R.id.privacy_settings_titlebar)).setLeftButtonClickListener(v -> finish());
     }
 }

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:right_button_visibility="false"
-        app:title="通用设置" />
+        app:title="@string/entry_general" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,12 +32,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                app:checkbox_item_title="@string/switch_auto_daynight"
                 app:checkbox_item_top_radius_enable="true"
-                app:checkbox_item_bottom_radius_enable="true"
-                app:checkbox_item_title="夜间模式跟随系统"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <com.cloudchewie.client.ui.SettingItem
+                android:id="@+id/entry_language"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/switch_auto_daynight"
+                app:setting_item_bottom_radius_enable="true"
+                app:setting_item_tip="@string/language_default"
+                app:setting_item_title="@string/switch_auto_daynight" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
