@@ -43,9 +43,9 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
             startActivity(intent);
         } else if (view == findViewById(R.id.entry_close_app)) {
             android.os.Process.killProcess(android.os.Process.myPid());
-        }else if (view == findViewById(R.id.entry_logout)) {
+        } else if (view == findViewById(R.id.entry_logout)) {
             android.os.Process.killProcess(android.os.Process.myPid());
-        }else if (view == findViewById(R.id.entry_about)) {
+        } else if (view == findViewById(R.id.entry_about)) {
             Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
             startActivity(intent);
         }

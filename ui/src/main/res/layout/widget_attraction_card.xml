@@ -1,51 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:background="@drawable/shape_card_round"
     android:clickable="true"
     android:focusable="true">
 
     <LinearLayout
-        android:id="@+id/attraction_card_title_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/attraction_card_title_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/attraction_card_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="九寨沟"
+                    android:textColor="@color/color_accent"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/attraction_card_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:maxWidth="300dp"
+                    android:singleLine="true"
+                    android:text="四川省九寨沟市黄果山瀑布"
+                    android:textColor="@color/text_color_gray" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/attraction_card_jump_to_map"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="跳转到地图"
+                android:src="@drawable/ic_light_map" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divider_color" />
+
+        <LinearLayout
+            android:id="@+id/attraction_card_statistics_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:textSize="40sp"
-            tools:text="九寨沟" />
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="跳转到地图"
-            android:src="@drawable/ic_light_arrow_right" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_card_bottom_left_radius"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/attraction_card_follow_icon"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_light_star" />
+
+                    <TextView
+                        android:id="@+id/attraction_card_follow_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@id/attraction_card_follow_icon"
+                        android:text="想去的人"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_card"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/attraction_card_visitor_icon"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_light_eye" />
+
+                    <TextView
+                        android:id="@+id/attraction_card_visitor_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@id/attraction_card_visitor_icon"
+                        android:text="去过的人"
+                        android:textSize="11sp" />
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_card_bottom_right_radius"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/attraction_card_post_icon"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_light_edit" />
+
+                    <TextView
+                        android:id="@+id/attraction_card_post_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@id/attraction_card_post_icon"
+                        android:gravity="center_vertical"
+                        android:text="帖子数"
+                        android:textSize="11sp" />
+
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/attraction_card_title_layout">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:contentDescription="地点"
-            android:src="@drawable/ic_light_map" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:textAlignment="center"
-            tools:text="四川省九寨沟市黄果山瀑布" />
-    </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

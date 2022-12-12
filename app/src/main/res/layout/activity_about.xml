@@ -59,21 +59,8 @@
             android:id="@+id/about_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintTop_toBottomOf="@id/logo_layout">
-
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_privacy_policy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:setting_item_left_icon="@drawable/ic_light_security"
-                app:setting_item_title="@string/entry_privacy_policy"
-                app:setting_item_top_radius_enable="true" />
 
             <com.cloudchewie.client.ui.SettingItem
                 android:id="@+id/entry_update_history"
@@ -83,9 +70,22 @@
                 android:focusable="true"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_privacy_policy"
+                app:layout_constraintTop_toTopOf="parent"
                 app:setting_item_left_icon="@drawable/ic_light_operation"
-                app:setting_item_title="@string/entry_update_history" />
+                app:setting_item_title="@string/entry_update_history"
+                app:setting_item_top_radius_enable="true" />
+
+            <com.cloudchewie.client.ui.SettingItem
+                android:id="@+id/entry_privacy_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/entry_update_history"
+                app:setting_item_left_icon="@drawable/ic_light_security"
+                app:setting_item_title="@string/entry_privacy_policy" />
 
             <com.cloudchewie.client.ui.SettingItem
                 android:id="@+id/entry_service_terms"
@@ -95,9 +95,21 @@
                 android:focusable="true"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_update_history"
+                app:layout_constraintTop_toBottomOf="@id/entry_privacy_policy"
                 app:setting_item_left_icon="@drawable/ic_light_service"
                 app:setting_item_title="@string/entry_service_terms" />
+
+            <com.cloudchewie.client.ui.SettingItem
+                android:id="@+id/entry_opensource"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/entry_service_terms"
+                app:setting_item_left_icon="@drawable/ic_light_opensource"
+                app:setting_item_title="@string/entry_opensource" />
 
             <com.cloudchewie.client.ui.SettingItem
                 android:id="@+id/entry_third_party"
@@ -107,7 +119,7 @@
                 android:focusable="true"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_service_terms"
+                app:layout_constraintTop_toBottomOf="@id/entry_opensource"
                 app:setting_item_bottom_radius_enable="true"
                 app:setting_item_left_icon="@drawable/ic_light_third_party"
                 app:setting_item_title="@string/entry_third_party" />

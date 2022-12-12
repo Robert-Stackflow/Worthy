@@ -43,8 +43,9 @@
     <string name="language_traditional_chinese">繁體中文</string>
     <string name="language_english">English</string>
     <!--关于APP-->
-    <string name="entry_privacy_policy">隐私政策</string>
     <string name="entry_update_history">更新日志</string>
-    <string name="entry_service_terms">服务条款</string>
+    <string name="entry_privacy_policy">隐私政策</string>
+    <string name="entry_service_terms">用户协议</string>
+    <string name="entry_opensource">开发者与开源协议</string>
     <string name="entry_third_party">第三方信息收集清单</string>
 </resources>

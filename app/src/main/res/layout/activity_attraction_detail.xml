@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/titlebar_background">
+
+        <ImageButton
+            android:id="@+id/attraction_detail_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/titlebar_background"
+            android:contentDescription="返回"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_arrow_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:neumorph_shapeType="flat" />
+
+        <ImageButton
+            android:id="@+id/attraction_detail_more"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/titlebar_background"
+            android:contentDescription="更多"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_ellipsis"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:neumorph_shapeType="flat" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/attraction_detail_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/attraction_card_title_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/attraction_card_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="九寨沟"
+                        android:textColor="@color/color_accent"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/attraction_card_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:maxWidth="300dp"
+                        android:singleLine="true"
+                        android:text="四川省九寨沟市黄果山瀑布"
+                        android:textColor="@color/text_color_gray" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/attraction_card_share"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toStartOf="@id/attraction_card_jump_to_map"
+                    android:contentDescription="分享地点"
+                    android:src="@drawable/ic_light_share" />
+
+                <ImageView
+                    android:id="@+id/attraction_card_jump_to_map"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="跳转到地图"
+                    android:src="@drawable/ic_light_map" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:paddingStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/attraction_detail_detail"
+                    android:text="赏樱之人络绎不绝，且看珞珈山下热舞"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
