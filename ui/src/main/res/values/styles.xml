@@ -80,6 +80,23 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <declare-styleable name="InputItem">
+        <attr name="input_item_mode" format="enum">
+            <enum name="text" value="0" />
+            <enum name="number" value="1" />
+            <enum name="password" value="2" />
+            <enum name="phonenumber" value="3" />
+            <enum name="mail" value="4" />
+        </attr>
+        <attr name="input_item_hint" format="string" />
+        <attr name="input_item_text" format="string" />
+        <attr name="input_item_editable" format="boolean" />
+        <attr name="input_item_left_icon" format="reference" />
+        <attr name="input_item_left_icon_visibility" format="boolean" />
+        <attr name="input_item_right_icon" format="reference" />
+        <attr name="input_item_right_icon_visibility" format="boolean" />
+    </declare-styleable>
+
     <style name="AnimActivity" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowAnimationStyle">@style/anim_fade</item>
         <item name="android:windowNoTitle">true</item>

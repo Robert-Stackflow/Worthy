@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Attraction implements Serializable {
     String name;
     String location;
-    String detail;
+    String describe;
     int authorId;
     double longtitude;
     double latitude;
@@ -18,10 +18,10 @@ public class Attraction implements Serializable {
     public Attraction() {
     }
 
-    public Attraction(String name, String location, String detail, int authorId, double longtitude, double latitude, int followerCount, int visitorCount, int postCount) {
+    public Attraction(String name, String location, String describe, int authorId, double longtitude, double latitude, int followerCount, int visitorCount, int postCount) {
         this.name = name;
         this.location = location;
-        this.detail = detail;
+        this.describe = describe;
         this.authorId = authorId;
         this.longtitude = longtitude;
         this.latitude = latitude;
@@ -46,12 +46,12 @@ public class Attraction implements Serializable {
         this.location = location;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 
     public int getAuthorId() {
@@ -108,7 +108,7 @@ public class Attraction implements Serializable {
         return "Attraction{" +
                 "name='" + name + '\'' +
                 ", location='" + location + '\'' +
-                ", detail='" + detail + '\'' +
+                ", detail='" + describe + '\'' +
                 ", authorId=" + authorId +
                 ", longtitude=" + longtitude +
                 ", latitude=" + latitude +

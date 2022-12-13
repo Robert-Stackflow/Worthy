@@ -89,7 +89,7 @@ public class ChatterItem extends ConstraintLayout {
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    void setRadiusEnbale(boolean top, boolean bottom) {
+    public void setRadiusEnbale(boolean top, boolean bottom) {
         if (!top && !bottom)
             mainLayout.setBackground(getResources().getDrawable(R.drawable.shape_card));
         else if (top && bottom)

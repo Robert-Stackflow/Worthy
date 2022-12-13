@@ -7,8 +7,10 @@ import android.view.View;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.ui.TitleBar;
 import com.cloudchewie.client.util.StatusBarUtil;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 public class SettingsActivity extends BaseActivity implements View.OnClickListener {
+    RefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,15 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.entry_about).setOnClickListener(this);
         findViewById(R.id.entry_close_app).setOnClickListener(this);
         findViewById(R.id.entry_logout).setOnClickListener(this);
+        initSwipeRefresh();
+    }
+
+    void initSwipeRefresh() {
+        swipeRefreshLayout = findViewById(R.id.settings_swipe_refresh);
+        swipeRefreshLayout.setEnableOverScrollDrag(true);
+        swipeRefreshLayout.setEnableOverScrollBounce(true);
+        swipeRefreshLayout.setEnableLoadMore(false);
+        swipeRefreshLayout.setEnablePureScrollMode(true);
     }
 
     @Override

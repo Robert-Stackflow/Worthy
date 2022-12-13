@@ -32,6 +32,7 @@
     <string name="switch_topic_new_content">关注的话题</string>
     <!--隐私设置-->
     <string name="switch_showmylocation">公开我的位置</string>
+    <string name="switch_personalized_recommendation">个性化推荐</string>
     <string name="switch_allowstrangermessages">接收陌生人的私信</string>
     <string name="entry_blacklist">黑名单管理</string>
     <string name="entry_uninterested">不感兴趣列表</string>

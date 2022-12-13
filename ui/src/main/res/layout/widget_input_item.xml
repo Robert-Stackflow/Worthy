@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/input_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_card_round"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:id="@+id/input_item_left_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent" />
+
+    <EditText
+        android:id="@+id/input_item_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/input_item_right_icon"
+        android:layout_toEndOf="@id/input_item_left_icon"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:singleLine="true"
+        android:textColor="#9C9C9C"
+        android:textCursorDrawable="@drawable/view_shape_line"
+        android:textSize="15sp" />
+
+    <ImageButton
+        android:id="@+id/input_item_right_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+</RelativeLayout>

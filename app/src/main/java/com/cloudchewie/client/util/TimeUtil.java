@@ -1,14 +1,45 @@
 package com.cloudchewie.client.util;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class TimeUtil {
     private static final TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
+
+    public static String dateToString(Date date) {
+        Date curDate = new Date(System.currentTimeMillis());
+        Date curDateStart = getStartOfDay(curDate);
+        Date yesterday = getStartOfDay(new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24));
+        Date dayBeforeYesterday = getStartOfDay(new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24 * 2));
+        long interval = (curDate.getTime() - date.getTime()) / 1000;
+        long intervalStart = (date.getTime() - curDateStart.getTime()) / 1000;
+        SimpleDateFormat fullFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+        SimpleDateFormat mdFormat = new SimpleDateFormat("MM月dd日", Locale.CHINA);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.CHINA);
+        Log.d("xuruida", fullFormat.format(date) + "_" + fullFormat.format(curDate) + "_" + fullFormat.format(curDateStart) + "_" + fullFormat.format(yesterday));
+        Log.d("xuruida", interval + "_" + intervalStart);
+        if (interval < 3)
+            return "刚刚";
+        else if (date.after(curDateStart))
+            return timeFormat.format(date);
+        else if (date.before(curDateStart) && date.after(yesterday))
+            return "昨天";
+        else if (date.before(curDateStart) && date.before(yesterday) && date.after(dayBeforeYesterday))
+            return "前天";
+        else if (getYear(date) != getYear(curDate))
+            return ymdFormat.format(date);
+        else
+            return mdFormat.format(date);
+    }
 
     @NonNull
     public static com.haibin.calendarview.Calendar getCalendar(int year, int month, int day) {

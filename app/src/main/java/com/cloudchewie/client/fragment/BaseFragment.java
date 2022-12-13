@@ -12,10 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import com.cloudchewie.client.R;
 
-/**
- * Created by yu on 2016/11/11.
- */
-
 public class BaseFragment extends Fragment {
     private String title;
 

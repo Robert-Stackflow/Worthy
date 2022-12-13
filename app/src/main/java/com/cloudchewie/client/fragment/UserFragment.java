@@ -13,9 +13,13 @@ import androidx.fragment.app.Fragment;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.SettingsActivity;
 import com.cloudchewie.client.util.StatusBarUtil;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     View mainView;
+    RefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,9 +33,17 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         StatusBarUtil.setMargin(mainView.findViewById(R.id.user_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.user_settings).setOnClickListener(this);
         mainView.findViewById(R.id.switch_daynight).setOnClickListener(this);
+        initSwipeRefresh();
         return mainView;
     }
 
+    void initSwipeRefresh() {
+        swipeRefreshLayout = mainView.findViewById(R.id.fragment_user_swipe_refresh);
+        swipeRefreshLayout.setEnableOverScrollDrag(true);
+        swipeRefreshLayout.setEnableOverScrollBounce(true);
+        swipeRefreshLayout.setEnableLoadMore(false);
+        swipeRefreshLayout.setEnablePureScrollMode(true);
+    }
 
     @Override
     public void onClick(View view) {

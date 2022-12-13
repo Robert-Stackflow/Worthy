@@ -43,9 +43,6 @@ public class LocationUtil {
             options2Items.add(cityList);
             options3Items.add(province_AreaList);
         }
-        Log.d("xuruida", getProvices().toString());
-        Log.d("xuruida", getCities().toString());
-        Log.d("xuruida", getCounties().toString());
     }
 
     public static ArrayList<String> getProvices() {

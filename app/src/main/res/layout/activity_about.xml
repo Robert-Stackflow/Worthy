@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,122 +8,129 @@
         android:id="@+id/about_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentTop="true"
         app:right_button_visibility="false"
         app:title="@string/entry_about" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/about_swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintTop_toBottomOf="@id/about_titlebar">
+        android:layout_height="match_parent"
+        android:layout_below="@id/about_titlebar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/logo_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/about_titlebar">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/logo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@mipmap/ic_launcher"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/appname"
-                style="@style/TextAppearance.AppCompat.Title"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logo_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/appname"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/logo" />
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/version"
-                android:layout_width="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/ic_launcher"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/appname"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/appname"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/logo" />
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/version"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/appname" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/about_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/version"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/appname" />
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/logo_layout">
+
+                <com.cloudchewie.client.ui.SettingItem
+                    android:id="@+id/entry_update_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setting_item_left_icon="@drawable/ic_light_operation"
+                    app:setting_item_title="@string/entry_update_history"
+                    app:setting_item_top_radius_enable="true" />
+
+                <com.cloudchewie.client.ui.SettingItem
+                    android:id="@+id/entry_privacy_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/entry_update_history"
+                    app:setting_item_left_icon="@drawable/ic_light_security"
+                    app:setting_item_title="@string/entry_privacy_policy" />
+
+                <com.cloudchewie.client.ui.SettingItem
+                    android:id="@+id/entry_service_terms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/entry_privacy_policy"
+                    app:setting_item_left_icon="@drawable/ic_light_service"
+                    app:setting_item_title="@string/entry_service_terms" />
+
+                <com.cloudchewie.client.ui.SettingItem
+                    android:id="@+id/entry_opensource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/entry_service_terms"
+                    app:setting_item_left_icon="@drawable/ic_light_opensource"
+                    app:setting_item_title="@string/entry_opensource" />
+
+                <com.cloudchewie.client.ui.SettingItem
+                    android:id="@+id/entry_third_party"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/entry_opensource"
+                    app:setting_item_bottom_radius_enable="true"
+                    app:setting_item_left_icon="@drawable/ic_light_third_party"
+                    app:setting_item_title="@string/entry_third_party" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/about_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@id/logo_layout">
-
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_update_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:setting_item_left_icon="@drawable/ic_light_operation"
-                app:setting_item_title="@string/entry_update_history"
-                app:setting_item_top_radius_enable="true" />
-
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_privacy_policy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_update_history"
-                app:setting_item_left_icon="@drawable/ic_light_security"
-                app:setting_item_title="@string/entry_privacy_policy" />
-
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_service_terms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_privacy_policy"
-                app:setting_item_left_icon="@drawable/ic_light_service"
-                app:setting_item_title="@string/entry_service_terms" />
-
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_opensource"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_service_terms"
-                app:setting_item_left_icon="@drawable/ic_light_opensource"
-                app:setting_item_title="@string/entry_opensource" />
-
-            <com.cloudchewie.client.ui.SettingItem
-                android:id="@+id/entry_third_party"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/entry_opensource"
-                app:setting_item_bottom_radius_enable="true"
-                app:setting_item_left_icon="@drawable/ic_light_third_party"
-                app:setting_item_title="@string/entry_third_party" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+</RelativeLayout>
