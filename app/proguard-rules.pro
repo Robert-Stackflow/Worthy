@@ -26,3 +26,6 @@
 -keep class vi.com.** {*;}
 -keep class com.baidu.vi.** {*;}
 -dontwarn com.baidu.**
+
+-dontwarn razerdp.basepopup.**
+-keep class razerdp.basepopup.**{*;}

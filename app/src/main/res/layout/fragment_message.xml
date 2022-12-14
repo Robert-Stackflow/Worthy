@@ -15,11 +15,12 @@
         android:paddingEnd="10dp">
 
         <TextView
-            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/titlebar_background"
             android:text="消息"
+            android:textColor="@color/color_accent"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,255 +41,210 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/fragment_message_swipe_refresh"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/message_titlebar">
 
-        <com.scwang.smart.refresh.header.ClassicsHeader
-            android:id="@+id/fragment_message_swipe_refresh_header"
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/fragment_message_swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:id="@+id/fragment_message_swipe_refresh_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/message_entry_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_card_round"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:padding="10dp">
 
-                <LinearLayout
-                    android:id="@+id/message_entry_comment_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@id/message_entry_thumbup_layout"
-                    app:layout_constraintStart_toStartOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/message_entry_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_card_round"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/message_entry_comment_layout"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/message_entry_thumbup_layout"
                         app:layout_constraintStart_toStartOf="parent">
 
-                        <ImageButton
-                            android:id="@+id/message_entry_comment_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageButton
+                                android:id="@+id/message_entry_comment_icon"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@android:color/transparent"
+                                android:clickable="true"
+                                android:contentDescription="评论回复"
+                                android:focusable="true"
+                                android:src="@drawable/ic_light_comment"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <TextView
+                            android:id="@+id/message_entry_comment_text"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:contentDescription="评论回复"
                             android:focusable="true"
-                            android:src="@drawable/ic_light_comment"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            android:text="评论回复"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_color_fast_entry" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/message_entry_comment_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
+                    <LinearLayout
+                        android:id="@+id/message_entry_thumbup_layout"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="评论回复"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/message_entry_thumbup_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@id/message_entry_fans_layout"
-                    app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent">
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/message_entry_fans_layout"
+                        app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout">
 
-                        <ImageButton
-                            android:id="@+id/message_entry_thumbup_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageButton
+                                android:id="@+id/message_entry_thumbup_icon"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@android:color/transparent"
+                                android:clickable="true"
+                                android:contentDescription="点赞收藏"
+                                android:focusable="true"
+                                android:src="@drawable/ic_light_heart"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <TextView
+                            android:id="@+id/message_entry_thumbup_text"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:contentDescription="点赞收藏"
                             android:focusable="true"
-                            android:src="@drawable/ic_light_heart"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            android:text="点赞收藏"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_color_fast_entry" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/message_entry_thumbup_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
+                    <LinearLayout
+                        android:id="@+id/message_entry_fans_layout"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="点赞收藏"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/message_entry_fans_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@id/message_entry_system_layout"
-                    app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent">
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/message_entry_system_layout"
+                        app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout">
 
-                        <ImageButton
-                            android:id="@+id/message_entry_fans_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageButton
+                                android:id="@+id/message_entry_fans_icon"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@android:color/transparent"
+                                android:clickable="true"
+                                android:contentDescription="新的关注"
+                                android:focusable="true"
+                                android:src="@drawable/ic_light_eye"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <TextView
+                            android:id="@+id/message_entry_fans_text"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:contentDescription="新的关注"
                             android:focusable="true"
-                            android:src="@drawable/ic_light_eye"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            android:text="新的关注"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_color_fast_entry" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/message_entry_fans_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
+                    <LinearLayout
+                        android:id="@+id/message_entry_system_layout"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="新的关注"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/message_entry_system_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layout_constraintStart_toStartOf="parent">
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout">
 
-                        <ImageButton
-                            android:id="@+id/message_entry_system_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageButton
+                                android:id="@+id/message_entry_system_icon"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:background="@android:color/transparent"
+                                android:clickable="true"
+                                android:contentDescription="系统通知"
+                                android:focusable="true"
+                                android:src="@drawable/ic_light_at"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <TextView
+                            android:id="@+id/message_entry_system_text"
+                            style="@style/TextAppearance.AppCompat.Body1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:clickable="true"
-                            android:contentDescription="系统通知"
                             android:focusable="true"
-                            android:src="@drawable/ic_light_at"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            android:text="系统通知"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_color_fast_entry" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/message_entry_system_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="系统通知"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry" />
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/messagers_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/message_entry_layout" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/messagers_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/message_entry_layout" />
-
-<!--                        <com.cloudchewie.client.ui.ChatterItem-->
-<!--                            android:id="@+id/item1"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:clickable="true"-->
-<!--                            android:focusable="true"-->
-<!--                            app:chatter_item_content="欢迎使用本软件，点击查收你的入会大礼包，欢迎查询"-->
-<!--                            app:chatter_item_name="官方通知"-->
-<!--                            app:chatter_item_time="2022年10月20日"-->
-<!--                            app:chatter_item_top_radius_enable="true"-->
-<!--                            app:layout_constraintTop_toBottomOf="@id/message_entry_layout" />-->
-
-<!--                        <com.cloudchewie.client.ui.ChatterItem-->
-<!--                            android:id="@+id/item2"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:clickable="true"-->
-<!--                            android:focusable="true"-->
-<!--                            app:chatter_item_content="欢迎使用本软件，点击查收你的入会大礼包，欢迎查询"-->
-<!--                            app:chatter_item_name="官方通知"-->
-<!--                            app:chatter_item_tag="陌生人"-->
-<!--                            app:chatter_item_tag_visibility="true"-->
-<!--                            app:chatter_item_time="2022年10月20日"-->
-<!--                            app:layout_constraintTop_toBottomOf="@id/item1" />-->
-
-<!--                        <com.cloudchewie.client.ui.ChatterItem-->
-<!--                            android:id="@+id/item3"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:clickable="true"-->
-<!--                            android:focusable="true"-->
-<!--                            app:chatter_item_content="欢迎使用本软件，点击查收你的入会大礼包，欢迎查询"-->
-<!--                            app:chatter_item_name="官方通知"-->
-<!--                            app:chatter_item_time="2022年10月20日"-->
-<!--                            app:layout_constraintTop_toBottomOf="@id/item2" />-->
-
-<!--                        <com.cloudchewie.client.ui.ChatterItem-->
-<!--                            android:id="@+id/item4"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:clickable="true"-->
-<!--                            android:focusable="true"-->
-<!--                            app:chatter_item_bottom_radius_enable="true"-->
-<!--                            app:chatter_item_content="欢迎使用本软件，点击查收你的入会大礼包，欢迎查询"-->
-<!--                            app:chatter_item_name="官方通知"-->
-<!--                            app:chatter_item_splitter_enable="false"-->
-<!--                            app:chatter_item_time="2022年10月20日"-->
-<!--                            app:layout_constraintTop_toBottomOf="@id/item3" />-->
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    </ScrollView>
 </RelativeLayout>

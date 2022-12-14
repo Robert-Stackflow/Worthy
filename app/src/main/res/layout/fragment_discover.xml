@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +31,9 @@
             app:tabIndicatorFullWidth="false"
             app:tabMode="fixed"
             app:tabRippleColor="@android:color/transparent"
-            app:tabTextAppearance="@style/TabTextAppearance" />
+            app:tabSelectedTextColor="@color/checked_color"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@color/color_accent" />
 
         <ImageButton
             android:id="@+id/discover_search"

@@ -55,6 +55,13 @@
         <attr name="checkbox_item_bottom_radius_enable" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="TagItem">
+        <attr name="tag_item_background" format="reference|integer" />
+        <attr name="tag_item_text" format="string" />
+        <attr name="tag_item_text_color" format="color" />
+        <attr name="tag_item_text_size" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="ChatterItem">
         <attr name="chatter_item_name" format="string" />
         <attr name="chatter_item_name_color" format="color" />
@@ -113,5 +120,14 @@
         <item name="android:activityOpenExitAnimation">@anim/anim_fade_out</item>
         <item name="android:activityCloseEnterAnimation">@anim/anim_fade_in</item>
         <item name="android:activityCloseExitAnimation">@anim/anim_fade_out</item>
+    </style>
+
+    <declare-styleable name="FlowTagLayout">
+        <attr name="horizontal_diver" format="dimension" />
+        <attr name="vertical_diver" format="dimension" />
+    </declare-styleable>
+
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

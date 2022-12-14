@@ -81,6 +81,7 @@ import java.util.Objects;
 
 public class MapFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnGetPoiSearchResultListener, OnGetSuggestionResultListener,
         BaiduMap.OnMapClickListener, BaiduMap.OnMarkerClickListener {
+    boolean itemClicked = false;
     View mainView;
     MapView mapView;
     BaiduMap baiduMap;
@@ -174,6 +175,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
                 Utils.hideKeyBoard(getActivity());
             }
         });
+        recyclerView.setVisibility(View.GONE);
         MyLocationConfiguration myLocationConfiguration = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, null);
         myLocationConfiguration.accuracyCircleFillColor = 0x00000000;
         myLocationConfiguration.accuracyCircleStrokeColor = 0x00000000;
@@ -381,7 +383,10 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         if (null == suggesInfos)
             return;
         hideInfoLayout();
-        recyclerView.setVisibility(View.VISIBLE);
+        if (suggesInfos.size() > 0 && !itemClicked)
+            recyclerView.setVisibility(View.VISIBLE);
+        else
+            recyclerView.setVisibility(View.GONE);
         if (null == poiItemAdaper)
             poiItemAdaper = new PoiItemAdapter(suggesInfos);
         else
@@ -441,6 +446,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         searchInput.setText(suggestInfo.getKey());
         searchInput.setSelection(suggestInfo.getKey().length());
         searchInput.addTextChangedListener(myTextWatcher);
+        itemClicked = true;
     }
 
     private void locateSuggestPoi(SuggestionResult.SuggestionInfo suggestInfo) {
@@ -542,6 +548,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_map_infowindow, null);
         ((TextView) view.findViewById(R.id.infowindow_title)).setText(poiInfo.getName());
+        ((TextView) view.findViewById(R.id.infowindow_address)).setText(poiInfo.getAddress());
         return new InfoWindow(view, poiInfo.getLocation(), -150);
     }
 
@@ -641,6 +648,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
 
         @Override
         public void afterTextChanged(Editable s) {
+            itemClicked = false;
             String cityStr = citySpinner.getSelectedItem().toString();
             String keyWordStr = searchInput.getText().toString();
             if (TextUtils.isEmpty(cityStr) || TextUtils.isEmpty(keyWordStr)) {

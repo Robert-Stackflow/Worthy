@@ -3,6 +3,7 @@ package com.cloudchewie.client.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,18 +15,22 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.fragment.BaseFragment;
 import com.cloudchewie.client.ui.NoScrollViewPager;
+import com.cloudchewie.client.util.StatusBarUtil;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttractionDetailActivity extends AppCompatActivity {
+public class AttractionDetailActivity extends BaseActivity {
     Attraction attraction;
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
     private NoScrollViewPager viewPager;
     AttractionDetailFragmentAdapter adapter;
+    Toolbar mToolbar;
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

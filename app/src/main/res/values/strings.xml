@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">朝夕</string>
-    <string name="top_title">Hello，夜深了</string>
+    <string name="follow_attraction">关注地点</string>
+    <string name="nav_map">地图</string>
+    <string name="nav_discover">发现</string>
+    <string name="nav_message">消息</string>
+    <string name="nav_user">我的</string>
+    <string-array name="following_tags">
+        <item>全部</item>
+        <item>关注的人</item>
+        <item>关注的地点</item>
+        <item>关注的话题</item>
+    </string-array>
+
     <string-array name="english_week_string_array">
         <item>日</item>
         <item>一</item>

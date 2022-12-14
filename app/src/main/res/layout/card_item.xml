@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:contentPadding="10dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Card"
+        android:textSize="20sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="世界上根本就不存在完美的事物，我们没必要浪费大量的精力去寻找不存在的东西。与其用一生的时间去执着地追求虚无缥缈的东西，不如珍惜和把握现在美好的生活。
+        当我们抛开追求完美的幻想和错觉，收获的可能是埋藏在平凡和朴实生活中的幸福"/>
+</androidx.cardview.widget.CardView>

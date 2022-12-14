@@ -27,6 +27,7 @@ public class FollowingFragment extends Fragment implements View.OnClickListener 
     RefreshLayout swipeRefreshLayout;
     ClassicsHeader header;
     ClassicsFooter footer;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class FollowingFragment extends Fragment implements View.OnClickListener 
         initSwipeRefresh();
         return mainView;
     }
+
     void initRecyclerView() {
         followingRecyclerView = mainView.findViewById(R.id.fragment_following_recyclerview);
         followingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -58,6 +60,11 @@ public class FollowingFragment extends Fragment implements View.OnClickListener 
         swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
     }
+
+    public void performRefresh() {
+        swipeRefreshLayout.autoRefresh();
+    }
+
     @Override
     public void onClick(View view) {
     }

@@ -4,11 +4,11 @@
         android:id="@+id/map"
         android:checked="true"
         android:icon="@drawable/ic_light_map"
-        android:title="地图" />
+        android:title="@string/nav_map" />
     <item
         android:id="@+id/discover"
         android:icon="@drawable/ic_light_navigation"
-        android:title="发现" />
+        android:title="@string/nav_discover" />
     <!--    <item-->
     <!--        android:id="@+id/add"-->
     <!--        android:icon="@drawable/ic_light_plus"-->
@@ -16,9 +16,9 @@
     <item
         android:id="@+id/message"
         android:icon="@drawable/ic_light_message"
-        android:title="消息" />
+        android:title="@string/nav_message" />
     <item
         android:id="@+id/personal"
         android:icon="@drawable/ic_light_user"
-        android:title="我的" />
+        android:title="@string/nav_user" />
 </menu>

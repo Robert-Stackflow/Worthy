@@ -2,69 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/shape_card"
+    android:clickable="false"
+    android:focusable="false"
+    android:padding="10dp">
 
-    <LinearLayout
+    <com.cloudchewie.client.ui.FlowTagLayout
+        android:id="@+id/follow_choices_flowtaglayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_height="match_parent"
+        app:horizontal_diver="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/follow_choices_all"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/shape_tag_round"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="10dp"
-            android:text="全部"
-            android:textAlignment="center"
-            android:textColor="@color/text_color_fast_entry" />
-
-        <TextView
-            android:id="@+id/follow_choices_person"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/shape_tag_round"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="10dp"
-            android:text="关注的人"
-            android:textAlignment="center"
-            android:textColor="@color/text_color_fast_entry" />
-
-        <TextView
-            android:id="@+id/follow_choices_attraction"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/shape_tag_round"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="10dp"
-            android:text="关注的地点"
-            android:textAlignment="center"
-            android:textColor="@color/text_color_fast_entry" />
-
-        <TextView
-            android:id="@+id/follow_choices_topic"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_tag_round"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="10dp"
-            android:text="关注的话题"
-            android:textAlignment="center"
-            android:textColor="@color/text_color_fast_entry" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:vertical_diver="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,11 +11,11 @@
 
     <TextView
         android:id="@+id/checkbox_item_title"
-        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
-        android:textSize="17sp"
+        android:textColor="@color/color_accent"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

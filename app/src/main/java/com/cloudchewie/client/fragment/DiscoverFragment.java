@@ -1,17 +1,13 @@
 package com.cloudchewie.client.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,20 +20,24 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.SearchActivity;
 import com.cloudchewie.client.ui.NoScrollViewPager;
 import com.cloudchewie.client.util.StatusBarUtil;
+import com.cloudchewie.client.widget.FollowingPopupWindow;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import razerdp.basepopup.BasePopupWindow;
+
 public class DiscoverFragment extends Fragment implements View.OnClickListener {
     View mainView;
     Context context;
-    private PopupWindow popupWindow;
+    private FollowingPopupWindow popupWindow;
     HomeFragmentAdapter adapter;
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
     private NoScrollViewPager viewPager;
+    private int followingOption = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,10 +77,8 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 2)
-                    tabLayout.getTabAt(position).setText(" 关注▾");
-                else
-                    tabLayout.getTabAt(2).setText(" 关注 ");
+                if (position == 2) tabLayout.getTabAt(position).setText(" 关注▾");
+                else tabLayout.getTabAt(2).setText(" 关注 ");
             }
 
             @Override
@@ -103,27 +101,31 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
                 }
             }
             tabLayout.getTabAt(2).view.setOnClickListener(view -> {
-                if (viewPager.getCurrentItem() == 2)
-                    showPopupwindow(2, view);
+                if (viewPager.getCurrentItem() == 2) showPopupwindow(2, view);
             });
         }
     }
 
     private void showPopupwindow(final int position, View v) {
-        if (popupWindow != null) {
-            popupWindow.dismiss();
-            popupWindow = null;
-        } else {
+        if (popupWindow == null || (popupWindow != null && !popupWindow.isShowing())) {
             tabLayout.getTabAt(position).setText(" 关注▴");
-            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            @SuppressLint("InflateParams") View inflate = LayoutInflater.from(context).inflate(R.layout.layout_follow_choices, null);
-            popupWindow = new PopupWindow(inflate, wm.getDefaultDisplay().getWidth(), ViewPager.LayoutParams.WRAP_CONTENT);
-            popupWindow.setBackgroundDrawable(new BitmapDrawable());
-            popupWindow.setOutsideTouchable(true);
-            popupWindow.setOnDismissListener(() -> tabLayout.getTabAt(position).setText(" 关注▾"));
-            int[] location = new int[2];
-            v.getLocationOnScreen(location);
-            popupWindow.showAtLocation(v, Gravity.NO_GRAVITY, 0, location[1] + v.getHeight());
+            popupWindow = new FollowingPopupWindow(getContext(), followingOption);
+            popupWindow.showPopupWindow(v);
+            popupWindow.setAlignBackground(true);
+            popupWindow.setAlignBackgroundGravity(Gravity.TOP);
+            popupWindow.setOnDismissListener(new BasePopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    followingOption = popupWindow.getCurrentOption();
+                    tabLayout.getTabAt(position).setText(" 关注▾");
+                    if (popupWindow.isOptionChanged())
+                        ((FollowingFragment) fragments.get(position)).performRefresh();
+                }
+            });
+        } else {
+            if (popupWindow.isShowing())
+                popupWindow.dismiss();
+            popupWindow = null;
         }
     }
 

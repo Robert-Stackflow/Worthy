@@ -44,8 +44,7 @@ public class PoiItemAdapter extends RecyclerView.Adapter<PoiItemAdapter.MyViewHo
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateData(List<SuggestionResult.SuggestionInfo> suggestInfos) {
-        if (null == suggestInfos)
-            return;
+        if (null == suggestInfos) return;
         mSuggestInfos = suggestInfos;
         notifyDataSetChanged();
     }
@@ -53,8 +52,7 @@ public class PoiItemAdapter extends RecyclerView.Adapter<PoiItemAdapter.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_poi_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_poi_item, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -96,12 +94,12 @@ public class PoiItemAdapter extends RecyclerView.Adapter<PoiItemAdapter.MyViewHo
             holder.mPoiAddress.setText(suggestInfo.getAddress());
             holder.mPoiAddress.setVisibility(View.VISIBLE);
         }
-        if (position == 0)
-            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_top_radius));
-        if (position == getItemCount() - 1)
-            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_bottom_radius));
-        if (position == 0 && position == getItemCount() - 1)
-            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_round));
+//        if (position == 0)
+//            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_top_radius));
+//        if (position == getItemCount() - 1)
+//            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_bottom_radius));
+//        if (position == 0 && position == getItemCount() - 1)
+//            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_round));
     }
 
     @Override

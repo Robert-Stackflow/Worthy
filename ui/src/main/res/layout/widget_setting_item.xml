@@ -21,23 +21,23 @@
 
     <TextView
         android:id="@+id/setting_item_title"
-        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textColor="@color/color_accent"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/setting_item_left_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/setting_item_tip"
-        style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginEnd="5dp"
+        android:textColor="@color/text_color_light_gray"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/setting_item_right_icon"

@@ -84,6 +84,34 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 Messager messager = new Messager("山风", 0, false, messages);
                 messagers.add(messager);
             }
+            {
+                List<Message> messages = new ArrayList<>();
+                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-10 20:12:33"), "你好，在吗"));
+                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-12 20:12:33"), "嘀嘀嘀"));
+                Messager messager = new Messager("官方通知", 0, false, messages);
+                messagers.add(messager);
+            }
+            {
+                List<Message> messages = new ArrayList<>();
+                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2020-12-10 20:12:33"), "我是恐龙"));
+                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2020-12-12 20:12:33"), "你是谁"));
+                Messager messager = new Messager("远古巨兽", 0, false, messages);
+                messagers.add(messager);
+            }
+            {
+                List<Message> messages = new ArrayList<>();
+                messages.add(new Message(1, 1, 0, 0, new Date(System.currentTimeMillis()), "你好，我是来自山东的汉子一枚"));
+                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-13 20:12:33"), "哈哈哈"));
+                Messager messager = new Messager("灿烂未来", 0, true, messages);
+                messagers.add(messager);
+            }
+            {
+                List<Message> messages = new ArrayList<>();
+                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-11 20:12:33"), "你好，我是山风"));
+                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-10 20:12:33"), "你去过这里吗"));
+                Messager messager = new Messager("山风", 0, false, messages);
+                messagers.add(messager);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

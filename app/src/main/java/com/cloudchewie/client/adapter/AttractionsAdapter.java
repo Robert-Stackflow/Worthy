@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.AttractionDetailActivity;
+import com.cloudchewie.client.activity.CollapseActivity;
 import com.cloudchewie.client.domin.Attraction;
 
 import java.util.List;

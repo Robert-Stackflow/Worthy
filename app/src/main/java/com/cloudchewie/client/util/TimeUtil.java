@@ -25,8 +25,6 @@ public class TimeUtil {
         SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
         SimpleDateFormat mdFormat = new SimpleDateFormat("MM月dd日", Locale.CHINA);
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.CHINA);
-        Log.d("xuruida", fullFormat.format(date) + "_" + fullFormat.format(curDate) + "_" + fullFormat.format(curDateStart) + "_" + fullFormat.format(yesterday));
-        Log.d("xuruida", interval + "_" + intervalStart);
         if (interval < 3)
             return "刚刚";
         else if (date.after(curDateStart))
