@@ -1,8 +1,8 @@
 package com.cloudchewie.client.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.ui.TitleBar;

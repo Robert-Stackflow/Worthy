@@ -3,8 +3,6 @@ package com.cloudchewie.client.activity;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.ui.TitleBar;
 import com.cloudchewie.client.util.StatusBarUtil;

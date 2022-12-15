@@ -29,3 +29,6 @@
 
 -dontwarn razerdp.basepopup.**
 -keep class razerdp.basepopup.**{*;}
+
+-keep class com.zackratos.ultimatebarx.ultimatebarx.** { *; }
+-keep public class * extends androidx.fragment.app.Fragment { *; }

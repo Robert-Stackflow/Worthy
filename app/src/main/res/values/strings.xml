@@ -5,6 +5,7 @@
     <string name="nav_discover">发现</string>
     <string name="nav_message">消息</string>
     <string name="nav_user">我的</string>
+    <string name="follow_topic">关注话题</string>
     <string-array name="following_tags">
         <item>全部</item>
         <item>关注的人</item>

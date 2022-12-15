@@ -1,5 +1,6 @@
 package com.cloudchewie.client.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -11,8 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.domin.Attraction;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.fragment.PostsFragment;
 import com.cloudchewie.client.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -21,50 +21,45 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttractionDetailActivity extends BaseActivity {
-    Attraction attraction;
+public class TopicDetailActivity extends BaseActivity {
+    Topic topic;
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
     private NoScrollViewPager viewPager;
-    AttractionDetailFragmentAdapter adapter;
     Toolbar mToolbar;
+    TopicDetailFragmentAdapter adapter;
     CollapsingToolbarLayout mCollapsingToolbarLayout;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attraction_detail);
         Intent intent = this.getIntent();
-        attraction = (Attraction) intent.getSerializableExtra("attraction");
-        findViewById(R.id.attraction_detail_back).setOnClickListener(v -> finish());
-        ((TextView) findViewById(R.id.attraction_detail_name)).setText(attraction.getName());
-        ((TextView) findViewById(R.id.attraction_detail_location)).setText(attraction.getLocation());
-        ((TextView) findViewById(R.id.attraction_detail_describe)).setText(attraction.getDescribe());
-        tabLayout = findViewById(R.id.attraction_detail_content_tab_layout);
-        viewPager = findViewById(R.id.attraction_detail_content_viewpager);
-        fragments = new ArrayList<>();
-        titles = new ArrayList<>();
+        topic = (Topic) intent.getSerializableExtra("topic");
+        setContentView(R.layout.activity_topic_detail);
+        findViewById(R.id.topic_detail_back).setOnClickListener(v -> finish());
+        ((TextView) findViewById(R.id.topic_detail_name)).setText(topic.getName());
+        ((TextView) findViewById(R.id.topic_detail_describe)).setText(topic.getDescribe());
+        ((TextView) findViewById(R.id.topic_detail_hotvalue)).setText(topic.getHotvalue() + "热度 · " + topic.getFollowerCount() + "人关注");
+        tabLayout = findViewById(R.id.topic_detail_content_tab_layout);
+        viewPager = findViewById(R.id.topic_detail_content_viewpager);
+        fragments = new ArrayList<>(2);
+        titles = new ArrayList<>(2);
         titles.add("帖子");
         titles.add("文章");
-        titles.add("相册");
         fragments.add(new PostsFragment());
         fragments.add(new PostsFragment());
-        BaseFragment fragment = new BaseFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("title", "相册");
-        fragment.setArguments(bundle);
-        fragments.add(fragment);
-        adapter = new AttractionDetailFragmentAdapter(getSupportFragmentManager(), fragments, titles);
+        adapter = new TopicDetailFragmentAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public class AttractionDetailFragmentAdapter extends FragmentPagerAdapter {
+    public class TopicDetailFragmentAdapter extends FragmentPagerAdapter {
         private final List<Fragment> fragmentList;
         private final List<String> titleList;
 
-        public AttractionDetailFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> titles) {
+        public TopicDetailFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> titles) {
             super(fragmentManager);
             fragmentList = fragments;
             titleList = titles;

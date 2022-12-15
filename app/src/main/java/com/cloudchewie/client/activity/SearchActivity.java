@@ -6,8 +6,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.util.StatusBarUtil;
 import com.cloudchewie.search.SearchLayout;

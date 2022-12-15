@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="CustomShapeAppearance">
-        <item name="neumorph_cornerFamily">rounded</item>
-        <item name="neumorph_cornerSize">16dp</item>
-        <item name="neumorph_cornerSizeTopLeft">64dp</item>
-        <item name="neumorph_cornerSizeTopRight">64dp</item>
-    </style>
-
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
         <!--        <item name="android:backgroundDimEnabled">false</item>-->
@@ -130,4 +122,18 @@
     <style name="TabLayoutTextStyle">
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="SmallTabLayoutTextStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <declare-styleable name="IconTextItem">
+        <attr name="icon_text_item_text" format="string" />
+        <attr name="icon_text_item_text_color" format="color" />
+        <attr name="icon_text_item_text_size" format="dimension" />
+        <attr name="icon_text_item_icon" format="reference" />
+        <attr name="icon_text_item_icon_color" format="color" />
+        <attr name="icon_text_item_icon_size" format="dimension" />
+        <attr name="icon_text_item_spacing" format="dimension" />
+    </declare-styleable>
 </resources>

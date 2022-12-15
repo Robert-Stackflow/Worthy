@@ -8,20 +8,20 @@
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/attraction_detail_appbar"
+        android:id="@+id/topic_detail_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/checked_color">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/attraction_detail_collapsing_toolbar_layout"
+            android:id="@+id/topic_detail_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/checked_color"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/attraction_detail_banner"
+                android:id="@+id/topic_detail_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -32,14 +32,14 @@
                 app:layout_collapseParallaxMultiplier="0.7">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/attraction_detail_titlebar"
+                    android:id="@+id/topic_detail_titlebar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageButton
-                        android:id="@+id/attraction_detail_back"
+                        android:id="@+id/topic_detail_back"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
@@ -51,7 +51,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:id="@+id/attraction_detail_share"
+                        android:id="@+id/topic_detail_share"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
@@ -59,23 +59,11 @@
                         android:padding="10dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_light_share"
-                        app:layout_constraintEnd_toStartOf="@id/attraction_detail_jump_to_map"
+                        app:layout_constraintEnd_toStartOf="@id/topic_detail_more"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:id="@+id/attraction_detail_jump_to_map"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="跳转到地图"
-                        android:padding="10dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_light_map"
-                        app:layout_constraintEnd_toStartOf="@id/attraction_detail_more"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/attraction_detail_more"
+                        android:id="@+id/topic_detail_more"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
@@ -94,36 +82,37 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/attraction_detail_titlebar">
+                    app:layout_constraintTop_toBottomOf="@id/topic_detail_titlebar">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:id="@+id/attraction_detail_title_layout"
+                            android:id="@+id/topic_detail_title_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:padding="10dp">
 
                             <TextView
-                                android:id="@+id/attraction_detail_name"
+                                android:id="@+id/topic_detail_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
                                 android:textColor="@color/text_color_white"
                                 android:textSize="24sp"
-                                tools:text="九寨沟" />
+                                tools:text="生活圈" />
 
                             <TextView
-                                android:id="@+id/attraction_detail_location"
+                                android:id="@+id/topic_detail_hotvalue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:maxWidth="300dp"
                                 android:singleLine="true"
                                 android:textColor="@color/text_color_light_gray"
-                                tools:text="四川省九寨沟市黄果山瀑布" />
+                                tools:text="6543254热度 · 234人关注" />
+
                         </LinearLayout>
 
                         <Button
@@ -135,7 +124,7 @@
                             android:background="@drawable/shape_button"
                             android:minWidth="0dp"
                             android:minHeight="0dp"
-                            android:text="@string/follow_attraction"
+                            android:text="@string/follow_topic"
                             android:textColor="@color/text_color_white"
                             android:textSize="12sp"
                             tools:ignore="RelativeOverlap" />
@@ -150,27 +139,27 @@
                         android:padding="10dp">
 
                         <TextView
-                            android:id="@+id/attraction_detail_describe"
+                            android:id="@+id/topic_detail_describe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="3"
                             android:textColor="@color/text_color_white"
                             android:textSize="12sp"
-                            tools:text="赏樱之人络绎不绝，且看珞珈山下热舞" />
+                            tools:text="大家可以在这里尽情分享我们的生活" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/attraction_detail_content_bar"
+            android:id="@+id/topic_detail_content_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@drawable/shape_card_top_radius">
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/attraction_detail_content_tab_layout"
+                android:id="@+id/topic_detail_content_tab_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -208,19 +197,19 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/attraction_detail_content"
+            android:id="@+id/topic_detail_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <View
-                android:id="@+id/attraction_detail_content_divider"
+                android:id="@+id/topic_detail_content_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/divider_color"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.cloudchewie.client.ui.NoScrollViewPager
-                android:id="@+id/attraction_detail_content_viewpager"
+                android:id="@+id/topic_detail_content_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent" />

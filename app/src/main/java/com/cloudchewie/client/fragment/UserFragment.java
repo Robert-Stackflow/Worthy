@@ -11,10 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.activity.HomePageActivity;
 import com.cloudchewie.client.activity.SettingsActivity;
 import com.cloudchewie.client.util.StatusBarUtil;
-import com.scwang.smart.refresh.footer.ClassicsFooter;
-import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
@@ -33,6 +32,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         StatusBarUtil.setMargin(mainView.findViewById(R.id.user_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.user_settings).setOnClickListener(this);
         mainView.findViewById(R.id.switch_daynight).setOnClickListener(this);
+        mainView.findViewById(R.id.entry_home_page).setOnClickListener(this);
         initSwipeRefresh();
         return mainView;
     }
@@ -61,6 +61,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 //                    else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //                }
 //            });
+        } else if (view == mainView.findViewById(R.id.entry_home_page)) {
+            Intent intent = new Intent(getActivity(), HomePageActivity.class);
+            startActivity(intent);
         }
     }
 }

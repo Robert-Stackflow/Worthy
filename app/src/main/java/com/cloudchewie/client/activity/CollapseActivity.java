@@ -1,10 +1,10 @@
 package com.cloudchewie.client.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cloudchewie.client.R;
 import com.google.android.material.appbar.CollapsingToolbarLayout;

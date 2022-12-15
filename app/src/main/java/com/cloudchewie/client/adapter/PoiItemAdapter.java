@@ -1,13 +1,7 @@
 package com.cloudchewie.client.adapter;
 
-import java.util.List;
-
-import com.baidu.mapapi.search.sug.SuggestionResult;
-import com.cloudchewie.client.R;
-
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.cloudchewie.client.R;
+
+import java.util.List;
 
 public class PoiItemAdapter extends RecyclerView.Adapter<PoiItemAdapter.MyViewHolder> {
     private List<SuggestionResult.SuggestionInfo> mSuggestInfos = null;

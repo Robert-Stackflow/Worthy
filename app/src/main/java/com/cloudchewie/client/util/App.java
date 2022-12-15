@@ -1,7 +1,6 @@
 package com.cloudchewie.client.util;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.cloudchewie.client.R;
 import com.scwang.smart.refresh.footer.ClassicsFooter;

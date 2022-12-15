@@ -64,9 +64,9 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         titles.add(" 推荐 ");
         titles.add(" 关注 ");
         fragments.add(new AttractionsFragment());
-        fragments.add(new RecommendFragment());
-        fragments.add(new FollowingFragment());
-        adapter = new HomeFragmentAdapter(getActivity().getSupportFragmentManager(), fragments, titles);
+        fragments.add(new PostsFragment());
+        fragments.add(new PostsFragment());
+        adapter = new HomeFragmentAdapter(getChildFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -119,7 +119,7 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
                     followingOption = popupWindow.getCurrentOption();
                     tabLayout.getTabAt(position).setText(" 关注▾");
                     if (popupWindow.isOptionChanged())
-                        ((FollowingFragment) fragments.get(position)).performRefresh();
+                        ((PostsFragment) fragments.get(position)).performRefresh();
                 }
             });
         } else {

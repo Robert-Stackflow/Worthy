@@ -86,7 +86,7 @@
                     app:layout_constraintTop_toTopOf="@id/avatar" />
 
                 <Button
-                    android:id="@+id/entry_profile"
+                    android:id="@+id/entry_home_page"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

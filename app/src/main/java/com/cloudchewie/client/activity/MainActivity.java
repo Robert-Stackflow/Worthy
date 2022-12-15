@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +25,6 @@ import com.cloudchewie.client.fragment.MessageFragment;
 import com.cloudchewie.client.fragment.UserFragment;
 import com.cloudchewie.client.ui.NoScrollViewPager;
 import com.cloudchewie.client.util.LocalStorage;
-import com.google.android.material.tabs.TabLayout;
 import com.yh.bottomnavigationex.BottomNavigationViewEx;
 
 import java.util.ArrayList;

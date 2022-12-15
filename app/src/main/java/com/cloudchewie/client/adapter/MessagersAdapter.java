@@ -53,13 +53,16 @@ public class MessagersAdapter extends RecyclerView.Adapter<MessagersAdapter.MyVi
         if (null == messager) {
             return;
         }
-        if (position == 0 && position == getItemCount() - 1)
+        if (position == 0 && position == getItemCount() - 1) {
+            holder.splitter.setVisibility(View.GONE);
             holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_round));
+        }
         if (position == 0)
             holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_top_radius));
-        else if (position == getItemCount() - 1)
+        else if (position == getItemCount() - 1) {
+            holder.splitter.setVisibility(View.GONE);
             holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_bottom_radius));
-        else
+        } else
             holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card));
         holder.itemView.setOnClickListener(view -> {
 //            Intent intent = new Intent(context, MessagerDetailActivity.class);
@@ -90,6 +93,7 @@ public class MessagersAdapter extends RecyclerView.Adapter<MessagersAdapter.MyVi
         public TextView timeView;
         public TextView contentView;
         public ImageView statusView;
+        public View splitter;
 
         public MyViewHolder(View view) {
             super(view);
@@ -101,6 +105,7 @@ public class MessagersAdapter extends RecyclerView.Adapter<MessagersAdapter.MyVi
             timeView = view.findViewById(R.id.chatter_item_time);
             contentView = view.findViewById(R.id.chatter_item_content);
             statusView = view.findViewById(R.id.chatter_item_status);
+            splitter = view.findViewById(R.id.chatter_item_splitter);
         }
     }
 }

@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ThreadUtils;
 import com.cloudchewie.client.R;

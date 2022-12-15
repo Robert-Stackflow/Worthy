@@ -1,17 +1,13 @@
 package com.cloudchewie.client.util;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LocationUtil {
     private static List<JsonBean> options1Items = new ArrayList<>();

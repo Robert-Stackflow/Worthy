@@ -1,7 +1,5 @@
 package com.cloudchewie.client.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.cloudchewie.client.R;
