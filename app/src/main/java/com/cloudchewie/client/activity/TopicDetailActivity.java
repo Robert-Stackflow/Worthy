@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.fragment.PostsFragment;
+import com.cloudchewie.client.ui.BottomSheet;
 import com.cloudchewie.client.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -39,6 +40,12 @@ public class TopicDetailActivity extends BaseActivity {
         topic = (Topic) intent.getSerializableExtra("topic");
         setContentView(R.layout.activity_topic_detail);
         findViewById(R.id.topic_detail_back).setOnClickListener(v -> finish());
+        findViewById(R.id.topic_detail_more).setOnClickListener(v -> {
+            BottomSheet bottomSheet = new BottomSheet(this);
+            bottomSheet.setMainLayout(R.layout.layout_detail_more);
+            bottomSheet.show();
+            bottomSheet.findViewById(R.id.detail_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
+        });
         ((TextView) findViewById(R.id.topic_detail_name)).setText(topic.getName());
         ((TextView) findViewById(R.id.topic_detail_describe)).setText(topic.getDescribe());
         ((TextView) findViewById(R.id.topic_detail_hotvalue)).setText(topic.getHotvalue() + "热度 · " + topic.getFollowerCount() + "人关注");

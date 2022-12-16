@@ -4,6 +4,8 @@ import static com.cloudchewie.client.util.TimeUtil.dateToString;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.activity.MessagerDetailActivity;
 import com.cloudchewie.client.domin.Messager;
 import com.cloudchewie.client.ui.ChatterItem;
 
@@ -53,17 +56,7 @@ public class MessagersAdapter extends RecyclerView.Adapter<MessagersAdapter.MyVi
         if (null == messager) {
             return;
         }
-        if (position == 0 && position == getItemCount() - 1) {
-            holder.splitter.setVisibility(View.GONE);
-            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_round));
-        }
-        if (position == 0)
-            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_top_radius));
-        else if (position == getItemCount() - 1) {
-            holder.splitter.setVisibility(View.GONE);
-            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card_bottom_radius));
-        } else
-            holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card));
+        holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card));
         holder.itemView.setOnClickListener(view -> {
 //            Intent intent = new Intent(context, MessagerDetailActivity.class);
 //            Bundle bundle = new Bundle();

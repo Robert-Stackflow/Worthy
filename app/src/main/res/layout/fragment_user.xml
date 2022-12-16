@@ -48,7 +48,7 @@
             android:padding="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/avatar_layout"
+                android:id="@+id/fragment_user_avatar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_card_round"
@@ -102,193 +102,66 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/user_entry_layout"
+                android:id="@+id/fragment_user_entry_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/shape_card_round"
-                android:paddingStart="10dp"
                 android:paddingTop="10dp"
-                android:paddingEnd="10dp"
                 android:paddingBottom="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/avatar_layout">
+                app:layout_constraintTop_toBottomOf="@id/fragment_user_avatar_layout">
 
-                <LinearLayout
-                    android:id="@+id/entry_content_layout"
+                <com.cloudchewie.client.ui.EntryItem
+                    android:id="@+id/user_entry_creation"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@id/entry_following_layout"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:entry_item_icon="@drawable/ic_light_edit"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="我的创作"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/user_entry_following"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <ImageButton
-                            android:id="@+id/entry_content_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
-                            android:clickable="true"
-                            android:contentDescription="我的创作"
-                            android:focusable="true"
-                            android:src="@drawable/ic_light_edit"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/entry_content_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="我的创作"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry"
-                        app:layout_constraintBottom_toBottomOf="@id/avatar"
-                        app:layout_constraintStart_toEndOf="@id/avatar"
-                        app:layout_constraintTop_toTopOf="@id/avatar" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/entry_following_layout"
+                <com.cloudchewie.client.ui.EntryItem
+                    android:id="@+id/user_entry_following"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@id/entry_collection_layout"
-                    app:layout_constraintStart_toEndOf="@id/entry_content_layout">
+                    app:entry_item_icon="@drawable/ic_light_heart"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="我的关注"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/user_entry_collection"
+                    app:layout_constraintStart_toEndOf="@id/user_entry_creation"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <ImageButton
-                            android:id="@+id/entry_following_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
-                            android:clickable="true"
-                            android:contentDescription="我的关注"
-                            android:focusable="true"
-                            android:src="@drawable/ic_light_heart"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/entry_following_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="我的关注"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry"
-                        app:layout_constraintBottom_toBottomOf="@id/avatar"
-                        app:layout_constraintStart_toEndOf="@id/avatar"
-                        app:layout_constraintTop_toTopOf="@id/avatar" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/entry_collection_layout"
+                <com.cloudchewie.client.ui.EntryItem
+                    android:id="@+id/user_entry_collection"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@id/entry_footprint_layout"
-                    app:layout_constraintStart_toEndOf="@id/entry_following_layout">
+                    app:entry_item_icon="@drawable/ic_light_star"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="我的收藏"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/user_entry_footprint"
+                    app:layout_constraintStart_toEndOf="@id/user_entry_following"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <ImageButton
-                            android:id="@+id/entry_collection_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
-                            android:clickable="true"
-                            android:contentDescription="我的收藏"
-                            android:focusable="true"
-                            android:src="@drawable/ic_light_star"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/entry_collection_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="我的收藏"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry"
-                        app:layout_constraintBottom_toBottomOf="@id/avatar"
-                        app:layout_constraintStart_toEndOf="@id/avatar"
-                        app:layout_constraintTop_toTopOf="@id/avatar" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/entry_footprint_layout"
+                <com.cloudchewie.client.ui.EntryItem
+                    android:id="@+id/user_entry_footprint"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    app:entry_item_icon="@drawable/ic_light_clock"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="我的足迹"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/entry_collection_layout">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <ImageButton
-                            android:id="@+id/entry_footprint_icon"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@android:color/transparent"
-                            android:clickable="true"
-                            android:contentDescription="我的足迹"
-                            android:focusable="true"
-                            android:src="@drawable/ic_light_clock"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/entry_footprint_text"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:text="我的足迹"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_color_fast_entry"
-                        app:layout_constraintBottom_toBottomOf="@id/avatar"
-                        app:layout_constraintStart_toEndOf="@id/avatar"
-                        app:layout_constraintTop_toTopOf="@id/avatar" />
-                </LinearLayout>
+                    app:layout_constraintStart_toEndOf="@id/user_entry_collection"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </RelativeLayout>

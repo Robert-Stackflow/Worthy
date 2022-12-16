@@ -97,6 +97,8 @@ public class PostsFragment extends Fragment implements View.OnClickListener {
         swipeRefreshLayout.setOnLoadMoreListener(v -> handler.post(getMorehDatas));
         swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
+        header.setTextSizeTitle(14);
+        footer.setTextSizeTitle(14);
     }
 
     public void performRefresh() {

@@ -1,35 +1,48 @@
 package com.cloudchewie.client.widget;
 
+import static java.lang.Math.abs;
+
 import com.google.android.material.appbar.AppBarLayout;
 
 public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
     public enum State {
         EXPANDED,
         COLLAPSED,
-        IDLE
+        UPING,
+        DOWNING
     }
 
-    private State mCurrentState = State.IDLE;
+    private int offset;
+    private State mCurrentState = State.UPING;
 
     @Override
     public final void onOffsetChanged(AppBarLayout appBarLayout, int i) {
         if (i == 0) {
             if (mCurrentState != State.EXPANDED) {
-                onStateChanged(appBarLayout, State.EXPANDED);
+                onStateChanged(appBarLayout, State.EXPANDED, i);
             }
             mCurrentState = State.EXPANDED;
-        } else if (Math.abs(i) >= appBarLayout.getTotalScrollRange()) {
+            offset = i;
+        } else if (abs(i) >= appBarLayout.getTotalScrollRange()) {
             if (mCurrentState != State.COLLAPSED) {
-                onStateChanged(appBarLayout, State.COLLAPSED);
+                onStateChanged(appBarLayout, State.COLLAPSED, i);
             }
             mCurrentState = State.COLLAPSED;
-        } else {
-            if (mCurrentState != State.IDLE) {
-                onStateChanged(appBarLayout, State.IDLE);
+            offset = i;
+        } else if (offset < i) {
+            if (mCurrentState != State.DOWNING || ((abs(offset - i) > 50) && (mCurrentState == State.DOWNING))) {
+                onStateChanged(appBarLayout, State.DOWNING, i);
+                offset = i;
             }
-            mCurrentState = State.IDLE;
+            mCurrentState = State.DOWNING;
+        } else {
+            if (mCurrentState != State.UPING || ((abs(offset - i) > 200) && (mCurrentState == State.UPING))) {
+                onStateChanged(appBarLayout, State.UPING, i);
+                offset = i;
+            }
+            mCurrentState = State.UPING;
         }
     }
 
-    public abstract void onStateChanged(AppBarLayout appBarLayout, State state);
+    public abstract void onStateChanged(AppBarLayout appBarLayout, State state, int offset);
 }

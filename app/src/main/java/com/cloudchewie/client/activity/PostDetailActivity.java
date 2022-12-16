@@ -18,6 +18,7 @@ import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.ui.BottomSheet;
 import com.cloudchewie.client.ui.IconTextItem;
 import com.cloudchewie.client.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -43,6 +44,12 @@ public class PostDetailActivity extends BaseActivity {
         post = (Post) intent.getSerializableExtra("post");
         setContentView(R.layout.activity_post_detail);
         findViewById(R.id.post_detail_back).setOnClickListener(v -> finish());
+        findViewById(R.id.post_detail_more).setOnClickListener(v -> {
+            BottomSheet bottomSheet = new BottomSheet(this);
+            bottomSheet.setMainLayout(R.layout.layout_detail_more);
+            bottomSheet.show();
+            bottomSheet.findViewById(R.id.detail_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
+        });
         tabLayout = findViewById(R.id.post_detail_comment_tab_layout);
         viewPager = findViewById(R.id.post_detail_content_viewpager);
         ((TextView) findViewById(R.id.post_detail_username)).setText(post.getUsername());

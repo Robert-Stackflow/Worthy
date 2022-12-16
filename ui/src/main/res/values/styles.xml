@@ -136,4 +136,16 @@
         <attr name="icon_text_item_icon_size" format="dimension" />
         <attr name="icon_text_item_spacing" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="EntryItem">
+        <attr name="entry_item_text" format="string" />
+        <attr name="entry_item_text_color" format="color" />
+        <attr name="entry_item_text_size" format="dimension" />
+        <attr name="entry_item_icon" format="reference" />
+        <attr name="entry_item_icon_color" format="color" />
+        <attr name="entry_item_icon_size" format="dimension" />
+        <attr name="entry_item_spacing" format="dimension" />
+        <attr name="entry_item_icon_background" format="reference" />
+        <attr name="entry_item_icon_background_enable" format="boolean" />
+    </declare-styleable>
 </resources>

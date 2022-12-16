@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 
 public class AnimationUtil {
 
@@ -47,5 +48,25 @@ public class AnimationUtil {
 
     public interface AnimInterface {
         void animEnd();
+    }
+
+
+    private static AlphaAnimation mHideAnimation = null;
+    private static AlphaAnimation mShowAnimation = null;
+
+    /**
+     * View渐现动画效果
+     */
+    public static void setAlphaAnimation(float start,float end,View view, int duration) {
+        if (null == view || duration < 0) {
+            return;
+        }
+        if (null != mShowAnimation) {
+            mShowAnimation.cancel();
+        }
+        mShowAnimation = new AlphaAnimation(start,end);
+        mShowAnimation.setDuration(duration);
+        mShowAnimation.setFillAfter(true);
+        view.startAnimation(mShowAnimation);
     }
 }

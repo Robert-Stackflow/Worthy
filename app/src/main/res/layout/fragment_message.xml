@@ -58,184 +58,69 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/message_entry_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/shape_card_round"
-                    android:paddingStart="10dp"
                     android:paddingTop="10dp"
-                    android:paddingEnd="10dp"
                     android:paddingBottom="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <com.cloudchewie.client.ui.EntryItem
                         android:id="@+id/message_entry_comment_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:entry_item_icon="@drawable/ic_light_comment"
+                        app:entry_item_icon_size="40dp"
+                        app:entry_item_text="评论回复"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/message_entry_thumbup_layout"
-                        app:layout_constraintStart_toStartOf="parent">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            app:layout_constraintStart_toStartOf="parent">
-
-                            <ImageButton
-                                android:id="@+id/message_entry_comment_icon"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@android:color/transparent"
-                                android:clickable="true"
-                                android:contentDescription="评论回复"
-                                android:focusable="true"
-                                android:src="@drawable/ic_light_comment"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <TextView
-                            android:id="@+id/message_entry_comment_text"
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:text="评论回复"
-                            android:textAlignment="center"
-                            android:textColor="@color/text_color_fast_entry" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <com.cloudchewie.client.ui.EntryItem
                         android:id="@+id/message_entry_thumbup_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        app:entry_item_icon="@drawable/ic_light_heart"
+                        app:entry_item_icon_size="40dp"
+                        app:entry_item_text="点赞收藏"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/message_entry_fans_layout"
-                        app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout">
+                        app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            app:layout_constraintStart_toStartOf="parent">
-
-                            <ImageButton
-                                android:id="@+id/message_entry_thumbup_icon"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@android:color/transparent"
-                                android:clickable="true"
-                                android:contentDescription="点赞收藏"
-                                android:focusable="true"
-                                android:src="@drawable/ic_light_heart"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <TextView
-                            android:id="@+id/message_entry_thumbup_text"
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:text="点赞收藏"
-                            android:textAlignment="center"
-                            android:textColor="@color/text_color_fast_entry" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <com.cloudchewie.client.ui.EntryItem
                         android:id="@+id/message_entry_fans_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        app:entry_item_icon="@drawable/ic_light_eye"
+                        app:entry_item_icon_size="40dp"
+                        app:entry_item_text="新的关注"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/message_entry_system_layout"
-                        app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout">
+                        app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            app:layout_constraintStart_toStartOf="parent">
-
-                            <ImageButton
-                                android:id="@+id/message_entry_fans_icon"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@android:color/transparent"
-                                android:clickable="true"
-                                android:contentDescription="新的关注"
-                                android:focusable="true"
-                                android:src="@drawable/ic_light_eye"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <TextView
-                            android:id="@+id/message_entry_fans_text"
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:text="新的关注"
-                            android:textAlignment="center"
-                            android:textColor="@color/text_color_fast_entry" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <com.cloudchewie.client.ui.EntryItem
                         android:id="@+id/message_entry_system_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        app:entry_item_icon="@drawable/ic_light_at"
+                        app:entry_item_icon_size="40dp"
+                        app:entry_item_text="系统通知"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:layout_constraintStart_toStartOf="parent">
-
-                            <ImageButton
-                                android:id="@+id/message_entry_system_icon"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@android:color/transparent"
-                                android:clickable="true"
-                                android:contentDescription="系统通知"
-                                android:focusable="true"
-                                android:src="@drawable/ic_light_at"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <TextView
-                            android:id="@+id/message_entry_system_text"
-                            style="@style/TextAppearance.AppCompat.Body1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:text="系统通知"
-                            android:textAlignment="center"
-                            android:textColor="@color/text_color_fast_entry" />
-                    </LinearLayout>
-
+                        app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView

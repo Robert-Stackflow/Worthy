@@ -14,6 +14,7 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.fragment.BaseFragment;
 import com.cloudchewie.client.fragment.PostsFragment;
+import com.cloudchewie.client.ui.BottomSheet;
 import com.cloudchewie.client.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -38,6 +39,12 @@ public class AttractionDetailActivity extends BaseActivity {
         Intent intent = this.getIntent();
         attraction = (Attraction) intent.getSerializableExtra("attraction");
         findViewById(R.id.attraction_detail_back).setOnClickListener(v -> finish());
+        findViewById(R.id.attraction_detail_more).setOnClickListener(v -> {
+            BottomSheet bottomSheet = new BottomSheet(this);
+            bottomSheet.setMainLayout(R.layout.layout_detail_more);
+            bottomSheet.show();
+            bottomSheet.findViewById(R.id.detail_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
+        });
         ((TextView) findViewById(R.id.attraction_detail_name)).setText(attraction.getName());
         ((TextView) findViewById(R.id.attraction_detail_location)).setText(attraction.getLocation());
         ((TextView) findViewById(R.id.attraction_detail_describe)).setText(attraction.getDescribe());

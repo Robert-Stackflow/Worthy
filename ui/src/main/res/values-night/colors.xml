@@ -5,6 +5,7 @@
     <color name="icon_color">#999999</color>
     <color name="titlebar_background">#000000</color>
     <color name="text_color_white">#FFFFFF</color>
+    <color name="text_color_red">#E81111</color>
     <color name="text_color_black">#000000</color>
     <color name="text_color_fast_entry">#C6C6C6</color>
     <color name="text_color_gray">#999999</color>
