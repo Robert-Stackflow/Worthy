@@ -44,7 +44,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/message_titlebar">
+        android:layout_below="@id/message_titlebar"
+        android:scrollbars="none">
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/fragment_message_swipe_refresh"
