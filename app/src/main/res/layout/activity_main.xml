@@ -14,9 +14,9 @@
         app:itemBackground="@null"
         app:itemIconTint="@color/checkable_color_selector"
         app:itemTextColor="@color/checkable_color_selector"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/menu_navigation" />
 
-    <com.cloudchewie.client.ui.NoScrollViewPager
+    <com.cloudchewie.ui.NoScrollViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

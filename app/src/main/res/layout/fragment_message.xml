@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/titlebar_background"
-            android:text="消息"
+            android:text="@string/fragement_message_title"
             android:textColor="@color/color_accent"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,12 +27,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/message_clear"
+            android:id="@+id/message_clear_unread"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@color/titlebar_background"
             android:clickable="true"
-            android:contentDescription="清除未读"
+            android:contentDescription="@string/cd_clear_unread"
             android:focusable="true"
             android:src="@drawable/ic_light_clear"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +73,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.cloudchewie.client.ui.EntryItem
+                    <com.cloudchewie.ui.EntryItem
                         android:id="@+id/message_entry_comment_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -87,7 +87,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.cloudchewie.client.ui.EntryItem
+                    <com.cloudchewie.ui.EntryItem
                         android:id="@+id/message_entry_thumbup_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -99,7 +99,7 @@
                         app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.cloudchewie.client.ui.EntryItem
+                    <com.cloudchewie.ui.EntryItem
                         android:id="@+id/message_entry_fans_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -111,7 +111,7 @@
                         app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.cloudchewie.client.ui.EntryItem
+                    <com.cloudchewie.ui.EntryItem
                         android:id="@+id/message_entry_system_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"

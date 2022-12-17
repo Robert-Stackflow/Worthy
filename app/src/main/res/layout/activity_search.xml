@@ -12,7 +12,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.cloudchewie.search.SearchLayout
+        <com.cloudchewie.ui.SearchLayout
             android:id="@+id/search_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:textAlignment="center" />
     </LinearLayout>
 
-    <com.cloudchewie.search.SearchList
+    <com.cloudchewie.ui.SearchList
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -14,8 +14,8 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.fragment.BaseFragment;
 import com.cloudchewie.client.fragment.PostsFragment;
-import com.cloudchewie.client.ui.BottomSheet;
-import com.cloudchewie.client.ui.NoScrollViewPager;
+import com.cloudchewie.ui.BottomSheet;
+import com.cloudchewie.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 

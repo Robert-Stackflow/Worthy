@@ -57,14 +57,14 @@ public class AnimationUtil {
     /**
      * View渐现动画效果
      */
-    public static void setAlphaAnimation(float start,float end,View view, int duration) {
+    public static void setAlphaAnimation(float start, float end, View view, int duration) {
         if (null == view || duration < 0) {
             return;
         }
         if (null != mShowAnimation) {
             mShowAnimation.cancel();
         }
-        mShowAnimation = new AlphaAnimation(start,end);
+        mShowAnimation = new AlphaAnimation(start, end);
         mShowAnimation.setDuration(duration);
         mShowAnimation.setFillAfter(true);
         view.startAnimation(mShowAnimation);

@@ -22,13 +22,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@color/titlebar_background"
-                android:contentDescription="返回"
+                android:contentDescription="@string/cd_titlebar_left_button"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_light_arrow_left"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:neumorph_shapeType="flat"
                 tools:ignore="UsingOnClickInXml" />
 
             <TextView
@@ -47,13 +46,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@color/titlebar_background"
-                android:contentDescription="更多"
+                android:contentDescription="@string/cd_titlebar_right_button"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_light_ellipsis"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:neumorph_shapeType="flat" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </merge>

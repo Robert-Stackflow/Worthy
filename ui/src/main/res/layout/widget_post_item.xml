@@ -22,7 +22,7 @@
             android:layout_height="30dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/avatar"
+            android:src="@drawable/img_default_avatar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/post_item_content_layout">
 
-        <com.cloudchewie.client.ui.IconTextItem
+        <com.cloudchewie.ui.IconTextItem
             android:id="@+id/post_item_attraction"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -94,7 +94,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.cloudchewie.client.ui.IconTextItem
+        <com.cloudchewie.ui.IconTextItem
             android:id="@+id/post_item_topic"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -108,7 +108,7 @@
             app:layout_constraintStart_toEndOf="@id/post_item_attraction"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.cloudchewie.client.ui.IconTextItem
+        <com.cloudchewie.ui.IconTextItem
             android:id="@+id/post_item_comment"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -124,7 +124,7 @@
             app:layout_constraintEnd_toStartOf="@id/post_item_thumbup"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.cloudchewie.client.ui.IconTextItem
+        <com.cloudchewie.ui.IconTextItem
             android:id="@+id/post_item_thumbup"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

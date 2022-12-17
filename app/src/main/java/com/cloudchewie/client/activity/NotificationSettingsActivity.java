@@ -3,7 +3,7 @@ package com.cloudchewie.client.activity;
 import android.os.Bundle;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.ui.TitleBar;
+import com.cloudchewie.ui.TitleBar;
 import com.cloudchewie.client.util.StatusBarUtil;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 

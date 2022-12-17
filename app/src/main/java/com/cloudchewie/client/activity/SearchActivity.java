@@ -8,8 +8,8 @@ import android.widget.Toast;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.util.StatusBarUtil;
-import com.cloudchewie.search.SearchLayout;
-import com.cloudchewie.search.SearchList;
+import com.cloudchewie.ui.SearchLayout;
+import com.cloudchewie.ui.SearchList;
 
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
     SearchLayout searchLayout;

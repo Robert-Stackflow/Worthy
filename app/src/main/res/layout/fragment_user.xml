@@ -17,7 +17,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
-            android:contentDescription="深色模式"
+            android:contentDescription="@string/cd_daynight"
             android:src="@drawable/ic_light_daynight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/user_settings"
@@ -28,7 +28,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
-            android:contentDescription="设置"
+            android:contentDescription="@string/cd_settings"
             android:src="@drawable/ic_light_set"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +65,7 @@
                     android:layout_height="40dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:src="@drawable/avatar"
+                    android:src="@drawable/img_default_avatar"
                     app:civ_border_width="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
                     android:background="@android:color/transparent"
                     android:clickable="true"
                     android:focusable="true"
-                    android:text="个人主页"
+                    android:text="@string/entry_home_page"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@id/avatar"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +112,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_user_avatar_layout">
 
-                <com.cloudchewie.client.ui.EntryItem
+                <com.cloudchewie.ui.EntryItem
                     android:id="@+id/user_entry_creation"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -124,7 +124,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.EntryItem
+                <com.cloudchewie.ui.EntryItem
                     android:id="@+id/user_entry_following"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -136,7 +136,7 @@
                     app:layout_constraintStart_toEndOf="@id/user_entry_creation"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.EntryItem
+                <com.cloudchewie.ui.EntryItem
                     android:id="@+id/user_entry_collection"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -148,7 +148,7 @@
                     app:layout_constraintStart_toEndOf="@id/user_entry_following"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.EntryItem
+                <com.cloudchewie.ui.EntryItem
                     android:id="@+id/user_entry_footprint"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -160,8 +160,6 @@
                     app:layout_constraintStart_toEndOf="@id/user_entry_collection"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </RelativeLayout>

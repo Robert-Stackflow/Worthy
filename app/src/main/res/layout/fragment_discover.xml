@@ -49,7 +49,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.cloudchewie.client.ui.NoScrollViewPager
+    <com.cloudchewie.ui.NoScrollViewPager
         android:id="@+id/discover_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

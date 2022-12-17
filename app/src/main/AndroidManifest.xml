@@ -64,13 +64,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.CollapseActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".activity.ChangePasswordActivity"
             android:exported="false">
             <meta-data

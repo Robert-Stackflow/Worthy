@@ -17,7 +17,7 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.MessagersAdapter;
 import com.cloudchewie.client.domin.Message;
 import com.cloudchewie.client.domin.Messager;
-import com.cloudchewie.client.ui.CustomDialog;
+import com.cloudchewie.ui.CustomDialog;
 import com.cloudchewie.client.util.StatusBarUtil;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -46,7 +46,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_message, null);
         StatusBarUtil.setMargin(mainView.findViewById(R.id.message_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
-        mainView.findViewById(R.id.message_clear).setOnClickListener(this);
+        mainView.findViewById(R.id.message_clear_unread).setOnClickListener(this);
         initSwipeRefresh();
         initRecyclerView();
         return mainView;
@@ -140,7 +140,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == mainView.findViewById(R.id.message_clear)) {
+        if (view == mainView.findViewById(R.id.message_clear_unread)) {
             final CustomDialog dialog = new CustomDialog(getActivity());
             dialog.setMessage("是否清除所有未读消息?")
                     .setSingle(false).setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {

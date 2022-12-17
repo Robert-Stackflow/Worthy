@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_wechat"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -38,7 +38,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_qq"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_wechat"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_weibo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -70,7 +70,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_qq"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_pengyouquan"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -86,7 +86,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_weibo"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_qqzone"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -102,7 +102,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_pengyouquan"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -158,7 +158,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -176,7 +176,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_edit"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_report"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -192,7 +192,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_delete"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_uninterested"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -208,7 +208,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_report"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_viewavatar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -224,7 +224,7 @@
                 app:layout_constraintStart_toEndOf="@id/detail_more_uninterested"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.EntryItem
+            <com.cloudchewie.ui.EntryItem
                 android:id="@+id/detail_more_addtoblacklist"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -257,7 +257,7 @@
         android:focusable="true"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="取消"
+        android:text="@string/cancel"
         android:textAlignment="center"
         android:textColor="@color/text_color_red"
         android:textSize="14sp"

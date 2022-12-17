@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.ui.TitleBar;
+import com.cloudchewie.ui.TitleBar;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 public class ChangePasswordActivity extends AppCompatActivity {

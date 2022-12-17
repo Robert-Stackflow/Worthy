@@ -1,6 +1,7 @@
 [versions]
 
-kotlin = "1.5.32"
+kotlin = "1.7.0"
+kotlin-stdlib = "1.7.10"
 benchmark = "1.0.0"
 
 [libraries]
@@ -8,7 +9,7 @@ benchmark = "1.0.0"
 android-pluginGradle = "com.android.tools.build:gradle:7.1.0"
 
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref = "kotlin-stdlib" }
 
 androidx-appcompat = "androidx.appcompat:appcompat:1.2.0"
 androidx-constraintlayout = "androidx.constraintlayout:constraintlayout:2.0.4"

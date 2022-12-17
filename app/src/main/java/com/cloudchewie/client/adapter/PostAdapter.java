@@ -20,7 +20,7 @@ import com.cloudchewie.client.activity.TopicDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
-import com.cloudchewie.client.ui.IconTextItem;
+import com.cloudchewie.ui.IconTextItem;
 import com.cloudchewie.client.util.TimeUtil;
 
 import java.util.List;

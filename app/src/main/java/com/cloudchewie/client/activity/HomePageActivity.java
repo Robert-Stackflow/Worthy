@@ -4,27 +4,21 @@ import static java.lang.Math.abs;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.fragment.BaseFragment;
-import com.cloudchewie.client.ui.BottomSheet;
-import com.cloudchewie.client.ui.NoScrollViewPager;
-import com.cloudchewie.client.util.AnimationUtil;
+import com.cloudchewie.ui.BottomSheet;
+import com.cloudchewie.ui.NoScrollViewPager;
 import com.cloudchewie.client.widget.AppBarStateChangeListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -67,7 +61,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state, int offset) {
                 if (state == State.EXPANDED) {
-                    ((ImageView) findViewById(R.id.home_page_background)).setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.background));
+                    ((ImageView) findViewById(R.id.home_page_background)).setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.img_default_background));
                     isBlurred = false;
                 } else if (state == State.COLLAPSED) {
                     isBlurred = true;
@@ -79,13 +73,16 @@ public class HomePageActivity extends AppCompatActivity {
                 } else {
                     findViewById(R.id.home_page_small_avatar).setVisibility(View.GONE);
                     findViewById(R.id.home_page_small_username).setVisibility(View.GONE);
-                    ((ImageView) findViewById(R.id.home_page_background)).setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.background));
+                    ((ImageView) findViewById(R.id.home_page_background)).setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.img_default_background));
                     isBlurred = false;
                 }
             }
         });
         initSwipeRefresh();
         initTabLayout();
+        {
+
+        }
     }
 
     void initTabLayout() {

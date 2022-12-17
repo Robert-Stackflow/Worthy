@@ -63,7 +63,7 @@ import com.cloudchewie.client.adapter.PoiItemAdapter;
 import com.cloudchewie.client.util.LocationUtil;
 import com.cloudchewie.client.util.StatusBarUtil;
 import com.cloudchewie.client.util.Utils;
-import com.cloudchewie.search.SearchLayout;
+import com.cloudchewie.ui.SearchLayout;
 
 import org.jetbrains.annotations.Contract;
 
@@ -93,7 +93,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     private RecyclerView recyclerView;
     LocationClientOption locationOption;
     private PoiItemAdapter poiItemAdaper;
-    private BitmapDescriptor bitmapdescwaterdrop = BitmapDescriptorFactory.fromResource(R.drawable.water_drop);
+    private BitmapDescriptor bitmapdescwaterdrop = BitmapDescriptorFactory.fromResource(R.drawable.img_water_drop);
     private int loadIndex = 0;
     private TextView poiTitle;
     private TextView poiAddress;

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.AttractionDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
+import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;
 
@@ -59,9 +60,9 @@ public class AttractionsAdapter extends RecyclerView.Adapter<AttractionsAdapter.
         });
         holder.nameView.setText(attraction.getName());
         holder.locationView.setText(attraction.getLocation());
-        holder.followerText.setText(String.valueOf(attraction.getFollowerCount()));
-        holder.visitorText.setText(String.valueOf(attraction.getVisitorCount()));
-        holder.postText.setText(String.valueOf(attraction.getPostCount()));
+        holder.follow.setText(String.valueOf(attraction.getFollowerCount()));
+        holder.visitor.setText(String.valueOf(attraction.getVisitorCount()));
+        holder.post.setText(String.valueOf(attraction.getPostCount()));
     }
 
     @Override
@@ -74,12 +75,9 @@ public class AttractionsAdapter extends RecyclerView.Adapter<AttractionsAdapter.
         public TextView nameView;
         public TextView locationView;
         public ImageView jumpToMap;
-        public ImageView followerIcon;
-        public TextView followerText;
-        public ImageView visitorIcon;
-        public TextView visitorText;
-        public ImageView postIcon;
-        public TextView postText;
+        public IconTextItem follow;
+        public IconTextItem visitor;
+        public IconTextItem post;
 
         public MyViewHolder(View view) {
             super(view);
@@ -87,12 +85,9 @@ public class AttractionsAdapter extends RecyclerView.Adapter<AttractionsAdapter.
             nameView = view.findViewById(R.id.attraction_card_name);
             locationView = view.findViewById(R.id.attraction_card_location);
             jumpToMap = view.findViewById(R.id.attraction_card_jump_to_map);
-            followerIcon = view.findViewById(R.id.attraction_card_follow_icon);
-            followerText = view.findViewById(R.id.attraction_card_follow_text);
-            visitorIcon = view.findViewById(R.id.attraction_card_visitor_icon);
-            visitorText = view.findViewById(R.id.attraction_card_visitor_text);
-            postIcon = view.findViewById(R.id.attraction_card_post_icon);
-            postText = view.findViewById(R.id.attraction_card_post_text);
+            follow = view.findViewById(R.id.attraction_card_follow);
+            visitor = view.findViewById(R.id.attraction_card_visitor);
+            post = view.findViewById(R.id.attraction_card_post);
         }
     }
 }

@@ -8,8 +8,8 @@ import android.view.animation.Animation;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.ui.FlowTagLayout;
-import com.cloudchewie.client.ui.TagItem;
+import com.cloudchewie.ui.FlowTagLayout;
+import com.cloudchewie.ui.TagItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;

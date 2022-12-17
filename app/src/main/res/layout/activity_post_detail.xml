@@ -20,7 +20,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
-            android:contentDescription="返回"
+            android:contentDescription="@string/back"
             android:scaleType="centerInside"
             android:src="@drawable/ic_light_arrow_left"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,7 @@
             android:background="@android:color/transparent"
             android:scaleType="centerInside"
             android:src="@drawable/ic_light_arrow_left"
-            android:text="帖子详情"
+            android:text="@string/post_detail_title"
             android:textColor="@color/color_accent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/post_detail_back"
@@ -45,7 +45,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
-            android:contentDescription="更多"
+            android:contentDescription="@string/more"
             android:scaleType="centerInside"
             android:src="@drawable/ic_light_ellipsis"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -99,7 +99,7 @@
                                 android:layout_height="30dp"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/avatar"
+                                android:src="@drawable/img_default_avatar"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -159,7 +159,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/post_detail_content_layout">
 
-                            <com.cloudchewie.client.ui.IconTextItem
+                            <com.cloudchewie.ui.IconTextItem
                                 android:id="@+id/post_detail_attraction"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -171,7 +171,7 @@
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:icon_text_item_text="武汉" />
 
-                            <com.cloudchewie.client.ui.IconTextItem
+                            <com.cloudchewie.ui.IconTextItem
                                 android:id="@+id/post_detail_topic"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
@@ -227,7 +227,7 @@
                     android:background="@drawable/shape_button_dark"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
-                    android:text="排序"
+                    android:text="@string/sort"
                     android:textColor="@color/color_accent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -252,7 +252,7 @@
                     android:background="@color/divider_color"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.NoScrollViewPager
+                <com.cloudchewie.ui.NoScrollViewPager
                     android:id="@+id/post_detail_content_viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -276,6 +276,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -288,7 +289,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
-            <com.cloudchewie.client.ui.IconTextItem
+            <com.cloudchewie.ui.IconTextItem
                 android:id="@+id/post_detail_collection"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -313,7 +314,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
-            <com.cloudchewie.client.ui.IconTextItem
+            <com.cloudchewie.ui.IconTextItem
                 android:id="@+id/post_detail_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -338,7 +339,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp">
 
-            <com.cloudchewie.client.ui.IconTextItem
+            <com.cloudchewie.ui.IconTextItem
                 android:id="@+id/post_detail_thumbup"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

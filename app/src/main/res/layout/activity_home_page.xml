@@ -40,8 +40,9 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/background"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:src="@drawable/img_default_background"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/cd_home_page_background" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/home_page_avatar"
@@ -49,7 +50,7 @@
                         android:layout_height="80dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="-20dp"
-                        android:src="@drawable/avatar"
+                        android:src="@drawable/img_default_avatar"
                         app:civ_border_color="@color/background"
                         app:civ_border_width="2dp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="#AC000000"
+                        android:background="#66000000"
                         android:padding="5dp"
                         app:layout_constraintBottom_toBottomOf="@id/home_page_background"
                         app:layout_constraintEnd_toEndOf="parent">
@@ -70,7 +71,7 @@
                             android:id="@+id/home_page_followCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="100"
+                            android:text="@string/zero"
                             android:textColor="@color/text_color_white"
                             android:textSize="17sp" />
 
@@ -87,7 +88,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="100"
+                            android:text="@string/zero"
                             android:textColor="@color/text_color_white"
                             android:textSize="17sp" />
 
@@ -117,7 +118,8 @@
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:text="+ 关注"
-                            android:textColor="@color/color_accent" />
+                            android:textColor="@color/color_accent"
+                            style="?android:attr/buttonBarButtonStyle" />
 
                         <Button
                             android:id="@+id/home_page_sendmessage"
@@ -127,7 +129,8 @@
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:text="私信"
-                            android:textColor="@color/color_accent" />
+                            android:textColor="@color/color_accent"
+                            style="?android:attr/buttonBarButtonStyle" />
                     </LinearLayout>
 
                     <TextView
@@ -135,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="余湍"
+                        tools:text="余湍"
                         android:textAlignment="center"
                         android:textColor="@color/color_accent"
                         android:textSize="16sp"
@@ -170,7 +173,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@android:color/transparent"
-                            android:contentDescription="返回"
+                            android:contentDescription="@string/back"
                             android:scaleType="centerInside"
                             android:src="@drawable/ic_light_arrow_left"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -183,7 +186,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginStart="20dp"
-                            android:src="@drawable/avatar"
+                            android:src="@drawable/img_default_avatar"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/home_page_back"
@@ -195,7 +198,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:paddingStart="10dp"
-                            android:text="余湍"
+                            tools:text="余湍"
                             android:textAlignment="center"
                             android:textColor="@color/background"
                             android:textSize="15sp"
@@ -211,7 +214,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@android:color/transparent"
-                            android:contentDescription="更多"
+                            android:contentDescription="@string/more"
                             android:scaleType="centerInside"
                             android:src="@drawable/ic_light_ellipsis"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -272,7 +275,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_card_top_radius">
 
-                <com.cloudchewie.client.ui.NoScrollViewPager
+                <com.cloudchewie.ui.NoScrollViewPager
                     android:id="@+id/home_page_content_viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

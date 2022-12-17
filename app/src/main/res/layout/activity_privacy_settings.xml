@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.cloudchewie.client.ui.TitleBar
+    <com.cloudchewie.ui.TitleBar
         android:id="@+id/privacy_settings_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_showmylocation"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_allowstrangermessages"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/general_privacy_layout">
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_personalized_recommendation"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/personalized_layout">
 
-                <com.cloudchewie.client.ui.SettingItem
+                <com.cloudchewie.ui.SettingItem
                     android:id="@+id/entry_blacklist"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -96,7 +96,7 @@
                     app:setting_item_title="@string/entry_blacklist"
                     app:setting_item_top_radius_enable="true" />
 
-                <com.cloudchewie.client.ui.SettingItem
+                <com.cloudchewie.ui.SettingItem
                     android:id="@+id/entry_uninterested"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"

@@ -65,7 +65,7 @@
                 android:textAlignment="center" />
         </LinearLayout>
 
-        <com.cloudchewie.search.SearchLayout
+        <com.cloudchewie.ui.SearchLayout
             android:id="@+id/map_search_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

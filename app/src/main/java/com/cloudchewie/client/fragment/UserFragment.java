@@ -51,7 +51,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
         } else if (view == mainView.findViewById(R.id.switch_daynight)) {
-//            NeumorphImageButton switchDaynight = (NeumorphImageButton) view;
+//            ImageButton switchDaynight = (ImageButton) view;
 //            if (switchDaynight != null) switchDaynight.setOnClickListener(v -> {
 //                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED && (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == 0) {
 //                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

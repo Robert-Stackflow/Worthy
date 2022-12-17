@@ -23,7 +23,7 @@ import com.cloudchewie.client.fragment.DiscoverFragment;
 import com.cloudchewie.client.fragment.MapFragment;
 import com.cloudchewie.client.fragment.MessageFragment;
 import com.cloudchewie.client.fragment.UserFragment;
-import com.cloudchewie.client.ui.NoScrollViewPager;
+import com.cloudchewie.ui.NoScrollViewPager;
 import com.cloudchewie.client.util.LocalStorage;
 import com.yh.bottomnavigationex.BottomNavigationViewEx;
 

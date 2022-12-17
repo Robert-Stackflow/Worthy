@@ -49,4 +49,14 @@
     <string name="entry_service_terms">用户协议</string>
     <string name="entry_opensource">开发者与开源协议</string>
     <string name="entry_third_party">第三方信息收集清单</string>
+    <string name="cd_jump_to_map">跳转到地图</string>
+    <string name="cd_entry_item_icon">图标</string>
+    <string name="cd_icon_text_item_icon">图标</string>
+    <string name="cd_input_item_left_icon">左侧图标</string>
+    <string name="cd_input_item_right_icon">右侧图标</string>
+    <string name="cd_titlebar_left_button">标题栏左侧图标</string>
+    <string name="cd_titlebar_right_button">标题栏右侧图标</string>
+    <string name="search_hot_tag">热门搜索</string>
+    <string name="search_history_tag">搜索历史</string>
+    <string name="search_history_clear">清除全部</string>
 </resources>

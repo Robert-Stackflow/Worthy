@@ -18,7 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.SearchActivity;
-import com.cloudchewie.client.ui.NoScrollViewPager;
+import com.cloudchewie.ui.NoScrollViewPager;
 import com.cloudchewie.client.util.StatusBarUtil;
 import com.cloudchewie.client.widget.FollowingPopupWindow;
 import com.google.android.material.tabs.TabLayout;

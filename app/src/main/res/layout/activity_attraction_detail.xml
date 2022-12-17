@@ -42,7 +42,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
-                        android:contentDescription="返回"
+                        android:contentDescription="@string/back"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_light_arrow_left"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,23 +50,11 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:id="@+id/attraction_detail_share"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="分享地点"
-                        android:padding="10dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_light_share"
-                        app:layout_constraintEnd_toStartOf="@id/attraction_detail_jump_to_map"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
                         android:id="@+id/attraction_detail_jump_to_map"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
-                        android:contentDescription="跳转到地图"
+                        android:contentDescription="@string/cd_jump_to_map"
                         android:padding="10dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_light_map"
@@ -78,7 +66,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
-                        android:contentDescription="更多"
+                        android:contentDescription="@string/more"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_light_ellipsis"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -193,7 +181,7 @@
                 android:background="@drawable/shape_button_dark"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
-                android:text="筛选"
+                android:text="@string/filter"
                 android:textColor="@color/color_accent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -219,7 +207,7 @@
                 android:background="@color/divider_color"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.cloudchewie.client.ui.NoScrollViewPager
+            <com.cloudchewie.ui.NoScrollViewPager
                 android:id="@+id/attraction_detail_content_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

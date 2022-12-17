@@ -10,6 +10,7 @@
         android:id="@+id/icon_text_item_icon"
         android:layout_width="10dp"
         android:layout_height="10dp"
+        android:contentDescription="@string/cd_icon_text_item_icon"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_light_map"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,6 +28,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon_text_item_icon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="武汉"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlSymmetry"
+        tools:text="武汉" />
 </androidx.constraintlayout.widget.ConstraintLayout>

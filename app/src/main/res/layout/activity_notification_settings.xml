@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.cloudchewie.client.ui.TitleBar
+    <com.cloudchewie.ui.TitleBar
         android:id="@+id/notification_settings_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_recommend"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_system_notification"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/system_notification_layout">
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_new_follower"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_new_thumbup"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/switch_new_follower" />
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_new_collection"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/objective_notification_layout">
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_following_new_content"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_place_new_content"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/switch_following_new_content" />
 
-                <com.cloudchewie.client.ui.CheckBoxItem
+                <com.cloudchewie.ui.CheckBoxItem
                     android:id="@+id/switch_topic_new_content"
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"

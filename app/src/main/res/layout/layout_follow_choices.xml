@@ -9,7 +9,7 @@
     android:focusable="false"
     android:padding="10dp">
 
-    <com.cloudchewie.client.ui.FlowTagLayout
+    <com.cloudchewie.ui.FlowTagLayout
         android:id="@+id/follow_choices_flowtaglayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
