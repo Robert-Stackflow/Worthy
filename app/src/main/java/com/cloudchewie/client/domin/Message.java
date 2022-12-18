@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.domin;
 
 import androidx.annotation.NonNull;
@@ -12,6 +19,18 @@ public class Message {
     Date date;
     String content;
 
+    public Message() {
+    }
+
+    public Message(int aId, int bId, int state, int type, Date date, String content) {
+        this.aId = aId;
+        this.bId = bId;
+        this.state = state;
+        this.type = type;
+        this.date = date;
+        this.content = content;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -23,18 +42,6 @@ public class Message {
                 ", date=" + date +
                 ", content='" + content + '\'' +
                 '}';
-    }
-
-    public Message() {
-    }
-
-    public Message(int aId, int bId, int state, int type, Date date, String content) {
-        this.aId = aId;
-        this.bId = bId;
-        this.state = state;
-        this.type = type;
-        this.date = date;
-        this.content = content;
     }
 
     public int getaId() {

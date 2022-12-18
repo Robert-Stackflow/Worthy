@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.http;
 
 import android.util.Log;
@@ -17,9 +24,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class HttpRequestUtil {
-    private static final String baseUrl = "https://116.62.239.181:443";
     public static final MediaType mediaType_JSON = MediaType.get("application/json; charset=utf-8");
     public static final MediaType mediaType_FORM = MediaType.get("application/x-www-form-urlencoded; charset=utf-8");
+    private static final String baseUrl = "https://116.62.239.181:443";
     private final OkHttpClient okHttpClient = null;
 
     public static JSONObject post(MediaType contentType, String url, Object body) {

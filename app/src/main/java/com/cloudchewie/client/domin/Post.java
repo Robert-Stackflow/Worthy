@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:39
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.domin;
 
 import android.media.Image;
@@ -9,13 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Post implements Serializable {
-    enum POST_TYPE {
-        TEXT,
-        TEXT_IMAGE,
-        TEXT_WEB,
-        VIDEO
-    }
-
     int userId;
     String username;
     Date date;
@@ -27,10 +27,6 @@ public class Post implements Serializable {
     String location;
     String tag;
     POST_TYPE type;
-
-    public POST_TYPE getType() {
-        return type;
-    }
 
     public Post() {
     }
@@ -47,10 +43,19 @@ public class Post implements Serializable {
         this.tag = tag;
     }
 
+    public POST_TYPE getType() {
+        return type;
+    }
+
     public int getUserId() {
         return userId;
     }
 
+    /**
+     * 设置用户ID
+     *
+     * @param userId 用户ID
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -99,17 +104,16 @@ public class Post implements Serializable {
         return thumbupCount;
     }
 
+    public void setThumbupCount(int thumbupCount) {
+        this.thumbupCount = thumbupCount;
+    }
+
     public int getCollectionCount() {
         return collectionCount;
     }
 
     public void setCollectionCount(int collectionCount) {
         this.collectionCount = collectionCount;
-    }
-
-
-    public void setThumbupCount(int thumbupCount) {
-        this.thumbupCount = thumbupCount;
     }
 
     public String getLocation() {
@@ -142,5 +146,12 @@ public class Post implements Serializable {
                 ", location='" + location + '\'' +
                 ", tag='" + tag + '\'' +
                 '}';
+    }
+
+    enum POST_TYPE {
+        TEXT,
+        TEXT_IMAGE,
+        TEXT_WEB,
+        VIDEO
     }
 }

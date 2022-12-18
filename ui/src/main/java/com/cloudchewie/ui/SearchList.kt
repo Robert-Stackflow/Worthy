@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/17 21:46:02
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.ui
 
 import android.content.Context
@@ -16,11 +23,6 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import org.json.JSONArray
 import org.json.JSONObject
 
-/**
- *AUTHOR:AbnerMing
- *DATE:2022/10/27
- *INTRODUCE:搜索列表
- */
 class SearchList : LinearLayout {
     private var mHistoryMarginTop = 0f
     private var mSearchHistoryTag: TextView? = null

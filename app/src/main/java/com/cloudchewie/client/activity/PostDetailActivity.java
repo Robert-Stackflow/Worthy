@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.activity;
 
 import static com.cloudchewie.client.util.StringUtil.dealNewLine;
@@ -29,13 +36,13 @@ import java.util.List;
 
 public class PostDetailActivity extends BaseActivity {
     Post post;
+    PostDetailActivity.PostDetailFragmentAdapter adapter;
+    Toolbar mToolbar;
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
     private NoScrollViewPager viewPager;
-    PostDetailActivity.PostDetailFragmentAdapter adapter;
-    Toolbar mToolbar;
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

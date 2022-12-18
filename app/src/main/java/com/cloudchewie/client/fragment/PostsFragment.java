@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.fragment;
 
 import android.annotation.SuppressLint;
@@ -44,6 +51,38 @@ public class PostsFragment extends Fragment implements View.OnClickListener {
             posts.add((Post) msg.obj);
             postAdapter.notifyItemInserted(posts.size());
         }
+    };
+    Runnable getDatas = () -> {
+        //TODO 获取数据并停止刷新
+        Message message = handler.obtainMessage();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
+        try {
+            message.obj = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        handler.sendMessage(message);
+        swipeRefreshLayout.finishRefresh();
+    };
+    Runnable getRefreshDatas = () -> {
+        //TODO 获取下拉数据并停止刷新
+        Message message = handler.obtainMessage();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
+        try {
+            message.obj = new Post(1, "东方不败", simpleDateFormat.parse("2022-12-13 20:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "北京", "生活圈");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        handler.sendMessage(message);
+        swipeRefreshLayout.finishRefresh();
+    };
+    Runnable getMorehDatas = () -> {
+        //TODO 获取上拉数据并停止刷新
+        Message message = handler.obtainMessage();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
+        message.obj = new Post(1, "镜", new Date(System.currentTimeMillis()), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "乌鲁木齐", "你好!未来");
+        handler.sendMessage(message);
+        swipeRefreshLayout.finishLoadMore();
     };
 
     @Override
@@ -108,39 +147,4 @@ public class PostsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
     }
-
-    Runnable getDatas = () -> {
-        //TODO 获取数据并停止刷新
-        Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        try {
-            message.obj = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        handler.sendMessage(message);
-        swipeRefreshLayout.finishRefresh();
-    };
-
-    Runnable getRefreshDatas = () -> {
-        //TODO 获取下拉数据并停止刷新
-        Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        try {
-            message.obj = new Post(1, "东方不败", simpleDateFormat.parse("2022-12-13 20:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "北京", "生活圈");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        handler.sendMessage(message);
-        swipeRefreshLayout.finishRefresh();
-    };
-
-    Runnable getMorehDatas = () -> {
-        //TODO 获取上拉数据并停止刷新
-        Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        message.obj = new Post(1, "镜", new Date(System.currentTimeMillis()), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "乌鲁木齐", "你好!未来");
-        handler.sendMessage(message);
-        swipeRefreshLayout.finishLoadMore();
-    };
 }

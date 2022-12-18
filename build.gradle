@@ -1,7 +1,4 @@
 buildscript {
-    apply from: "${rootDir}/gradle/git.gradle"
-    apply from: "${rootDir}/gradle/config.gradle"
-    apply from: "${rootDir}/gradle/dependency.gradle"
     ext.buildConfig = [
             'minSdk'    : 23,
             'targetSdk' : 30,

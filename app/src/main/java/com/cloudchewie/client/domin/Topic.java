@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:39
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.domin;
 
 import androidx.annotation.NonNull;
@@ -5,14 +12,6 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class Topic implements Serializable {
-    public int getHotvalue() {
-        return hotvalue;
-    }
-
-    public void setHotvalue(int hotvalue) {
-        this.hotvalue = hotvalue;
-    }
-
     String name;
     String describe;
     int hotvalue;
@@ -26,6 +25,14 @@ public class Topic implements Serializable {
         this.hotvalue = hotvalue;
         this.describe = describe;
         this.followerCount = followerCount;
+    }
+
+    public int getHotvalue() {
+        return hotvalue;
+    }
+
+    public void setHotvalue(int hotvalue) {
+        this.hotvalue = hotvalue;
     }
 
     public String getName() {

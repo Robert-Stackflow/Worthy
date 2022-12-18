@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/17 21:46:02
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.ui
 
 import android.content.Context
@@ -11,11 +18,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 
-/**
- *AUTHOR:AbnerMing
- *DATE:2022/10/26
- *INTRODUCE:自定义搜索框
- */
 class SearchLayout : LinearLayout {
     private var mLayoutSearch: RelativeLayout? = null
     private var mSearchBg: Drawable? = null
@@ -83,6 +85,7 @@ class SearchLayout : LinearLayout {
         mSearchSize =
             os.getDimension(R.styleable.SearchLayout_search_size, 0f)
         init(context)
+        os.recycle()
     }
 
     private fun init(context: Context) {

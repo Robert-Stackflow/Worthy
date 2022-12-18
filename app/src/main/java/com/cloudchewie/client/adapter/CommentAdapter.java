@@ -5,8 +5,7 @@
  * Copyright(c) 2022 Ruida https://cloudchewie.com
  */
 
-package com.cloudchewie.client.util;
+package com.cloudchewie.client.adapter;
 
-public enum RefreshCode {
-
+public class CommentAdapter {
 }

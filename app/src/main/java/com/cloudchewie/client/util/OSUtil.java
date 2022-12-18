@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.util;
 
 import android.os.Environment;
@@ -87,6 +94,10 @@ public class OSUtil {
                     ".prop")));
         }
 
+        public static BuildProperties newInstance() throws IOException {
+            return new BuildProperties();
+        }
+
         public boolean containsKey(final Object key) {
             return properties.containsKey(key);
         }
@@ -125,10 +136,6 @@ public class OSUtil {
 
         public Collection<Object> values() {
             return properties.values();
-        }
-
-        public static BuildProperties newInstance() throws IOException {
-            return new BuildProperties();
         }
     }
 }

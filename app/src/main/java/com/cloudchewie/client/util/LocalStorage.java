@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.util;
 
 import com.cloudchewie.client.database.AppDatabase;
@@ -43,11 +50,11 @@ public class LocalStorage {
         user_id = Integer.parseInt(Objects.requireNonNull(JwtUtil.getPayload(token).get("sub")).asString());
     }
 
-    public static void setAppDatabase(AppDatabase appDatabase) {
-        LocalStorage.appDatabase = appDatabase;
-    }
-
     public static AppDatabase getAppDatabase() {
         return appDatabase;
+    }
+
+    public static void setAppDatabase(AppDatabase appDatabase) {
+        LocalStorage.appDatabase = appDatabase;
     }
 }

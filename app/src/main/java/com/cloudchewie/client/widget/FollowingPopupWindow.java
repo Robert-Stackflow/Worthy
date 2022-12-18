@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.widget;
 
 import android.content.Context;
@@ -20,9 +27,9 @@ import razerdp.util.animation.AnimationHelper;
 import razerdp.util.animation.TranslationConfig;
 
 public class FollowingPopupWindow extends BasePopupWindow implements View.OnClickListener {
+    FlowTagLayout flowTagLayout;
     private int oldOption = -1;
     private int currentOption = -1;
-    FlowTagLayout flowTagLayout;
     private List<String> strings;
     private List<TagItem> tagItemList = new ArrayList<>();
 
@@ -56,6 +63,10 @@ public class FollowingPopupWindow extends BasePopupWindow implements View.OnClic
                 .toShow();
     }
 
+    public int getCurrentOption() {
+        return currentOption;
+    }
+
     public void setCurrentOption(int option) {
         oldOption = currentOption;
         if (option > tagItemList.size())
@@ -69,10 +80,6 @@ public class FollowingPopupWindow extends BasePopupWindow implements View.OnClic
         }
         tagItemList.get(option - 1).setTextColor(getContext().getColor(R.color.checked_color));
         tagItemList.get(option - 1).setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_tag_round_checked));
-    }
-
-    public int getCurrentOption() {
-        return currentOption;
     }
 
     public boolean isOptionChanged() {

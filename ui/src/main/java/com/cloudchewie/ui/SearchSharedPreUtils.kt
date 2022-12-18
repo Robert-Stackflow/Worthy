@@ -1,14 +1,15 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/17 21:46:02
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.ui
 
 import android.content.Context
 import android.content.SharedPreferences
 
-
-/**
- *AUTHOR:AbnerMing
- *DATE:2022/10/27
- *INTRODUCE:采用sp存储 目前只用到简单的 String存储，其他暂时不涉及
- */
 object SearchSharedPreUtils {
     private const val PREFERENCES = "search"
     private var preferencesSharedPreferences: SharedPreferences? = null

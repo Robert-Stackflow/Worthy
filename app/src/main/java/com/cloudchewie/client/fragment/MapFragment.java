@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.fragment;
 
 import android.annotation.SuppressLint;
@@ -81,17 +88,31 @@ import java.util.Objects;
 
 public class MapFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnGetPoiSearchResultListener, OnGetSuggestionResultListener,
         BaiduMap.OnMapClickListener, BaiduMap.OnMarkerClickListener {
+    private static final String CUSTOM_FILE_NAME_GRAY = "custom_blacknight.sty";
+    private static final String CUSTOM_FILE_NAME_WHITE = "custom_trip.sty";
     boolean itemClicked = false;
     View mainView;
     MapView mapView;
     BaiduMap baiduMap;
     SearchLayout searchLayout;
     EditText searchInput;
-    private PoiSearch poiSearch;
     LocationClient locationClient;
+    LocationClientOption locationOption;
+    int province_postion = 0;
+    int city_postion = 0;
+    int county_poisition = 0;
+    String seletced_province;
+    String seletced_county;
+    String seletced_city;
+    ArrayAdapter<String> adapter_province;
+    ArrayAdapter<String> adapter_city;
+    ArrayAdapter<String> adapter_county;
+    ArrayList<String> provinces;
+    ArrayList<ArrayList<String>> cities;
+    ArrayList<ArrayList<ArrayList<String>>> counties;
+    private PoiSearch poiSearch;
     private SuggestionSearch suggestionSearch;
     private RecyclerView recyclerView;
-    LocationClientOption locationOption;
     private PoiItemAdapter poiItemAdaper;
     private BitmapDescriptor bitmapdescwaterdrop = BitmapDescriptorFactory.fromResource(R.drawable.img_water_drop);
     private int loadIndex = 0;
@@ -102,22 +123,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     private Spinner countySpinner;
     private Marker preSelectMarker;
     private LinearLayout layoutDetailInfo;
-    int province_postion = 0;
-    int city_postion = 0;
-    int county_poisition = 0;
-    String seletced_province;
-    String seletced_county;
-    String seletced_city;
-    ArrayAdapter<String> adapter_province;
-    ArrayAdapter<String> adapter_city;
-    ArrayAdapter<String> adapter_county;
     private HashMap<Marker, PoiInfo> markerPoiInfo = new HashMap<>();
     private MyTextWatcher myTextWatcher = new MyTextWatcher();
-    private static final String CUSTOM_FILE_NAME_GRAY = "custom_blacknight.sty";
-    private static final String CUSTOM_FILE_NAME_WHITE = "custom_trip.sty";
-    ArrayList<String> provinces;
-    ArrayList<ArrayList<String>> cities;
-    ArrayList<ArrayList<ArrayList<String>>> counties;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -316,30 +323,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     public boolean onTouch(View view, MotionEvent motionEvent) {
         recyclerView.setVisibility(View.GONE);
         return false;
-    }
-
-    public class MyLocationListener extends BDAbstractLocationListener {
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            if (location == null || mapView == null)
-                return;
-            MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius())
-                    .direction(location.getDirection()).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            baiduMap.setMyLocationData(locData);
-            int errorCode = location.getLocType();
-            float radius = location.getRadius();
-            double latitude = location.getLatitude();
-            double longitude = location.getLongitude();
-            String coorType = location.getCoorType();
-            if (errorCode == BDLocation.TYPE_NO_PERMISSION_LOCATION_FAIL)
-                Toast.makeText(getActivity(), "定位失败，请授予定位权限!", Toast.LENGTH_SHORT).show();
-            else {
-                locationOption.setScanSpan(0);
-                locationClient.stop();
-                locationClient.setLocOption(locationOption);
-            }
-        }
     }
 
     @Override
@@ -633,36 +616,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
                 verticalPaddingBottom);
     }
 
-    class MyTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (s.length() <= 0 && View.VISIBLE == recyclerView.getVisibility()) {
-                recyclerView.setVisibility(View.INVISIBLE);
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            itemClicked = false;
-            String cityStr = citySpinner.getSelectedItem().toString();
-            String keyWordStr = searchInput.getText().toString();
-            if (TextUtils.isEmpty(cityStr) || TextUtils.isEmpty(keyWordStr)) {
-                return;
-            }
-            if (View.VISIBLE == recyclerView.getVisibility())
-                recyclerView.setVisibility(View.INVISIBLE);
-            suggestionSearch.requestSuggestion(new SuggestionSearchOption()
-                    .city(cityStr)
-                    .keyword(keyWordStr)
-                    .citylimit(true));
-        }
-    }
-
     @Override
     public void onClick(View view) {
         recyclerView.setVisibility(View.GONE);
@@ -691,5 +644,59 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
 //      mapView.onDestroy();
         mapView = null;
         super.onDestroy();
+    }
+
+    public class MyLocationListener extends BDAbstractLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            if (location == null || mapView == null)
+                return;
+            MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius())
+                    .direction(location.getDirection()).latitude(location.getLatitude())
+                    .longitude(location.getLongitude()).build();
+            baiduMap.setMyLocationData(locData);
+            int errorCode = location.getLocType();
+            float radius = location.getRadius();
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            String coorType = location.getCoorType();
+            if (errorCode == BDLocation.TYPE_NO_PERMISSION_LOCATION_FAIL)
+                Toast.makeText(getActivity(), "定位失败，请授予定位权限!", Toast.LENGTH_SHORT).show();
+            else {
+                locationOption.setScanSpan(0);
+                locationClient.stop();
+                locationClient.setLocOption(locationOption);
+            }
+        }
+    }
+
+    class MyTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (s.length() <= 0 && View.VISIBLE == recyclerView.getVisibility()) {
+                recyclerView.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            itemClicked = false;
+            String cityStr = citySpinner.getSelectedItem().toString();
+            String keyWordStr = searchInput.getText().toString();
+            if (TextUtils.isEmpty(cityStr) || TextUtils.isEmpty(keyWordStr)) {
+                return;
+            }
+            if (View.VISIBLE == recyclerView.getVisibility())
+                recyclerView.setVisibility(View.INVISIBLE);
+            suggestionSearch.requestSuggestion(new SuggestionSearchOption()
+                    .city(cityStr)
+                    .keyword(keyWordStr)
+                    .citylimit(true));
+        }
     }
 }

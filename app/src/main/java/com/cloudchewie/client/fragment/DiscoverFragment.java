@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.fragment;
 
 import android.content.Context;
@@ -31,8 +38,8 @@ import razerdp.basepopup.BasePopupWindow;
 public class DiscoverFragment extends Fragment implements View.OnClickListener {
     View mainView;
     Context context;
-    private FollowingPopupWindow popupWindow;
     HomeFragmentAdapter adapter;
+    private FollowingPopupWindow popupWindow;
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;

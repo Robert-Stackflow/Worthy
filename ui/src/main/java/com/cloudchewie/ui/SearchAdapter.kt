@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/17 21:46:02
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.ui
 
 import android.annotation.SuppressLint
@@ -9,11 +16,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-/**
- *AUTHOR:AbnerMing
- *DATE:2022/10/27
- *INTRODUCE:适配器
- */
 class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private var mItemTopMargin = 0f
     private var mSearchList = ArrayList<SearchBean>()
@@ -86,20 +88,12 @@ class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchAdapter.Searc
         return mSearchList.size
     }
 
-    /**
-     * AUTHOR:AbnerMing
-     * INTRODUCE:设置数据
-     */
     @SuppressLint("NotifyDataSetChanged")
     fun setList(searchList: ArrayList<SearchBean>) {
         mSearchList = searchList
         notifyDataSetChanged()
     }
 
-    /**
-     * AUTHOR:AbnerMing
-     * INTRODUCE:设置属性
-     */
     fun setViewCenter(viewCenter: Boolean) {
         mViewCenter = viewCenter
     }
@@ -122,10 +116,6 @@ class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchAdapter.Searc
         }
     }
 
-    /**
-     * AUTHOR:AbnerMing
-     * INTRODUCE:设置文字的内边距
-     */
     fun setItemPadding(
         paddingLeft: Float,
         paddingTop: Float,
@@ -138,26 +128,14 @@ class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchAdapter.Searc
         mPaddingBottom = paddingBottom.toInt()
     }
 
-    /**
-     * AUTHOR:AbnerMing
-     * INTRODUCE:设置文字显示几行
-     */
     fun setItemLine(mHotItemLine: Int) {
         mItemLine = mHotItemLine
     }
 
-    /**
-     * AUTHOR:AbnerMing
-     * INTRODUCE:设置背景色
-     */
     fun setItemBg(itemBg: Int) {
         mItemBg = itemBg
     }
 
-    /**
-     * AUTHOR:AbnerMing
-     * INTRODUCE:设置距离上边的距离
-     */
     fun setItemTopMargin(itemTopMargin: Float) {
         mItemTopMargin = itemTopMargin
     }

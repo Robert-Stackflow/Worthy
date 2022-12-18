@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.domin;
 
 import androidx.annotation.NonNull;
@@ -12,6 +19,16 @@ public class Messager implements Serializable {
     boolean isStranger;
     List<Message> messages;
 
+    public Messager() {
+    }
+
+    public Messager(String name, int state, boolean isStranger, List<Message> messages) {
+        this.name = name;
+        this.state = state;
+        this.isStranger = isStranger;
+        this.messages = messages;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -23,18 +40,12 @@ public class Messager implements Serializable {
                 '}';
     }
 
-    public Messager() {
-    }
-
-    public Messager(String name, int state, boolean isStranger, List<Message> messages) {
-        this.name = name;
-        this.state = state;
-        this.isStranger = isStranger;
-        this.messages = messages;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Message getLastMessage() {
@@ -49,10 +60,6 @@ public class Messager implements Serializable {
             }
         }
         return messages.get(index);
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getState() {

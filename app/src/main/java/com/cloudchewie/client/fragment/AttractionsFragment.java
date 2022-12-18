@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.fragment;
 
 import android.annotation.SuppressLint;
@@ -40,6 +47,27 @@ public class AttractionsFragment extends Fragment implements View.OnClickListene
             attractions.add((Attraction) msg.obj);
             attractionsAdapter.notifyItemInserted(attractions.size());
         }
+    };
+    Runnable getDatas = () -> {
+        //TODO 获取数据并停止刷新
+        Message message = handler.obtainMessage();
+        message.obj = new Attraction("九寨沟", "四川省九寨沟市黄果山瀑布", "风景宜人的千古名胜", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
+        handler.sendMessage(message);
+        swipeRefreshLayout.finishRefresh();
+    };
+    Runnable getRefreshDatas = () -> {
+        //TODO 获取下拉数据并停止刷新
+        Message message = handler.obtainMessage();
+        message.obj = new Attraction("东湖", "湖北省武汉市洪山区", "凌波门畔，赏日出绝景", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
+        handler.sendMessage(message);
+        swipeRefreshLayout.finishRefresh();
+    };
+    Runnable getMorehDatas = () -> {
+        //TODO 获取上拉数据并停止刷新
+        Message message = handler.obtainMessage();
+        message.obj = new Attraction("珞珈山", "湖北省武汉市武汉大学内", "赏樱之人络绎不绝，且看珞珈山下热舞", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
+        handler.sendMessage(message);
+        swipeRefreshLayout.finishLoadMore();
     };
 
     @Override
@@ -90,28 +118,4 @@ public class AttractionsFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
     }
-
-    Runnable getDatas = () -> {
-        //TODO 获取数据并停止刷新
-        Message message = handler.obtainMessage();
-        message.obj = new Attraction("九寨沟", "四川省九寨沟市黄果山瀑布", "风景宜人的千古名胜", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
-        handler.sendMessage(message);
-        swipeRefreshLayout.finishRefresh();
-    };
-
-    Runnable getRefreshDatas = () -> {
-        //TODO 获取下拉数据并停止刷新
-        Message message = handler.obtainMessage();
-        message.obj = new Attraction("东湖", "湖北省武汉市洪山区", "凌波门畔，赏日出绝景", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
-        handler.sendMessage(message);
-        swipeRefreshLayout.finishRefresh();
-    };
-
-    Runnable getMorehDatas = () -> {
-        //TODO 获取上拉数据并停止刷新
-        Message message = handler.obtainMessage();
-        message.obj = new Attraction("珞珈山", "湖北省武汉市武汉大学内", "赏樱之人络绎不绝，且看珞珈山下热舞", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
-        handler.sendMessage(message);
-        swipeRefreshLayout.finishLoadMore();
-    };
 }

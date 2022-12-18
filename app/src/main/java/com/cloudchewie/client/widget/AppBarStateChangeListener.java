@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.widget;
 
 import static java.lang.Math.abs;
@@ -5,13 +12,6 @@ import static java.lang.Math.abs;
 import com.google.android.material.appbar.AppBarLayout;
 
 public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {
-    public enum State {
-        EXPANDED,
-        COLLAPSED,
-        UPING,
-        DOWNING
-    }
-
     private int offset;
     private State mCurrentState = State.UPING;
 
@@ -45,4 +45,11 @@ public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffset
     }
 
     public abstract void onStateChanged(AppBarLayout appBarLayout, State state, int offset);
+
+    public enum State {
+        EXPANDED,
+        COLLAPSED,
+        UPING,
+        DOWNING
+    }
 }

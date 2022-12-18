@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.database;
 
 import android.content.Context;
@@ -16,6 +23,11 @@ import com.cloudchewie.client.domin.User;
 @Database(entities = {User.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+        }
+    };
     private static final String DB_NAME = "test.db";
     private static volatile AppDatabase instance;
 
@@ -31,12 +43,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 .addMigrations(MIGRATION_1_2).allowMainThreadQueries()
                 .build();
     }
-
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(@NonNull SupportSQLiteDatabase database) {
-        }
-    };
 
     public abstract UserDao userDao();
 }

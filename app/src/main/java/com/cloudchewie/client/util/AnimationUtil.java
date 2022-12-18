@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.util;
 
 import android.animation.Animator;
@@ -11,6 +18,8 @@ public class AnimationUtil {
     //动画持续时间
     public final static int ANIMATION_IN_TIME = 500;
     public final static int ANIMATION_OUT_TIME = 500;
+    private static AlphaAnimation mHideAnimation = null;
+    private static AlphaAnimation mShowAnimation = null;
 
     /**
      * @param isIn          动画类型，进入或消失
@@ -46,14 +55,6 @@ public class AnimationUtil {
         valueAnimator.start();
     }
 
-    public interface AnimInterface {
-        void animEnd();
-    }
-
-
-    private static AlphaAnimation mHideAnimation = null;
-    private static AlphaAnimation mShowAnimation = null;
-
     /**
      * View渐现动画效果
      */
@@ -68,5 +69,9 @@ public class AnimationUtil {
         mShowAnimation.setDuration(duration);
         mShowAnimation.setFillAfter(true);
         view.startAnimation(mShowAnimation);
+    }
+
+    public interface AnimInterface {
+        void animEnd();
     }
 }

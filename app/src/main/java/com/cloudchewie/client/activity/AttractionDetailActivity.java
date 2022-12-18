@@ -1,3 +1,10 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 13:13:37
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
 package com.cloudchewie.client.activity;
 
 import android.content.Intent;
@@ -24,13 +31,13 @@ import java.util.List;
 
 public class AttractionDetailActivity extends BaseActivity {
     Attraction attraction;
+    AttractionDetailFragmentAdapter adapter;
+    Toolbar mToolbar;
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
     private NoScrollViewPager viewPager;
-    AttractionDetailFragmentAdapter adapter;
-    Toolbar mToolbar;
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
