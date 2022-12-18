@@ -60,7 +60,6 @@ public class MessagersAdapter extends RecyclerView.Adapter<MessagersAdapter.MyVi
         if (null == messager) {
             return;
         }
-        holder.mItemView.setBackground(holder.mItemView.getResources().getDrawable(R.drawable.shape_card));
         holder.itemView.setOnClickListener(view -> {
 //            Intent intent = new Intent(context, MessagerDetailActivity.class);
 //            Bundle bundle = new Bundle();

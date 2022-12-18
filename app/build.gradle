@@ -66,6 +66,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.10'
     //Controller
     implementation 'io.github.razerdp:BasePopup:3.2.0'
+    implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:2.0.2'
     implementation 'io.github.clistery:bottomnavigationex-ex:2.0.0'
     implementation 'io.github.clistery:bottomnavigationex-15x:2.0.0'
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5'

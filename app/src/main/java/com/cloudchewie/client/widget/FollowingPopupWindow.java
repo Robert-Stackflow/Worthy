@@ -46,7 +46,7 @@ public class FollowingPopupWindow extends BasePopupWindow implements View.OnClic
             tagItem.setFocusable(true);
             tagItem.setOnClickListener(this);
             tagItem.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            tagItem.setTextColor(getContext().getColor(R.color.text_color_fast_entry));
+            tagItem.setTextColor(getContext().getColor(R.color.text_color_entry));
             tagItem.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_tag_round));
             tagItem.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             tagItemList.add(tagItem);
@@ -75,10 +75,10 @@ public class FollowingPopupWindow extends BasePopupWindow implements View.OnClic
             return;
         currentOption = option;
         for (TagItem tagItem : tagItemList) {
-            tagItem.setTextColor(getContext().getColor(R.color.text_color_fast_entry));
+            tagItem.setTextColor(getContext().getColor(R.color.text_color_entry));
             tagItem.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_tag_round));
         }
-        tagItemList.get(option - 1).setTextColor(getContext().getColor(R.color.checked_color));
+        tagItemList.get(option - 1).setTextColor(getContext().getColor(R.color.color_prominent));
         tagItemList.get(option - 1).setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_tag_round_checked));
     }
 

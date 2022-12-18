@@ -8,6 +8,7 @@
 package com.cloudchewie.client.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +22,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.activity.NoticeActivity;
 import com.cloudchewie.client.adapter.MessagersAdapter;
 import com.cloudchewie.client.domin.Message;
 import com.cloudchewie.client.domin.Messager;
-import com.cloudchewie.ui.CustomDialog;
 import com.cloudchewie.client.util.StatusBarUtil;
+import com.cloudchewie.ui.CustomDialog;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
@@ -54,6 +56,10 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         mainView = View.inflate(getContext(), R.layout.fragment_message, null);
         StatusBarUtil.setMargin(mainView.findViewById(R.id.message_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.message_clear_unread).setOnClickListener(this);
+        mainView.findViewById(R.id.message_entry_comment_layout).setOnClickListener(this);
+        mainView.findViewById(R.id.message_entry_thumbup_layout).setOnClickListener(this);
+        mainView.findViewById(R.id.message_entry_fans_layout).setOnClickListener(this);
+        mainView.findViewById(R.id.message_entry_system_layout).setOnClickListener(this);
         initSwipeRefresh();
         initRecyclerView();
         return mainView;
@@ -149,20 +155,37 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == mainView.findViewById(R.id.message_clear_unread)) {
             final CustomDialog dialog = new CustomDialog(getActivity());
-            dialog.setMessage("是否清除所有未读消息?")
-                    .setSingle(false).setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
-                        @Override
-                        public void onPositiveClick() {
-                            dialog.dismiss();
-                            Toast.makeText(getActivity(), "清除所有未读消息", Toast.LENGTH_SHORT).show();
-                        }
+            dialog.setMessage("是否清除所有未读消息?").setSingle(false).setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
+                @Override
+                public void onPositiveClick() {
+                    dialog.dismiss();
+                    Toast.makeText(getActivity(), "清除所有未读消息", Toast.LENGTH_SHORT).show();
+                }
 
-                        @Override
-                        public void onNegtiveClick() {
-                            dialog.dismiss();
-                            Toast.makeText(getActivity(), "取消清除未读消息", Toast.LENGTH_SHORT).show();
-                        }
-                    }).show();
+                @Override
+                public void onNegtiveClick() {
+                    dialog.dismiss();
+                    Toast.makeText(getActivity(), "取消清除未读消息", Toast.LENGTH_SHORT).show();
+                }
+            }).show();
+        } else if (view == mainView.findViewById(R.id.message_entry_comment_layout)) {
+            Intent intent = new Intent(getContext(), NoticeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.COMMENT_REPLY);
+            intent.putExtras(bundle);
+            getContext().startActivity(intent);
+        } else if (view == mainView.findViewById(R.id.message_entry_thumbup_layout)) {
+            Intent intent = new Intent(getContext(), NoticeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.THUMBUP_COLLECT);
+            intent.putExtras(bundle);
+            getContext().startActivity(intent);
+        } else if (view == mainView.findViewById(R.id.message_entry_fans_layout)) {
+            Intent intent = new Intent(getContext(), NoticeActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.FOLLOW);
+            intent.putExtras(bundle);
+            getContext().startActivity(intent);
         }
     }
 

@@ -16,15 +16,17 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.fragment.PostsFragment;
 import com.cloudchewie.ui.BottomSheet;
-import com.cloudchewie.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class TopicDetailActivity extends BaseActivity {
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
-    private NoScrollViewPager viewPager;
+    private ViewPager2 viewPager;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -64,35 +66,32 @@ public class TopicDetailActivity extends BaseActivity {
         titles.add("文章");
         fragments.add(new PostsFragment());
         fragments.add(new PostsFragment());
-        adapter = new TopicDetailFragmentAdapter(getSupportFragmentManager(), fragments, titles);
+        adapter = new TopicDetailFragmentAdapter(getSupportFragmentManager(), getLifecycle(), fragments);
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(titles.get(position))).attach();
     }
 
-    public class TopicDetailFragmentAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> fragmentList;
-        private final List<String> titleList;
+    public String getTopic() {
+        return topic.getName();
+    }
 
-        public TopicDetailFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> titles) {
-            super(fragmentManager);
+    public class TopicDetailFragmentAdapter extends FragmentStateAdapter {
+        private final List<Fragment> fragmentList;
+
+        public TopicDetailFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<Fragment> fragments) {
+            super(fragmentManager, lifecycle);
             fragmentList = fragments;
-            titleList = titles;
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             return fragmentList.get(position);
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titleList.get(position);
         }
     }
 }

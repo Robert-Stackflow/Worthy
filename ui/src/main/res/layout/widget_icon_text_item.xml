@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/icon_text_item_layout"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
 
     <ImageView
         android:id="@+id/icon_text_item_icon"
@@ -16,14 +17,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/checked_color" />
+        app:tint="@color/color_prominent" />
 
     <TextView
         android:id="@+id/icon_text_item_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingStart="3dp"
-        android:textColor="@color/checked_color"
+        android:textColor="@color/color_prominent"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon_text_item_icon"

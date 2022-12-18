@@ -8,6 +8,7 @@
 package com.cloudchewie.client.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -15,16 +16,18 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.fragment.BaseFragment;
 import com.cloudchewie.client.fragment.PostsFragment;
 import com.cloudchewie.ui.BottomSheet;
-import com.cloudchewie.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +40,7 @@ public class AttractionDetailActivity extends BaseActivity {
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
-    private NoScrollViewPager viewPager;
+    private ViewPager2 viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,35 +72,37 @@ public class AttractionDetailActivity extends BaseActivity {
         bundle.putString("title", "相册");
         fragment.setArguments(bundle);
         fragments.add(fragment);
-        adapter = new AttractionDetailFragmentAdapter(getSupportFragmentManager(), fragments, titles);
+        adapter = new AttractionDetailFragmentAdapter(getSupportFragmentManager(), getLifecycle(), fragments);
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(titles.get(position))).attach();
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab != null) {
+                tab.view.setLongClickable(false);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    tab.view.setTooltipText(null);
+                }
+            }
+        }
     }
 
-    public class AttractionDetailFragmentAdapter extends FragmentPagerAdapter {
+    public class AttractionDetailFragmentAdapter extends FragmentStateAdapter {
         private final List<Fragment> fragmentList;
-        private final List<String> titleList;
 
-        public AttractionDetailFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> titles) {
-            super(fragmentManager);
+        public AttractionDetailFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<Fragment> fragments) {
+            super(fragmentManager, lifecycle);
             fragmentList = fragments;
-            titleList = titles;
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             return fragmentList.get(position);
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titleList.get(position);
         }
     }
 }

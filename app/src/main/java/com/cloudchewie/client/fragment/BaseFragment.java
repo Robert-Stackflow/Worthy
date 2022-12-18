@@ -25,14 +25,19 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        title = getArguments().getString("title");
+        if (getArguments() != null) title = getArguments().getString("title", "base");
+        else title = "base";
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(getContext(), R.layout.fragment_base, null);
-        ((TextView) view.findViewById(R.id.tv_title)).setText(title);
+        if (view.findViewById(R.id.tv_title) != null)
+            ((TextView) view.findViewById(R.id.tv_title)).setText(title);
         return view;
+    }
+
+    public void performRefresh() {
     }
 }

@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +30,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttractionsFragment extends Fragment implements View.OnClickListener {
+public class AttractionsFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
     List<Attraction> attractions;
     AttractionsAdapter attractionsAdapter;
@@ -80,6 +79,13 @@ public class AttractionsFragment extends Fragment implements View.OnClickListene
         ClassicsHeader.REFRESH_HEADER_FINISH = "刷新成功";
         ClassicsHeader.REFRESH_HEADER_FAILED = "刷新失败";
         ClassicsHeader.REFRESH_HEADER_SECONDARY = "释放进入二楼";
+        ClassicsFooter.REFRESH_FOOTER_FAILED = "加载失败";
+        ClassicsFooter.REFRESH_FOOTER_FINISH = "加载成功";
+        ClassicsFooter.REFRESH_FOOTER_LOADING = "正在加载...";
+        ClassicsFooter.REFRESH_FOOTER_NOTHING = "已经到底啦";
+        ClassicsFooter.REFRESH_FOOTER_PULLING = "上拉加载";
+        ClassicsFooter.REFRESH_FOOTER_REFRESHING = "正在加载";
+        ClassicsFooter.REFRESH_FOOTER_RELEASE = "释放立即加载";
     }
 
     @Nullable
@@ -97,6 +103,12 @@ public class AttractionsFragment extends Fragment implements View.OnClickListene
         attractionsAdapter = new AttractionsAdapter(getActivity(), attractions);
         attractionsRecyclerView.setAdapter(attractionsAdapter);
         attractionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void performRefresh() {
+        if (swipeRefreshLayout != null)
+            swipeRefreshLayout.autoRefresh();
     }
 
     void initSwipeRefresh() {

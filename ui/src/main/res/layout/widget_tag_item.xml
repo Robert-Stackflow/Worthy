@@ -14,6 +14,6 @@
         android:background="@drawable/shape_tag_round"
         android:padding="10dp"
         android:textAlignment="center"
-        android:textColor="@color/text_color_fast_entry"
+        android:textColor="@color/text_color_entry"
         tools:text="全部" />
 </RelativeLayout>

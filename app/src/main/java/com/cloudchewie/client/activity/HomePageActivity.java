@@ -20,15 +20,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.fragment.BaseFragment;
-import com.cloudchewie.ui.BottomSheet;
-import com.cloudchewie.ui.NoScrollViewPager;
 import com.cloudchewie.client.widget.AppBarStateChangeListener;
+import com.cloudchewie.ui.BottomSheet;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.zackratos.ultimatebarx.ultimatebarx.java.UltimateBarX;
 
@@ -44,17 +46,14 @@ public class HomePageActivity extends AppCompatActivity {
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
-    private NoScrollViewPager viewPager;
+    private ViewPager2 viewPager;
     private HomePageFragmentAdapter adapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         context = getApplicationContext();
-        UltimateBarX.statusBarOnly(this)
-                .fitWindow(true)
-                .transparent()
-                .apply();
+        UltimateBarX.statusBarOnly(this).fitWindow(true).transparent().apply();
         UltimateBarX.addStatusBarTopPadding(findViewById(R.id.home_page_toolbar));
         findViewById(R.id.home_page_back).setOnClickListener(v -> finish());
         findViewById(R.id.home_page_more).setOnClickListener(v -> {
@@ -109,9 +108,9 @@ public class HomePageActivity extends AppCompatActivity {
             fragment.setArguments(bundle);
             fragments.add(fragment);
         }
-        adapter = new HomePageFragmentAdapter(getSupportFragmentManager(), fragments, titles);
+        adapter = new HomePageFragmentAdapter(getSupportFragmentManager(), getLifecycle(), fragments);
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(titles.get(position))).attach();
     }
 
     void initSwipeRefresh() {
@@ -122,30 +121,23 @@ public class HomePageActivity extends AppCompatActivity {
 //        swipeRefreshLayout.setEnablePureScrollMode(true);
     }
 
-    public class HomePageFragmentAdapter extends FragmentPagerAdapter {
+    public class HomePageFragmentAdapter extends FragmentStateAdapter {
         private final List<Fragment> fragmentList;
-        private final List<String> titleList;
 
-        public HomePageFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> titles) {
-            super(fragmentManager);
+        public HomePageFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<Fragment> fragments) {
+            super(fragmentManager, lifecycle);
             fragmentList = fragments;
-            titleList = titles;
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             return fragmentList.get(position);
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titleList.get(position);
         }
     }
 }

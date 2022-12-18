@@ -54,10 +54,10 @@ public class IconTextItem extends ConstraintLayout {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.IconTextItem);
         if (attr != null) {
             int iconId = attr.getResourceId(R.styleable.IconTextItem_icon_text_item_icon, R.drawable.ic_light_map);
-            int iconColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_icon_color, getResources().getColor(R.color.checked_color, getResources().newTheme()));
+            int iconColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
             int iconSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_icon_size, 10);
             String text = attr.getString(R.styleable.IconTextItem_icon_text_item_text);
-            int textColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_text_color, getResources().getColor(R.color.checked_color, getResources().newTheme()));
+            int textColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_text_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
             int textSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_text_size, 11);
             int spacing = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_spacing, 3);
             setIcon(iconId);

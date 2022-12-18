@@ -54,10 +54,10 @@ public class EntryItem extends ConstraintLayout {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.EntryItem);
         if (attr != null) {
             int iconId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon, R.drawable.ic_light_map);
-            int iconColor = attr.getColor(R.styleable.EntryItem_entry_item_icon_color, getResources().getColor(R.color.icon_color, getResources().newTheme()));
+            int iconColor = attr.getColor(R.styleable.EntryItem_entry_item_icon_color, getResources().getColor(R.color.color_icon, getResources().newTheme()));
             int iconSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_icon_size, 10);
             String text = attr.getString(R.styleable.EntryItem_entry_item_text);
-            int textColor = attr.getColor(R.styleable.EntryItem_entry_item_text_color, getResources().getColor(R.color.text_color_fast_entry, getResources().newTheme()));
+            int textColor = attr.getColor(R.styleable.EntryItem_entry_item_text_color, getResources().getColor(R.color.text_color_entry, getResources().newTheme()));
             int textSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_text_size, 11);
             int spacing = (int) attr.getDimension(R.styleable.EntryItem_entry_item_spacing, 3);
             int backgroundId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon_background, R.drawable.shape_tag_round);

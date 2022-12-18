@@ -27,10 +27,11 @@ import com.cloudchewie.client.activity.TopicDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
-import com.cloudchewie.ui.IconTextItem;
 import com.cloudchewie.client.util.TimeUtil;
+import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
     private List<Post> posts;
@@ -44,8 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     @NonNull
     @Override
     public PostAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.widget_post_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.widget_post_item, parent, false);
         return new PostAdapter.MyViewHolder(view);
     }
 
@@ -79,12 +79,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         holder.thumbup.setText(String.valueOf(post.getThumbupCount()));
         holder.comment.setText(String.valueOf(post.getCommentCount()));
         holder.topic.setOnClickListener(v -> {
-            Intent intent = new Intent(context, TopicDetailActivity.class);
-            Bundle bundle = new Bundle();
-            Topic topic = new Topic(holder.topic.getText(), "这里大家可以尽情分享我们的生活", (int) (Math.random() * 100000), (int) (Math.random() * 1000));
-            bundle.putSerializable("topic", topic);
-            intent.putExtras(bundle);
-            context.startActivity(intent);
+            if (!(context instanceof TopicDetailActivity && Objects.equals(((TopicDetailActivity) context).getTopic(), holder.topic.getText()))) {
+                Intent intent = new Intent(context, TopicDetailActivity.class);
+                Bundle bundle = new Bundle();
+                Topic topic = new Topic(holder.topic.getText(), "这里大家可以尽情分享我们的生活", (int) (Math.random() * 100000), (int) (Math.random() * 1000));
+                bundle.putSerializable("topic", topic);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            } else {
+
+            }
         });
         holder.location.setOnClickListener(v -> {
             Attraction attraction = new Attraction(holder.location.getText(), "湖北省武汉市洪山区", "凌波门畔，赏日出绝景", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));

@@ -18,18 +18,20 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.CommentsFragment;
 import com.cloudchewie.ui.BottomSheet;
 import com.cloudchewie.ui.IconTextItem;
-import com.cloudchewie.ui.NoScrollViewPager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +44,7 @@ public class PostDetailActivity extends BaseActivity {
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
-    private NoScrollViewPager viewPager;
+    private ViewPager2 viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,42 +89,30 @@ public class PostDetailActivity extends BaseActivity {
         titles = new ArrayList<>();
         titles.add("热门评论");
         titles.add("全部评论");
-        for (String str : titles) {
-            BaseFragment fragment = new BaseFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("title", str);
-            fragment.setArguments(bundle);
-            fragments.add(fragment);
-        }
-        adapter = new PostDetailActivity.PostDetailFragmentAdapter(getSupportFragmentManager(), fragments, titles);
+        fragments.add(new CommentsFragment());
+        fragments.add(new CommentsFragment());
+        adapter = new PostDetailFragmentAdapter(getSupportFragmentManager(), getLifecycle(), fragments);
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(titles.get(position))).attach();
     }
 
-    public class PostDetailFragmentAdapter extends FragmentPagerAdapter {
+    public class PostDetailFragmentAdapter extends FragmentStateAdapter {
         private final List<Fragment> fragmentList;
-        private final List<String> titleList;
 
-        public PostDetailFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> titles) {
-            super(fragmentManager);
+        public PostDetailFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<Fragment> fragments) {
+            super(fragmentManager, lifecycle);
             fragmentList = fragments;
-            titleList = titles;
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             return fragmentList.get(position);
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titleList.get(position);
         }
     }
 }

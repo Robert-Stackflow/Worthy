@@ -24,17 +24,31 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:allowBackup">
-        <!-- 适配全面屏 -->
+        <activity
+            android:name=".activity.CommentDetailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <meta-data
             android:name="android.max_aspect"
-            android:value="2.4" /> <!-- 适配华为(hua wei)刘海屏 -->
+            android:value="2.4" />
         <meta-data
             android:name="android.notch_support"
-            android:value="true" /> <!-- 适配小米(xiao mi)刘海屏 -->
+            android:value="true" />
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
 
+        <activity
+            android:name=".activity.NoticeActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".activity.HomePageActivity"
             android:exported="false">

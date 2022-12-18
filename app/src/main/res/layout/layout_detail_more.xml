@@ -123,7 +123,7 @@
         android:id="@+id/detail_more_divider"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/divider_color"
+        android:background="@color/color_divider"
         app:layout_constraintTop_toBottomOf="@id/detail_more_share_scrollview" />
 
     <HorizontalScrollView
@@ -245,14 +245,14 @@
         android:id="@+id/detail_more_divider_2"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/divider_color"
+        android:background="@color/color_divider"
         app:layout_constraintTop_toBottomOf="@id/detail_more_operation_scrollview" />
 
     <TextView
         android:id="@+id/detail_more_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_card"
+        android:background="@drawable/shape_content"
         android:clickable="true"
         android:focusable="true"
         android:paddingTop="10dp"

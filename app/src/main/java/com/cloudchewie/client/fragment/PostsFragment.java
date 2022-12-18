@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +34,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class PostsFragment extends Fragment implements View.OnClickListener {
+public class PostsFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
     List<Post> posts;
     PostAdapter postAdapter;
@@ -140,11 +139,14 @@ public class PostsFragment extends Fragment implements View.OnClickListener {
         footer.setTextSizeTitle(14);
     }
 
+    @Override
     public void performRefresh() {
-        swipeRefreshLayout.autoRefresh();
+        if (swipeRefreshLayout != null)
+            swipeRefreshLayout.autoRefresh();
     }
 
     @Override
     public void onClick(View view) {
     }
+    
 }

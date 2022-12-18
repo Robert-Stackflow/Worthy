@@ -50,7 +50,7 @@ public class TagItem extends RelativeLayout {
         if (attr != null) {
             int backgroundId = attr.getResourceId(R.styleable.TagItem_tag_item_background, R.drawable.shape_tag_round);
             text = attr.getString(R.styleable.TagItem_tag_item_text);
-            int textColor = attr.getColor(R.styleable.TagItem_tag_item_text_color, getResources().getColor(R.color.text_color_fast_entry, getResources().newTheme()));
+            int textColor = attr.getColor(R.styleable.TagItem_tag_item_text_color, getResources().getColor(R.color.text_color_entry, getResources().newTheme()));
             int textSize = (int) attr.getDimension(R.styleable.TagItem_tag_item_text_size, 14);
             setText(text);
             setTextSize(textSize);

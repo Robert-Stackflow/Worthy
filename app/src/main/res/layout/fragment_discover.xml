@@ -26,11 +26,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="@android:color/transparent"
             app:tabIndicator="@drawable/shape_tab_indicator"
-            app:tabIndicatorColor="@color/checked_color"
+            app:tabIndicatorColor="@color/color_prominent"
             app:tabIndicatorFullWidth="false"
             app:tabMode="fixed"
             app:tabRippleColor="@android:color/transparent"
-            app:tabSelectedTextColor="@color/checked_color"
+            app:tabSelectedTextColor="@color/color_prominent"
             app:tabTextAppearance="@style/TabLayoutTextStyle"
             app:tabTextColor="@color/color_accent" />
 
@@ -49,7 +49,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.cloudchewie.ui.NoScrollViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/discover_viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

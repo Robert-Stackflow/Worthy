@@ -29,7 +29,7 @@
                     android:id="@+id/home_page_banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/card_background"
+                    android:background="@color/content_background"
                     android:paddingBottom="20dp"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.7">
@@ -39,10 +39,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
+                        android:contentDescription="@string/cd_home_page_background"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_default_background"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="@string/cd_home_page_background" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/home_page_avatar"
@@ -111,6 +111,7 @@
 
                         <Button
                             android:id="@+id/home_page_follow"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="20dp"
@@ -118,19 +119,18 @@
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:text="+ 关注"
-                            android:textColor="@color/color_accent"
-                            style="?android:attr/buttonBarButtonStyle" />
+                            android:textColor="@color/color_accent" />
 
                         <Button
                             android:id="@+id/home_page_sendmessage"
+                            style="?android:attr/buttonBarButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/shape_button_dark"
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:text="私信"
-                            android:textColor="@color/color_accent"
-                            style="?android:attr/buttonBarButtonStyle" />
+                            android:textColor="@color/color_accent" />
                     </LinearLayout>
 
                     <TextView
@@ -138,14 +138,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        tools:text="余湍"
                         android:textAlignment="center"
                         android:textColor="@color/color_accent"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="@id/home_page_avatar"
                         app:layout_constraintStart_toStartOf="@id/home_page_avatar"
-                        app:layout_constraintTop_toBottomOf="@id/home_page_avatar" />
+                        app:layout_constraintTop_toBottomOf="@id/home_page_avatar"
+                        tools:text="余湍" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,8 +178,7 @@
                             android:src="@drawable/ic_light_arrow_left"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/background" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/home_page_small_avatar"
@@ -198,16 +197,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:paddingStart="10dp"
-                            tools:text="余湍"
                             android:textAlignment="center"
-                            android:textColor="@color/background"
+                            android:textColor="@color/text_color_white"
                             android:textSize="15sp"
                             android:textStyle="bold"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/home_page_small_avatar"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="RtlSymmetry" />
+                            tools:ignore="RtlSymmetry"
+                            tools:text="余湍" />
 
                         <ImageButton
                             android:id="@+id/home_page_more"
@@ -219,8 +218,7 @@
                             android:src="@drawable/ic_light_ellipsis"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/background" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -230,13 +228,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@color/card_background">
+                android:background="@color/content_background">
 
                 <View
                     android:id="@+id/home_page_content_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/divider_color"
+                    android:background="@color/color_divider"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.tabs.TabLayout
@@ -249,11 +247,11 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:tabBackground="@android:color/transparent"
                     app:tabIndicator="@drawable/shape_tab_indicator"
-                    app:tabIndicatorColor="@color/checked_color"
+                    app:tabIndicatorColor="@color/color_prominent"
                     app:tabIndicatorFullWidth="false"
                     app:tabMode="fixed"
                     app:tabRippleColor="@android:color/transparent"
-                    app:tabSelectedTextColor="@color/checked_color"
+                    app:tabSelectedTextColor="@color/color_prominent"
                     app:tabTextAppearance="@style/TabLayoutTextStyle"
                     app:tabTextColor="@color/color_accent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -275,7 +273,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_card_top_radius">
 
-                <com.cloudchewie.ui.NoScrollViewPager
+                <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/home_page_content_viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

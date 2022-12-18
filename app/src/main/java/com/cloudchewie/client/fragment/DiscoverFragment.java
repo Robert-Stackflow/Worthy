@@ -20,15 +20,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.SearchActivity;
-import com.cloudchewie.ui.NoScrollViewPager;
 import com.cloudchewie.client.util.StatusBarUtil;
 import com.cloudchewie.client.widget.FollowingPopupWindow;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
     private List<String> titles;
     private TabLayout tabLayout;
     private List<Fragment> fragments;
-    private NoScrollViewPager viewPager;
+    private ViewPager2 viewPager;
     private int followingOption = 1;
 
     @Override
@@ -73,26 +74,26 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         fragments.add(new AttractionsFragment());
         fragments.add(new PostsFragment());
         fragments.add(new PostsFragment());
-        adapter = new HomeFragmentAdapter(getChildFragmentManager(), fragments, titles);
+        adapter = new HomeFragmentAdapter(getChildFragmentManager(), getLifecycle(), fragments);
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 2) tabLayout.getTabAt(position).setText(" 关注▾");
-                else tabLayout.getTabAt(2).setText(" 关注 ");
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(titles.get(position))).attach();
+//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if (position == 2) tabLayout.getTabAt(position).setText(" 关注▾");
+//                else tabLayout.getTabAt(2).setText(" 关注 ");
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
     }
 
     void initTabLayout() {
@@ -102,6 +103,8 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
                 TabLayout.Tab tab = tabLayout.getTabAt(i);
                 if (tab != null) {
                     tab.view.setLongClickable(false);
+                    int finalI = i;
+                    tab.view.setOnClickListener(v -> ((BaseFragment) fragments.get(finalI)).performRefresh());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         tab.view.setTooltipText(null);
                     }
@@ -130,8 +133,7 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
                 }
             });
         } else {
-            if (popupWindow.isShowing())
-                popupWindow.dismiss();
+            if (popupWindow.isShowing()) popupWindow.dismiss();
             popupWindow = null;
         }
     }
@@ -144,30 +146,23 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public class HomeFragmentAdapter extends FragmentPagerAdapter {
+    public class HomeFragmentAdapter extends FragmentStateAdapter {
         private final List<Fragment> fragmentList;
-        private final List<String> titleList;
 
-        public HomeFragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments, List<String> titles) {
-            super(fragmentManager);
+        public HomeFragmentAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<Fragment> fragments) {
+            super(fragmentManager, lifecycle);
             fragmentList = fragments;
-            titleList = titles;
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             return fragmentList.get(position);
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return fragmentList.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titleList.get(position);
         }
     }
 }

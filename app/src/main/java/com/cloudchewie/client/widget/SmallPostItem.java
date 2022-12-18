@@ -1,0 +1,83 @@
+/*
+ * Project Name: Worthy
+ * Author: Ruida
+ * Last Modified: 2022/12/18 21:47:29
+ * Copyright(c) 2022 Ruida https://cloudchewie.com
+ */
+
+package com.cloudchewie.client.widget;
+
+import static com.cloudchewie.client.util.StringUtil.dealNewLine;
+import static com.cloudchewie.client.util.TimeUtil.dateToString;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.cloudchewie.client.activity.PostDetailActivity;
+import com.cloudchewie.client.domin.Post;
+
+public class SmallPostItem extends ConstraintLayout {
+    Post mPost;
+    Context context;
+    private ConstraintLayout mainLayout;
+    private TextView username;
+    private TextView content;
+    private TextView time;
+
+    public SmallPostItem(@NonNull Context context) {
+        super(context);
+        initView(context, null);
+    }
+
+    public SmallPostItem(@NonNull Context context, Post post) {
+        super(context);
+        initView(context, null);
+        setPost(post);
+    }
+
+    public SmallPostItem(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        initView(context, attrs);
+    }
+
+    public SmallPostItem(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView(context, attrs);
+    }
+
+    public SmallPostItem(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        initView(context, attrs);
+    }
+
+    private void initView(Context context, AttributeSet attrs) {
+        this.context = context;
+        LayoutInflater.from(context).inflate(com.cloudchewie.ui.R.layout.widget_small_post_item, this, true);
+        mainLayout = findViewById(com.cloudchewie.ui.R.id.small_post_item_layout);
+        username = findViewById(com.cloudchewie.ui.R.id.small_post_item_username);
+        content = findViewById(com.cloudchewie.ui.R.id.small_post_item_content);
+        time = findViewById(com.cloudchewie.ui.R.id.small_post_item_time);
+    }
+
+    public void setPost(Post post) {
+        this.mPost = post;
+        username.setText(post.getUsername());
+        content.setText(dealNewLine(post.getContent()));
+        time.setText(dateToString(post.getDate()));
+        mainLayout.setOnClickListener(view -> {
+            Intent intent = new Intent(context, PostDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("post", mPost);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
+    }
+}

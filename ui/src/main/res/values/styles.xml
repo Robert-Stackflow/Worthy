@@ -105,7 +105,7 @@
     <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="textAllCaps">false</item>
         <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@color/tab_color_selector</item>
+        <item name="android:textColor">@color/color_selector_tab</item>
     </style>
 
     <style name="anim_fade" parent="@android:style/Animation.Activity">
