@@ -40,8 +40,9 @@
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
                         android:contentDescription="@string/cd_home_page_background"
+                        android:maxHeight="200dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img_default_background"
+                        android:src="@drawable/ic_state_background"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -246,6 +247,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tabBackground="@android:color/transparent"
+                    app:tabGravity="center"
                     app:tabIndicator="@drawable/shape_tab_indicator"
                     app:tabIndicatorColor="@color/color_prominent"
                     app:tabIndicatorFullWidth="false"

@@ -81,7 +81,7 @@ public class Notice implements Serializable {
     public String getDescribe() {
         switch (noticeType) {
             case COMMENT:
-                return "有人评论了你:\n" + ((obj2 == null || !(obj2 instanceof Comment)) ? "" : ((Comment) obj2).getContent());
+                return "有人评论了你的帖子:\n" + ((obj2 == null || !(obj2 instanceof Comment)) ? "" : ((Comment) obj2).getContent());
             case REPLY:
                 return "有人回复了你的评论:\n" + ((obj2 == null || !(obj2 instanceof Comment)) ? "" : ((Comment) obj2).getContent());
             case THUMBUP:

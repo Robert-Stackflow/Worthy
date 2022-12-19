@@ -7,8 +7,8 @@
 
 package com.cloudchewie.client.widget;
 
-import static com.cloudchewie.client.util.StringUtil.dealNewLine;
-import static com.cloudchewie.client.util.TimeUtil.dateToString;
+import static com.cloudchewie.client.util.basic.DateUtil.beautifyTime;
+import static com.cloudchewie.client.util.basic.StringUtil.handleLineBreaks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.cloudchewie.client.activity.PostDetailActivity;
+import com.cloudchewie.client.activity.discover.PostDetailActivity;
 import com.cloudchewie.client.domin.Post;
 
 public class SmallPostItem extends ConstraintLayout {
@@ -70,8 +70,8 @@ public class SmallPostItem extends ConstraintLayout {
     public void setPost(Post post) {
         this.mPost = post;
         username.setText(post.getUsername());
-        content.setText(dealNewLine(post.getContent()));
-        time.setText(dateToString(post.getDate()));
+        content.setText(handleLineBreaks(post.getContent()));
+        time.setText(beautifyTime(post.getDate()));
         mainLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, PostDetailActivity.class);
             Bundle bundle = new Bundle();

@@ -36,7 +36,7 @@
         android:paddingEnd="5dp"
         android:singleLine="true"
         android:textColor="#9C9C9C"
-        android:textCursorDrawable="@drawable/view_shape_line"
+        android:textCursorDrawable="@drawable/shape_line"
         android:textSize="15sp"
         tools:ignore="Autofill,LabelFor" />
 

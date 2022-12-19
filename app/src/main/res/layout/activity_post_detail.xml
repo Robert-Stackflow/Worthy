@@ -8,15 +8,15 @@
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/post_detail_titlebar"
+        android:id="@+id/activity_post_detail_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/card_background"
+        android:background="@color/content_background"
         android:fitsSystemWindows="true">
 
         <ImageButton
-            android:id="@+id/post_detail_back"
+            android:id="@+id/activity_post_detail_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/post_detail_title"
+            android:id="@+id/activity_post_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
@@ -37,11 +37,11 @@
             android:text="@string/post_detail_title"
             android:textColor="@color/color_accent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/post_detail_back"
+            app:layout_constraintStart_toEndOf="@id/activity_post_detail_back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/post_detail_more"
+            android:id="@+id/activity_post_detail_more"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
@@ -56,24 +56,24 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/post_detail_titlebar">
+        android:layout_below="@id/activity_post_detail_titlebar">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/post_detail_appbar"
+            android:id="@+id/activity_post_detail_appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/content_background"
             android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/post_detail_collapsing_toolbar_layout"
+                android:id="@+id/activity_post_detail_collapsing_toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/post_detail_banner"
+                    android:id="@+id/activity_post_detail_banner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fitsSystemWindows="true"
@@ -88,13 +88,13 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/post_detail_top_layout"
+                            android:id="@+id/activity_post_detail_top_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/post_detail_avatar"
+                                android:id="@+id/activity_post_detail_avatar"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:clickable="true"
@@ -105,7 +105,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/post_detail_username"
+                                android:id="@+id/activity_post_detail_username"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
@@ -114,12 +114,12 @@
                                 android:textColor="@color/text_color_gray"
                                 android:textSize="13sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/post_detail_avatar"
+                                app:layout_constraintStart_toEndOf="@id/activity_post_detail_avatar"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="用户昵称" />
 
                             <TextView
-                                android:id="@+id/post_detail_time"
+                                android:id="@+id/activity_post_detail_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/text_color_light_gray"
@@ -131,7 +131,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/post_detail_content_layout"
+                            android:id="@+id/activity_post_detail_content_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingStart="5dp"
@@ -139,10 +139,10 @@
                             android:paddingEnd="5dp"
                             android:paddingBottom="10dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/post_detail_top_layout">
+                            app:layout_constraintTop_toBottomOf="@id/activity_post_detail_top_layout">
 
                             <TextView
-                                android:id="@+id/post_detail_content"
+                                android:id="@+id/activity_post_detail_content"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/color_accent"
@@ -152,15 +152,15 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/post_detail_bottom_layout"
+                            android:id="@+id/activity_post_detail_bottom_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/post_detail_content_layout">
+                            app:layout_constraintTop_toBottomOf="@id/activity_post_detail_content_layout">
 
                             <com.cloudchewie.ui.IconTextItem
-                                android:id="@+id/post_detail_attraction"
+                                android:id="@+id/activity_post_detail_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:clickable="true"
@@ -172,7 +172,7 @@
                                 tools:icon_text_item_text="武汉" />
 
                             <com.cloudchewie.ui.IconTextItem
-                                android:id="@+id/post_detail_topic"
+                                android:id="@+id/activity_post_detail_topic"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="10dp"
@@ -181,7 +181,7 @@
                                 app:icon_text_item_icon="@drawable/ic_light_at"
                                 app:icon_text_item_icon_size="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/post_detail_attraction"
+                                app:layout_constraintStart_toEndOf="@id/activity_post_detail_location"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:icon_text_item_text="生活圈" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -190,27 +190,28 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/post_detail_comment_bar"
+                android:id="@+id/activity_post_detail_comment_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:background="@color/content_background">
 
                 <View
-                    android:id="@+id/post_detail_content_divider"
+                    android:id="@+id/activity_post_detail_content_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:background="@color/color_divider"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/post_detail_comment_tab_layout"
+                    android:id="@+id/activity_post_detail_comment_tab_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tabBackground="@android:color/transparent"
+                    app:tabGravity="center"
                     app:tabIndicator="@drawable/shape_tab_indicator"
                     app:tabIndicatorColor="@color/color_prominent"
                     app:tabIndicatorFullWidth="false"
@@ -241,19 +242,19 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/post_detail_comment_layout"
+                android:id="@+id/activity_post_detail_comment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <View
-                    android:id="@+id/post_detail_comment_divider"
+                    android:id="@+id/activity_post_detail_comment_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:background="@color/color_divider"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/post_detail_content_viewpager"
+                    android:id="@+id/activity_post_detail_content_viewpager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -264,15 +265,15 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <View
-        android:id="@+id/post_detail_statistics_divider"
+        android:id="@+id/activity_post_detail_statistics_divider"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_above="@id/post_detail_statistics_layout"
+        android:layout_above="@id/activity_post_detail_statistics_layout"
         android:background="@color/color_divider"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/post_detail_statistics_layout"
+        android:id="@+id/activity_post_detail_statistics_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -290,7 +291,7 @@
             android:paddingBottom="10dp">
 
             <com.cloudchewie.ui.IconTextItem
-                android:id="@+id/post_detail_collection"
+                android:id="@+id/activity_post_detail_collection_count"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:icon_text_item_icon="@drawable/ic_light_star"
@@ -315,7 +316,7 @@
             android:paddingBottom="10dp">
 
             <com.cloudchewie.ui.IconTextItem
-                android:id="@+id/post_detail_comment"
+                android:id="@+id/activity_post_detail_comment_count"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:icon_text_item_icon="@drawable/ic_light_comment"
@@ -340,7 +341,7 @@
             android:paddingBottom="10dp">
 
             <com.cloudchewie.ui.IconTextItem
-                android:id="@+id/post_detail_thumbup"
+                android:id="@+id/activity_post_detail_thumbup_count"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:icon_text_item_icon="@drawable/ic_light_thumbsup"

@@ -19,19 +19,19 @@ public class Comment implements Serializable {
     Date date;
     String content;
     List<Image> images;
-    int commentCount;
+    int replyCount;
     int thumbupCount;
     COMMENT_TYPE type;
 
     public Comment() {
     }
 
-    public Comment(int userId, String username, Date date, String content, int commentCount, int thumbupCount) {
+    public Comment(int userId, String username, Date date, String content, int replyCount, int thumbupCount) {
         this.userId = userId;
         this.username = username;
         this.date = date;
         this.content = content;
-        this.commentCount = commentCount;
+        this.replyCount = replyCount;
         this.thumbupCount = thumbupCount;
     }
 
@@ -75,12 +75,12 @@ public class Comment implements Serializable {
         this.images = images;
     }
 
-    public int getCommentCount() {
-        return commentCount;
+    public int getReplyCount() {
+        return replyCount;
     }
 
-    public void setCommentCount(int commentCount) {
-        this.commentCount = commentCount;
+    public void setReplyCount(int replyCount) {
+        this.replyCount = replyCount;
     }
 
     public int getThumbupCount() {

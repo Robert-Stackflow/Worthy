@@ -10,8 +10,8 @@ package com.cloudchewie.client.request;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ToastUtils;
 import com.cloudchewie.client.domin.User;
-import com.cloudchewie.client.http.HttpRequestUtil;
-import com.cloudchewie.client.http.ResponseCode;
+import com.cloudchewie.client.util.http.HttpRequestUtil;
+import com.cloudchewie.client.util.http.ResponseCode;
 
 public class UserRequest {
 

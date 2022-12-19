@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/content_background"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favorites_detail_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/card_background"
+        android:fitsSystemWindows="true">
+
+        <ImageButton
+            android:id="@+id/favorites_detail_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_arrow_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/favorites_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_arrow_left"
+            android:text="收藏夹详情"
+            android:textColor="@color/color_accent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/favorites_detail_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/favorites_detail_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/more"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/favorites_detail_more"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/favorites_detail_more"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/more"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_ellipsis"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favorites_detail_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/favorites_detail_titlebar"
+        android:background="@drawable/shape_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/favorites_detail_image"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_default_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.cloudchewie.ui.IconTextItem
+            android:id="@+id/favorites_detail_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/dark_translucent"
+            android:padding="2dp"
+            app:icon_text_item_icon="@drawable/ic_light_note"
+            app:icon_text_item_icon_color="@color/text_color_white"
+            app:icon_text_item_icon_size="11dp"
+            app:icon_text_item_text="3"
+            app:icon_text_item_text_color="@color/text_color_white"
+            app:layout_constraintBottom_toBottomOf="@id/favorites_detail_image"
+            app:layout_constraintEnd_toEndOf="@id/favorites_detail_image" />
+
+        <TextView
+            android:id="@+id/favorites_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:singleLine="true"
+            android:textColor="@color/color_accent"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/favorites_detail_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="默认收藏夹" />
+
+        <TextView
+            android:id="@+id/favorites_detail_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="2dp"
+            android:singleLine="true"
+            android:text="·"
+            android:textColor="@color/color_accent"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/favorites_detail_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/favorites_detail_ispublic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="2dp"
+            android:singleLine="true"
+            android:textColor="@color/color_accent"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/favorites_detail_dot"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="公开" />
+
+        <TextView
+            android:id="@+id/favorites_detail_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLines="2"
+            android:textColor="@color/text_color_gray"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="@id/favorites_detail_name"
+            app:layout_constraintTop_toBottomOf="@id/favorites_detail_name"
+            tools:text="创建者:余湍" />
+
+        <TextView
+            android:id="@+id/favorites_detail_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/text_color_gray"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/favorites_detail_name"
+            app:layout_constraintTop_toBottomOf="@id/favorites_detail_author"
+            tools:text="简介:主要收藏个人喜欢的一些影视、游戏、音乐赏析或解说" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/favorites_detail_content_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@id/favorites_detail_content_layout"
+        android:background="@color/color_divider"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/favorites_detail_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/favorites_detail_statistics_divider"
+        android:layout_below="@id/favorites_detail_banner">
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/favorites_detail_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:id="@+id/favorites_detail_swipe_refresh_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favorites_detail_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/favorites_detail_statistics_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@id/favorites_detail_statistics_layout"
+        android:background="@color/color_divider"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/favorites_detail_statistics_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <com.cloudchewie.ui.IconTextItem
+                android:id="@+id/favorites_detail_collection"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:icon_text_item_icon="@drawable/ic_light_star"
+                app:icon_text_item_icon_color="@color/color_accent"
+                app:icon_text_item_icon_size="11dp"
+                app:icon_text_item_text="收藏人数"
+                app:icon_text_item_text_color="@color/color_accent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <com.cloudchewie.ui.IconTextItem
+                android:id="@+id/favorites_detail_visitor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:icon_text_item_icon="@drawable/ic_light_eye"
+                app:icon_text_item_icon_color="@color/color_accent"
+                app:icon_text_item_icon_size="11dp"
+                app:icon_text_item_text="浏览人数"
+                app:icon_text_item_text_color="@color/color_accent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <com.cloudchewie.ui.IconTextItem
+                android:id="@+id/favorites_detail_thumbup"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:icon_text_item_icon="@drawable/ic_light_thumbsup"
+                app:icon_text_item_icon_color="@color/color_accent"
+                app:icon_text_item_icon_size="11dp"
+                app:icon_text_item_text="点赞人数"
+                app:icon_text_item_text_color="@color/color_accent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</RelativeLayout>

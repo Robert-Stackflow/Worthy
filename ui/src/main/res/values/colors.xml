@@ -10,6 +10,7 @@
     <color name="color_prominent">#0066FF</color>
     <color name="color_prominent_background">#a2c0ff</color>
     <color name="light_translucent">#12000000</color>
+    <color name="dark_translucent">#AC000000</color>
     <!--控件颜色-->
     <color name="card_background">#FFFFFF</color>
     <color name="card_pressed_background">#E5E5E5</color>

@@ -38,6 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="@android:color/transparent"
+            app:tabGravity="center"
             app:tabIndicator="@drawable/shape_tab_indicator"
             app:tabIndicatorColor="@color/color_prominent"
             app:tabIndicatorFullWidth="false"

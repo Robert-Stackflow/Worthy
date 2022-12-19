@@ -13,7 +13,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +23,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class EntryItem extends ConstraintLayout {
     private ConstraintLayout mainLayout;
-    private ImageView icon;
+    private ImageButton icon;
     private TextView textView;
 
     public EntryItem(@NonNull Context context) {
@@ -52,6 +52,7 @@ public class EntryItem extends ConstraintLayout {
         icon = findViewById(R.id.entry_item_icon);
         textView = findViewById(R.id.entry_item_text);
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.EntryItem);
+        icon.setOnClickListener(v -> this.performClick());
         if (attr != null) {
             int iconId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon, R.drawable.ic_light_map);
             int iconColor = attr.getColor(R.styleable.EntryItem_entry_item_icon_color, getResources().getColor(R.color.color_icon, getResources().newTheme()));

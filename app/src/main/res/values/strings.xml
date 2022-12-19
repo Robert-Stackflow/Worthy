@@ -21,30 +21,4 @@
     <string name="zero">0</string>
     <string name="filter">筛选</string>
     <string name="comment_detail_title">回复详情</string>
-    <string-array name="following_tags">
-        <item>全部</item>
-        <item>关注的人</item>
-        <item>关注的地点</item>
-        <item>关注的话题</item>
-    </string-array>
-
-    <string-array name="english_week_string_array">
-        <item>日</item>
-        <item>一</item>
-        <item>二</item>
-        <item>三</item>
-        <item>四</item>
-        <item>五</item>
-        <item>六</item>
-    </string-array>
-
-    <string-array name="chinese_week_string_array">
-        <item>周日</item>
-        <item>周一</item>
-        <item>周二</item>
-        <item>周三</item>
-        <item>周四</item>
-        <item>周五</item>
-        <item>周六</item>
-    </string-array>
 </resources>

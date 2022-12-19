@@ -7,7 +7,7 @@
 
 package com.cloudchewie.client.widget;
 
-import static com.cloudchewie.client.util.StringUtil.dealNewLine;
+import static com.cloudchewie.client.util.basic.StringUtil.handleLineBreaks;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.cloudchewie.client.activity.CommentDetailActivity;
+import com.cloudchewie.client.activity.discover.CommentDetailActivity;
 import com.cloudchewie.client.domin.Comment;
 
 public class ReplyItem extends ConstraintLayout {
@@ -67,7 +67,7 @@ public class ReplyItem extends ConstraintLayout {
     public void setComment(Comment comment) {
         this.mComment = comment;
         username.setText(comment.getUsername());
-        content.setText(dealNewLine(comment.getContent()));
+        content.setText(handleLineBreaks(comment.getContent()));
         mainLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, CommentDetailActivity.class);
             Bundle bundle = new Bundle();

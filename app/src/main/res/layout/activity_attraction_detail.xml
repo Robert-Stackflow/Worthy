@@ -8,20 +8,20 @@
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/attraction_detail_appbar"
+        android:id="@+id/activity_attraction_detail_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_prominent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/attraction_detail_collapsing_toolbar_layout"
+            android:id="@+id/activity_attraction_detail_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/color_prominent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/attraction_detail_banner"
+                android:id="@+id/activity_attraction_detail_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -31,14 +31,14 @@
                 app:layout_collapseParallaxMultiplier="0.7">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/attraction_detail_titlebar"
+                    android:id="@+id/activity_attraction_detail_titlebar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageButton
-                        android:id="@+id/attraction_detail_back"
+                        android:id="@+id/activity_attraction_detail_back"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
@@ -50,7 +50,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:id="@+id/attraction_detail_jump_to_map"
+                        android:id="@+id/activity_attraction_detail_jump_to_map"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
@@ -58,11 +58,11 @@
                         android:padding="10dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_light_map"
-                        app:layout_constraintEnd_toStartOf="@id/attraction_detail_more"
+                        app:layout_constraintEnd_toStartOf="@id/activity_attraction_detail_more"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:id="@+id/attraction_detail_more"
+                        android:id="@+id/activity_attraction_detail_more"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
@@ -81,21 +81,21 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/attraction_detail_titlebar">
+                    app:layout_constraintTop_toBottomOf="@id/activity_attraction_detail_titlebar">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:id="@+id/attraction_detail_title_layout"
+                            android:id="@+id/activity_attraction_detail_title_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:padding="10dp">
 
                             <TextView
-                                android:id="@+id/attraction_detail_name"
+                                android:id="@+id/activity_attraction_detail_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
@@ -104,7 +104,7 @@
                                 tools:text="九寨沟" />
 
                             <TextView
-                                android:id="@+id/attraction_detail_location"
+                                android:id="@+id/activity_attraction_detail_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:maxWidth="300dp"
@@ -138,7 +138,7 @@
                         android:padding="10dp">
 
                         <TextView
-                            android:id="@+id/attraction_detail_describe"
+                            android:id="@+id/activity_attraction_detail_describe"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="3"
@@ -151,20 +151,21 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/attraction_detail_content_bar"
+            android:id="@+id/activity_attraction_detail_content_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@drawable/shape_content_top_radius">
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/attraction_detail_content_tab_layout"
+                android:id="@+id/activity_attraction_detail_content_tab_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabBackground="@android:color/transparent"
+                app:tabGravity="center"
                 app:tabIndicator="@drawable/shape_tab_indicator"
                 app:tabIndicatorColor="@color/color_prominent"
                 app:tabIndicatorFullWidth="false"
@@ -196,19 +197,19 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/attraction_detail_content"
+            android:id="@+id/activity_attraction_detail_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <View
-                android:id="@+id/attraction_detail_content_divider"
+                android:id="@+id/activity_attraction_detail_content_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/color_divider"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/attraction_detail_content_viewpager"
+                android:id="@+id/activity_attraction_detail_content_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent" />
