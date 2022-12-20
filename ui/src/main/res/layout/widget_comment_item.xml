@@ -109,7 +109,7 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
-            app:icon_text_item_icon="@drawable/ic_light_thumbsup"
+            app:icon_text_item_icon="@drawable/ic_light_thumbup"
             app:icon_text_item_icon_color="@color/text_color_gray"
             app:icon_text_item_icon_size="10dp"
             app:icon_text_item_text="3"

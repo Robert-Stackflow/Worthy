@@ -19,9 +19,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
+import com.cloudchewie.client.util.image.CornerTransform;
+import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;
@@ -39,8 +43,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AttractionListAdapter.MyViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.widget_attraction_card, parent, false));
+        return new AttractionListAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.widget_attraction_card, parent, false));
     }
 
     @Override
@@ -70,6 +73,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
         holder.follow.setText(String.valueOf(attraction.getFollowerCount()));
         holder.visitor.setText(String.valueOf(attraction.getVisitorCount()));
         holder.post.setText(String.valueOf(attraction.getPostCount()));
+        Glide.with(context).load(ImageUrlUtil.getUrls(1).get(0)).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransform.getTransform(context, true, true, false, false))).into(holder.imageView);
     }
 
     @Override
@@ -85,6 +89,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
         public IconTextItem follow;
         public IconTextItem visitor;
         public IconTextItem post;
+        public ImageView imageView;
 
         public MyViewHolder(View view) {
             super(view);
@@ -95,6 +100,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
             follow = view.findViewById(R.id.attraction_card_follow);
             visitor = view.findViewById(R.id.attraction_card_visitor);
             post = view.findViewById(R.id.attraction_card_post);
+            imageView = view.findViewById(R.id.attraction_card_image);
         }
     }
 }

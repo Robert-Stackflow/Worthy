@@ -30,6 +30,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.domin.UserViewInfo;
 import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.ImageViewFragment;
+import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.client.widget.AppBarStateChangeListener;
 import com.cloudchewie.ui.BottomSheet;
 import com.google.android.material.appbar.AppBarLayout;
@@ -51,6 +53,7 @@ public class HomePageActivity extends AppCompatActivity {
     private boolean mIsBlurred = false;
     private UserViewInfo mAvatarInfo;
     private UserViewInfo mBackGroundInfo;
+    private UserViewInfo mSmallAvatarInfo;
     //基本控件
     private Toolbar mToolBar;
     private AppBarLayout mAppBar;
@@ -85,10 +88,11 @@ public class HomePageActivity extends AppCompatActivity {
         initBlur();
         initTabLayout();
         mAvatarInfo = new UserViewInfo("https://hellorfimg.zcool.cn/preview260/658596682.jpg");
-        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_imgae_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
-        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_imgae_load_fail).placeholder(R.drawable.ic_state_background)).into(mSmallAvatarView);
+        mSmallAvatarInfo = new UserViewInfo("https://hellorfimg.zcool.cn/preview260/658596682.jpg");
+        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
+        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mSmallAvatarView);
         mBackGroundInfo = new UserViewInfo("https://hellorfimg.zcool.cn/preview260/658596682.jpg");
-        Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_imgae_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
+        Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
     }
 
 
@@ -96,24 +100,27 @@ public class HomePageActivity extends AppCompatActivity {
         mBackButton.setOnClickListener(v -> finish());
         mMoreButton.setOnClickListener(v -> {
             BottomSheet bottomSheet = new BottomSheet(this);
-            bottomSheet.setMainLayout(R.layout.layout_detail_more);
+            bottomSheet.setMainLayout(R.layout.layout_home_page_more);
             bottomSheet.show();
-            bottomSheet.findViewById(R.id.detail_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
+            bottomSheet.findViewById(R.id.home_page_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
         });
         mBackGroundView.setOnClickListener(v -> {
             List<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
+            mBackGroundInfo.setBounds(NineGridUtil.getBounds(mBackGroundView));
             mThumbViewInfoList.add(mBackGroundInfo);
-            GPreviewBuilder.from(HomePageActivity.this).setSingleShowType(false).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
+            GPreviewBuilder.from(HomePageActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
         });
         mAvatarView.setOnClickListener(v -> {
             List<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
+            mAvatarInfo.setBounds(NineGridUtil.getBounds(mAvatarView));
             mThumbViewInfoList.add(mAvatarInfo);
-            GPreviewBuilder.from(HomePageActivity.this).setSingleShowType(false).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
+            GPreviewBuilder.from(HomePageActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
         });
         mSmallAvatarView.setOnClickListener(v -> {
             List<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
-            mThumbViewInfoList.add(mAvatarInfo);
-            GPreviewBuilder.from(HomePageActivity.this).setSingleShowType(false).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
+            mSmallAvatarInfo.setBounds(NineGridUtil.getBounds(mSmallAvatarView));
+            mThumbViewInfoList.add(mSmallAvatarInfo);
+            GPreviewBuilder.from(HomePageActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
         });
     }
 
@@ -125,7 +132,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state, int offset) {
                 if (state == State.EXPANDED) {
-                    Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_imgae_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
+                    Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
 //                    mBackGroundView.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.img_default_background));
                     mIsBlurred = false;
                 } else if (state == State.COLLAPSED) {
@@ -138,7 +145,7 @@ public class HomePageActivity extends AppCompatActivity {
                 } else {
                     mSmallAvatarView.setVisibility(View.GONE);
                     mSmallUsernameView.setVisibility(View.GONE);
-                    Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_imgae_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
+                    Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
 //                    mBackGroundView.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.img_default_background));
                     mIsBlurred = false;
                 }

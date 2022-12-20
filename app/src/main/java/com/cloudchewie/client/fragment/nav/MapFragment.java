@@ -114,7 +114,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     private SuggestionSearch suggestionSearch;
     private RecyclerView recyclerView;
     private SugListAdapter poiItemAdaper;
-    private BitmapDescriptor bitmapdescwaterdrop = BitmapDescriptorFactory.fromResource(R.drawable.img_water_drop);
+    private BitmapDescriptor bitmapdescwaterdrop = BitmapDescriptorFactory.fromResource(R.drawable.img_poi);
     private int loadIndex = 0;
     private TextView poiTitle;
     private TextView poiAddress;

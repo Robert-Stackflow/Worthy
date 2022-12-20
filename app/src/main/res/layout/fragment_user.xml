@@ -29,7 +29,7 @@
             android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_settings"
-            android:src="@drawable/ic_light_set"
+            android:src="@drawable/ic_light_settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

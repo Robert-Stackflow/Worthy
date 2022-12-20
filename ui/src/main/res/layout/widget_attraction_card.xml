@@ -16,6 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/attraction_card_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxHeight="150dp"
+            android:scaleType="centerCrop" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -63,63 +71,84 @@
             android:layout_height="1px"
             android:background="@color/color_divider" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/attraction_card_statistics_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <com.cloudchewie.ui.IconTextItem
-                android:id="@+id/attraction_card_follow"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/attraction_card_follow_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/shape_card_bottom_left_radius"
                 android:clickable="true"
-                android:focusable="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                app:icon_text_item_icon="@drawable/ic_light_star"
-                app:icon_text_item_icon_color="@color/color_accent"
-                app:icon_text_item_icon_size="11dp"
-                app:icon_text_item_text_color="@color/color_accent"
-                app:layout_constraintEnd_toStartOf="@id/attraction_card_visitor"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:icon_text_item_text="收藏人数" />
+                android:focusable="true">
 
-            <com.cloudchewie.ui.IconTextItem
-                android:id="@+id/attraction_card_visitor"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                <com.cloudchewie.ui.IconTextItem
+                    android:id="@+id/attraction_card_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    app:icon_text_item_icon="@drawable/ic_light_star"
+                    app:icon_text_item_icon_color="@color/color_accent"
+                    app:icon_text_item_icon_size="13dp"
+                    app:icon_text_item_text_color="@color/color_accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:icon_text_item_text="收藏人数" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/attraction_card_visitor_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/shape_card"
                 android:clickable="true"
-                android:focusable="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                app:icon_text_item_icon="@drawable/ic_light_eye"
-                app:icon_text_item_icon_color="@color/color_accent"
-                app:icon_text_item_icon_size="11dp"
-                app:icon_text_item_text_color="@color/color_accent"
-                app:layout_constraintEnd_toStartOf="@id/attraction_card_post"
-                app:layout_constraintStart_toEndOf="@id/attraction_card_follow"
-                tools:icon_text_item_text="浏览人数" />
+                android:focusable="true">
 
-            <com.cloudchewie.ui.IconTextItem
-                android:id="@+id/attraction_card_post"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                <com.cloudchewie.ui.IconTextItem
+                    android:id="@+id/attraction_card_visitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    app:icon_text_item_icon="@drawable/ic_light_visible"
+                    app:icon_text_item_icon_color="@color/color_accent"
+                    app:icon_text_item_icon_size="13dp"
+                    app:icon_text_item_text_color="@color/color_accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:icon_text_item_text="浏览人数" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/attraction_card_post_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/shape_card_bottom_right_radius"
                 android:clickable="true"
-                android:focusable="true"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                app:icon_text_item_icon="@drawable/ic_light_note"
-                app:icon_text_item_icon_color="@color/color_accent"
-                app:icon_text_item_icon_size="11dp"
-                app:icon_text_item_text_color="@color/color_accent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/attraction_card_visitor"
-                tools:icon_text_item_text="帖子数目" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:focusable="true">
+
+                <com.cloudchewie.ui.IconTextItem
+                    android:id="@+id/attraction_card_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    app:icon_text_item_icon="@drawable/ic_light_note"
+                    app:icon_text_item_icon_color="@color/color_accent"
+                    app:icon_text_item_icon_size="13dp"
+                    app:icon_text_item_text_color="@color/color_accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:icon_text_item_text="帖子数目" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

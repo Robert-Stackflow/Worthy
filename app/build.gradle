@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation project(':ui')
+    implementation project(':ninegrid')
     implementation libs.kotlin.stdlib
     implementation files('libs/BaiduLBS_Android.jar')
     //Androidx
@@ -74,10 +75,11 @@ dependencies {
     implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'
     implementation group: 'com.haibin', name: 'calendarview', version: '3.7.1'
     //Image
-    implementation 'jp.wasabeef:blurry:4.0.1'
-    implementation 'com.ycjiang:ImagePreview:2.3.7'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.gitee.zackratos:UltimateBarX:0.8.0'
-    implementation 'com.github.bumptech.glide:glide:4.5.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    implementation 'jp.wasabeef:blurry:4.0.1'  //毛玻璃
+    implementation 'com.ycjiang:ImagePreview:2.3.7'  //图片预览
+    implementation 'de.hdodenhof:circleimageview:3.1.0'  //圆形头像
+    implementation 'com.gitee.zackratos:UltimateBarX:0.8.0'  //状态栏
+//    implementation 'com.cloudchewie.ninegrid:library:1.1.1'  //九宫格
+    implementation 'com.github.bumptech.glide:glide:4.5.0'  //Glide
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'  //Glide注解
 }

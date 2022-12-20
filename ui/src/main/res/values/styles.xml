@@ -134,6 +134,8 @@
         <attr name="icon_text_item_text_size" format="dimension" />
         <attr name="icon_text_item_icon" format="reference" />
         <attr name="icon_text_item_icon_color" format="color" />
+        <attr name="icon_text_item_checked_icon" format="reference" />
+        <attr name="icon_text_item_checked_icon_color" format="color" />
         <attr name="icon_text_item_icon_size" format="dimension" />
         <attr name="icon_text_item_spacing" format="dimension" />
     </declare-styleable>
@@ -144,6 +146,8 @@
         <attr name="entry_item_text_size" format="dimension" />
         <attr name="entry_item_icon" format="reference" />
         <attr name="entry_item_icon_color" format="color" />
+        <attr name="entry_item_checked_icon" format="reference" />
+        <attr name="entry_item_checked_icon_color" format="color" />
         <attr name="entry_item_icon_size" format="dimension" />
         <attr name="entry_item_spacing" format="dimension" />
         <attr name="entry_item_icon_background" format="reference" />

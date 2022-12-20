@@ -25,6 +25,11 @@ public class EntryItem extends ConstraintLayout {
     private ConstraintLayout mainLayout;
     private ImageButton icon;
     private TextView textView;
+    private boolean isChecked;
+    private int iconId;
+    private int iconColor;
+    private int checkedIconId;
+    private int checkedIconColor;
 
     public EntryItem(@NonNull Context context) {
         super(context);
@@ -54,8 +59,10 @@ public class EntryItem extends ConstraintLayout {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.EntryItem);
         icon.setOnClickListener(v -> this.performClick());
         if (attr != null) {
-            int iconId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon, R.drawable.ic_light_map);
-            int iconColor = attr.getColor(R.styleable.EntryItem_entry_item_icon_color, getResources().getColor(R.color.color_icon, getResources().newTheme()));
+            iconId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon, R.drawable.ic_light_map);
+            iconColor = attr.getColor(R.styleable.EntryItem_entry_item_icon_color, getResources().getColor(R.color.color_icon, getResources().newTheme()));
+            checkedIconId = attr.getResourceId(R.styleable.EntryItem_entry_item_checked_icon, R.drawable.ic_light_map_fill);
+            checkedIconColor = attr.getColor(R.styleable.EntryItem_entry_item_checked_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
             int iconSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_icon_size, 10);
             String text = attr.getString(R.styleable.EntryItem_entry_item_text);
             int textColor = attr.getColor(R.styleable.EntryItem_entry_item_text_color, getResources().getColor(R.color.text_color_entry, getResources().newTheme()));
@@ -70,10 +77,24 @@ public class EntryItem extends ConstraintLayout {
             setTextColor(textColor);
             setTextSize(textSize);
             setSpacing(spacing);
-            if (backgroundEnable)
-                setIconBackground(backgroundId);
+            if (backgroundEnable) setIconBackground(backgroundId);
             attr.recycle();
         }
+    }
+
+    public void toggle() {
+        isChecked = !isChecked;
+        if (isChecked) {
+            setIcon(checkedIconId);
+            setIconColor(checkedIconColor);
+        } else {
+            setIcon(iconId);
+            setIconColor(iconColor);
+        }
+    }
+
+    public boolean isChecked() {
+        return isChecked;
     }
 
     public void setIcon(int iconId) {

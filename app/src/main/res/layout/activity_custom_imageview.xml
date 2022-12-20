@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        app:navigationIcon="@drawable/ic_light_arrow_left"
+        app:title="自定义预览"
+        app:titleMarginBottom="15dp"
+        app:titleMarginStart="20dp"
+        app:titleTextColor="@android:color/white" />
+
+
+    <include layout="@layout/activity_image_preview_photo" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/testBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-130dp"
+        android:text="测试" />
+</LinearLayout>

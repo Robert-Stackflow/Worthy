@@ -1,3 +1,4 @@
 include ':app'
 include ':ui'
+include ':ninegrid'
 enableFeaturePreview("VERSION_CATALOGS")

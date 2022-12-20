@@ -24,11 +24,17 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
+import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
+import com.cloudchewie.client.domin.UserViewInfo;
 import com.cloudchewie.client.fragment.internal.CommentListFragment;
+import com.cloudchewie.client.util.image.ImageUrlUtil;
+import com.cloudchewie.client.util.image.NineGridUtil;
+import com.cloudchewie.ninegrid.NineGridImageView;
 import com.cloudchewie.ui.BottomSheet;
+import com.cloudchewie.ui.EntryItem;
 import com.cloudchewie.ui.IconTextItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -49,13 +55,14 @@ public class PostDetailActivity extends BaseActivity {
     private TextView mContentView;
     private IconTextItem mTopicView;
     private IconTextItem mLocationView;
-    private IconTextItem mCommentsCountView;
-    private IconTextItem mThumbupCountView;
-    private IconTextItem mCollectionCountView;
+    private EntryItem mCommentsCountView;
+    private EntryItem mThumbupCountView;
+    private EntryItem mCollectionCountView;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
     private PostDetailFragmentAdapter mAdapter;
+    private NineGridImageView<UserViewInfo> mNineGridImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +82,7 @@ public class PostDetailActivity extends BaseActivity {
         mCollectionCountView = findViewById(R.id.activity_post_detail_collection_count);
         mTabLayout = findViewById(R.id.activity_post_detail_comment_tab_layout);
         mViewPager = findViewById(R.id.activity_post_detail_content_viewpager);
+        mNineGridImageView = findViewById(R.id.activity_post_detail_nine_grid);
         initView();
         initViewPager();
     }
@@ -113,6 +121,18 @@ public class PostDetailActivity extends BaseActivity {
             attractionDetailIntent.putExtras(bundle);
             startActivity(attractionDetailIntent);
         });
+        mThumbupCountView.setOnClickListener(v -> {
+            mThumbupCountView.toggle();
+            mPost.setThumbupCount(mPost.getThumbupCount() + (mThumbupCountView.isChecked() ? 1 : -1));
+            mThumbupCountView.setText(String.valueOf(mPost.getThumbupCount()));
+        });
+        mCollectionCountView.setOnClickListener(v -> {
+            mCollectionCountView.toggle();
+            mPost.setCollectionCount(mPost.getCollectionCount() + (mCollectionCountView.isChecked() ? 1 : -1));
+            mCollectionCountView.setText(String.valueOf(mPost.getCollectionCount()));
+        });
+        mNineGridImageView.setAdapter(new MyNineGridImageViewAdapter());
+        NineGridUtil.setDataSource(mNineGridImageView, ImageUrlUtil.getViewInfos(mPost.getImageUrls()));
     }
 
     private void initViewPager() {

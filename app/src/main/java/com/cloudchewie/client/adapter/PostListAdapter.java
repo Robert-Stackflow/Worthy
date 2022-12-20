@@ -27,8 +27,13 @@ import com.cloudchewie.client.activity.discover.TopicDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
+import com.cloudchewie.client.domin.UserViewInfo;
 import com.cloudchewie.client.util.basic.DateUtil;
+import com.cloudchewie.client.util.image.ImageUrlUtil;
+import com.cloudchewie.client.util.image.NineGridUtil;
+import com.cloudchewie.ninegrid.NineGridImageView;
 import com.cloudchewie.ui.IconTextItem;
+import com.previewlibrary.GPreviewBuilder;
 
 import java.util.List;
 import java.util.Objects;
@@ -64,7 +69,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
         if (null == post) {
             return;
         }
-        holder.mItemView.setOnClickListener(view -> {
+        holder.mainView.setOnClickListener(view -> {
             Intent intent = new Intent(context, PostDetailActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("post", post);
@@ -99,6 +104,12 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
             intent.putExtras(bundle);
             context.startActivity(intent);
         });
+        holder.thumbup.setOnClickListener(v -> {
+            holder.thumbup.toggle();
+            post.setThumbupCount(post.getThumbupCount() + (holder.thumbup.isChecked() ? 1 : -1));
+            holder.thumbup.setText(String.valueOf(post.getThumbupCount()));
+        });
+        NineGridUtil.setDataSource(holder.nineGridImageViewer, ImageUrlUtil.getViewInfos(post.getImageUrls()));
     }
 
     @Override
@@ -107,7 +118,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        public View mItemView;
+        public View mainView;
         public TextView nameView;
         public TextView timeView;
         public TextView contentView;
@@ -115,11 +126,13 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
         public IconTextItem topic;
         public IconTextItem comment;
         public IconTextItem thumbup;
-
+        public NineGridImageView<UserViewInfo> nineGridImageViewer;
+        private MyNineGridImageViewAdapter mAdapter;
+        private GPreviewBuilder.IndicatorType mIndicatorType;
 
         public MyViewHolder(View view) {
             super(view);
-            mItemView = view;
+            mainView = view;
             nameView = view.findViewById(R.id.post_item_username);
             timeView = view.findViewById(R.id.post_item_time);
             contentView = view.findViewById(R.id.post_item_content);
@@ -127,6 +140,9 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
             topic = view.findViewById(R.id.post_item_topic);
             comment = view.findViewById(R.id.post_item_comment);
             thumbup = view.findViewById(R.id.post_item_thumbup);
+            nineGridImageViewer = view.findViewById(R.id.post_item_nine_grid);
+            mAdapter = new MyNineGridImageViewAdapter();
+            nineGridImageViewer.setAdapter(mAdapter);
         }
     }
 }

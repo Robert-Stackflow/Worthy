@@ -14,7 +14,9 @@ import androidx.annotation.Nullable;
 
 import com.previewlibrary.enitity.IThumbViewInfo;
 
-public class UserViewInfo implements IThumbViewInfo {
+import java.io.Serializable;
+
+public class UserViewInfo implements IThumbViewInfo, Serializable {
     public static final Creator<UserViewInfo> CREATOR = new Creator<UserViewInfo>() {
         @Override
         public UserViewInfo createFromParcel(Parcel source) {

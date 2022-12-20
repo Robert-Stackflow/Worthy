@@ -13,7 +13,8 @@
         android:layout_height="40dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/cd_entry_item_icon"
-        android:src="@drawable/ic_light_eye"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_light_visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

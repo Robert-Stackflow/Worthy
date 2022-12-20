@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <HorizontalScrollView
+        android:id="@+id/image_operation_share_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/image_operation_share_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/detail_more_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:entry_item_icon="@drawable/ic_colorful_wechat"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="微信"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/detail_more_pengyouquan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/detail_more_pengyouquan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                app:entry_item_icon="@drawable/ic_colorful_pengyouquan"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="朋友圈"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/detail_more_qq"
+                app:layout_constraintStart_toEndOf="@id/detail_more_wechat"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/detail_more_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                app:entry_item_icon="@drawable/ic_colorful_qq"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="QQ"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/detail_more_qqzone"
+                app:layout_constraintStart_toEndOf="@id/detail_more_pengyouquan"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/detail_more_qqzone"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                app:entry_item_icon="@drawable/ic_colorful_qqzone"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="QQ空间"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/detail_more_weibo"
+                app:layout_constraintStart_toEndOf="@id/detail_more_qq"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/detail_more_weibo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                app:entry_item_icon="@drawable/ic_colorful_weibo"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="微博"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/detail_more_more"
+                app:layout_constraintStart_toEndOf="@id/detail_more_qqzone"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/detail_more_more"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:entry_item_icon="@drawable/ic_light_ellipsis"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="更多"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_more_weibo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/image_operation_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_divider"
+        app:layout_constraintTop_toBottomOf="@id/image_operation_share_scrollview" />
+
+    <HorizontalScrollView
+        android:id="@+id/image_operation_operation_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_operation_divider">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/image_operation_operation_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/image_operation_download"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:entry_item_icon="@drawable/ic_light_download"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="保存图片"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/image_operation_report"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.cloudchewie.ui.EntryItem
+                android:id="@+id/image_operation_report"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                app:entry_item_icon="@drawable/ic_light_warning"
+                app:entry_item_icon_background="@drawable/shape_card_round"
+                app:entry_item_icon_background_enable="true"
+                app:entry_item_icon_size="50dp"
+                app:entry_item_spacing="10dp"
+                app:entry_item_text="举报"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_operation_download"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/image_operation_divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_divider"
+        app:layout_constraintTop_toBottomOf="@id/image_operation_operation_scrollview" />
+
+    <TextView
+        android:id="@+id/image_operation_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/cancel"
+        android:textAlignment="center"
+        android:textColor="@color/text_color_red"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/image_operation_divider_2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

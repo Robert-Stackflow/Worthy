@@ -77,17 +77,17 @@ public class InputItem extends RelativeLayout {
             rightIcon.setFocusable(true);
             rightIcon.setClickable(true);
             rightIcon.setSelected(false);
-            setRightButton(true, R.drawable.ic_light_eyeoff);
+            setRightButton(true, R.drawable.ic_light_invisible);
             editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             rightIcon.setOnClickListener(v -> {
                 if (rightIcon.isSelected()) {
                     rightIcon.setSelected(false);
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    setRightButton(true, R.drawable.ic_light_eyeoff);
+                    setRightButton(true, R.drawable.ic_light_invisible);
                 } else {
                     rightIcon.setSelected(true);
                     editText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    setRightButton(true, R.drawable.ic_light_eye);
+                    setRightButton(true, R.drawable.ic_light_visible);
                 }
             });
         } else if (mode == 3) {
@@ -95,6 +95,14 @@ public class InputItem extends RelativeLayout {
         } else if (mode == 4) {
             editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         }
+    }
+
+    public void setHint(String hint) {
+        editText.setHint(hint);
+    }
+
+    public String getText() {
+        return editText.getText().toString();
     }
 
     private void setEditText(String hint, String text, boolean editable) {
@@ -110,18 +118,14 @@ public class InputItem extends RelativeLayout {
     }
 
     private void setLeftButton(boolean visibility, int iconId) {
-        if (visibility)
-            leftIcon.setVisibility(View.VISIBLE);
-        else
-            leftIcon.setVisibility(View.GONE);
+        if (visibility) leftIcon.setVisibility(View.VISIBLE);
+        else leftIcon.setVisibility(View.GONE);
         leftIcon.setImageResource(iconId);
     }
 
     private void setRightButton(boolean visibility, int iconId) {
-        if (visibility)
-            rightIcon.setVisibility(View.VISIBLE);
-        else
-            rightIcon.setVisibility(View.GONE);
+        if (visibility) rightIcon.setVisibility(View.VISIBLE);
+        else rightIcon.setVisibility(View.GONE);
         rightIcon.setImageResource(iconId);
     }
 }

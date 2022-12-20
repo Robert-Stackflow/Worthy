@@ -25,7 +25,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:background="@android:color/transparent"
-        android:button="@drawable/checkbox"
+        android:button="@drawable/ic_light_checkbox"
         android:checked="true"
         android:text=""
         android:textOff=""

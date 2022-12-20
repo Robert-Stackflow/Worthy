@@ -31,7 +31,7 @@ import com.previewlibrary.loader.MySimpleTarget;
 public class ImageLoader implements IZoomMediaLoader {
     @Override
     public void displayImage(@NonNull Fragment context, @NonNull String path, final ImageView imageView, @NonNull final MySimpleTarget simpleTarget) {
-        Glide.with(context).asBitmap().load(path).apply(RequestOptions.errorOf(R.drawable.ic_state_imgae_load_fail)).listener(new RequestListener<Bitmap>() {
+        Glide.with(context).asBitmap().load(path).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail)).listener(new RequestListener<Bitmap>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                 simpleTarget.onLoadFailed(null);
@@ -48,7 +48,7 @@ public class ImageLoader implements IZoomMediaLoader {
 
     @Override
     public void displayGifImage(@NonNull Fragment context, @NonNull String path, ImageView imageView, @NonNull final MySimpleTarget simpleTarget) {
-        Glide.with(context).asGif().load(path).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).error(R.drawable.ic_state_imgae_load_fail).dontAnimate()).listener(new RequestListener<GifDrawable>() {
+        Glide.with(context).asGif().load(path).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).error(R.drawable.ic_state_image_load_fail).dontAnimate()).listener(new RequestListener<GifDrawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
                 simpleTarget.onResourceReady();

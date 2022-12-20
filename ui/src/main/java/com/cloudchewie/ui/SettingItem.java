@@ -61,7 +61,7 @@ public class SettingItem extends ConstraintLayout {
             int titleBarBackground = attr.getResourceId(R.styleable.SettingItem_setting_item_background, Color.TRANSPARENT);
             setBackgroundResource(titleBarBackground);
             boolean leftButtonVisible = attr.getBoolean(R.styleable.SettingItem_setting_item_left_icon_visibility, true);
-            int leftButtonIconId = attr.getResourceId(R.styleable.SettingItem_setting_item_left_icon, R.drawable.ic_light_set);
+            int leftButtonIconId = attr.getResourceId(R.styleable.SettingItem_setting_item_left_icon, R.drawable.ic_light_settings);
             int leftButtonBackgroundColor = attr.getColor(R.styleable.SettingItem_setting_item_left_icon_background, Color.TRANSPARENT);
             setLeftButton(leftButtonVisible, leftButtonIconId, leftButtonBackgroundColor);
             boolean rightButtonVisible = attr.getBoolean(R.styleable.SettingItem_setting_item_right_icon_visibility, true);

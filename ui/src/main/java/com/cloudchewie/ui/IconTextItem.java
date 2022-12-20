@@ -25,6 +25,11 @@ public class IconTextItem extends ConstraintLayout {
     private ConstraintLayout mainLayout;
     private ImageView icon;
     private TextView textView;
+    private boolean isChecked;
+    private int iconId;
+    private int iconColor;
+    private int checkedIconId;
+    private int checkedIconColor;
 
     public IconTextItem(@NonNull Context context) {
         super(context);
@@ -53,9 +58,11 @@ public class IconTextItem extends ConstraintLayout {
         textView = findViewById(R.id.icon_text_item_text);
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.IconTextItem);
         if (attr != null) {
-            int iconId = attr.getResourceId(R.styleable.IconTextItem_icon_text_item_icon, R.drawable.ic_light_map);
-            int iconColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
-            int iconSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_icon_size, 10);
+            iconId = attr.getResourceId(R.styleable.IconTextItem_icon_text_item_icon, R.drawable.ic_light_map);
+            iconColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
+            checkedIconId = attr.getResourceId(R.styleable.IconTextItem_icon_text_item_checked_icon, R.drawable.ic_light_map_fill);
+            checkedIconColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_checked_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
+            int iconSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_icon_size, 13);
             String text = attr.getString(R.styleable.IconTextItem_icon_text_item_text);
             int textColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_text_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
             int textSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_text_size, 11);
@@ -68,6 +75,21 @@ public class IconTextItem extends ConstraintLayout {
             setTextSize(textSize);
             attr.recycle();
         }
+    }
+
+    public void toggle() {
+        isChecked = !isChecked;
+        if (isChecked) {
+            setIcon(checkedIconId);
+            setIconColor(checkedIconColor);
+        } else {
+            setIcon(iconId);
+            setIconColor(iconColor);
+        }
+    }
+
+    public boolean isChecked() {
+        return isChecked;
     }
 
     public void setIcon(int iconId) {

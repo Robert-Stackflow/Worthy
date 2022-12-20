@@ -8,7 +8,6 @@ android {
     defaultConfig {
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.targetSdk
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -28,6 +27,7 @@ android {
 dependencies {
     implementation libs.kotlin.stdlib
     //AndroidX
+    implementation project(':ninegrid')
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -36,5 +36,6 @@ dependencies {
     api "com.google.android:flexbox:1.1.0"
     implementation 'com.google.android.material:material:1.5.0'
     //Image
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'  //圆形头像
+    implementation 'com.jaeger.ninegridimageview:library:1.1.1'  //九宫格
 }

@@ -7,9 +7,9 @@
 
 package com.cloudchewie.client.domin;
 
-import android.media.Image;
-
 import androidx.annotation.NonNull;
+
+import com.cloudchewie.client.util.image.ImageUrlUtil;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,7 +20,7 @@ public class Post implements Serializable {
     String username;
     Date date;
     String content;
-    List<Image> images;
+    List<String> imageUrls;
     int commentCount;
     int thumbupCount;
     int collectionCount;
@@ -41,6 +41,7 @@ public class Post implements Serializable {
         this.collectionCount = collectionCount;
         this.location = location;
         this.tag = tag;
+        imageUrls = ImageUrlUtil.getUrls(15);
     }
 
     public POST_TYPE getType() {
@@ -84,12 +85,12 @@ public class Post implements Serializable {
         this.content = content;
     }
 
-    public List<Image> getImages() {
-        return images;
+    public List<String> getImageUrls() {
+        return imageUrls;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setImages(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
     }
 
     public int getCommentCount() {
@@ -135,23 +136,10 @@ public class Post implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return "Post{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", date=" + date +
-                ", content='" + content + '\'' +
-                ", images=" + images +
-                ", commentCount=" + commentCount +
-                ", thumbupCount=" + thumbupCount +
-                ", location='" + location + '\'' +
-                ", tag='" + tag + '\'' +
-                '}';
+        return "Post{" + "userId=" + userId + ", username='" + username + '\'' + ", date=" + date + ", content='" + content + '\'' + ", imageUrls=" + imageUrls + ", commentCount=" + commentCount + ", thumbupCount=" + thumbupCount + ", location='" + location + '\'' + ", tag='" + tag + '\'' + '}';
     }
 
     enum POST_TYPE {
-        TEXT,
-        TEXT_IMAGE,
-        TEXT_WEB,
-        VIDEO
+        TEXT, TEXT_IMAGE, TEXT_WEB, VIDEO
     }
 }

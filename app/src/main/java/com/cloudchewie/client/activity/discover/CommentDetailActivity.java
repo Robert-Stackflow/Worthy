@@ -28,7 +28,8 @@ import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.domin.Comment;
 import com.cloudchewie.client.fragment.internal.CommentListFragment;
 import com.cloudchewie.ui.BottomSheet;
-import com.cloudchewie.ui.IconTextItem;
+import com.cloudchewie.ui.EntryItem;
+import com.cloudchewie.ui.InputItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -46,8 +47,9 @@ public class CommentDetailActivity extends BaseActivity {
     private TextView mUserNameView;
     private TextView mTimeView;
     private TextView mContentView;
-    private IconTextItem mReplyCountView;
-    private IconTextItem mThumbupCountView;
+    private EntryItem mReplyCountView;
+    private EntryItem mThumbupCountView;
+    private InputItem mInputReplyView;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
@@ -66,6 +68,7 @@ public class CommentDetailActivity extends BaseActivity {
         mContentView = findViewById(R.id.activity_comment_detail_content);
         mReplyCountView = findViewById(R.id.activity_comment_detail_replies_count);
         mThumbupCountView = findViewById(R.id.activity_comment_detail_thumbup_count);
+        mInputReplyView = findViewById(R.id.activity_comment_detail_input_reply);
         initView();
         initViewPager();
     }
@@ -85,6 +88,12 @@ public class CommentDetailActivity extends BaseActivity {
         mContentView.setText(handleLineBreaks(mComment.getContent()));
         mReplyCountView.setText(String.valueOf(mComment.getReplyCount()));
         mThumbupCountView.setText(String.valueOf(mComment.getThumbupCount()));
+        mInputReplyView.setHint("回复 " + mComment.getUsername());
+        mThumbupCountView.setOnClickListener(v -> {
+            mThumbupCountView.toggle();
+            mComment.setThumbupCount(mComment.getThumbupCount() + (mThumbupCountView.isChecked() ? 1 : -1));
+            mThumbupCountView.setText(String.valueOf(mComment.getThumbupCount()));
+        });
     }
 
     void initViewPager() {

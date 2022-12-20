@@ -3,18 +3,18 @@
     <item
         android:id="@+id/map"
         android:checked="true"
-        android:icon="@drawable/ic_light_map"
+        android:icon="@drawable/ic_big_map"
         android:title="@string/nav_map" />
     <item
         android:id="@+id/discover"
-        android:icon="@drawable/ic_light_navigation"
+        android:icon="@drawable/ic_big_navigation"
         android:title="@string/nav_discover" />
     <item
         android:id="@+id/message"
-        android:icon="@drawable/ic_light_message"
+        android:icon="@drawable/ic_big_message"
         android:title="@string/nav_message" />
     <item
         android:id="@+id/personal"
-        android:icon="@drawable/ic_light_user"
+        android:icon="@drawable/ic_big_user"
         android:title="@string/nav_user" />
 </menu>
