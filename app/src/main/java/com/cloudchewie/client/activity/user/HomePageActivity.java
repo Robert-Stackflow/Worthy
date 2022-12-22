@@ -10,6 +10,7 @@ package com.cloudchewie.client.activity.user;
 import static java.lang.Math.abs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -28,12 +29,17 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.domin.User;
 import com.cloudchewie.client.domin.UserViewInfo;
 import com.cloudchewie.client.fragment.BaseFragment;
 import com.cloudchewie.client.fragment.ImageViewFragment;
+import com.cloudchewie.client.fragment.StateFragment;
+import com.cloudchewie.client.fragment.internal.PostListFragment;
 import com.cloudchewie.client.util.image.NineGridUtil;
+import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.client.widget.AppBarStateChangeListener;
 import com.cloudchewie.ui.BottomSheet;
+import com.cloudchewie.ui.IconTextItem;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -47,6 +53,7 @@ import java.util.List;
 import jp.wasabeef.blurry.Blurry;
 
 public class HomePageActivity extends AppCompatActivity {
+    private User mUser;
     private Context mContext;
     private List<String> mTitles;
     private List<Fragment> mFragments;
@@ -64,6 +71,8 @@ public class HomePageActivity extends AppCompatActivity {
     private TextView mUsernameView;
     private ImageView mSmallAvatarView;
     private TextView mSmallUsernameView;
+    private IconTextItem mLocationView;
+    private IconTextItem mGenderView;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
@@ -84,19 +93,37 @@ public class HomePageActivity extends AppCompatActivity {
         mSmallUsernameView = findViewById(R.id.home_page_small_username);
         mTabLayout = findViewById(R.id.home_page_content_tab_layout);
         mViewPager = findViewById(R.id.home_page_content_viewpager);
+        mLocationView = findViewById(R.id.home_page_ipaddress);
+        mGenderView = findViewById(R.id.home_page_gender);
         initView();
         initBlur();
         initTabLayout();
-        mAvatarInfo = new UserViewInfo("https://hellorfimg.zcool.cn/preview260/658596682.jpg");
-        mSmallAvatarInfo = new UserViewInfo("https://hellorfimg.zcool.cn/preview260/658596682.jpg");
-        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
-        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mSmallAvatarView);
-        mBackGroundInfo = new UserViewInfo("https://hellorfimg.zcool.cn/preview260/658596682.jpg");
-        Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
+        initGlide();
     }
 
+    void initGlide() {
+        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
+        Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mSmallAvatarView);
+        //        mBackGroundInfo = new UserViewInfo("https://hellorfimg.zcool.cn/provider_image/preview260/2234602281.jpg");
+        //        mBackGroundInfo = new UserViewInfo("https://iknow-pic.cdn.bcebos.com/7e3e6709c93d70cfc0e42a59f7dcd100baa12b4c");
+        Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
+        if (StatusBarUtil.setStatusBarTextColor(HomePageActivity.this, mBackGroundInfo.getUrl())) {
+            mBackButton.setImageTintList(getColorStateList(R.color.color_selector_icon_light));
+            mMoreButton.setImageTintList(getColorStateList(R.color.color_selector_icon_light));
+            mSmallUsernameView.setTextColor(getColor(R.color.text_color_light));
+        } else {
+            mBackButton.setImageTintList(getColorStateList(R.color.color_selector_icon_dark));
+            mMoreButton.setImageTintList(getColorStateList(R.color.color_selector_icon_dark));
+            mSmallUsernameView.setTextColor(getColor(R.color.text_color_dark));
+        }
+    }
 
     void initView() {
+        Intent intent = this.getIntent();
+        mUser = (User) intent.getSerializableExtra("user");
+        mAvatarInfo = new UserViewInfo(mUser.getAvatarUrl());
+        mSmallAvatarInfo = new UserViewInfo(mUser.getAvatarUrl());
+        mBackGroundInfo = new UserViewInfo(mUser.getBackgroundUrl());
         mBackButton.setOnClickListener(v -> finish());
         mMoreButton.setOnClickListener(v -> {
             BottomSheet bottomSheet = new BottomSheet(this);
@@ -122,6 +149,10 @@ public class HomePageActivity extends AppCompatActivity {
             mThumbViewInfoList.add(mSmallAvatarInfo);
             GPreviewBuilder.from(HomePageActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
         });
+        mUsernameView.setText(mUser.getUsername());
+        mSmallUsernameView.setText(mUser.getUsername());
+        mGenderView.setText(mUser.getGenderInfo());
+        mLocationView.setText(mUser.getCurrentLocation());
     }
 
     void initBlur() {
@@ -133,7 +164,6 @@ public class HomePageActivity extends AppCompatActivity {
             public void onStateChanged(AppBarLayout appBarLayout, State state, int offset) {
                 if (state == State.EXPANDED) {
                     Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
-//                    mBackGroundView.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.img_default_background));
                     mIsBlurred = false;
                 } else if (state == State.COLLAPSED) {
                     mIsBlurred = true;
@@ -146,7 +176,6 @@ public class HomePageActivity extends AppCompatActivity {
                     mSmallAvatarView.setVisibility(View.GONE);
                     mSmallUsernameView.setVisibility(View.GONE);
                     Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
-//                    mBackGroundView.setImageDrawable(AppCompatResources.getDrawable(mContext, R.drawable.img_default_background));
                     mIsBlurred = false;
                 }
             }
@@ -156,13 +185,13 @@ public class HomePageActivity extends AppCompatActivity {
     void initTabLayout() {
         mFragments = new ArrayList<>();
         mTitles = Arrays.asList(getResources().getStringArray(R.array.home_page_tab_titles));
-        for (String str : mTitles) {
-            BaseFragment fragment = new BaseFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("title", str);
-            fragment.setArguments(bundle);
-            mFragments.add(fragment);
-        }
+        BaseFragment fragment = new BaseFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("title", mTitles.get(0));
+        fragment.setArguments(bundle);
+        mFragments.add(new StateFragment());
+        mFragments.add(new PostListFragment());
+        mFragments.add(new PostListFragment());
         mAdapter = new HomePageFragmentAdapter(getSupportFragmentManager(), getLifecycle(), mFragments);
         mViewPager.setAdapter(mAdapter);
         new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText(mTitles.get(position))).attach();

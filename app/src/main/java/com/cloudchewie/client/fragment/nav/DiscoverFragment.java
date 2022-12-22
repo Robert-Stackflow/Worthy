@@ -59,7 +59,7 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_discover, null);
-        StatusBarUtil.setMargin(mainView.findViewById(R.id.discover_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
+        StatusBarUtil.setStatusBarMargin(mainView.findViewById(R.id.discover_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         context = getContext();
         tabLayout = mainView.findViewById(R.id.discover_tab_layout);
         viewPager = mainView.findViewById(R.id.discover_viewpager);

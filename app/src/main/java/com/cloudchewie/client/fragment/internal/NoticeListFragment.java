@@ -32,6 +32,7 @@ import com.cloudchewie.client.domin.Comment;
 import com.cloudchewie.client.domin.Notice;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
@@ -139,6 +140,7 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
         swipeRefreshLayout = mainView.findViewById(R.id.fragment_notice_list_swipe_refresh);
         header = mainView.findViewById(R.id.fragment_notice_list_swipe_refresh_header);
         swipeRefreshLayout.setRefreshHeader(header);
+        swipeRefreshLayout.setEnableLoadMore(false);
         swipeRefreshLayout.setEnableOverScrollDrag(true);
         swipeRefreshLayout.setEnableOverScrollBounce(true);
         swipeRefreshLayout.setDisableContentWhenRefresh(true);
@@ -159,12 +161,10 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
     }
 
     Comment getComment() throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        return new Comment(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
+        return DomainUtil.getComment(getContext(), 3);
     }
 
     Post getPost() throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        return new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
+        return DomainUtil.getPost(getContext());
     }
 }

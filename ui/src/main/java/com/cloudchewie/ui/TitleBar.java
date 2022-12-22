@@ -99,6 +99,10 @@ public class TitleBar extends ConstraintLayout implements View.OnClickListener {
         title_view.setTextColor(titleColor);
     }
 
+    public void setTitle(String title) {
+        title_view.setText(title);
+    }
+
     @Override
     public void onClick(View view) {
 

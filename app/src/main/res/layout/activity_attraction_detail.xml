@@ -39,8 +39,8 @@
 
                     <ImageButton
                         android:id="@+id/activity_attraction_detail_back"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/back"
                         android:scaleType="centerInside"
@@ -51,8 +51,8 @@
 
                     <ImageButton
                         android:id="@+id/activity_attraction_detail_jump_to_map"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/cd_jump_to_map"
                         android:padding="10dp"
@@ -63,8 +63,8 @@
 
                     <ImageButton
                         android:id="@+id/activity_attraction_detail_more"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/more"
                         android:scaleType="centerInside"
@@ -91,6 +91,8 @@
                             android:id="@+id/activity_attraction_detail_title_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@id/activity_attraction_detail_follow"
                             android:orientation="vertical"
                             android:padding="10dp">
 
@@ -100,20 +102,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
                                 android:textColor="@color/text_color_white"
-                                android:textSize="24sp"
-                                tools:text="九寨沟" />
+                                android:textSize="@dimen/page_detail_title"
+                                tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
                             <TextView
                                 android:id="@+id/activity_attraction_detail_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:maxWidth="300dp"
-                                android:singleLine="true"
                                 android:textColor="@color/text_color_light_gray"
-                                tools:text="四川省九寨沟市黄果山瀑布" />
+                                android:textSize="@dimen/page_detail_subtitle"
+                                tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
                         </LinearLayout>
 
                         <Button
+                            android:id="@+id/activity_attraction_detail_follow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -124,7 +126,7 @@
                             android:minHeight="0dp"
                             android:text="@string/follow_attraction"
                             android:textColor="@color/text_color_white"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/button_text_size"
                             tools:ignore="RelativeOverlap" />
                     </RelativeLayout>
 
@@ -143,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:maxLines="3"
                             android:textColor="@color/text_color_white"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/page_detail_describe"
                             tools:text="赏樱之人络绎不绝，且看珞珈山下热舞" />
                     </LinearLayout>
                 </LinearLayout>
@@ -184,6 +186,7 @@
                 android:minHeight="0dp"
                 android:text="@string/filter"
                 android:textColor="@color/color_accent"
+                android:textSize="@dimen/button_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

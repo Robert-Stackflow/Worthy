@@ -29,7 +29,7 @@ public class LocalStorage {
         isLogin = !tokens.isEmpty() && !(tokens.get(0) == null);
         if (isLogin) {
             token = tokens.get(0);
-            user_id = appDatabase.userDao().getAll().get(0).getUser_id();
+            user_id = appDatabase.userDao().getAll().get(0).getUserId();
         }
     }
 

@@ -28,7 +28,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setMargin(this);
+        StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_search);
         searchLayout = findViewById(R.id.search_layout);
         searchList = findViewById(R.id.search_list);

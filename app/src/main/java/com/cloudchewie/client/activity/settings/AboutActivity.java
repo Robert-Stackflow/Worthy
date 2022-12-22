@@ -22,7 +22,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setMargin(this);
+        StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_about);
         ((TitleBar) findViewById(R.id.activity_about_titlebar)).setLeftButtonClickListener(v -> finish());
         initSwipeRefresh();

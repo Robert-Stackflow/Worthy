@@ -12,19 +12,20 @@ import java.util.Date;
 
 public class Favorites implements Serializable {
     String name;
+    int userId;
+    //TODO 无效,引用为userId
     String username;
     String describe;
     Date createTime;
     boolean isPublic;
     int thumbupCount;
     int itemCount;
-    int subscribeCount;
     int visitorCount;
-
+    int followerCount;
+    String coverUrl;
     public Favorites() {
     }
-
-    public Favorites(String name, String username, String describe, Date createTime, boolean isPublic, int thumbupCount, int itemCount, int subscribeCount, int visitorCount) {
+    public Favorites(String name, String username, String describe, String coverUrl, Date createTime, boolean isPublic, int thumbupCount, int itemCount, int followerCount, int visitorCount) {
         this.name = name;
         this.username = username;
         this.describe = describe;
@@ -32,8 +33,17 @@ public class Favorites implements Serializable {
         this.isPublic = isPublic;
         this.thumbupCount = thumbupCount;
         this.itemCount = itemCount;
-        this.subscribeCount = subscribeCount;
+        this.followerCount = followerCount;
         this.visitorCount = visitorCount;
+        this.coverUrl = coverUrl;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 
     public int getVisitorCount() {
@@ -100,11 +110,11 @@ public class Favorites implements Serializable {
         this.itemCount = itemCount;
     }
 
-    public int getSubscribeCount() {
-        return subscribeCount;
+    public int getFollowerCount() {
+        return followerCount;
     }
 
-    public void setSubscribeCount(int subscribeCount) {
-        this.subscribeCount = subscribeCount;
+    public void setFollowerCount(int followerCount) {
+        this.followerCount = followerCount;
     }
 }

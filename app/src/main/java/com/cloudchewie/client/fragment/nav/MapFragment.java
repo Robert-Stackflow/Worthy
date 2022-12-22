@@ -136,7 +136,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_map, null);
         mainView.findViewById(R.id.goto_mylocation).setOnClickListener(this);
-        StatusBarUtil.setMargin(mainView.findViewById(R.id.map_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
+        StatusBarUtil.setStatusBarMargin(mainView.findViewById(R.id.map_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         initMap();
         locateMyLocation();
         initSpinner();
@@ -638,11 +638,14 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
 
     @Override
     public void onDestroy() {
-        mapView.onDestroy();
-        locationClient.stop();
-        baiduMap.setMyLocationEnabled(false);
-//      mapView.onDestroy();
-        mapView = null;
+        if (mapView != null) {
+            mapView.onDestroy();
+            mapView = null;
+        }
+        if (locationClient != null)
+            locationClient.stop();
+        if (baiduMap != null)
+            baiduMap.setMyLocationEnabled(false);
         super.onDestroy();
     }
 

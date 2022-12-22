@@ -62,7 +62,6 @@
         <activity android:name=".activity.discover.SearchActivity" />
         <activity android:name=".activity.discover.PostDetailActivity" />
         <activity android:name=".activity.discover.TopicDetailActivity" />
-        <activity android:name=".activity.discover.CommentDetailActivity" />
         <activity android:name=".activity.discover.AttractionDetailActivity" />
         <!--消息-->
         <activity android:name=".activity.message.NoticeActivity" />

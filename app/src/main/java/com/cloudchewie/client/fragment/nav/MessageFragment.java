@@ -24,22 +24,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.message.NoticeActivity;
 import com.cloudchewie.client.adapter.ChatterListAdapter;
-import com.cloudchewie.client.domin.Message;
-import com.cloudchewie.client.domin.Messager;
+import com.cloudchewie.client.domin.Chatter;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.ui.CustomDialog;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class MessageFragment extends Fragment implements View.OnClickListener {
     View mainView;
-    List<Messager> messagers;
+    List<Chatter> chatters;
     ChatterListAdapter chatterListAdapter;
     RecyclerView messagersRecyclerView;
     RefreshLayout swipeRefreshLayout;
@@ -54,7 +51,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_message, null);
-        StatusBarUtil.setMargin(mainView.findViewById(R.id.message_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
+        StatusBarUtil.setStatusBarMargin(mainView.findViewById(R.id.message_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.message_clear_unread).setOnClickListener(this);
         mainView.findViewById(R.id.message_entry_comment_layout).setOnClickListener(this);
         mainView.findViewById(R.id.message_entry_thumbup_layout).setOnClickListener(this);
@@ -66,70 +63,14 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     }
 
     void initRecyclerView() {
-        messagers = new ArrayList<>();
+        chatters = new ArrayList<>();
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-10 20:12:33"), "你好，在吗"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-12 20:12:33"), "嘀嘀嘀"));
-                Messager messager = new Messager("官方通知", 0, false, messages);
-                messagers.add(messager);
-            }
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2020-12-10 20:12:33"), "我是恐龙"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2020-12-12 20:12:33"), "你是谁"));
-                Messager messager = new Messager("远古巨兽", 0, false, messages);
-                messagers.add(messager);
-            }
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, new Date(System.currentTimeMillis()), "你好，我是来自山东的汉子一枚"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-13 20:12:33"), "哈哈哈"));
-                Messager messager = new Messager("灿烂未来", 0, true, messages);
-                messagers.add(messager);
-            }
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-11 20:12:33"), "你好，我是山风"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-10 20:12:33"), "你去过这里吗"));
-                Messager messager = new Messager("山风", 0, false, messages);
-                messagers.add(messager);
-            }
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-10 20:12:33"), "你好，在吗"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-12 20:12:33"), "嘀嘀嘀"));
-                Messager messager = new Messager("官方通知", 0, false, messages);
-                messagers.add(messager);
-            }
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2020-12-10 20:12:33"), "我是恐龙"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2020-12-12 20:12:33"), "你是谁"));
-                Messager messager = new Messager("远古巨兽", 0, false, messages);
-                messagers.add(messager);
-            }
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, new Date(System.currentTimeMillis()), "你好，我是来自山东的汉子一枚"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-13 20:12:33"), "哈哈哈"));
-                Messager messager = new Messager("灿烂未来", 0, true, messages);
-                messagers.add(messager);
-            }
-            {
-                List<Message> messages = new ArrayList<>();
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-11 20:12:33"), "你好，我是山风"));
-                messages.add(new Message(1, 1, 0, 0, simpleDateFormat.parse("2022-12-10 20:12:33"), "你去过这里吗"));
-                Messager messager = new Messager("山风", 0, false, messages);
-                messagers.add(messager);
-            }
+            chatters.addAll(DomainUtil.getChatterList(getContext()));
         } catch (Exception e) {
             e.printStackTrace();
         }
         messagersRecyclerView = mainView.findViewById(R.id.messagers_recyclerview);
-        chatterListAdapter = new ChatterListAdapter(getActivity(), messagers);
+        chatterListAdapter = new ChatterListAdapter(getActivity(), chatters);
         messagersRecyclerView.setAdapter(chatterListAdapter);
         messagersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -139,6 +80,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         swipeRefreshLayout = mainView.findViewById(R.id.fragment_message_swipe_refresh);
         header = mainView.findViewById(R.id.fragment_message_swipe_refresh_header);
         swipeRefreshLayout.setRefreshHeader(header);
+        swipeRefreshLayout.setEnableLoadMore(false);
         swipeRefreshLayout.setEnableOverScrollDrag(true);
         swipeRefreshLayout.setEnableOverScrollBounce(true);
         swipeRefreshLayout.setDisableContentWhenRefresh(true);

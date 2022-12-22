@@ -29,7 +29,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setMargin(this);
+        StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_login);
         findViewById(R.id.titlebar_left_button).setOnClickListener(this);
         findViewById(R.id.login_confirm).setOnClickListener(this);

@@ -5,6 +5,10 @@
     <color name="color_accent">#000000</color>
     <color name="color_icon">#060606</color>
     <color name="color_icon_pressed">#88060606</color>
+    <color name="color_icon_light">#FFFFFF</color>
+    <color name="color_icon_pressed_light">#88FFFFFF</color>
+    <color name="color_icon_dark">#060606</color>
+    <color name="color_icon_pressed_dark">#88060606</color>
     <color name="color_toolbar_icon">#060606</color>
     <color name="color_toolbar_icon_pressed">#88060606</color>
     <color name="color_prominent">#0066FF</color>
@@ -23,6 +27,8 @@
     <color name="reply_background">#F6F6F6</color>
     <color name="reply_pressed_background">#AAF6F6F6</color>
     <!--字体颜色-->
+    <color name="text_color_dark">#000000</color>
+    <color name="text_color_light">#FFFFFF</color>
     <color name="text_color_red">#E81111</color>
     <color name="text_color_white">#FFFFFF</color>
     <color name="text_color_black">#000000</color>

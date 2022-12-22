@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.cloudchewie.client.activity.discover.CommentDetailActivity;
+import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.domin.Comment;
 
 public class ReplyItem extends ConstraintLayout {
@@ -66,14 +66,14 @@ public class ReplyItem extends ConstraintLayout {
 
     public void setComment(Comment comment) {
         this.mComment = comment;
-        username.setText(comment.getUsername());
-        content.setText(handleLineBreaks(comment.getContent()));
-        mainLayout.setOnClickListener(view -> {
-            Intent intent = new Intent(context, CommentDetailActivity.class);
+        username.setText(comment.getUser().getUsername());
+        username.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HomePageActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("comment", mComment);
+            bundle.putSerializable("user", comment.getUser());
             intent.putExtras(bundle);
             context.startActivity(intent);
         });
+        content.setText(handleLineBreaks(comment.getContent()));
     }
 }

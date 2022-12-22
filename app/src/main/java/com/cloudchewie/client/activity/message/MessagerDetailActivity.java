@@ -18,7 +18,7 @@ public class MessagerDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setMargin(this);
+        StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_messager_detail);
     }
 }

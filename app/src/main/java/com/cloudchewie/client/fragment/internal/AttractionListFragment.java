@@ -24,6 +24,7 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.AttractionListAdapter;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -43,19 +44,19 @@ public class AttractionListFragment extends BaseFragment implements View.OnClick
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            attractions.add((Attraction) msg.obj);
+            attractions.addAll((List<Attraction>) msg.obj);
             attractionListAdapter.notifyItemInserted(attractions.size());
         }
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        message.obj = new Attraction("东湖", "湖北省武汉市洪山区", "凌波门畔，赏日出绝景", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
+        message.obj = DomainUtil.getAttractionList(getContext());
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
     Runnable getMoreDatas = () -> {
         Message message = handler.obtainMessage();
-        message.obj = new Attraction("珞珈山", "湖北省武汉市武汉大学内", "赏樱之人络绎不绝，且看珞珈山下热舞", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
+        message.obj = DomainUtil.getAttractionList(getContext());
         handler.sendMessage(message);
         swipeRefreshLayout.finishLoadMore();
     };

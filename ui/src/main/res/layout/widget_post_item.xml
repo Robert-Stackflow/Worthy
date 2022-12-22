@@ -19,8 +19,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/post_item_avatar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/post_item_avatar"
+            android:layout_height="@dimen/post_item_avatar"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/img_default_avatar"
@@ -36,7 +36,7 @@
             android:layout_marginStart="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color_gray"
-            android:textSize="13sp"
+            android:textSize="@dimen/post_item_username"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/post_item_avatar"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/text_color_light_gray"
-            android:textSize="11sp"
+            android:textSize="@dimen/post_item_time"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,9 +70,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/color_accent"
+            android:textSize="@dimen/post_item_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="有时相信在某个平行的宇宙\n你的爱还一如既往陪在我左右" />
+            tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
         <com.cloudchewie.ninegrid.NineGridImageView
             android:id="@+id/post_item_nine_grid"
@@ -80,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:paddingTop="5dp"
-            app:imgGap="4dp"
+            app:imgGap="@dimen/nine_grid_gap"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/post_item_content"
@@ -105,11 +106,11 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
-            app:icon_text_item_icon_size="13dp"
-            app:icon_text_item_text="武汉"
+            app:icon_text_item_icon_size="@dimen/icon_text_item_default_icon_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:icon_text_item_text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
         <com.cloudchewie.ui.IconTextItem
             android:id="@+id/post_item_topic"
@@ -119,7 +120,7 @@
             android:clickable="true"
             android:focusable="true"
             app:icon_text_item_icon="@drawable/ic_light_topic"
-            app:icon_text_item_icon_size="12dp"
+            app:icon_text_item_icon_size="@dimen/icon_text_item_default_icon_size"
             app:icon_text_item_text="生活圈"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/post_item_attraction"
@@ -134,8 +135,8 @@
             android:focusable="true"
             app:icon_text_item_icon="@drawable/ic_light_comment"
             app:icon_text_item_icon_color="@color/text_color_gray"
-            app:icon_text_item_icon_size="13dp"
-            app:icon_text_item_text="100"
+            app:icon_text_item_icon_size="@dimen/icon_text_item_default_icon_size"
+            app:icon_text_item_text="0"
             app:icon_text_item_text_color="@color/text_color_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/post_item_thumbup"
@@ -150,8 +151,8 @@
             app:icon_text_item_checked_icon="@drawable/ic_light_thumbup_fill"
             app:icon_text_item_icon="@drawable/ic_light_thumbup"
             app:icon_text_item_icon_color="@color/text_color_gray"
-            app:icon_text_item_icon_size="13dp"
-            app:icon_text_item_text="3"
+            app:icon_text_item_icon_size="@dimen/icon_text_item_default_icon_size"
+            app:icon_text_item_text="0"
             app:icon_text_item_text_color="@color/text_color_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +162,7 @@
     <View
         android:id="@+id/comment_item_comment_divider"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="@dimen/divider_height"
         android:background="@color/color_divider"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

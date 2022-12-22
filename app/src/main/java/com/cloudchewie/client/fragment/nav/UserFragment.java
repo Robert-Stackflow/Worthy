@@ -7,11 +7,16 @@
 
 package com.cloudchewie.client.fragment.nav;
 
+import static com.cloudchewie.client.util.basic.DomainUtil.getCity;
+import static com.cloudchewie.client.util.basic.DomainUtil.getDate;
+import static com.cloudchewie.client.util.basic.DomainUtil.getPhone;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +27,8 @@ import com.cloudchewie.client.activity.settings.SettingsActivity;
 import com.cloudchewie.client.activity.user.FavoritesListActivity;
 import com.cloudchewie.client.activity.user.FollowListActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
+import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.util.ui.DarkModeUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
@@ -38,7 +45,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_user, null);
-        StatusBarUtil.setMargin(mainView.findViewById(R.id.user_titlebar), 0, StatusBarUtil.getHeight(getActivity()), 0, 0);
+        StatusBarUtil.setStatusBarMargin(mainView.findViewById(R.id.user_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.user_settings).setOnClickListener(this);
         mainView.findViewById(R.id.switch_daynight).setOnClickListener(this);
         mainView.findViewById(R.id.entry_home_page).setOnClickListener(this);
@@ -64,16 +71,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
         } else if (view == mainView.findViewById(R.id.switch_daynight)) {
-//            ImageButton switchDaynight = (ImageButton) view;
-//            if (switchDaynight != null) switchDaynight.setOnClickListener(v -> {
-//                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_UNSPECIFIED && (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_YES) == 0) {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                } else {
-//                    if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
-//                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//                    else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//                }
-//            });
+            ImageButton switchDaynight = (ImageButton) view;
+            if (switchDaynight != null) {
+                DarkModeUtil.toggle(getActivity());
+            }
         } else if (view == mainView.findViewById(R.id.user_entry_collection)) {
             Intent intent = new Intent(getActivity(), FavoritesListActivity.class);
             startActivity(intent);
@@ -86,6 +87,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
         } else if (view == mainView.findViewById(R.id.entry_home_page)) {
             Intent intent = new Intent(getActivity(), HomePageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", new User(((int) (Math.random() * 1000)), "Ruida", getPhone(), "", User.GENDER.values()[((int) (Math.random() * 1000)) % User.GENDER.values().length], getDate(), getCity()));
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     }

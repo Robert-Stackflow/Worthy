@@ -12,8 +12,10 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,9 +25,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class EntryItem extends ConstraintLayout {
     private ConstraintLayout mainLayout;
+    private LinearLayout topLayout;
     private ImageButton icon;
     private TextView textView;
+    private TextView bigTextView;
     private boolean isChecked;
+    private int mode;
     private int iconId;
     private int iconColor;
     private int checkedIconId;
@@ -51,31 +56,62 @@ public class EntryItem extends ConstraintLayout {
         init(context, attrs);
     }
 
+    public void setMode(int mode) {
+        this.mode = mode;
+        if (mode == 0) {
+            bigTextView.setVisibility(GONE);
+            icon.setVisibility(VISIBLE);
+            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(topLayout.getLayoutParams());
+            layoutParams.startToStart = LayoutParams.PARENT_ID;
+            layoutParams.endToEnd = LayoutParams.PARENT_ID;
+            layoutParams.topToTop = LayoutParams.PARENT_ID;
+            topLayout.setLayoutParams(layoutParams);
+        } else {
+            bigTextView.setVisibility(VISIBLE);
+            icon.setVisibility(GONE);
+            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(topLayout.getLayoutParams());
+            layoutParams.startToStart = LayoutParams.PARENT_ID;
+            layoutParams.endToEnd = LayoutParams.PARENT_ID;
+            layoutParams.topToTop = LayoutParams.PARENT_ID;
+            topLayout.setLayoutParams(layoutParams);
+        }
+    }
+
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater.from(context).inflate(R.layout.widget_entry_item, this, true);
         mainLayout = findViewById(R.id.entry_item_layout);
         icon = findViewById(R.id.entry_item_icon);
         textView = findViewById(R.id.entry_item_text);
+        bigTextView = findViewById(R.id.entry_item_text_big);
+        topLayout = findViewById(R.id.entry_item_top_layout);
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.EntryItem);
         icon.setOnClickListener(v -> this.performClick());
         if (attr != null) {
+            mode = attr.getInt(R.styleable.EntryItem_entry_item_mode, 0);
             iconId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon, R.drawable.ic_light_map);
             iconColor = attr.getColor(R.styleable.EntryItem_entry_item_icon_color, getResources().getColor(R.color.color_icon, getResources().newTheme()));
             checkedIconId = attr.getResourceId(R.styleable.EntryItem_entry_item_checked_icon, R.drawable.ic_light_map_fill);
             checkedIconColor = attr.getColor(R.styleable.EntryItem_entry_item_checked_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
-            int iconSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_icon_size, 10);
+            int iconSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_icon_size, getResources().getDimension(R.dimen.entry_item_default_icon_size));
             String text = attr.getString(R.styleable.EntryItem_entry_item_text);
-            int textColor = attr.getColor(R.styleable.EntryItem_entry_item_text_color, getResources().getColor(R.color.text_color_entry, getResources().newTheme()));
-            int textSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_text_size, 11);
+            int textColor = attr.getColor(R.styleable.EntryItem_entry_item_text_color, getResources().getColor(R.color.text_color_gray, getResources().newTheme()));
+            int textSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_text_size, getResources().getDimension(R.dimen.entry_item_default_text_size));
+            String bigText = attr.getString(R.styleable.EntryItem_entry_item_big_text);
+            int bigTextColor = attr.getColor(R.styleable.EntryItem_entry_item_big_text_color, getResources().getColor(R.color.color_accent, getResources().newTheme()));
+            int bigTextSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_big_text_size, getResources().getDimension(R.dimen.entry_item_default_big_text_size));
             int spacing = (int) attr.getDimension(R.styleable.EntryItem_entry_item_spacing, 3);
             int backgroundId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon_background, R.drawable.shape_tag_round);
             boolean backgroundEnable = attr.getBoolean(R.styleable.EntryItem_entry_item_icon_background_enable, false);
+            setMode(mode);
             setIcon(iconId);
             setIconColor(iconColor);
             setIconSize(iconSize);
             setText(text);
             setTextColor(textColor);
             setTextSize(textSize);
+            setBigText(bigText);
+            setBigTextColor(bigTextColor);
+            setBigTextSize(bigTextSize);
             setSpacing(spacing);
             if (backgroundEnable) setIconBackground(backgroundId);
             attr.recycle();
@@ -110,12 +146,9 @@ public class EntryItem extends ConstraintLayout {
     }
 
     public void setIconSize(int size) {
-        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(icon.getLayoutParams());
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(icon.getLayoutParams());
         layoutParams.width = size;
         layoutParams.height = size;
-        layoutParams.startToStart = LayoutParams.PARENT_ID;
-        layoutParams.endToEnd = LayoutParams.PARENT_ID;
-        layoutParams.topToTop = LayoutParams.PARENT_ID;
         icon.setLayoutParams(layoutParams);
     }
 
@@ -132,7 +165,23 @@ public class EntryItem extends ConstraintLayout {
     }
 
     public void setTextSize(int size) {
-        textView.setTextSize(size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+    }
+
+    public String getBigText() {
+        return (String) bigTextView.getText();
+    }
+
+    public void setBigText(String text) {
+        bigTextView.setText(text);
+    }
+
+    public void setBigTextColor(int textColor) {
+        bigTextView.setTextColor(textColor);
+    }
+
+    public void setBigTextSize(int size) {
+        bigTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
 
     public void setSpacing(int spacing) {

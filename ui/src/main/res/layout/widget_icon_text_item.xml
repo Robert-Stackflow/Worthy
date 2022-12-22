@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/icon_text_item_icon"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
+        android:layout_width="@dimen/icon_text_item_default_icon_size"
+        android:layout_height="@dimen/icon_text_item_default_icon_size"
         android:contentDescription="@string/cd_icon_text_item_icon"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_light_map"
@@ -24,8 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingStart="3dp"
+        android:singleLine="true"
         android:textColor="@color/color_prominent"
-        android:textSize="11sp"
+        android:textSize="@dimen/icon_text_item_default_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon_text_item_icon"
         app:layout_constraintTop_toTopOf="parent"

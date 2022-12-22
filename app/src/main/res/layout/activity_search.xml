@@ -17,37 +17,37 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            app:search_color="@color/color_accent"
-            app:search_text_cursor="@drawable/shape_cursor"
             android:layout_weight="0.7"
-            app:search_bg="@drawable/shape_tag_round" />
+            app:search_bg="@drawable/shape_tag_round"
+            app:search_color="@color/color_accent"
+            app:search_text_cursor="@drawable/shape_cursor" />
 
         <TextView
             android:id="@+id/search_cancel"
             android:layout_width="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:focusable="true"
             android:text="取消"
-            android:textColor="@color/text_color_gray"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/text_color_gray" />
     </LinearLayout>
 
     <com.cloudchewie.ui.SearchList
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_margin="10dp"
+        android:padding="10dp"
+        app:history_clear_icon="@drawable/ic_light_delete"
+        app:history_flex_box_count="20"
+        app:history_padding_bottom="8dp"
         app:history_padding_left="18dp"
         app:history_padding_right="18dp"
-        app:history_flex_box_count="20"
         app:history_padding_top="8dp"
-        app:history_padding_bottom="8dp"
-        app:history_clear_icon="@drawable/ic_light_delete"
         app:is_visibility_history_clear="true"
         app:layout_constraintTop_toBottomOf="@id/searchbox_layout" />
 

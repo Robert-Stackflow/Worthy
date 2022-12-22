@@ -25,7 +25,6 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.util.image.CornerTransform;
-import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;
@@ -43,7 +42,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AttractionListAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.widget_attraction_card, parent, false));
+        return new AttractionListAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.widget_attraction_item, parent, false));
     }
 
     @Override
@@ -73,7 +72,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
         holder.follow.setText(String.valueOf(attraction.getFollowerCount()));
         holder.visitor.setText(String.valueOf(attraction.getVisitorCount()));
         holder.post.setText(String.valueOf(attraction.getPostCount()));
-        Glide.with(context).load(ImageUrlUtil.getUrls(1).get(0)).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransform.getTransform(context, true, true, false, false))).into(holder.imageView);
+        Glide.with(context).load(attraction.getCoverImageUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransform.getTransform(context, true, true, false, false))).into(holder.imageView);
     }
 
     @Override

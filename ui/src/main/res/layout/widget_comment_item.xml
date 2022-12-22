@@ -52,29 +52,63 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2022年10月20日" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comment_item_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="50dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/comment_item_top_layout">
+
         <TextView
             android:id="@+id/comment_item_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:textColor="@color/color_accent"
-            app:layout_constraintStart_toStartOf="@id/comment_item_username"
-            app:layout_constraintTop_toBottomOf="@id/comment_item_username"
-            tools:text="有时相信在某个平行的宇宙\n你的爱还一如既往陪在我左右" />
+            android:textSize="@dimen/post_item_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
+
+        <com.cloudchewie.ninegrid.NineGridImageView
+            android:id="@+id/comment_item_nine_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            app:imgGap="@dimen/nine_grid_gap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comment_item_content"
+            app:showStyle="grid"
+            app:singleImgSize="120dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/comment_item_replies_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/shape_reply_round"
         android:orientation="vertical"
         android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comment_item_top_layout" />
+        app:layout_constraintEnd_toEndOf="@id/comment_item_content_layout"
+        app:layout_constraintStart_toStartOf="@id/comment_item_content_layout"
+        app:layout_constraintTop_toBottomOf="@id/comment_item_content_layout">
+
+        <TextView
+            android:id="@+id/comment_item_expand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="@color/color_prominent"
+            android:textSize="12sp" />
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/comment_item_bottom_layout"
@@ -96,8 +130,7 @@
             android:focusable="true"
             app:icon_text_item_icon="@drawable/ic_light_comment"
             app:icon_text_item_icon_color="@color/text_color_gray"
-            app:icon_text_item_icon_size="10dp"
-            app:icon_text_item_text="100"
+            app:icon_text_item_text="0"
             app:icon_text_item_text_color="@color/text_color_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/comment_item_thumbup"
@@ -109,10 +142,10 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
+            app:icon_text_item_checked_icon="@drawable/ic_light_thumbup_fill"
             app:icon_text_item_icon="@drawable/ic_light_thumbup"
             app:icon_text_item_icon_color="@color/text_color_gray"
-            app:icon_text_item_icon_size="10dp"
-            app:icon_text_item_text="3"
+            app:icon_text_item_text="0"
             app:icon_text_item_text_color="@color/text_color_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -20,18 +20,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.domin.Messager;
+import com.cloudchewie.client.domin.Chatter;
 import com.cloudchewie.ui.ChatterItem;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChatterListAdapter extends RecyclerView.Adapter<ChatterListAdapter.MyViewHolder> {
-    private List<Messager> messagers;
+    private List<Chatter> chatters;
     private Context context;
 
-    public ChatterListAdapter(Context context, List<Messager> messagers) {
-        this.messagers = messagers;
+    public ChatterListAdapter(Context context, List<Chatter> chatters) {
+        this.chatters = chatters;
         this.context = context;
     }
 
@@ -47,17 +51,17 @@ public class ChatterListAdapter extends RecyclerView.Adapter<ChatterListAdapter.
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        if (null == messagers) {
+        if (null == chatters) {
             return;
         }
-        if (position < 0 || position >= messagers.size()) {
+        if (position < 0 || position >= chatters.size()) {
             return;
         }
         if (null == holder) {
             return;
         }
-        final Messager messager = messagers.get(position);
-        if (null == messager) {
+        final Chatter chatter = chatters.get(position);
+        if (null == chatter) {
             return;
         }
         holder.itemView.setOnClickListener(view -> {
@@ -67,18 +71,20 @@ public class ChatterListAdapter extends RecyclerView.Adapter<ChatterListAdapter.
 //            intent.putExtras(bundle);
 //            context.startActivity(intent);
         });
-        holder.nameView.setText(messager.getName());
-        if (messager.isStranger())
-            holder.tagView.setText("陌生人");
+        holder.nameView.setText(chatter.getUser().getUsername());
+        String info = chatter.getTypeInfo();
+        if (info != null)
+            holder.tagView.setText(info);
         else
             holder.tagView.setVisibility(View.GONE);
-        holder.timeView.setText(beautifyTime(messager.getLastMessage().getDate()));
-        holder.contentView.setText(messager.getLastMessage().getContent());
+        holder.timeView.setText(beautifyTime(chatter.getLastMessage().getDate()));
+        holder.contentView.setText(chatter.getLastMessage().getContent());
+        Glide.with(context).load(chatter.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.avatarView);
     }
 
     @Override
     public int getItemCount() {
-        return messagers == null ? 0 : messagers.size();
+        return chatters == null ? 0 : chatters.size();
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -89,6 +95,7 @@ public class ChatterListAdapter extends RecyclerView.Adapter<ChatterListAdapter.
         public TextView timeView;
         public TextView contentView;
         public ImageView statusView;
+        public CircleImageView avatarView;
         public View splitter;
 
         public MyViewHolder(View view) {
@@ -102,6 +109,7 @@ public class ChatterListAdapter extends RecyclerView.Adapter<ChatterListAdapter.
             contentView = view.findViewById(R.id.chatter_item_content);
             statusView = view.findViewById(R.id.chatter_item_status);
             splitter = view.findViewById(R.id.chatter_item_splitter);
+            avatarView = view.findViewById(R.id.chatter_item_avatar);
         }
     }
 }

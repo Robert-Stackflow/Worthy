@@ -23,7 +23,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.domin.Attraction;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.StateFragment;
 import com.cloudchewie.client.fragment.internal.PostListFragment;
 import com.cloudchewie.ui.BottomSheet;
 import com.google.android.material.tabs.TabLayout;
@@ -83,13 +83,7 @@ public class AttractionDetailActivity extends BaseActivity {
         mTitles = Arrays.asList(getResources().getStringArray(R.array.attraction_detail_tab_titles));
         mFragments.add(new PostListFragment());
         mFragments.add(new PostListFragment());
-        {
-            BaseFragment fragment = new BaseFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("title", "相册");
-            fragment.setArguments(bundle);
-            mFragments.add(fragment);
-        }
+        mFragments.add(new StateFragment());
         mAdapter = new AttractionDetailFragmentAdapter(getSupportFragmentManager(), getLifecycle(), mFragments);
         mViewPager.setAdapter(mAdapter);
         new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText(mTitles.get(position))).attach();

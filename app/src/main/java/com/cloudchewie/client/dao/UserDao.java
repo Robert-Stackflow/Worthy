@@ -23,7 +23,7 @@ public interface UserDao {
     @Query("select * from user")
     List<User> getAll();
 
-    @Query("select * from user where user_id= :user_id")
+    @Query("select * from user where userId= :user_id")
     User findById(int user_id);
 
     @Update

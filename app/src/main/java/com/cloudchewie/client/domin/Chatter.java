@@ -13,40 +13,49 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Messager implements Serializable {
+public class Chatter implements Serializable {
     //TODO 无效,引用为userId
-    String name;
-    int state;//0默认,1免打扰,2黑名单
-    boolean isStranger;
+    User user;
+    CHATTER_TYPE type;
+    CHATTER_STATE state;
     List<Message> messages;
 
-    public Messager() {
+    public Chatter() {
     }
 
-    public Messager(String name, int state, boolean isStranger, List<Message> messages) {
-        this.name = name;
+    public Chatter(User user, CHATTER_STATE state, CHATTER_TYPE type, List<Message> messages) {
+        this.user = user;
         this.state = state;
-        this.isStranger = isStranger;
+        this.type = type;
         this.messages = messages;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Messager{" +
-                "name='" + name + '\'' +
-                ", state=" + state +
-                ", isStranger=" + isStranger +
-                ", messages=" + messages +
-                '}';
+        return "Messager{" + '\'' + ", state=" + state + ", isStranger=" + type + ", messages=" + messages + '}';
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getTypeInfo() {
+        switch (type) {
+            case SPECIAL:
+                return "特别关心";
+            case OFFICIAL:
+                return "官方";
+            case STRANGER:
+                return "陌生人";
+            case DEFAULT:
+            default:
+                return null;
+        }
     }
 
     public Message getLastMessage() {
@@ -63,20 +72,20 @@ public class Messager implements Serializable {
         return messages.get(index);
     }
 
-    public int getState() {
+    public CHATTER_STATE getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(CHATTER_STATE state) {
         this.state = state;
     }
 
-    public boolean isStranger() {
-        return isStranger;
+    public CHATTER_TYPE getType() {
+        return type;
     }
 
-    public void setStranger(boolean stranger) {
-        isStranger = stranger;
+    public void setType(CHATTER_TYPE type) {
+        this.type = type;
     }
 
     public List<Message> getMessages() {
@@ -85,5 +94,13 @@ public class Messager implements Serializable {
 
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+
+    public enum CHATTER_TYPE {
+        DEFAULT, SPECIAL, OFFICIAL, STRANGER
+    }
+
+    public enum CHATTER_STATE {
+        DEFAULT, PIN, DONTDISTURB, BLOCK,
     }
 }

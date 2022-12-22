@@ -13,26 +13,27 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.adapter.SmallPostListAdapter;
 import com.cloudchewie.client.domin.Favorites;
 import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.cloudchewie.ui.BottomSheet;
 import com.cloudchewie.ui.IconTextItem;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class FavoritesDetailActivity extends BaseActivity implements View.OnClickListener {
     Favorites favorites;
@@ -45,18 +46,13 @@ public class FavoritesDetailActivity extends BaseActivity implements View.OnClic
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            posts.add((Post) msg.obj);
+            posts.addAll((List<Post>) msg.obj);
             postAdapter.notifyItemInserted(posts.size());
         }
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        try {
-            message.obj = new Post(1, "东方不败", simpleDateFormat.parse("2022-12-13 20:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "北京", "生活圈");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        message.obj = DomainUtil.getPostList(this);
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
@@ -73,7 +69,7 @@ public class FavoritesDetailActivity extends BaseActivity implements View.OnClic
         ((TextView) findViewById(R.id.favorites_detail_ispublic)).setText(favorites.isPublic() ? "公开" : "私密");
         ((TextView) findViewById(R.id.favorites_detail_describe)).setText("简介:" + favorites.getDescribe());
         ((IconTextItem) findViewById(R.id.favorites_detail_count)).setText(String.valueOf(favorites.getItemCount()));
-        ((IconTextItem) findViewById(R.id.favorites_detail_collection)).setText(String.valueOf(favorites.getSubscribeCount()));
+        ((IconTextItem) findViewById(R.id.favorites_detail_collection)).setText(String.valueOf(favorites.getFollowerCount()));
         ((IconTextItem) findViewById(R.id.favorites_detail_thumbup)).setText(String.valueOf(favorites.getThumbupCount()));
         ((IconTextItem) findViewById(R.id.favorites_detail_visitor)).setText(String.valueOf(favorites.getVisitorCount()));
         findViewById(R.id.favorites_detail_back).setOnClickListener(v -> finish());
@@ -85,6 +81,7 @@ public class FavoritesDetailActivity extends BaseActivity implements View.OnClic
         });
         initSwipeRefresh();
         initRecyclerView();
+        Glide.with(this).load(favorites.getCoverUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into((ImageView) findViewById(R.id.favorites_detail_cover));
     }
 
     void initSwipeRefresh() {
@@ -104,21 +101,7 @@ public class FavoritesDetailActivity extends BaseActivity implements View.OnClic
     void initRecyclerView() {
         posts = new ArrayList<>();
         favoritesRecyclerView = findViewById(R.id.favorites_detail_recyclerview);
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-            Post post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        posts.addAll(DomainUtil.getPostList(this));
         postAdapter = new SmallPostListAdapter(getApplication(), posts);
         favoritesRecyclerView.setAdapter(postAdapter);
         favoritesRecyclerView.setLayoutManager(new LinearLayoutManager(getApplication()));

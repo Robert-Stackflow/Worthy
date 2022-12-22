@@ -15,12 +15,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.PostDetailActivity;
 import com.cloudchewie.client.domin.Post;
 
@@ -31,6 +35,7 @@ public class SmallPostItem extends ConstraintLayout {
     private TextView username;
     private TextView content;
     private TextView time;
+    private ImageView imageView;
 
     public SmallPostItem(@NonNull Context context) {
         super(context);
@@ -65,11 +70,12 @@ public class SmallPostItem extends ConstraintLayout {
         username = findViewById(com.cloudchewie.ui.R.id.small_post_item_username);
         content = findViewById(com.cloudchewie.ui.R.id.small_post_item_content);
         time = findViewById(com.cloudchewie.ui.R.id.small_post_item_time);
+        imageView = findViewById(com.cloudchewie.ui.R.id.small_post_item_image);
     }
 
     public void setPost(Post post) {
         this.mPost = post;
-        username.setText(post.getUsername());
+        username.setText(post.getUser().getUsername());
         content.setText(handleLineBreaks(post.getContent()));
         time.setText(beautifyTime(post.getDate()));
         mainLayout.setOnClickListener(view -> {
@@ -79,5 +85,6 @@ public class SmallPostItem extends ConstraintLayout {
             intent.putExtras(bundle);
             context.startActivity(intent);
         });
+        Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(imageView);
     }
 }

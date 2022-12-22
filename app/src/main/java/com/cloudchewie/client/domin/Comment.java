@@ -7,48 +7,48 @@
 
 package com.cloudchewie.client.domin;
 
-import android.media.Image;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 public class Comment implements Serializable {
-    int userId;
-    String username;
+    //TODO 无效,引用为userId
+    User user;
     Date date;
     String content;
-    List<Image> images;
-    int replyCount;
+    List<String> imageUrls;
     int thumbupCount;
     COMMENT_TYPE type;
+    //TODO 无效引用为commentId;
+    List<Comment> replies;
 
     public Comment() {
     }
 
-    public Comment(int userId, String username, Date date, String content, int replyCount, int thumbupCount) {
-        this.userId = userId;
-        this.username = username;
+    public Comment(User user, Date date, String content, List<String> imageUrls, int thumbupCount, COMMENT_TYPE type, List<Comment> replies) {
+        this.user = user;
         this.date = date;
         this.content = content;
-        this.replyCount = replyCount;
+        this.imageUrls = imageUrls;
         this.thumbupCount = thumbupCount;
+        this.type = type;
+        this.replies = replies;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getUsername() {
-        return username;
+    public List<Comment> getReplies() {
+        return replies;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setReplies(List<Comment> replies) {
+        this.replies = replies;
     }
 
     public Date getDate() {
@@ -67,20 +67,16 @@ public class Comment implements Serializable {
         this.content = content;
     }
 
-    public List<Image> getImages() {
-        return images;
+    public List<String> getImageUrls() {
+        return imageUrls;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
     }
 
     public int getReplyCount() {
-        return replyCount;
-    }
-
-    public void setReplyCount(int replyCount) {
-        this.replyCount = replyCount;
+        return replies.size();
     }
 
     public int getThumbupCount() {
@@ -99,7 +95,7 @@ public class Comment implements Serializable {
         this.type = type;
     }
 
-    enum COMMENT_TYPE {
+    public enum COMMENT_TYPE {
         TEXT,
         TEXT_IMAGE
     }

@@ -21,7 +21,7 @@ public class GeneralSettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setMargin(this);
+        StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_general_settings);
         ((TitleBar) findViewById(R.id.activity_general_settings_titlebar)).setLeftButtonClickListener(v -> finish());
         initSwipeRefresh();

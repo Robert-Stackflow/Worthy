@@ -41,96 +41,88 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/fragment_message_swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/message_titlebar"
-        android:scrollbars="none">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message_titlebar">
 
-        <com.scwang.smart.refresh.layout.SmartRefreshLayout
-            android:id="@+id/fragment_message_swipe_refresh"
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:id="@+id/fragment_message_swipe_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.scwang.smart.refresh.header.ClassicsHeader
-                android:id="@+id/fragment_message_swipe_refresh_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/message_entry_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/shape_card_round"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/message_entry_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/shape_card_round"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="20dp"
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/message_entry_comment_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:entry_item_icon="@drawable/ic_light_comment"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="评论回复"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/message_entry_thumbup_layout"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.cloudchewie.ui.EntryItem
-                        android:id="@+id/message_entry_comment_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:clickable="true"
-                        android:focusable="true"
-                        app:entry_item_icon="@drawable/ic_light_comment"
-                        app:entry_item_icon_size="40dp"
-                        app:entry_item_text="评论回复"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/message_entry_thumbup_layout"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/message_entry_thumbup_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_heart"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="点赞收藏"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/message_entry_fans_layout"
+                    app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.cloudchewie.ui.EntryItem
-                        android:id="@+id/message_entry_thumbup_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:entry_item_icon="@drawable/ic_light_heart"
-                        app:entry_item_icon_size="40dp"
-                        app:entry_item_text="点赞收藏"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/message_entry_fans_layout"
-                        app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/message_entry_fans_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_visible"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="新的关注"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/message_entry_system_layout"
+                    app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.cloudchewie.ui.EntryItem
-                        android:id="@+id/message_entry_fans_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:entry_item_icon="@drawable/ic_light_visible"
-                        app:entry_item_icon_size="40dp"
-                        app:entry_item_text="新的关注"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/message_entry_system_layout"
-                        app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.cloudchewie.ui.EntryItem
-                        android:id="@+id/message_entry_system_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:entry_item_icon="@drawable/ic_light_board"
-                        app:entry_item_icon_size="40dp"
-                        app:entry_item_text="系统通知"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/messagers_recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/message_entry_layout" />
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/message_entry_system_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_board"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="系统通知"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-    </ScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/messagers_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/message_entry_layout"
+                android:layout_marginTop="10dp" />
+        </RelativeLayout>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </RelativeLayout>

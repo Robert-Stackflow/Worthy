@@ -9,18 +9,22 @@ package com.cloudchewie.client.domin;
 
 import androidx.annotation.NonNull;
 
+import com.cloudchewie.client.util.image.ImageUrlUtil;
+
 import java.io.Serializable;
 
 public class Attraction implements Serializable {
     String name;
     String location;
     String describe;
+    //TODO 无效,引用为userId
     int authorId;
-    double longtitude;
     double latitude;
-    int followerCount;
-    int visitorCount;
+    double longtitude;
     int postCount;
+    int visitorCount;
+    int followerCount;
+    String coverImageUrl;
 
     public Attraction() {
     }
@@ -35,6 +39,15 @@ public class Attraction implements Serializable {
         this.followerCount = followerCount;
         this.visitorCount = visitorCount;
         this.postCount = postCount;
+        coverImageUrl = ImageUrlUtil.getUrls(1).get(0);
+    }
+
+    public String getCoverImageUrl() {
+        return coverImageUrl;
+    }
+
+    public void setCoverImageUrl(String coverImageUrl) {
+        this.coverImageUrl = coverImageUrl;
     }
 
     public String getName() {
@@ -112,16 +125,6 @@ public class Attraction implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return "Attraction{" +
-                "name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", detail='" + describe + '\'' +
-                ", authorId=" + authorId +
-                ", longtitude=" + longtitude +
-                ", latitude=" + latitude +
-                ", followerCount=" + followerCount +
-                ", visitorCount=" + visitorCount +
-                ", postCount=" + postCount +
-                '}';
+        return "Attraction{" + "name='" + name + '\'' + ", location='" + location + '\'' + ", detail='" + describe + '\'' + ", authorId=" + authorId + ", longtitude=" + longtitude + ", latitude=" + latitude + ", followerCount=" + followerCount + ", visitorCount=" + visitorCount + ", postCount=" + postCount + '}';
     }
 }

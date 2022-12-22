@@ -12,62 +12,60 @@ import androidx.annotation.NonNull;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Post implements Serializable {
-    int userId;
-    String username;
+    //TODO 无效,引用为userId
+    User user;
     Date date;
     String content;
     List<String> imageUrls;
+    //TODO 无效,引用为attractionId
+    Attraction attraction;
+    //TODO 无效,引用为topicId
+    List<Topic> topics;
     int commentCount;
     int thumbupCount;
     int collectionCount;
-    String location;
-    String tag;
     POST_TYPE type;
 
     public Post() {
     }
 
-    public Post(int userId, String username, Date date, String content, int commentCount, int thumbupCount, int collectionCount, String location, String tag) {
-        this.userId = userId;
-        this.username = username;
+    public Post(User user, Date date, String content, int commentCount, int thumbupCount, int collectionCount, Attraction attraction, Topic topic) {
+        this.user = user;
         this.date = date;
         this.content = content;
         this.commentCount = commentCount;
         this.thumbupCount = thumbupCount;
         this.collectionCount = collectionCount;
-        this.location = location;
-        this.tag = tag;
-        imageUrls = ImageUrlUtil.getUrls(15);
+        this.attraction = attraction;
+        this.topics = new ArrayList<>();
+        topics.add(topic);
+        this.imageUrls = ImageUrlUtil.getUrls(15);
+    }
+
+    public Post(User user, Date date, String content, int commentCount, int thumbupCount, int collectionCount, Attraction attraction, List<Topic> topics) {
+        this.date = date;
+        this.content = content;
+        this.commentCount = commentCount;
+        this.thumbupCount = thumbupCount;
+        this.collectionCount = collectionCount;
+        this.attraction = attraction;
+        this.topics = topics;
+        this.imageUrls = ImageUrlUtil.getUrls(15);
     }
 
     public POST_TYPE getType() {
         return type;
     }
 
-    public int getUserId() {
-        return userId;
+    public void setType(POST_TYPE type) {
+        this.type = type;
     }
 
-    /**
-     * 设置用户ID
-     *
-     * @param userId 用户ID
-     */
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public Date getDate() {
         return date;
@@ -87,6 +85,10 @@ public class Post implements Serializable {
 
     public List<String> getImageUrls() {
         return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
     }
 
     public void setImages(List<String> imageUrls) {
@@ -117,26 +119,34 @@ public class Post implements Serializable {
         this.collectionCount = collectionCount;
     }
 
-    public String getLocation() {
-        return location;
+    public Attraction getAttraction() {
+        return attraction;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAttraction(Attraction attraction) {
+        this.attraction = attraction;
     }
 
-    public String getTag() {
-        return tag;
+    public List<Topic> getTopics() {
+        return topics;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Post{" + "userId=" + userId + ", username='" + username + '\'' + ", date=" + date + ", content='" + content + '\'' + ", imageUrls=" + imageUrls + ", commentCount=" + commentCount + ", thumbupCount=" + thumbupCount + ", location='" + location + '\'' + ", tag='" + tag + '\'' + '}';
+        return "Post{" + "user=" + user + ", date=" + date + ", content='" + content + '\'' + ", imageUrls=" + imageUrls + ", attraction=" + attraction + ", topics=" + topics + ", commentCount=" + commentCount + ", thumbupCount=" + thumbupCount + ", collectionCount=" + collectionCount + ", type=" + type + '}';
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     enum POST_TYPE {

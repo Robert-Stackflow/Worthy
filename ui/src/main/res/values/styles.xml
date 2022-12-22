@@ -3,7 +3,6 @@
 
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
-        <!--        <item name="android:backgroundDimEnabled">false</item>-->
     </style>
 
     <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
@@ -83,13 +82,16 @@
     <declare-styleable name="InputItem">
         <attr name="input_item_mode" format="enum">
             <enum name="text" value="0" />
-            <enum name="number" value="1" />
-            <enum name="password" value="2" />
-            <enum name="phonenumber" value="3" />
-            <enum name="mail" value="4" />
+            <enum name="textmultilines" value="1" />
+            <enum name="number" value="2" />
+            <enum name="password" value="3" />
+            <enum name="phonenumber" value="4" />
+            <enum name="mail" value="5" />
         </attr>
         <attr name="input_item_hint" format="string" />
         <attr name="input_item_text" format="string" />
+        <attr name="input_item_single_line" format="boolean" />
+        <attr name="input_item_max_lines" format="integer" />
         <attr name="input_item_editable" format="boolean" />
         <attr name="input_item_left_icon" format="reference" />
         <attr name="input_item_left_icon_visibility" format="boolean" />
@@ -121,15 +123,16 @@
     </declare-styleable>
 
     <style name="TabLayoutTextStyle">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/tab_title</item>
     </style>
 
     <style name="SmallTabLayoutTextStyle">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">@dimen/tab_title_small</item>
     </style>
 
     <declare-styleable name="IconTextItem">
         <attr name="icon_text_item_text" format="string" />
+        <attr name="icon_text_item_text_max_length" format="integer" />
         <attr name="icon_text_item_text_color" format="color" />
         <attr name="icon_text_item_text_size" format="dimension" />
         <attr name="icon_text_item_icon" format="reference" />
@@ -141,9 +144,16 @@
     </declare-styleable>
 
     <declare-styleable name="EntryItem">
+        <attr name="entry_item_mode" format="enum">
+            <enum name="icon" value="0" />
+            <enum name="text" value="1" />
+        </attr>
         <attr name="entry_item_text" format="string" />
         <attr name="entry_item_text_color" format="color" />
         <attr name="entry_item_text_size" format="dimension" />
+        <attr name="entry_item_big_text" format="string" />
+        <attr name="entry_item_big_text_color" format="color" />
+        <attr name="entry_item_big_text_size" format="dimension" />
         <attr name="entry_item_icon" format="reference" />
         <attr name="entry_item_icon_color" format="color" />
         <attr name="entry_item_checked_icon" format="reference" />
@@ -225,4 +235,9 @@
         <!--历史搜索列表 内边距，下-->
         <attr name="history_padding_bottom" format="dimension" />
     </declare-styleable>
+
+    <style name="BottomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_bottomsheet_up</item>
+        <item name="android:windowExitAnimation">@anim/anim_bottomsheet_down</item>
+    </style>
 </resources>

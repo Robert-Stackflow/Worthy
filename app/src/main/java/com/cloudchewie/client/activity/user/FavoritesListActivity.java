@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.adapter.CollectionListAdapter;
+import com.cloudchewie.client.adapter.FavoritesListAdapter;
 import com.cloudchewie.client.domin.Favorites;
+import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.ui.TitleBar;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -31,13 +32,13 @@ public class FavoritesListActivity extends BaseActivity implements View.OnClickL
     TitleBar mTitleBar;
     //主要控件
     RecyclerView mRecyclerView;
-    CollectionListAdapter mAdapter;
+    FavoritesListAdapter mAdapter;
     RefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setMargin(this);
+        StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_favorites_list);
         mTitleBar = findViewById(R.id.activity_favorites_list_titlebar);
         mRecyclerView = findViewById(R.id.activity_favorites_list_recyclerview);
@@ -53,9 +54,9 @@ public class FavoritesListActivity extends BaseActivity implements View.OnClickL
 
     void initRecyclerView() {
         mFavoritesList = new ArrayList<>();
-        mFavoritesList.add(new Favorites("执望三千里", "余湍", "主要收藏个人喜欢的一些影视、游戏、音乐赏析或解说", new Date(System.currentTimeMillis()), false, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)));
-        mFavoritesList.add(new Favorites("默认收藏夹", "余湍", "默认收藏夹", new Date(System.currentTimeMillis()), true, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)));
-        mAdapter = new CollectionListAdapter(getApplication(), mFavoritesList);
+        mFavoritesList.add(new Favorites("执望三千里", "余湍", "主要收藏个人喜欢的一些影视、游戏、音乐赏析或解说", ImageUrlUtil.getUrls(1).get(0), new Date(System.currentTimeMillis()), false, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)));
+        mFavoritesList.add(new Favorites("默认收藏夹", "余湍", "默认收藏夹", ImageUrlUtil.getUrls(1).get(0), new Date(System.currentTimeMillis()), true, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)));
+        mAdapter = new FavoritesListAdapter(getApplication(), mFavoritesList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplication()));
     }

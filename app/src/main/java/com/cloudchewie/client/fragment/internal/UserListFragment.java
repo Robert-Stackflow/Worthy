@@ -24,14 +24,12 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.UserListAdapter;
 import com.cloudchewie.client.domin.User;
 import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class UserListFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
@@ -50,12 +48,7 @@ public class UserListFragment extends BaseFragment implements View.OnClickListen
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-        try {
-            message.obj = new User(1, "奥斯", "123456", "17837353874", "20140378@qq.com", null, "哈哈哈，你好", 1, simpleDateFormat.parse("2003-7-26"), "12345", simpleDateFormat.parse("2022-03-02"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        message.obj = DomainUtil.getUser(getContext());
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
@@ -77,17 +70,9 @@ public class UserListFragment extends BaseFragment implements View.OnClickListen
     void initRecyclerView() {
         users = new ArrayList<>();
         userlistRecyclerView = mainView.findViewById(R.id.fragment_user_list_recyclerview);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-        try {
-            User user = new User(1, "奥斯", "123456", "17837353874", "20140378@qq.com", null, "哈哈哈，你好", 1, simpleDateFormat.parse("2003-7-26"), "12345", simpleDateFormat.parse("2022-03-02"));
-            users.add(user);
-            user = new User(2, "茄诺", "123456", "17837353874", "20140378@qq.com", null, "哈哈哈，你好", 1, simpleDateFormat.parse("2003-7-26"), "12345", simpleDateFormat.parse("2022-03-02"));
-            users.add(user);
-            user = new User(3, "二蛋", "123456", "17837353874", "20140378@qq.com", null, "哈哈哈，你好", 1, simpleDateFormat.parse("2003-7-26"), "12345", simpleDateFormat.parse("2022-03-02"));
-            users.add(user);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        users.add(DomainUtil.getUser(getContext()));
+        users.add(DomainUtil.getUser(getContext()));
+        users.add(DomainUtil.getUser(getContext()));
         userAdapter = new UserListAdapter(getActivity(), users);
         userlistRecyclerView.setAdapter(userAdapter);
         userlistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

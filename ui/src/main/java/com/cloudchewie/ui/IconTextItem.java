@@ -12,6 +12,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -62,17 +63,19 @@ public class IconTextItem extends ConstraintLayout {
             iconColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
             checkedIconId = attr.getResourceId(R.styleable.IconTextItem_icon_text_item_checked_icon, R.drawable.ic_light_map_fill);
             checkedIconColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_checked_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
-            int iconSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_icon_size, 13);
+            int textMaxLength = attr.getInt(R.styleable.IconTextItem_icon_text_item_text_max_length, getResources().getInteger(R.integer.icon_text_item_text_max_length));
+            int iconSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_icon_size, getResources().getDimension(R.dimen.icon_text_item_default_icon_size));
             String text = attr.getString(R.styleable.IconTextItem_icon_text_item_text);
             int textColor = attr.getColor(R.styleable.IconTextItem_icon_text_item_text_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
-            int textSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_text_size, 11);
-            int spacing = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_spacing, 3);
+            int textSize = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_text_size, getResources().getDimension(R.dimen.icon_text_item_default_text_size));
+            int spacing = (int) attr.getDimension(R.styleable.IconTextItem_icon_text_item_spacing, getResources().getDimension(R.dimen.icon_text_item_default_spacing));
             setIcon(iconId);
             setIconColor(iconColor);
             setIconSize(iconSize);
             setText(text);
             setTextColor(textColor);
             setTextSize(textSize);
+            setTextMaxLength(textMaxLength);
             attr.recycle();
         }
     }
@@ -112,6 +115,10 @@ public class IconTextItem extends ConstraintLayout {
         icon.setLayoutParams(layoutParams);
     }
 
+    public void setTextMaxLength(int textMaxLength) {
+        textView.setMaxEms(textMaxLength);
+    }
+
     public String getText() {
         return (String) textView.getText();
     }
@@ -125,7 +132,7 @@ public class IconTextItem extends ConstraintLayout {
     }
 
     public void setTextSize(int size) {
-        textView.setTextSize(size);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
 
     public void setSpacing(int spacing) {

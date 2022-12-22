@@ -13,6 +13,7 @@ import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -60,10 +61,14 @@ public class InputItem extends RelativeLayout {
             int leftIconId = attr.getResourceId(R.styleable.InputItem_input_item_left_icon, R.drawable.ic_light_search);
             boolean rightIconVisibility = attr.getBoolean(R.styleable.InputItem_input_item_right_icon_visibility, false);
             int rightIconId = attr.getResourceId(R.styleable.InputItem_input_item_right_icon, R.drawable.ic_light_delete);
+            int maxLines = attr.getInt(R.styleable.InputItem_input_item_max_lines, 20);
+            boolean isSingleLine = attr.getBoolean(R.styleable.InputItem_input_item_single_line, false);
+            setMode(mode);
+            setSingleLine(isSingleLine);
+            setMaxLines(maxLines);
             setLeftButton(leftIconVisibility, leftIconId);
             setRightButton(rightIconVisibility, rightIconId);
             setEditText(hint, text, editable);
-            setMode(mode);
             attr.recycle();
         }
     }
@@ -71,9 +76,14 @@ public class InputItem extends RelativeLayout {
     private void setMode(int mode) {
         if (mode == 0) {
             editText.setInputType(InputType.TYPE_CLASS_TEXT);
+            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         } else if (mode == 1) {
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+            editText.setImeOptions(EditorInfo.IME_ACTION_NONE);
         } else if (mode == 2) {
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        } else if (mode == 3) {
             rightIcon.setFocusable(true);
             rightIcon.setClickable(true);
             rightIcon.setSelected(false);
@@ -90,11 +100,22 @@ public class InputItem extends RelativeLayout {
                     setRightButton(true, R.drawable.ic_light_visible);
                 }
             });
-        } else if (mode == 3) {
-            editText.setInputType(InputType.TYPE_CLASS_PHONE);
+            editText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         } else if (mode == 4) {
+            editText.setInputType(InputType.TYPE_CLASS_PHONE);
+            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        } else if (mode == 5) {
             editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+            editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         }
+    }
+
+    public void setMaxLines(int maxLines) {
+        editText.setMaxLines(maxLines);
+    }
+
+    public void setSingleLine(boolean singleLine) {
+        editText.setSingleLine(singleLine);
     }
 
     public void setHint(String hint) {
@@ -115,6 +136,10 @@ public class InputItem extends RelativeLayout {
                 editText.setFocusableInTouchMode(false);
             }
         }
+    }
+
+    public EditText getEditText() {
+        return editText;
     }
 
     private void setLeftButton(boolean visibility, int iconId) {

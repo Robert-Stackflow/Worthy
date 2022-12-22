@@ -1,43 +1,24 @@
 package com.cloudchewie.client.adapter;
 
-import android.content.Context;
-
+import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.User;
 
-public class AttractionListAdapterBuilder {
+import java.util.List;
+
+public class AttractionListRequestOption {
     private String location;
     private String topic;
     private User followUser;
     private User goneUser;
     private User wantUser;
-    private Context context;
+    private List<Attraction> attractionList;
 
-    public static AttractionListAdapterBuilder locationOf(String location) {
-        return new AttractionListAdapterBuilder().location(location);
+    public List<Attraction> getAttractionList() {
+        return attractionList;
     }
 
-    public static AttractionListAdapterBuilder topicOf(String topic) {
-        return new AttractionListAdapterBuilder().topic(topic);
-    }
-
-    public static AttractionListAdapterBuilder followOf(User user) {
-        return new AttractionListAdapterBuilder().follow(user);
-    }
-
-    public static AttractionListAdapterBuilder goneOf(User user) {
-        return new AttractionListAdapterBuilder().gone(user);
-    }
-
-    public static AttractionListAdapterBuilder wantOf(User user) {
-        return new AttractionListAdapterBuilder().want(user);
-    }
-
-    public static AttractionListAdapterBuilder with(Context context) {
-        return new AttractionListAdapterBuilder().want(user);
-    }
-
-    public static AttractionListAdapter build() {
-        AttractionListAdapter adapter=new
+    public void setAttractionList(List<Attraction> attractionList) {
+        this.attractionList = attractionList;
     }
 
     public String getLocation() {
@@ -80,34 +61,33 @@ public class AttractionListAdapterBuilder {
         this.wantUser = wantUser;
     }
 
-    public AttractionListAdapterBuilder location(String location) {
-        AttractionListAdapterBuilder attractionListAdapterBuilder = new AttractionListAdapterBuilder();
-        attractionListAdapterBuilder.setLocation(location);
-        return attractionListAdapterBuilder;
+    public AttractionListRequestOption location(String location) {
+        setLocation(location);
+        return this;
     }
 
-    public AttractionListAdapterBuilder topic(String topic) {
-        AttractionListAdapterBuilder attractionListAdapterBuilder = new AttractionListAdapterBuilder();
-        attractionListAdapterBuilder.setTopic(topic);
-        return attractionListAdapterBuilder;
+    public AttractionListRequestOption topic(String topic) {
+        setTopic(topic);
+        return this;
     }
 
-    public AttractionListAdapterBuilder follow(User user) {
-        AttractionListAdapterBuilder attractionListAdapterBuilder = new AttractionListAdapterBuilder();
-        attractionListAdapterBuilder.setFollowUser(user);
-        return attractionListAdapterBuilder;
+    public AttractionListRequestOption follow(User user) {
+        setFollowUser(user);
+        return this;
     }
 
-    public AttractionListAdapterBuilder gone(User user) {
-        AttractionListAdapterBuilder attractionListAdapterBuilder = new AttractionListAdapterBuilder();
-        attractionListAdapterBuilder.setGoneUser(user);
-        return attractionListAdapterBuilder;
+    public AttractionListRequestOption gone(User user) {
+        setGoneUser(user);
+        return this;
     }
 
-    public AttractionListAdapterBuilder want(User user) {
-        AttractionListAdapterBuilder attractionListAdapterBuilder = new AttractionListAdapterBuilder();
-        attractionListAdapterBuilder.setWantUser(user);
-        return attractionListAdapterBuilder;
+    public AttractionListRequestOption want(User user) {
+        setWantUser(user);
+        return this;
     }
 
+    public AttractionListRequestOption data(List<Attraction> attractionList) {
+        setAttractionList(attractionList);
+        return this;
+    }
 }

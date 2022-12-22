@@ -43,5 +43,5 @@
         app:layout_constraintStart_toEndOf="@id/reply_item_splitter"
         app:layout_constraintTop_toTopOf="@id/reply_item_username"
         tools:ignore="RtlSymmetry"
-        tools:text="都是公平公正公开的吧，不会偏袒吧,都是公平公正公开的吧，不会偏袒吧," />
+        tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 </androidx.constraintlayout.widget.ConstraintLayout>

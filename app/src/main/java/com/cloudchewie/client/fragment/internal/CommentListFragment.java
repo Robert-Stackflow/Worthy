@@ -14,6 +14,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,19 +25,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.CommentListAdapter;
 import com.cloudchewie.client.domin.Comment;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class CommentListFragment extends Fragment implements View.OnClickListener {
     View mainView;
+    CommentListAdapter.OnCommentItemClickListener listener;
     List<Comment> comments;
     CommentListAdapter commentListAdapter;
     RecyclerView commentsRecyclerView;
@@ -47,25 +46,19 @@ public class CommentListFragment extends Fragment implements View.OnClickListene
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            comments.add((Comment) msg.obj);
+            comments.addAll((List<Comment>) msg.obj);
             commentListAdapter.notifyItemInserted(comments.size());
         }
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        try {
-            message.obj = new Comment(1, "东方不败", simpleDateFormat.parse("2022-12-13 20:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        message.obj = DomainUtil.getCommentList(getContext(), 3);
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
     Runnable getMoreDatas = () -> {
         Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        message.obj = new Comment(1, "镜", new Date(System.currentTimeMillis()), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
+        message.obj = DomainUtil.getCommentList(getContext(), 3);
         handler.sendMessage(message);
         swipeRefreshLayout.finishLoadMore();
     };
@@ -73,6 +66,13 @@ public class CommentListFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public CommentListFragment setOnCommentClickListener(CommentListAdapter.OnCommentItemClickListener listener) {
+        this.listener = listener;
+        if (commentListAdapter != null)
+            commentListAdapter.setListener(listener);
+        return this;
     }
 
     @Nullable
@@ -87,22 +87,12 @@ public class CommentListFragment extends Fragment implements View.OnClickListene
     void initRecyclerView() {
         comments = new ArrayList<>();
         commentsRecyclerView = mainView.findViewById(R.id.fragment_comments_recyclerview);
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-            Comment comment = new Comment(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
-            comments.add(comment);
-            comment = new Comment(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
-            comments.add(comment);
-            comment = new Comment(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
-            comments.add(comment);
-            comment = new Comment(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
-            comments.add(comment);
-            comment = new Comment(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100));
-            comments.add(comment);
-        } catch (Exception e) {
-            e.printStackTrace();
+        comments.addAll(DomainUtil.getCommentList(getContext(), 3));
+        commentListAdapter = new CommentListAdapter(getContext(), comments);
+        if (listener != null) {
+            commentListAdapter.setListener(listener);
+            Toast.makeText(getContext(), "设置监听器", Toast.LENGTH_SHORT).show();
         }
-        commentListAdapter = new CommentListAdapter(getActivity(), comments);
         commentsRecyclerView.setAdapter(commentListAdapter);
         commentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

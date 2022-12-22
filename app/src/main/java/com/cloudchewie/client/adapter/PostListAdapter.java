@@ -20,23 +20,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
 import com.cloudchewie.client.activity.discover.PostDetailActivity;
 import com.cloudchewie.client.activity.discover.TopicDetailActivity;
-import com.cloudchewie.client.domin.Attraction;
+import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.domin.Post;
-import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.domin.UserViewInfo;
 import com.cloudchewie.client.util.basic.DateUtil;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.ninegrid.NineGridImageView;
 import com.cloudchewie.ui.IconTextItem;
-import com.previewlibrary.GPreviewBuilder;
 
 import java.util.List;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyViewHolder> {
     private List<Post> posts;
@@ -77,19 +79,27 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
-        holder.nameView.setText(post.getUsername());
+        holder.nameView.setText(post.getUser().getUsername());
         holder.timeView.setText(DateUtil.beautifyTime(post.getDate()));
         holder.contentView.setText(handleLineBreaks(post.getContent()));
-        holder.location.setText(post.getLocation());
-        holder.topic.setText(post.getTag());
+        holder.location.setText(post.getAttraction().getName());
+        holder.topic.setText(post.getTopics().get(0).getName());
         holder.thumbup.setText(String.valueOf(post.getThumbupCount()));
         holder.comment.setText(String.valueOf(post.getCommentCount()));
+        holder.comment.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PostDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("post", post);
+            bundle.putSerializable("jumptocomment", false);
+            intent.putExtras(bundle);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
         holder.topic.setOnClickListener(v -> {
             if (!(context instanceof TopicDetailActivity && Objects.equals(((TopicDetailActivity) context).getTopic(), holder.topic.getText()))) {
                 Intent intent = new Intent(context, TopicDetailActivity.class);
                 Bundle bundle = new Bundle();
-                Topic topic = new Topic(holder.topic.getText(), "这里大家可以尽情分享我们的生活", (int) (Math.random() * 100000), (int) (Math.random() * 1000));
-                bundle.putSerializable("topic", topic);
+                bundle.putSerializable("topic", post.getTopics().get(0));
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             } else {
@@ -97,10 +107,9 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
             }
         });
         holder.location.setOnClickListener(v -> {
-            Attraction attraction = new Attraction(holder.location.getText(), "湖北省武汉市洪山区", "凌波门畔，赏日出绝景", 1, Math.random() % 180, Math.random() % 180, (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100));
             Intent intent = new Intent(context, AttractionDetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("attraction", attraction);
+            bundle.putSerializable("attraction", post.getAttraction());
             intent.putExtras(bundle);
             context.startActivity(intent);
         });
@@ -109,7 +118,22 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
             post.setThumbupCount(post.getThumbupCount() + (holder.thumbup.isChecked() ? 1 : -1));
             holder.thumbup.setText(String.valueOf(post.getThumbupCount()));
         });
+        holder.avatarView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HomePageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", post.getUser());
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
+        holder.nameView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HomePageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", post.getUser());
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
         NineGridUtil.setDataSource(holder.nineGridImageViewer, ImageUrlUtil.getViewInfos(post.getImageUrls()));
+        Glide.with(context).load(post.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.avatarView);
     }
 
     @Override
@@ -126,13 +150,14 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
         public IconTextItem topic;
         public IconTextItem comment;
         public IconTextItem thumbup;
+        public CircleImageView avatarView;
         public NineGridImageView<UserViewInfo> nineGridImageViewer;
         private MyNineGridImageViewAdapter mAdapter;
-        private GPreviewBuilder.IndicatorType mIndicatorType;
 
         public MyViewHolder(View view) {
             super(view);
             mainView = view;
+            avatarView = view.findViewById(R.id.post_item_avatar);
             nameView = view.findViewById(R.id.post_item_username);
             timeView = view.findViewById(R.id.post_item_time);
             contentView = view.findViewById(R.id.post_item_content);

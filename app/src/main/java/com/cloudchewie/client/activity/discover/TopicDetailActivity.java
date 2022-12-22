@@ -77,7 +77,7 @@ public class TopicDetailActivity extends BaseActivity {
         mTopic = (Topic) intent.getSerializableExtra("topic");
         mNameView.setText(mTopic.getName());
         mDescribeView.setText(mTopic.getDescribe());
-        mHotValueView.setText(mTopic.getHotvalue() + "热度 · " + mTopic.getFollowerCount() + "人关注");
+        mHotValueView.setText(mTopic.getVisitorCount() + "热度 · " + mTopic.getFollowerCount() + "人关注");
     }
 
     void initViewPager() {

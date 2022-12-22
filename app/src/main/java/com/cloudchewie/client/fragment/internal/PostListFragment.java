@@ -24,14 +24,14 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.PostListAdapter;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,25 +47,19 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            posts.add((Post) msg.obj);
+            posts.addAll((Collection<? extends Post>) msg.obj);
             postListAdapter.notifyItemInserted(posts.size());
         }
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        try {
-            message.obj = new Post(1, "东方不败", simpleDateFormat.parse("2022-12-13 20:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "北京", "生活圈");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        message.obj = DomainUtil.getPostList(getContext());
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
     Runnable getMoreDatas = () -> {
         Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        message.obj = new Post(1, "镜", new Date(System.currentTimeMillis()), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "乌鲁木齐", "你好!未来");
+        message.obj = DomainUtil.getPostList(getContext());
         handler.sendMessage(message);
         swipeRefreshLayout.finishLoadMore();
     };
@@ -89,16 +83,7 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
         followingRecyclerView = mainView.findViewById(R.id.fragment_following_recyclerview);
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-            Post post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
-            post = new Post(1, "灿烂未来", simpleDateFormat.parse("2022-12-15 06:00:00"), "有时相信在某个平行的宇宙\\n你的爱还一如既往陪在我左右", (int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100), "武汉", "生活圈");
-            posts.add(post);
+            posts.addAll(DomainUtil.getPostList(getContext()));
         } catch (Exception e) {
             e.printStackTrace();
         }

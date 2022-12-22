@@ -11,8 +11,8 @@ import android.os.Bundle;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.ui.TitleBar;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
+import com.cloudchewie.ui.TitleBar;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 public class PrivacySettingsActivity extends BaseActivity {
@@ -21,7 +21,7 @@ public class PrivacySettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setMargin(this);
+        StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_privacy_settings);
         ((TitleBar) findViewById(R.id.privacy_settings_titlebar)).setLeftButtonClickListener(v -> finish());
         initSwipeRefresh();
