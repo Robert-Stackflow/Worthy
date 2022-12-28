@@ -26,4 +26,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_attractions_fab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="600dp"
+        android:background="@drawable/shape_button_dark"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fragment_attractions_fab_avatar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/img_default_avatar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/fragment_attractions_fab_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="创建地点"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_attractions_fab_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
 </RelativeLayout>

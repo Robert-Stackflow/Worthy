@@ -21,4 +21,5 @@
     <string name="zero">0</string>
     <string name="filter">筛选</string>
     <string name="comment_detail_title">回复详情</string>
+    <string name="fab">FAB</string>
 </resources>

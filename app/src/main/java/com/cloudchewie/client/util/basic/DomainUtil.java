@@ -128,6 +128,29 @@ public class DomainUtil {
         return topicList;
     }
 
+    public static List<String> getTagList(Context context) {
+        List<String> tagList = new ArrayList<>();
+        AssetManager assetManager = context.getAssets();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(assetManager.open("topic.txt"), StandardCharsets.UTF_8));
+            String line;
+            int count = ((int) (Math.random() * 1000)) % 5 + 3;
+            int randomJumpLineCount = ((int) (Math.random() * 1000)) % 50;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] words = line.split(",");
+                for (String name : words) {
+                    if (--randomJumpLineCount < 0) {
+                        if (--count < 0) break;
+                        tagList.add(name);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tagList;
+    }
+
     public static String getContent() {
         return "占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符";
     }
@@ -174,7 +197,7 @@ public class DomainUtil {
                 while (--randomJumpLineCount > 0) bufferedReader.readLine();
                 while ((line = bufferedReader.readLine()) != null && --count > 0) {
                     String[] words = line.split(",");
-                    Attraction attraction = new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)));
+                    Attraction attraction = new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context));
                     attractionList.add(attraction);
                 }
             }
@@ -195,12 +218,12 @@ public class DomainUtil {
                 int randomJumpLineCount = ((int) (Math.random() * 1000)) % 50;
                 while (--randomJumpLineCount > 0) bufferedReader.readLine();
                 String[] words = bufferedReader.readLine().split(",");
-                return new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)));
+                return new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Attraction("东湖", "湖北省武汉市洪山区东湖", getContent(), ((int) (Math.random() * 1000)), 114.383034, 30.581009, ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)));
+        return new Attraction("东湖", "湖北省武汉市洪山区东湖", getContent(), ((int) (Math.random() * 1000)), 114.383034, 30.581009, ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context));
     }
 
     public static List<Message> getMessageList(Context context) {

@@ -60,6 +60,10 @@ public class TagItem extends RelativeLayout {
         }
     }
 
+    public void setPadding(int left, int top, int right, int bottom) {
+        textView.setPadding(left, top, right, bottom);
+    }
+
     public void setTextSize(int size) {
         textView.setTextSize(size);
     }

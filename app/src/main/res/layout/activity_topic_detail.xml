@@ -27,7 +27,6 @@
                 android:layout_alignParentTop="true"
                 android:background="@color/color_prominent"
                 android:fitsSystemWindows="true"
-                android:paddingBottom="20dp"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7">
 
@@ -124,6 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="20dp"
                         android:background="@drawable/shape_card_transparent"
                         android:padding="10dp">
 

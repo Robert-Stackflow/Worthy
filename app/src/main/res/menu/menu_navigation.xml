@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/map"
+        android:id="@+id/menu_map"
         android:checked="true"
         android:icon="@drawable/ic_big_map"
         android:title="@string/nav_map" />
     <item
-        android:id="@+id/discover"
+        android:id="@+id/menu_discover"
         android:icon="@drawable/ic_big_navigation"
         android:title="@string/nav_discover" />
     <item
-        android:id="@+id/message"
+        android:id="@+id/menu_create"
+        android:title="" />
+    <item
+        android:id="@+id/menu_message"
         android:icon="@drawable/ic_big_message"
         android:title="@string/nav_message" />
     <item
-        android:id="@+id/personal"
+        android:id="@+id/menu_personal"
         android:icon="@drawable/ic_big_user"
         android:title="@string/nav_user" />
 </menu>

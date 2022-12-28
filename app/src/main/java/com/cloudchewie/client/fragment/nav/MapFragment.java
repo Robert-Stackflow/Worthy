@@ -88,8 +88,8 @@ import java.util.Objects;
 
 public class MapFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnGetPoiSearchResultListener, OnGetSuggestionResultListener,
         BaiduMap.OnMapClickListener, BaiduMap.OnMarkerClickListener {
-    private static final String CUSTOM_FILE_NAME_GRAY = "custom_blacknight.sty";
-    private static final String CUSTOM_FILE_NAME_WHITE = "custom_trip.sty";
+    private static final String CUSTOM_FILE_NAME_DARK = "dark.sty";
+    private static final String CUSTOM_FILE_NAME_TEA = "tea.sty";
     boolean itemClicked = false;
     View mainView;
     MapView mapView;
@@ -195,9 +195,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             mapView.showScaleControl(false);
             mapView.showZoomControls(false);
         });
-        String customStyleFilePath = getCustomStyleFilePath(getActivity(), CUSTOM_FILE_NAME_GRAY);
+        String customStyleFilePath = getCustomStyleFilePath(getActivity(), CUSTOM_FILE_NAME_DARK);
         mapView.setMapCustomStylePath(customStyleFilePath);
-        mapView.setMapCustomStyleEnable(false);
+        mapView.setMapCustomStyleEnable(true);
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(this);
         suggestionSearch = SuggestionSearch.newInstance();
@@ -669,6 +669,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
                 locationOption.setScanSpan(0);
                 locationClient.stop();
                 locationClient.setLocOption(locationOption);
+
             }
         }
     }

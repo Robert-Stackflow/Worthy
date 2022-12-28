@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -25,7 +26,8 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.util.image.CornerTransform;
-import com.cloudchewie.ui.IconTextItem;
+import com.cloudchewie.ui.FlowTagLayout;
+import com.cloudchewie.ui.TagItem;
 
 import java.util.List;
 
@@ -69,9 +71,20 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
         });
         holder.nameView.setText(attraction.getName());
         holder.locationView.setText(attraction.getLocation());
-        holder.follow.setText(String.valueOf(attraction.getFollowerCount()));
-        holder.visitor.setText(String.valueOf(attraction.getVisitorCount()));
-        holder.post.setText(String.valueOf(attraction.getPostCount()));
+        if (holder.flowTagLayout.getChildCount() > 0)
+            holder.flowTagLayout.removeAllViews();
+        for (String tag : attraction.getTags()) {
+            TagItem tagItem = new TagItem(context);
+            tagItem.setText(tag);
+            tagItem.setTextSize(11);
+            tagItem.setPadding(8, 4, 8, 4);
+            tagItem.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            tagItem.setTextColor(context.getColor(R.color.text_color_entry));
+            tagItem.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_small_tag));
+            tagItem.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            holder.flowTagLayout.addView(tagItem);
+        }
+        holder.statisticsView.setText(attraction.getStatistics());
         Glide.with(context).load(attraction.getCoverImageUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransform.getTransform(context, true, true, false, false))).into(holder.imageView);
     }
 
@@ -84,22 +97,18 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
         public View mItemView;
         public TextView nameView;
         public TextView locationView;
-        public ImageView jumpToMap;
-        public IconTextItem follow;
-        public IconTextItem visitor;
-        public IconTextItem post;
         public ImageView imageView;
+        public FlowTagLayout flowTagLayout;
+        public TextView statisticsView;
 
         public MyViewHolder(View view) {
             super(view);
             mItemView = view;
             nameView = view.findViewById(R.id.attraction_card_name);
             locationView = view.findViewById(R.id.attraction_card_location);
-            jumpToMap = view.findViewById(R.id.attraction_card_jump_to_map);
-            follow = view.findViewById(R.id.attraction_card_follow);
-            visitor = view.findViewById(R.id.attraction_card_visitor);
-            post = view.findViewById(R.id.attraction_card_post);
             imageView = view.findViewById(R.id.attraction_card_image);
+            flowTagLayout = view.findViewById(R.id.attraction_card_tags);
+            statisticsView = view.findViewById(R.id.attraction_card_statistics);
         }
     }
 }

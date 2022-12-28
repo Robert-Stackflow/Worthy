@@ -24,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.VibrateUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
@@ -33,8 +32,6 @@ import com.cloudchewie.client.domin.Comment;
 import com.cloudchewie.client.domin.UserViewInfo;
 import com.cloudchewie.client.fragment.internal.BottomReplyFragment;
 import com.cloudchewie.client.util.basic.DateUtil;
-import com.cloudchewie.client.util.image.ImageUrlUtil;
-import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.client.util.system.ClipBoardUtil;
 import com.cloudchewie.client.widget.ReplyItem;
 import com.cloudchewie.ninegrid.NineGridImageView;
@@ -83,7 +80,6 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
         holder.contentView.setOnLongClickListener(view -> {
             ClipBoardUtil.copy(context, comment.getContent());
-            VibrateUtils.vibrate(200);
             Toast.makeText(context, "已复制" + comment.getUser().getUsername() + "的评论", Toast.LENGTH_SHORT).show();
             return false;
         });
@@ -98,10 +94,9 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         } else {
             holder.repliesLayout.setVisibility(View.GONE);
         }
-        holder.mItemView.setOnClickListener(v -> {
+        holder.contentView.setOnClickListener(v -> {
             if (listener != null)
                 listener.onClick(holder.mItemView, comment);
-            Toast.makeText(context, "点击" + comment.getUser().getUsername() + "的评论", Toast.LENGTH_SHORT).show();
         });
         holder.avatarView.setOnClickListener(v -> {
             Intent intent = new Intent(context, HomePageActivity.class);
@@ -134,7 +129,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
                 bottomReplyFragment.show();
             });
         }
-        NineGridUtil.setDataSource(holder.nineGridImageViewer, ImageUrlUtil.getViewInfos(comment.getImageUrls()));
+//        NineGridUtil.setDataSource(holder.nineGridImageViewer, ImageUrlUtil.getViewInfos(comment.getImageUrls()));
         Glide.with(context).load(comment.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.avatarView);
     }
 

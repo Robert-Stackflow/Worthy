@@ -10,7 +10,7 @@
     android:focusable="true">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,129 +21,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxHeight="150dp"
+            android:maxHeight="80dp"
             android:scaleType="centerCrop" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/attraction_card_title_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_toStartOf="@id/attraction_card_jump_to_map"
-                android:orientation="vertical"
-                android:padding="10dp"
-                tools:ignore="RelativeOverlap">
-
-                <TextView
-                    android:id="@+id/attraction_card_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/color_accent"
-                    android:textSize="20sp"
-                    tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
-
-                <TextView
-                    android:id="@+id/attraction_card_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/text_color_gray"
-                    tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/attraction_card_jump_to_map"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:contentDescription="@string/cd_jump_to_map"
-                android:src="@drawable/ic_light_map"
-                app:tint="@color/color_prominent" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/color_divider" />
-
         <LinearLayout
-            android:id="@+id/attraction_card_statistics_layout"
+            android:id="@+id/attraction_card_title_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:paddingStart="5dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
+            tools:ignore="RelativeOverlap">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/attraction_card_follow_layout"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/attraction_card_name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/shape_card_bottom_left_radius">
+                android:layout_marginStart="5dp"
+                android:textColor="@color/color_accent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
-                <com.cloudchewie.ui.IconTextItem
-                    android:id="@+id/attraction_card_follow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    app:icon_text_item_icon="@drawable/ic_light_star"
-                    app:icon_text_item_icon_color="@color/color_accent"
-                    app:icon_text_item_icon_size="20dp"
-                    app:icon_text_item_text_color="@color/color_accent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:icon_text_item_text="收藏人数" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/attraction_card_visitor_layout"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/attraction_card_statistics"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/shape_card">
+                android:layout_marginStart="5dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:singleLine="true"
+                android:textColor="@color/text_color_gray"
+                android:textSize="14sp"
+                tools:text="430人推荐 · 82人看过 · 99+人想去 · 54张照片" />
 
-                <com.cloudchewie.ui.IconTextItem
-                    android:id="@+id/attraction_card_visitor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    app:icon_text_item_icon="@drawable/ic_light_visible"
-                    app:icon_text_item_icon_color="@color/color_accent"
-                    app:icon_text_item_icon_size="20dp"
-                    app:icon_text_item_text_color="@color/color_accent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:icon_text_item_text="浏览人数" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/attraction_card_post_layout"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/attraction_card_location"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/shape_card_bottom_right_radius">
+                android:layout_marginStart="5dp"
+                android:singleLine="true"
+                android:textColor="@color/text_color_gray"
+                android:textSize="13sp"
+                tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
-                <com.cloudchewie.ui.IconTextItem
-                    android:id="@+id/attraction_card_post"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    app:icon_text_item_icon="@drawable/ic_light_note"
-                    app:icon_text_item_icon_color="@color/color_accent"
-                    app:icon_text_item_icon_size="20dp"
-                    app:icon_text_item_text_color="@color/color_accent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:icon_text_item_text="帖子数目" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.cloudchewie.ui.FlowTagLayout
+                android:id="@+id/attraction_card_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:horizontal_diver="5dp"
+                app:vertical_diver="5dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

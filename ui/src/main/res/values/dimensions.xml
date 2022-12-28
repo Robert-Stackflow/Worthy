@@ -2,8 +2,8 @@
 <resources>
     <!--默认-->
     <dimen name="icon_size">40dp</dimen>
-    <dimen name="button_text_size">12sp</dimen>
-    <integer name="icon_text_item_text_max_length">12</integer>
+    <dimen name="button_text_size">14sp</dimen>
+    <integer name="icon_text_item_text_max_length">8</integer>
     <dimen name="icon_text_item_default_icon_size">20dp</dimen>
     <dimen name="icon_text_item_default_spacing">3dp</dimen>
     <dimen name="icon_text_item_default_text_size">13sp</dimen>
@@ -15,7 +15,7 @@
     <!--自定义-->
     <dimen name="tab_title">16sp</dimen>
     <dimen name="tab_title_small">13sp</dimen>
-    <dimen name="page_detail_title">24sp</dimen>s
+    <dimen name="page_detail_title">24sp</dimen>
     <dimen name="page_detail_subtitle">15sp</dimen>
     <dimen name="page_detail_describe">12sp</dimen>
     <dimen name="attraction_item_title">15sp</dimen>

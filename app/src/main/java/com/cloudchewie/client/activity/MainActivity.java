@@ -12,6 +12,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -26,6 +28,8 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
+import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.CreateDialogFragment;
 import com.cloudchewie.client.fragment.nav.DiscoverFragment;
 import com.cloudchewie.client.fragment.nav.MapFragment;
 import com.cloudchewie.client.fragment.nav.MessageFragment;
@@ -33,6 +37,8 @@ import com.cloudchewie.client.fragment.nav.UserFragment;
 import com.cloudchewie.client.util.database.AppDatabase;
 import com.cloudchewie.client.util.system.LocalStorage;
 import com.cloudchewie.ui.NoScrollViewPager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.yh.bottomnavigation_base.IMenuListener;
 import com.yh.bottomnavigationex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
@@ -47,6 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private ImageButton userButton;
     private NoScrollViewPager viewPager;
     private BottomNavigationViewEx bottomNavigation;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     @SuppressLint("SourceLockedOrientationActivity")
@@ -57,19 +64,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         LocalStorage.init(AppDatabase.getInstance(getApplicationContext()));
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation = findViewById(R.id.activity_main_bottom_navigation);
         viewPager = findViewById(R.id.viewpager);
+        floatingActionButton = findViewById(R.id.fab);
         bottomNavigation.enableLabelVisibility(false);
         bottomNavigation.enableItemHorizontalTranslation(false);
         bottomNavigation.setSmallTextSize(11);
         bottomNavigation.setLargeTextSize(12);
         bottomNavigation.setIconSize(20);
         {
-            fragments = new ArrayList<>(4);
+            fragments = new ArrayList<>();
             fragments.add(new MapFragment());
             fragments.add(new DiscoverFragment());
             fragments.add(new MessageFragment());
             fragments.add(new UserFragment());
+            fragments.add(new BaseFragment());
             adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
             viewPager.setAdapter(adapter);
             viewPager.setNoScroll(false);
@@ -77,11 +86,48 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
         for (int i = 0; i < bottomNavigation.getBNItemViewCount(); i++)
             bottomNavigation.getBNMenuView().getChildAt(i).setOnLongClickListener(view -> true);
+        initEvent();
     }
 
     void checkPermission() {
         if (!EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION))
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+    }
+
+    private void initEvent() {
+        bottomNavigation.setMenuListener(new IMenuListener() {
+            private int previousPosition = -1;
+
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(int i, @NonNull MenuItem item, boolean b) {
+                int position = 0;
+                switch (item.getItemId()) {
+                    case R.id.menu_map:
+                        position = 0;
+                        break;
+                    case R.id.menu_discover:
+                        position = 1;
+                        break;
+                    case R.id.menu_message:
+                        position = 2;
+                        break;
+                    case R.id.menu_personal:
+                        position = 3;
+                        break;
+                    case R.id.menu_create:
+                        return false;
+                }
+                Log.d("xuruida", String.valueOf(position));
+//                if (previousPosition != position) {
+//                    viewPager.setCurrentItem(position, false);
+//                    Log.d("xuruida", "Current:" + position + ",True:" + viewPager.getCurrentItem());
+//                    previousPosition = position;
+//                }
+                return true;
+            }
+        });
+        floatingActionButton.setOnClickListener(view -> new CreateDialogFragment().show(getSupportFragmentManager(), ""));
     }
 
     void initMap() {

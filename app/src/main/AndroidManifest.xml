@@ -63,6 +63,11 @@
         <activity android:name=".activity.discover.PostDetailActivity" />
         <activity android:name=".activity.discover.TopicDetailActivity" />
         <activity android:name=".activity.discover.AttractionDetailActivity" />
+        <!--创作-->
+        <activity android:name=".activity.create.CreatePostActivity" />
+        <activity
+            android:name=".activity.create.CreateArticleActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <!--消息-->
         <activity android:name=".activity.message.NoticeActivity" />
         <activity android:name=".activity.message.MessagerDetailActivity" />

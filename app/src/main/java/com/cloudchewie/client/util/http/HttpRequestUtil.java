@@ -66,6 +66,18 @@ public class HttpRequestUtil {
         return JSON.parseObject(responseString[0]);
     }
 
+    public static JSONObject getOf(MediaType contentType, String url) {
+        final String[] responseString = {null};
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url(url).get().build();
+        try {
+            responseString[0] = okHttpClient.newCall(request).execute().body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return JSON.parseObject(responseString[0]);
+    }
+
     public static JSONObject delete(MediaType contentType, String url) {
         final String[] responseString = {null};
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new TokenInterceptor())

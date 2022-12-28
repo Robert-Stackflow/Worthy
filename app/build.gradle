@@ -67,6 +67,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.10'
     //Controller
     implementation 'io.github.razerdp:BasePopup:3.2.0'
+    implementation 'jp.wasabeef:richeditor-android:2.0.0'
     implementation 'com.github.Zhao-Yan-Yan:MultiStatePage:2.0.2'
     implementation 'io.github.clistery:bottomnavigationex-ex:2.0.0'
     implementation 'io.github.clistery:bottomnavigationex-15x:2.0.0'
@@ -79,7 +80,6 @@ dependencies {
     implementation 'com.ycjiang:ImagePreview:2.3.7'  //图片预览
     implementation 'de.hdodenhof:circleimageview:3.1.0'  //圆形头像
     implementation 'com.gitee.zackratos:UltimateBarX:0.8.0'  //状态栏
-//    implementation 'com.cloudchewie.ninegrid:library:1.1.1'  //九宫格
     implementation 'com.github.bumptech.glide:glide:4.5.0'  //Glide
     annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'  //Glide注解
 }

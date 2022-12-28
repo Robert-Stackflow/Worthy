@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Attraction implements Serializable {
     String name;
@@ -21,25 +22,35 @@ public class Attraction implements Serializable {
     int authorId;
     double latitude;
     double longtitude;
-    int postCount;
-    int visitorCount;
-    int followerCount;
+    int goneCount;
+    int recommendCount;
+    int wantCount;
     String coverImageUrl;
+    List<String> tags;
 
     public Attraction() {
     }
 
-    public Attraction(String name, String location, String describe, int authorId, double longtitude, double latitude, int followerCount, int visitorCount, int postCount) {
+    public Attraction(String name, String location, String describe, int authorId, double longtitude, double latitude, int wantCount, int recommendCount, int goneCount, List<String> tags) {
         this.name = name;
         this.location = location;
         this.describe = describe;
         this.authorId = authorId;
         this.longtitude = longtitude;
         this.latitude = latitude;
-        this.followerCount = followerCount;
-        this.visitorCount = visitorCount;
-        this.postCount = postCount;
+        this.wantCount = wantCount;
+        this.recommendCount = recommendCount;
+        this.goneCount = goneCount;
+        this.tags = tags;
         coverImageUrl = ImageUrlUtil.getUrls(1).get(0);
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     public String getCoverImageUrl() {
@@ -56,6 +67,10 @@ public class Attraction implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getStatistics() {
+        return recommendCount + "人推荐 · " + goneCount + "人看过 · " + wantCount + "人想去";
     }
 
     public String getLocation() {
@@ -98,33 +113,33 @@ public class Attraction implements Serializable {
         this.latitude = latitude;
     }
 
-    public int getFollowerCount() {
-        return followerCount;
+    public int getWantCount() {
+        return wantCount;
     }
 
-    public void setFollowerCount(int followerCount) {
-        this.followerCount = followerCount;
+    public void setWantCount(int wantCount) {
+        this.wantCount = wantCount;
     }
 
-    public int getVisitorCount() {
-        return visitorCount;
+    public int getRecommendCount() {
+        return recommendCount;
     }
 
-    public void setVisitorCount(int visitorCount) {
-        this.visitorCount = visitorCount;
+    public void setRecommendCount(int recommendCount) {
+        this.recommendCount = recommendCount;
     }
 
-    public int getPostCount() {
-        return postCount;
+    public int getGoneCount() {
+        return goneCount;
     }
 
-    public void setPostCount(int postCount) {
-        this.postCount = postCount;
+    public void setGoneCount(int goneCount) {
+        this.goneCount = goneCount;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Attraction{" + "name='" + name + '\'' + ", location='" + location + '\'' + ", detail='" + describe + '\'' + ", authorId=" + authorId + ", longtitude=" + longtitude + ", latitude=" + latitude + ", followerCount=" + followerCount + ", visitorCount=" + visitorCount + ", postCount=" + postCount + '}';
+        return "Attraction{" + "name='" + name + '\'' + ", location='" + location + '\'' + ", detail='" + describe + '\'' + ", authorId=" + authorId + ", longtitude=" + longtitude + ", latitude=" + latitude + ", followerCount=" + wantCount + ", visitorCount=" + recommendCount + ", postCount=" + goneCount + '}';
     }
 }

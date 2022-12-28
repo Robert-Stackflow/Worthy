@@ -48,6 +48,8 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,6 +84,8 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
     private ViewPager2 mViewPager;
     private PostDetailFragmentAdapter mAdapter;
     private AppBarLayout mAppBarLayout;
+    private RefreshLayout swipeRefreshLayout;
+    private ClassicsHeader header;
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private NineGridImageView<UserViewInfo> mNineGridImageView;
 
@@ -111,8 +115,20 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
         mEditText = mInputItem.getEditText();
         mSendView = findViewById(R.id.activity_post_detail_send);
         mBottomInputLayout = findViewById(R.id.activity_post_detail_statistics_layout);
+        swipeRefreshLayout = findViewById(R.id.activity_post_detail_swipe_refresh);
+        header = findViewById(R.id.activity_post_detail_swipe_refresh_header);
+        initSwipeRefresh();
         initView();
         initViewPager();
+    }
+
+    void initSwipeRefresh() {
+        swipeRefreshLayout.setRefreshHeader(header);
+        swipeRefreshLayout.setEnableLoadMore(false);
+        swipeRefreshLayout.setEnableOverScrollDrag(true);
+        swipeRefreshLayout.setEnableOverScrollBounce(true);
+        swipeRefreshLayout.setEnableLoadMore(false);
+        header.setEnableLastTime(false);
     }
 
     private void initView() {
@@ -206,9 +222,11 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
         mTitles = Arrays.asList(getResources().getStringArray(R.array.post_detail_comment_tab_titles));
         mTitles.set(mTitles.size() - 1, mTitles.get(mTitles.size() - 1) + "(" + mPost.getCommentCount() + ")");
         mFragments.add(new CommentListFragment().setOnCommentClickListener((v, comment) -> {
-            if (mEditText != null)
+            if (mEditText != null) {
+                mEditText.requestFocus();
                 mEditText.performClick();
-            inputString = "回复 " + comment.getUser().getUsername();
+                mEditText.setHint("回复 " + comment.getUser().getUsername());
+            }
         }));
         mFragments.add(new CommentListFragment());
         mAdapter = new PostDetailFragmentAdapter(getSupportFragmentManager(), getLifecycle(), mFragments);

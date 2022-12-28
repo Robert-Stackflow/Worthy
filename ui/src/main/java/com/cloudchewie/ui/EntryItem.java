@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -102,6 +103,8 @@ public class EntryItem extends ConstraintLayout {
             int spacing = (int) attr.getDimension(R.styleable.EntryItem_entry_item_spacing, 3);
             int backgroundId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon_background, R.drawable.shape_tag_round);
             boolean backgroundEnable = attr.getBoolean(R.styleable.EntryItem_entry_item_icon_background_enable, false);
+            int iconScaleType = attr.getInt(R.styleable.EntryItem_entry_item_icon_scale_type, 0);
+            setScaleType(iconScaleType);
             setMode(mode);
             setIcon(iconId);
             setIconColor(iconColor);
@@ -126,6 +129,22 @@ public class EntryItem extends ConstraintLayout {
         } else {
             setIcon(iconId);
             setIconColor(iconColor);
+        }
+    }
+
+    public void setScaleType(int type) {
+        switch (type) {
+            case 0:
+                icon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                break;
+            case 1:
+                icon.setPadding(10, 10, 10, 10);
+                icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                break;
+            case 2:
+                icon.setPadding(10, 10, 10, 10);
+                icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                break;
         }
     }
 

@@ -21,6 +21,17 @@
         <attr name="right_button_visibility" format="boolean" />
     </declare-styleable>
 
+    <style name="DialogFullScreen" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
+    </style>
+
     <declare-styleable name="SettingItem">
         <attr name="setting_item_simple_mode" format="boolean" />
         <attr name="setting_item_background" format="reference|integer" />
@@ -159,6 +170,11 @@
         <attr name="entry_item_checked_icon" format="reference" />
         <attr name="entry_item_checked_icon_color" format="color" />
         <attr name="entry_item_icon_size" format="dimension" />
+        <attr name="entry_item_icon_scale_type" format="enum">
+            <enum name="centerInside" value="0" />
+            <enum name="centerCrop" value="1" />
+            <enum name="fitCenter" value="2" />
+        </attr>
         <attr name="entry_item_spacing" format="dimension" />
         <attr name="entry_item_icon_background" format="reference" />
         <attr name="entry_item_icon_background_enable" format="boolean" />
@@ -236,8 +252,18 @@
         <attr name="history_padding_bottom" format="dimension" />
     </declare-styleable>
 
-    <style name="BottomDialogAnimation">
+    <style name="UpDownAnimation">
         <item name="android:windowEnterAnimation">@anim/anim_bottomsheet_up</item>
         <item name="android:windowExitAnimation">@anim/anim_bottomsheet_down</item>
+    </style>
+
+    <style name="ShadeAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_shade_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_shade_out</item>
+    </style>
+
+    <style name="FadeAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_fade_out</item>
     </style>
 </resources>

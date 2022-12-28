@@ -16,24 +16,38 @@ import com.cloudchewie.client.util.http.ResponseCode;
 public class UserRequest {
 
     public void signUp(User user) {
-        HttpRequestUtil.post(HttpRequestUtil.mediaType_JSON, "/user/signup", user);
+        new Thread(() -> HttpRequestUtil.post(HttpRequestUtil.mediaType_JSON, "/user/signup", user)).start();
     }
 
     public String login(User user) {
-        JSONObject response = HttpRequestUtil.post(HttpRequestUtil.mediaType_JSON, "/user/signin", user);
-        ToastUtils.showShort(response.getString("message"));
-        if (response.getIntValue("code") == ResponseCode.RC102.getCode())
-            return response.getString("data");
+        final JSONObject[] response = new JSONObject[1];
+        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.post(HttpRequestUtil.mediaType_JSON, "/user/signin", user));
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ToastUtils.showShort(response[0].getString("message"));
+        if (response[0].getIntValue("code") == ResponseCode.RC102.getCode())
+            return response[0].getString("data");
         return null;
     }
 
     public void logout() {
-        HttpRequestUtil.post(HttpRequestUtil.mediaType_FORM, "/user/logout", "");
+        new Thread(() -> HttpRequestUtil.post(HttpRequestUtil.mediaType_FORM, "/user/logout", "")).start();
     }
 
     public User find() {
-        JSONObject response = HttpRequestUtil.get(HttpRequestUtil.mediaType_FORM, "/user/find/");
-        return JSONObject.toJavaObject(response.getJSONObject("data"), User.class);
+        final JSONObject[] response = new JSONObject[1];
+        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.get(HttpRequestUtil.mediaType_FORM, "/user/find/"));
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return JSONObject.toJavaObject(response[0].getJSONObject("data"), User.class);
     }
 
 }
