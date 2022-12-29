@@ -68,6 +68,14 @@ public class TitleBar extends ConstraintLayout implements View.OnClickListener {
         }
     }
 
+    public ImageButton getRightButton() {
+        return right_button;
+    }
+
+    public ImageButton getLeftButton() {
+        return left_button;
+    }
+
     public void setLeftButtonClickListener(LeftButtonClickListener listener) {
         left_button.setOnClickListener(listener);
     }

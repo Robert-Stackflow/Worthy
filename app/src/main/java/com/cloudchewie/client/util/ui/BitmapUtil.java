@@ -13,6 +13,13 @@ import java.io.ByteArrayOutputStream;
 
 public class BitmapUtil {
 
+    public static double getAspectRatio(String path) {
+        Bitmap bitmap = BitmapFactory.decodeFile(path);
+        int height = bitmap.getHeight();
+        int width = bitmap.getWidth();
+        return height * 1.0 / width;
+    }
+
     public static Bitmap getBitmap(ImageView imageView) {
         return ((BitmapDrawable) imageView.getDrawable()).getBitmap();
     }

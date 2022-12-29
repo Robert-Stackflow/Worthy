@@ -27,9 +27,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding {
-        enabled = true
-    }
     sourceSets {
         main {
             jniLibs.srcDir 'libs'
@@ -41,6 +38,8 @@ android {
 dependencies {
     implementation project(':ui')
     implementation project(':ninegrid')
+    implementation project(':ucrop')
+    implementation project(':imagepicker')
     implementation libs.kotlin.stdlib
     implementation files('libs/BaiduLBS_Android.jar')
     //Androidx
@@ -64,6 +63,7 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.4.2'
     implementation 'com.alibaba:fastjson:2.0.21.graal'
     annotationProcessor 'androidx.room:room-compiler:2.4.2'
+    implementation 'com.github.tbruyelle:rxpermissions:0.12'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.10'
     //Controller
     implementation 'io.github.razerdp:BasePopup:3.2.0'

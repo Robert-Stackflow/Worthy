@@ -1,4 +1,4 @@
-package com.cloudchewie.client.util.ui;
+package com.cloudchewie.client.widget;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -19,6 +19,7 @@ import android.view.animation.LinearInterpolator;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -66,6 +67,10 @@ public class RichEditor extends WebView {
         getSettings().setJavaScriptEnabled(true);
         setWebChromeClient(new WebChromeClient());
         setWebViewClient(createWebviewClient());
+        WebSettings webSettings = getSettings();
+//        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        webSettings.setAllowFileAccess(true);
+//        webSettings.setAllowFileAccessFromFileURLs(true);
         loadUrl(SETUP_HTML);
 
         applyAttributes(context, attrs);
@@ -254,6 +259,10 @@ public class RichEditor extends WebView {
         exec("javascript:RE.setBold();");
     }
 
+    public void insertHorizontalRule() {
+        exec("javascript:RE.insertHorizontalRule();");
+    }
+
     public void setItalic() {
         exec("javascript:RE.setItalic();");
     }
@@ -342,10 +351,7 @@ public class RichEditor extends WebView {
 
     public void insertImage(String url, String alt) {
         exec("javascript:RE.prepareInsert();");
-//        exec("javascript:RE.insertImage('" + url + "', '" + alt + "');");
-//        String testStr = "<img src=\"http://www.1honeywan.com/siba/img/20100120/ai5.jpg\" alt=\"dachshund\"  width=\"100%\">";
-        String testStr = "<img src=\"" + url + "\" alt=\"dachshund\"  width=\"100%\">" + "<br><br>";
-        exec("javascript:RE.insertHTML('" + testStr + "');");
+        exec("javascript:RE.insertImage('" + url + "', '" + alt + "');");
     }
 
     /**
@@ -497,7 +503,7 @@ public class RichEditor extends WebView {
                             HitTestResult mResult = getHitTestResult();
                             if (mResult != null) {
                                 final int type = mResult.getType();
-                                if (type == HitTestResult.IMAGE_TYPE) {//|| type == WebView.HitTestResult.IMAGE_ANCHOR_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE
+                                if (type == HitTestResult.IMAGE_TYPE) {//
                                     //如果是点击图片
                                     String imageUrl = mResult.getExtra();
                                     setInputEnabled(false);

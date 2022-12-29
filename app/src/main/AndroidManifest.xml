@@ -84,5 +84,10 @@
         <activity android:name=".activity.settings.PrivacySettingsActivity" />
         <activity android:name=".activity.settings.AccountSettingsActivity" />
         <activity android:name=".activity.settings.NotificationSettingsActivity" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/AppTheme.Full" />
     </application>
 </manifest>
