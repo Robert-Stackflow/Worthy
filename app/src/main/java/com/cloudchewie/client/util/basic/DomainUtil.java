@@ -7,6 +7,7 @@ import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Chatter;
 import com.cloudchewie.client.domin.Comment;
 import com.cloudchewie.client.domin.Message;
+import com.cloudchewie.client.domin.Notice;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.domin.User;
@@ -264,5 +265,13 @@ public class DomainUtil {
         while (--count > 0 && level > 0)
             commentList.add(new Comment(getUser(context), getDate(), getContent(), ImageUrlUtil.getUrls(3), ((int) (Math.random() * 1000)), Comment.COMMENT_TYPE.values()[((int) (Math.random() * 1000)) % Comment.COMMENT_TYPE.values().length], getCommentList(context, --level)));
         return commentList;
+    }
+
+    public static List<Notice> getNoticeList(Context context, Notice.NOTICE_TYPE noticeType) {
+        List<Notice> noticeList = new ArrayList<>();
+        int count = ((int) (Math.random() * 1000)) % 15 + 3;
+        while (--count > 0)
+            noticeList.add(new Notice(getUser(context), getDate(), noticeType, getPost(context), getComment(context, 3)));
+        return noticeList;
     }
 }

@@ -40,6 +40,5 @@ public class MyNineGridImageViewAdapter extends NineGridImageViewAdapter<UserVie
 
     @Override
     protected void onItemImageClick(Context context, ImageView imageView, int index, List<UserViewInfo> list) {
-        //  Toast.makeText(context, "image position is " + index, Toast.LENGTH_SHORT).show();
     }
 }

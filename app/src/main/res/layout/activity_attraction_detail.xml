@@ -1,24 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_attraction_detail_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/color_prominent"
     android:fitsSystemWindows="true">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/activity_attraction_detail_appbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_attraction_detail_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageButton
+            android:id="@+id/activity_attraction_detail_back"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_arrow_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/activity_attraction_detail_jump_to_map"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/cd_jump_to_map"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_map"
+            app:layout_constraintEnd_toStartOf="@id/activity_attraction_detail_more"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/activity_attraction_detail_more"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/more"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_ellipsis"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         android:background="@color/color_prominent">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/activity_attraction_detail_collapsing_toolbar_layout"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/activity_attraction_detail_appbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/color_prominent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content"
+            android:background="@color/color_prominent"
+            app:elevation="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/activity_attraction_detail_banner"
@@ -26,53 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:background="@color/color_prominent"
-                android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/activity_attraction_detail_titlebar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageButton
-                        android:id="@+id/activity_attraction_detail_back"
-                        android:layout_width="@dimen/icon_size"
-                        android:layout_height="@dimen/icon_size"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/back"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_light_arrow_left"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/activity_attraction_detail_jump_to_map"
-                        android:layout_width="@dimen/icon_size"
-                        android:layout_height="@dimen/icon_size"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/cd_jump_to_map"
-                        android:padding="10dp"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_light_map"
-                        app:layout_constraintEnd_toStartOf="@id/activity_attraction_detail_more"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/activity_attraction_detail_more"
-                        android:layout_width="@dimen/icon_size"
-                        android:layout_height="@dimen/icon_size"
-                        android:background="@android:color/transparent"
-                        android:contentDescription="@string/more"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_light_ellipsis"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_scrollFlags="scroll">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/activity_attraction_detail_titlebar">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -103,6 +103,7 @@
                                 android:layout_marginBottom="10dp"
                                 android:textColor="@color/text_color_white"
                                 android:textSize="@dimen/page_detail_title"
+                                android:textStyle="bold"
                                 tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
                             <TextView
@@ -150,74 +151,135 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/activity_attraction_detail_content_bar"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity_attraction_detail_content_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shape_content_top_radius">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/activity_attraction_detail_content_tab_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tabBackground="@android:color/transparent"
+                    app:tabGravity="center"
+                    app:tabIndicator="@drawable/shape_tab_indicator"
+                    app:tabIndicatorColor="@color/color_prominent"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabMode="fixed"
+                    app:tabRippleColor="@android:color/transparent"
+                    app:tabSelectedTextColor="@color/color_prominent"
+                    app:tabTextAppearance="@style/SmallTabLayoutTextStyle"
+                    app:tabTextColor="@color/color_accent" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/shape_button_dark"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="@string/filter"
+                    android:textColor="@color/color_accent"
+                    android:textSize="@dimen/button_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/shape_content_top_radius">
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/activity_attraction_detail_content_tab_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tabBackground="@android:color/transparent"
-                app:tabGravity="center"
-                app:tabIndicator="@drawable/shape_tab_indicator"
-                app:tabIndicatorColor="@color/color_prominent"
-                app:tabIndicatorFullWidth="false"
-                app:tabMode="fixed"
-                app:tabRippleColor="@android:color/transparent"
-                app:tabSelectedTextColor="@color/color_prominent"
-                app:tabTextAppearance="@style/SmallTabLayoutTextStyle"
-                app:tabTextColor="@color/color_accent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity_attraction_detail_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/shape_button_dark"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="@string/filter"
-                android:textColor="@color/color_accent"
-                android:textSize="@dimen/button_text_size"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+                <View
+                    android:id="@+id/activity_attraction_detail_content_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/color_divider"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/activity_attraction_detail_content_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_attraction_detail_titlebar_2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/shape_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/content_background"
+        android:paddingTop="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/activity_attraction_detail_content"
+        <ImageButton
+            android:id="@+id/activity_attraction_detail_back_2"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_arrow_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/activity_attraction_detail_follow_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_button_dark"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="@string/follow_attraction"
+            android:textColor="@color/text_color_white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@+id/activity_attraction_detail_small_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:maxEms="6"
+            android:singleLine="true"
+            android:textColor="@color/color_accent"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/activity_attraction_detail_content_divider_2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <View
-                android:id="@+id/activity_attraction_detail_content_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/color_divider"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/activity_attraction_detail_content_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:layout_height="1px"
+            android:background="@color/color_divider"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

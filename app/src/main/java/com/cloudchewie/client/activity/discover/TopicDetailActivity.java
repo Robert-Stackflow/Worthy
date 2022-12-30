@@ -11,10 +11,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
@@ -25,7 +30,9 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.fragment.internal.PostListFragment;
+import com.cloudchewie.client.widget.AppBarStateChangeListener;
 import com.cloudchewie.ui.BottomSheet;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -41,8 +48,14 @@ public class TopicDetailActivity extends BaseActivity {
     private ImageView mBackButton;
     private ImageView mMoreButton;
     private TextView mNameView;
+    private TextView mSmallNameView;
     private TextView mDescribeView;
     private TextView mHotValueView;
+    private ConstraintLayout mTitleBar;
+    private ConstraintLayout mTitleBar2;
+    private RelativeLayout mMainLayout;
+    private ConstraintLayout mContentBar;
+    private AppBarLayout mAppBar;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
@@ -56,10 +69,17 @@ public class TopicDetailActivity extends BaseActivity {
         mBackButton = findViewById(R.id.activity_topic_detail_back);
         mMoreButton = findViewById(R.id.activity_topic_detail_more);
         mNameView = findViewById(R.id.activity_topic_detail_name);
+        mSmallNameView = findViewById(R.id.activity_topic_detail_small_name);
         mDescribeView = findViewById(R.id.activity_topic_detail_describe);
         mHotValueView = findViewById(R.id.activity_topic_detail_hotvalue);
         mTabLayout = findViewById(R.id.activity_topic_detail_content_tab_layout);
         mViewPager = findViewById(R.id.activity_topic_detail_content_viewpager);
+        mAppBar = findViewById(R.id.activity_topic_detail_appbar);
+        mTitleBar = findViewById(R.id.activity_topic_detail_titlebar);
+        mTitleBar2 = findViewById(R.id.activity_topic_detail_titlebar_2);
+        mMainLayout = findViewById(R.id.activity_topic_detail_layout);
+        mContentBar = findViewById(R.id.activity_topic_detail_content_bar);
+        mTitleBar2.setAlpha(0f);
         initView();
         initViewPager();
     }
@@ -76,8 +96,31 @@ public class TopicDetailActivity extends BaseActivity {
         Intent intent = this.getIntent();
         mTopic = (Topic) intent.getSerializableExtra("topic");
         mNameView.setText(mTopic.getName());
+        mSmallNameView.setText(mTopic.getName());
         mDescribeView.setText(mTopic.getDescribe());
         mHotValueView.setText(mTopic.getVisitorCount() + "热度 · " + mTopic.getFollowerCount() + "人关注");
+        mAppBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state, int offset) {
+                if (state == State.EXPANDED) {
+                    mTitleBar2.setAlpha(0f);
+                    mTitleBar2.setVisibility(View.GONE);
+                    mMainLayout.setBackgroundColor(getColor(R.color.color_prominent));
+                    mTitleBar.setBackgroundColor(getColor(R.color.color_prominent));
+                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_content_top_radius_unclickable));
+                } else if (state == State.COLLAPSED) {
+                    mTitleBar2.setAlpha(1f);
+                    mTitleBar2.setVisibility(View.VISIBLE);
+                    mMainLayout.setBackgroundColor(getColor(R.color.content_background));
+                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_content));
+                } else {
+                    mTitleBar2.setVisibility(View.VISIBLE);
+                    mTitleBar2.setAlpha(1f * Math.abs(offset) / appBarLayout.getTotalScrollRange());
+                    mMainLayout.setBackgroundColor(ColorUtils.blendARGB(getColor(R.color.color_prominent), getColor(R.color.content_background), 1f * Math.abs(offset) / appBarLayout.getTotalScrollRange()));
+                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_content_top_radius_unclickable));
+                }
+            }
+        });
     }
 
     void initViewPager() {

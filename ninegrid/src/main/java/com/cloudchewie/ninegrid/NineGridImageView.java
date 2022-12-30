@@ -547,6 +547,10 @@ public class NineGridImageView<T> extends ViewGroup {
         }
     }
 
+    public List<T> getImagesData() {
+        return mImgDataList;
+    }
+
     public void setImagesData(List<T> lists) {
         setImagesData(lists, NOSPAN);
     }
@@ -608,6 +612,34 @@ public class NineGridImageView<T> extends ViewGroup {
         } else {
             return size;
         }
+    }
+
+    public void deleteImage(int pos) {
+        if (pos >= mImageViewList.size())
+            return;
+        mImgDataList.remove(pos);
+        mImageViewList.remove(pos);
+        setImagesData(mImgDataList);
+        removeViewAt(pos);
+        for (ImageView imageView : mImageViewList) {
+            imageView.setOnClickListener(v -> {
+                mAdapter.onItemImageClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
+                if (mItemImageClickListener != null) {
+                    mItemImageClickListener.onItemImageClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
+                }
+            });
+        }
+        for (ImageView imageView : mImageViewList) {
+            imageView.setOnLongClickListener(v -> {
+                boolean consumedEvent = mAdapter.onItemImageLongClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
+                if (mItemImageLongClickListener != null) {
+                    consumedEvent = mItemImageLongClickListener.onItemImageLongClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList) || consumedEvent;
+                }
+                return consumedEvent;
+            });
+        }
+        invalidate();
+        requestLayout();
     }
 
     /**

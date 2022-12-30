@@ -6,14 +6,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.cloudchewie.ui.TitleBar
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_create_article_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        app:left_button_icon="@drawable/ic_light_close"
-        app:right_button_icon="@drawable/ic_light_right"
-        app:title="创作文章" />
+        android:background="@color/titlebar_background"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/activity_create_article_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/color_fe0000"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_create_article_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:text="发布文章"
+            android:textColor="@color/color_accent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_create_article_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="预览"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/activity_create_article_publish"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_create_article_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="发布"
+            android:textColor="@color/color_prominent"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/activity_create_article_swipe_refresh"
@@ -37,14 +93,15 @@
                     android:id="@+id/activity_create_article_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_card_round"
+                    android:background="@drawable/shape_card_round_unclickable"
                     android:gravity="top"
                     android:hint="标题(最多30字)"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
                     android:padding="10dp"
                     android:textCursorDrawable="@drawable/shape_cursor"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -140,7 +197,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@android:color/black" />
+                        android:src="@color/color_accent" />
 
                     <ImageView
                         android:id="@+id/activity_create_article_operation_color_red"

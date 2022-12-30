@@ -12,7 +12,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -76,9 +75,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             fragments = new ArrayList<>();
             fragments.add(new MapFragment());
             fragments.add(new DiscoverFragment());
+            fragments.add(new BaseFragment());
             fragments.add(new MessageFragment());
             fragments.add(new UserFragment());
-            fragments.add(new BaseFragment());
             adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
             viewPager.setAdapter(adapter);
             viewPager.setNoScroll(false);
@@ -101,29 +100,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(int i, @NonNull MenuItem item, boolean b) {
-                int position = 0;
                 switch (item.getItemId()) {
                     case R.id.menu_map:
-                        position = 0;
-                        break;
                     case R.id.menu_discover:
-                        position = 1;
-                        break;
                     case R.id.menu_message:
-                        position = 2;
-                        break;
                     case R.id.menu_personal:
-                        position = 3;
                         break;
                     case R.id.menu_create:
                         return false;
                 }
-                Log.d("xuruida", String.valueOf(position));
-//                if (previousPosition != position) {
-//                    viewPager.setCurrentItem(position, false);
-//                    Log.d("xuruida", "Current:" + position + ",True:" + viewPager.getCurrentItem());
-//                    previousPosition = position;
-//                }
                 return true;
             }
         });

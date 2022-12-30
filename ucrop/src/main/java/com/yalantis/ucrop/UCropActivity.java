@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -27,6 +26,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.transition.AutoTransition;
+import androidx.transition.Transition;
+import androidx.transition.TransitionManager;
+
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.yalantis.ucrop.callback.BitmapCropCallback;
@@ -41,26 +54,11 @@ import com.yalantis.ucrop.view.UCropView;
 import com.yalantis.ucrop.view.widget.AspectRatioTextView;
 import com.yalantis.ucrop.view.widget.HorizontalProgressWheelView;
 
-import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.transition.AutoTransition;
-import androidx.transition.Transition;
-import androidx.transition.TransitionManager;
 
 /**
  * Created by Oleksii Shliama (https://github.com/shliama).
@@ -76,18 +74,15 @@ public class UCropActivity extends AppCompatActivity {
     public static final int SCALE = 1;
     public static final int ROTATE = 2;
     public static final int ALL = 3;
-
-    @IntDef({NONE, SCALE, ROTATE, ALL})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface GestureTypes {
-
-    }
-
     private static final String TAG = "UCropActivity";
     private static final long CONTROLS_ANIMATION_DURATION = 50;
     private static final int TABS_COUNT = 3;
     private static final int SCALE_WIDGET_SENSITIVITY_COEFFICIENT = 15000;
     private static final int ROTATE_WIDGET_SENSITIVITY_COEFFICIENT = 42;
+
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
 
     private String mToolbarTitle;
 
@@ -121,15 +116,45 @@ public class UCropActivity extends AppCompatActivity {
     private Bitmap.CompressFormat mCompressFormat = DEFAULT_COMPRESS_FORMAT;
     private int mCompressQuality = DEFAULT_COMPRESS_QUALITY;
     private int[] mAllowedGestures = new int[]{SCALE, ROTATE, ALL};
-
-    static {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
+    private final View.OnClickListener mStateClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!v.isSelected()) {
+                setWidgetState(v.getId());
+            }
+        }
+    };
     private TextView txt_one;
     private TextView txt_two;
     private TextView txt_three;
+    private String pathFile;
+    private String outPath = "";
+    private TransformImageView.TransformImageListener mImageListener = new TransformImageView.TransformImageListener() {
+        @Override
+        public void onRotate(float currentAngle) {
+            setAngleText(currentAngle);
+        }
 
+        @Override
+        public void onScale(float currentScale) {
+            setScaleText(currentScale);
+        }
+
+        @Override
+        public void onLoadComplete() {
+            mUCropView.animate().alpha(1).setDuration(300).setInterpolator(new AccelerateInterpolator());
+            mBlockingView.setClickable(false);
+            mShowLoader = false;
+            supportInvalidateOptionsMenu();
+        }
+
+        @Override
+        public void onLoadFailure(@NonNull Exception e) {
+            setResultError(e);
+            finish();
+        }
+
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -159,7 +184,6 @@ public class UCropActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         txt_two.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,10 +242,8 @@ public class UCropActivity extends AppCompatActivity {
         setImageData(getIntent());
         setInitialState();
         addBlockingView();
+        txt_one.performClick();
     }
-
-    private String pathFile;
-    private String outPath = "";
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
@@ -457,33 +479,6 @@ public class UCropActivity extends AppCompatActivity {
         }
     }
 
-    private TransformImageView.TransformImageListener mImageListener = new TransformImageView.TransformImageListener() {
-        @Override
-        public void onRotate(float currentAngle) {
-            setAngleText(currentAngle);
-        }
-
-        @Override
-        public void onScale(float currentScale) {
-            setScaleText(currentScale);
-        }
-
-        @Override
-        public void onLoadComplete() {
-            mUCropView.animate().alpha(1).setDuration(300).setInterpolator(new AccelerateInterpolator());
-            mBlockingView.setClickable(false);
-            mShowLoader = false;
-            supportInvalidateOptionsMenu();
-        }
-
-        @Override
-        public void onLoadFailure(@NonNull Exception e) {
-            setResultError(e);
-            finish();
-        }
-
-    };
-
     /**
      * Use {@link #mActiveControlsWidgetColor} for color filter
      */
@@ -669,15 +664,6 @@ public class UCropActivity extends AppCompatActivity {
         mGestureCropImageView.setImageToWrapCropBounds();
     }
 
-    private final View.OnClickListener mStateClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (!v.isSelected()) {
-                setWidgetState(v.getId());
-            }
-        }
-    };
-
     private void setInitialState() {
         if (mShowBottomControls) {
             if (mWrapperStateAspectRatio.getVisibility() == View.VISIBLE) {
@@ -760,7 +746,7 @@ public class UCropActivity extends AppCompatActivity {
 
             @Override
             public void onCropFailure(@NonNull Throwable t) {
-                Log.e("没有数据么", " ==== " + t.toString());
+                Log.e("没有数据么", " ==== " + t);
                 setResultError(t);
                 finish();
             }
@@ -781,6 +767,12 @@ public class UCropActivity extends AppCompatActivity {
 
     protected void setResultError(Throwable throwable) {
         setResult(UCrop.RESULT_ERROR, new Intent().putExtra(UCrop.EXTRA_ERROR, throwable));
+    }
+
+    @IntDef({NONE, SCALE, ROTATE, ALL})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface GestureTypes {
+
     }
 
 }

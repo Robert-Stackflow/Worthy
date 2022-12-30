@@ -62,12 +62,17 @@
         <activity android:name=".activity.discover.SearchActivity" />
         <activity android:name=".activity.discover.PostDetailActivity" />
         <activity android:name=".activity.discover.TopicDetailActivity" />
-        <activity android:name=".activity.discover.AttractionDetailActivity" />
+        <activity
+            android:name=".activity.discover.AttractionDetailActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/TranslucentTheme" />
+        <activity android:name=".activity.discover.ArticleDetailActivity" />
         <!--创作-->
         <activity android:name=".activity.create.CreatePostActivity" />
+        <activity android:name=".activity.create.ArticlePreviewActivity" />
         <activity
             android:name=".activity.create.CreateArticleActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
+            android:windowSoftInputMode="adjustPan" />
         <!--消息-->
         <activity android:name=".activity.message.NoticeActivity" />
         <activity android:name=".activity.message.MessagerDetailActivity" />

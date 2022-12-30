@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,7 +83,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
         holder.nameView.setText(post.getUser().getUsername());
         holder.timeView.setText(DateUtil.beautifyTime(post.getDate()));
         holder.contentView.setText(handleLineBreaks(post.getContent()));
-        holder.location.setText(post.getAttraction().getName());
+        holder.attraction.setText(post.getAttraction().getName());
         holder.topic.setText(post.getTopics().get(0).getName());
         holder.thumbup.setText(String.valueOf(post.getThumbupCount()));
         holder.comment.setText(String.valueOf(post.getCommentCount()));
@@ -103,15 +104,19 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             } else {
-
+                Toast.makeText(context, "已经在看" + post.getTopics().get(0).getName() + "了喔", Toast.LENGTH_SHORT).show();
             }
         });
-        holder.location.setOnClickListener(v -> {
-            Intent intent = new Intent(context, AttractionDetailActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("attraction", post.getAttraction());
-            intent.putExtras(bundle);
-            context.startActivity(intent);
+        holder.attraction.setOnClickListener(v -> {
+            if (!(context instanceof AttractionDetailActivity && Objects.equals(((AttractionDetailActivity) context).getAttraction(), holder.attraction.getText()))) {
+                Intent intent = new Intent(context, AttractionDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("attraction", post.getAttraction());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            } else {
+                Toast.makeText(context, "已经在看" + post.getAttraction().getName() + "了喔", Toast.LENGTH_SHORT).show();
+            }
         });
         holder.thumbup.setOnClickListener(v -> {
             holder.thumbup.toggle();
@@ -146,7 +151,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
         public TextView nameView;
         public TextView timeView;
         public TextView contentView;
-        public IconTextItem location;
+        public IconTextItem attraction;
         public IconTextItem topic;
         public IconTextItem comment;
         public IconTextItem thumbup;
@@ -161,7 +166,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
             nameView = view.findViewById(R.id.post_item_username);
             timeView = view.findViewById(R.id.post_item_time);
             contentView = view.findViewById(R.id.post_item_content);
-            location = view.findViewById(R.id.post_item_attraction);
+            attraction = view.findViewById(R.id.post_item_attraction);
             topic = view.findViewById(R.id.post_item_topic);
             comment = view.findViewById(R.id.post_item_comment);
             thumbup = view.findViewById(R.id.post_item_thumbup);

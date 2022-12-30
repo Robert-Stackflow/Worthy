@@ -11,16 +11,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Notice implements Serializable {
-    int userId;
-    String username;
+    //TODO 无效,引用为userId
+    User user;
     Date date;
     Object obj;
     Object obj2;
     NOTICE_TYPE noticeType;
 
-    public Notice(int userId, String username, Date date, NOTICE_TYPE noticeType, Object obj, Object obj2) {
-        this.userId = userId;
-        this.username = username;
+    public Notice(User user, Date date, NOTICE_TYPE noticeType, Object obj, Object obj2) {
+        this.user = user;
         this.date = date;
         this.obj = obj;
         this.obj2 = obj2;
@@ -38,20 +37,12 @@ public class Notice implements Serializable {
         this.obj2 = obj2;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getDate() {
@@ -89,7 +80,7 @@ public class Notice implements Serializable {
             case COLLECT:
                 return "有人收藏了你的帖子";
             case FOLLOW:
-                return username + "关注了你";
+                return user.getUsername() + "关注了你";
             default:
                 return "有人与你进行了互动";
         }

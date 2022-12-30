@@ -10,6 +10,8 @@ package com.cloudchewie.client.adapter;
 import static com.cloudchewie.client.util.basic.StringUtil.handleLineBreaks;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +22,18 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.domin.Notice;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.util.basic.DateUtil;
 import com.cloudchewie.client.widget.SmallPostItem;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.MyViewHolder> {
     private List<Notice> notices;
@@ -61,7 +68,7 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.My
         if (null == notice) {
             return;
         }
-        holder.nameView.setText(notice.getUsername());
+        holder.nameView.setText(notice.getUser().getUsername());
         holder.timeView.setText(DateUtil.beautifyTime(notice.getDate()));
         holder.contentView.setText(handleLineBreaks(notice.getDescribe()));
         switch (type) {
@@ -75,10 +82,24 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.My
             default:
                 holder.referenceLayout.setVisibility(View.GONE);
                 holder.contentView.setVisibility(View.GONE);
-//                holder.bottomLayout.setVisibility(View.GONE);
                 holder.nameView.setText(notice.getDescribe());
                 break;
         }
+        holder.avatarView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HomePageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", notice.getUser());
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
+        holder.nameView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HomePageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", notice.getUser());
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
+        Glide.with(context).load(notice.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.avatarView);
     }
 
     @Override
@@ -89,6 +110,7 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.My
     static class MyViewHolder extends RecyclerView.ViewHolder {
         public View mItemView;
         public TextView nameView;
+        public CircleImageView avatarView;
         public TextView timeView;
         public TextView contentView;
         public LinearLayout referenceLayout;
@@ -98,6 +120,7 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.My
             super(view);
             mItemView = view;
             nameView = view.findViewById(R.id.notice_item_username);
+            avatarView = view.findViewById(R.id.notice_item_avatar);
             timeView = view.findViewById(R.id.notice_item_time);
             contentView = view.findViewById(R.id.notice_item_content);
             referenceLayout = view.findViewById(R.id.notice_item_reference_layout);

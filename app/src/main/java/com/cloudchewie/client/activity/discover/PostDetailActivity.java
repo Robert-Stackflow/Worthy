@@ -45,7 +45,6 @@ import com.cloudchewie.ui.EntryItem;
 import com.cloudchewie.ui.IconTextItem;
 import com.cloudchewie.ui.InputItem;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -86,7 +85,6 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
     private AppBarLayout mAppBarLayout;
     private RefreshLayout swipeRefreshLayout;
     private ClassicsHeader header;
-    private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private NineGridImageView<UserViewInfo> mNineGridImageView;
 
     @Override
@@ -109,7 +107,6 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
         mTabLayout = findViewById(R.id.activity_post_detail_comment_tab_layout);
         mViewPager = findViewById(R.id.activity_post_detail_content_viewpager);
         mNineGridImageView = findViewById(R.id.activity_post_detail_nine_grid);
-        mCollapsingToolbarLayout = findViewById(R.id.activity_post_detail_collapsing_toolbar_layout);
         mAppBarLayout = findViewById(R.id.activity_post_detail_appbar);
         mInputItem = findViewById(R.id.activity_post_detail_input_comment);
         mEditText = mInputItem.getEditText();

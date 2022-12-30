@@ -7,12 +7,6 @@
 
 package com.cloudchewie.client.fragment.internal;
 
-import static com.cloudchewie.client.domin.Notice.NOTICE_TYPE.COLLECT;
-import static com.cloudchewie.client.domin.Notice.NOTICE_TYPE.COMMENT;
-import static com.cloudchewie.client.domin.Notice.NOTICE_TYPE.FOLLOW;
-import static com.cloudchewie.client.domin.Notice.NOTICE_TYPE.REPLY;
-import static com.cloudchewie.client.domin.Notice.NOTICE_TYPE.THUMBUP;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,20 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.NoticeListAdapter;
-import com.cloudchewie.client.domin.Comment;
 import com.cloudchewie.client.domin.Notice;
-import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.fragment.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class NoticeListFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
@@ -55,36 +43,13 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            notices.add((Notice) msg.obj);
+            notices.addAll((List<Notice>) msg.obj);
             noticeListAdapter.notifyItemInserted(notices.size());
         }
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        try {
-            Notice notice = null;
-            switch (type) {
-                case COMMENT:
-                    notice = new Notice(1, "奥莫斯", simpleDateFormat.parse("2022-10-22 20:00:06"), COMMENT, getPost(), getComment());
-                    break;
-                case REPLY:
-                    notice = new Notice(1, "奥斯", simpleDateFormat.parse("2022-12-17 20:00:06"), REPLY, getPost(), getComment());
-                    break;
-                case THUMBUP:
-                    notice = new Notice(1, "莫斯", new Date(System.currentTimeMillis()), THUMBUP, getPost(), null);
-                    break;
-                case COLLECT:
-                    notice = new Notice(1, "奥斯莫", simpleDateFormat.parse("2022-12-18 20:00:06"), COLLECT, getPost(), null);
-                    break;
-                case FOLLOW:
-                    notice = new Notice(1, "莫斯奥", new Date(System.currentTimeMillis() - 5000), FOLLOW, null, null);
-                    break;
-            }
-            message.obj = notice;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        message.obj = DomainUtil.getNoticeList(getContext(), type);
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
@@ -107,30 +72,7 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
     void initRecyclerView() {
         notices = new ArrayList<>();
         noticelistRecyclerView = mainView.findViewById(R.id.fragment_notice_list_recyclerview);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-        try {
-            Notice notice = null;
-            switch (type) {
-                case COMMENT:
-                    notice = new Notice(1, "奥莫斯", simpleDateFormat.parse("2022-10-22 20:00:06"), COMMENT, getPost(), getComment());
-                    break;
-                case REPLY:
-                    notice = new Notice(1, "奥斯", simpleDateFormat.parse("2022-12-17 20:00:06"), REPLY, getPost(), getComment());
-                    break;
-                case THUMBUP:
-                    notice = new Notice(1, "莫斯", new Date(System.currentTimeMillis()), THUMBUP, getPost(), null);
-                    break;
-                case COLLECT:
-                    notice = new Notice(1, "奥斯莫", simpleDateFormat.parse("2022-12-18 20:00:06"), COLLECT, getPost(), null);
-                    break;
-                case FOLLOW:
-                    notice = new Notice(1, "莫斯奥", new Date(System.currentTimeMillis() - 5000), FOLLOW, null, null);
-                    break;
-            }
-            notices.add(notice);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        notices.addAll(DomainUtil.getNoticeList(getContext(), type));
         noticeListAdapter = new NoticeListAdapter(getActivity(), notices, type);
         noticelistRecyclerView.setAdapter(noticeListAdapter);
         noticelistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -158,13 +100,5 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-    }
-
-    Comment getComment() throws ParseException {
-        return DomainUtil.getComment(getContext(), 3);
-    }
-
-    Post getPost() throws ParseException {
-        return DomainUtil.getPost(getContext());
     }
 }

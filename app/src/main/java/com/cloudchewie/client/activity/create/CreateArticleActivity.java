@@ -3,6 +3,7 @@ package com.cloudchewie.client.activity.create;
 import static com.yalantis.ucrop.UCrop.EXTRA_OUTPUT_URI;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -12,20 +13,24 @@ import android.text.Html;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.blankj.utilcode.util.VibrateUtils;
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.activity.discover.ArticleDetailActivity;
 import com.cloudchewie.client.activity.global.BaseActivity;
+import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.util.basic.DomainUtil;
 import com.cloudchewie.client.util.image.CommonPopupWindow;
 import com.cloudchewie.client.util.ui.BitmapUtil;
 import com.cloudchewie.client.util.ui.KeyBoardUtil;
@@ -33,12 +38,10 @@ import com.cloudchewie.client.util.ui.RichEditorUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.client.widget.RichEditor;
 import com.cloudchewie.ui.CustomDialog;
-import com.cloudchewie.ui.TitleBar;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.tbruyelle.rxpermissions3.RxPermissions;
 import com.yalantis.ucrop.UCropActivity;
 
 import java.util.ArrayList;
@@ -46,14 +49,16 @@ import java.util.ArrayList;
 
 public class CreateArticleActivity extends BaseActivity implements View.OnClickListener {
     RefreshLayout swipeRefreshLayout;
-    TitleBar titleBar;
-    RxPermissions rxPermissions;
     EditText title;
     EditText content;
     RichEditor richEditor;
     ConstraintLayout operationLayout;
     String currentUrl = "";
+    String currentImageHtml = "";
     CommonPopupWindow popupWindow;
+    TextView cancelButton;
+    TextView publishButton;
+    TextView previewButton;
     boolean isTextBackGround = false;
     int maxTitleLength = 30;
     int defaultTextSize = 15;
@@ -69,44 +74,56 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         StatusBarUtil.setStatusBarMargin(this);
         setContentView(R.layout.activity_create_article);
-        titleBar = findViewById(R.id.activity_create_article_titlebar);
         title = findViewById(R.id.activity_create_article_title);
         content = findViewById(R.id.activity_create_article_content);
         richEditor = findViewById(R.id.activity_create_article_editor);
         operationLayout = findViewById(R.id.activity_create_article_operation_layout);
+        cancelButton = findViewById(R.id.activity_create_article_cancel);
+        previewButton = findViewById(R.id.activity_create_article_preview);
+        publishButton = findViewById(R.id.activity_create_article_publish);
         operationLayout.setVisibility(View.GONE);
-        rxPermissions = new RxPermissions(this);
         initView();
-        initPop();
         initEditor();
         initSwipeRefresh();
+        initImagePopupWindow();
+        setPublishEnabled(false);
+    }
+
+    void setPublishEnabled(boolean isEnabled) {
+        if (isEnabled) {
+            publishButton.setSelected(true);
+            publishButton.setEnabled(true);
+            previewButton.setSelected(true);
+            previewButton.setEnabled(true);
+            publishButton.setTextColor(getColor(R.color.color_prominent));
+            previewButton.setTextColor(getColor(R.color.color_prominent));
+        } else {
+            publishButton.setSelected(false);
+            publishButton.setEnabled(false);
+            previewButton.setSelected(false);
+            previewButton.setEnabled(false);
+            publishButton.setTextColor(getColor(R.color.text_color_light_gray));
+            previewButton.setTextColor(getColor(R.color.text_color_light_gray));
+        }
     }
 
     void initEditor() {
-        richEditor.setEditorHeight(800);
+        richEditor.setEditorHeight(650);
         richEditor.setEditorBackgroundColor(R.color.card_background);
         richEditor.setEditorFontSize(defaultTextSize);
-        richEditor.setEditorFontColor(R.color.color_accent);
+        richEditor.setEditorFontColor(getColor(R.color.color_accent));
+        richEditor.setTextColor(getColor(R.color.color_accent));
         richEditor.setPlaceholder("分享你的打卡经历");
         richEditor.setInputEnabled(true);
         richEditor.setOnTextChangeListener(text -> {
             if (TextUtils.isEmpty(title.getText().toString().trim())) {
-                titleBar.getRightButton().setSelected(false);
-                titleBar.getRightButton().setEnabled(false);
+                setPublishEnabled(false);
                 return;
             }
-            if (TextUtils.isEmpty(text)) {
-                titleBar.getRightButton().setSelected(false);
-                titleBar.getRightButton().setEnabled(false);
-            } else {
-                if (TextUtils.isEmpty(Html.fromHtml(text))) {
-                    titleBar.getRightButton().setSelected(false);
-                    titleBar.getRightButton().setEnabled(false);
-                } else {
-                    titleBar.getRightButton().setSelected(true);
-                    titleBar.getRightButton().setEnabled(true);
-                }
-            }
+            if (TextUtils.isEmpty(text))
+                setPublishEnabled(false);
+            else
+                setPublishEnabled(!TextUtils.isEmpty(Html.fromHtml(text)));
         });
         title.addTextChangedListener(new TextWatcher() {
             @Override
@@ -122,26 +139,16 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             public void afterTextChanged(Editable s) {
                 String html = richEditor.getHtml();
                 if (TextUtils.isEmpty(html)) {
-                    titleBar.getRightButton().setSelected(false);
-                    titleBar.getRightButton().setEnabled(false);
+                    setPublishEnabled(false);
                     return;
                 } else {
                     if (TextUtils.isEmpty(Html.fromHtml(html))) {
-                        titleBar.getRightButton().setSelected(false);
-                        titleBar.getRightButton().setEnabled(false);
+                        setPublishEnabled(false);
                         return;
-                    } else {
-                        titleBar.getRightButton().setSelected(true);
-                        titleBar.getRightButton().setEnabled(true);
-                    }
+                    } else
+                        setPublishEnabled(true);
                 }
-                if (TextUtils.isEmpty(s.toString())) {
-                    titleBar.getRightButton().setSelected(false);
-                    titleBar.getRightButton().setEnabled(false);
-                } else {
-                    titleBar.getRightButton().setSelected(true);
-                    titleBar.getRightButton().setEnabled(true);
-                }
+                setPublishEnabled(!TextUtils.isEmpty(s.toString()));
             }
         });
         richEditor.setOnDecorationChangeListener((text, types) -> {
@@ -208,13 +215,15 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         });
         richEditor.setImageClickListener(imageUrl -> {
             currentUrl = imageUrl;
+            currentImageHtml = getImageHtml(imageUrl);
             popupWindow.showBottom(getWindow().getDecorView().findViewById(android.R.id.content), 0.5f);
+            VibrateUtils.vibrate(50);
         });
     }
 
-    private void initPop() {
+    private void initImagePopupWindow() {
         @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(CreateArticleActivity.this).inflate(R.layout.newapp_pop_picture, null);
+        View view = LayoutInflater.from(CreateArticleActivity.this).inflate(R.layout.layout_post_image_operation, null);
         view.findViewById(R.id.linear_cancle).setOnClickListener(v -> popupWindow.dismiss());
         view.findViewById(R.id.linear_editor).setOnClickListener(v -> {
             Intent intent = new Intent(CreateArticleActivity.this, UCropActivity.class);
@@ -226,12 +235,14 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             popupWindow.dismiss();
         });
         view.findViewById(R.id.linear_delete_pic).setOnClickListener(v -> {
-            String removeUrl = "<img src=\"" + currentUrl + "\" alt=\"picture\"  width=\"100%\">" + "<br><br>";
-            String newUrl = richEditor.getHtml().replace(removeUrl, "");
             currentUrl = "";
-            richEditor.setHtml(newUrl);
+            richEditor.setHtml(richEditor.getHtml().replace(currentImageHtml, ""));
             if (RichEditorUtil.isEmpty(richEditor.getHtml()))
                 richEditor.setHtml("");
+            popupWindow.dismiss();
+        });
+        view.findViewById(R.id.linear_download_pic).setOnClickListener(v -> {
+            Toast.makeText(this, "图片保存成功", Toast.LENGTH_SHORT).show();
             popupWindow.dismiss();
         });
         popupWindow = new CommonPopupWindow.Builder(CreateArticleActivity.this)
@@ -243,12 +254,17 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         popupWindow.setOnDismissListener(() -> richEditor.setInputEnabled(true));
     }
 
+    String getImageHtml(String url) {
+        int width = 300;
+        int height = (int) (BitmapUtil.getAspectRatio(url) * 300);
+        return "<img src=\"" + url + "\" alt=\"" + url + "\" width=\"" + width + "\" height=\"" + height + "\">";
+    }
+
     void initView() {
-        titleBar.setRightButtonClickListener(v -> finish());
         title.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxTitleLength)});
-        titleBar.setLeftButtonClickListener(v -> {
+        cancelButton.setOnClickListener(v -> {
             CustomDialog dialog = new CustomDialog(CreateArticleActivity.this);
-            dialog.setMessage("是否将本次编辑保存为草稿？保存后下次可以继续编写");
+            dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
             dialog.setNegtive("放弃并退出");
             dialog.setPositive("保存为草稿");
             dialog.setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
@@ -263,6 +279,24 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 }
             });
             dialog.show();
+        });
+        previewButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CreateArticleActivity.this, ArticlePreviewActivity.class);
+            Post post = DomainUtil.getPost(this);
+            post.setThumbupCount(0);
+            post.setCollectionCount(0);
+            post.setCommentCount(0);
+            post.setContent(richEditor.getHtml());
+            post.setTitle(title.getText().toString());
+            intent.putExtra("post", post);
+            startActivity(intent);
+        });
+        publishButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CreateArticleActivity.this, ArticleDetailActivity.class);
+            Post post = DomainUtil.getPost(this);
+            post.setContent(richEditor.getHtml());
+            intent.putExtra("post", post);
+            startActivity(intent);
         });
         findViewById(R.id.activity_create_article_operation_redo).setOnClickListener(this);
         findViewById(R.id.activity_create_article_operation_undo).setOnClickListener(this);
@@ -298,7 +332,26 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         findViewById(R.id.activity_create_article_operation_color_pink).setOnClickListener(this);
         findViewById(R.id.activity_create_article_operation_color_green).setOnClickListener(this);
         findViewById(R.id.activity_create_article_operation_color_purple).setOnClickListener(this);
-
+        richEditor.setOnFocusChangeListener((v, b) -> {
+            Rect r = new Rect();
+            View view = getCurrentFocus();
+            CreateArticleActivity.this.getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+            int screenHeight = CreateArticleActivity.this.getWindow().getDecorView().getRootView().getHeight();
+            int heightDifference = screenHeight - r.bottom;
+            if (heightDifference > 0 && view != title) {
+                if (operationLayout != null) {
+                    operationLayout.setVisibility(View.VISIBLE);
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(operationLayout.getLayoutParams());
+                    layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    layoutParams.bottomMargin = heightDifference;
+                    operationLayout.setLayoutParams(layoutParams);
+                }
+            } else {
+                if (operationLayout != null) {
+                    operationLayout.setVisibility(View.GONE);
+                }
+            }
+        });
         richEditor.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             Rect r = new Rect();
             View view = getCurrentFocus();
@@ -324,7 +377,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         CustomDialog dialog = new CustomDialog(CreateArticleActivity.this);
-        dialog.setMessage("是否将本次编辑保存为草稿？保存后下次可以继续编写");
+        dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
         dialog.setNegtive("放弃并退出");
         dialog.setPositive("保存为草稿");
         dialog.setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
@@ -457,7 +510,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.activity_create_article_operation_color_black:
                 againEdit();
-                setPenColor(Color.BLACK);
+                setPenColor(getColor(R.color.color_accent));
                 break;
             case R.id.activity_create_article_operation_color_red:
                 againEdit();
@@ -508,13 +561,6 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 richEditor.setAlignRight();
                 break;
             case R.id.activity_create_article_operation_picture:
-                if (!TextUtils.isEmpty(richEditor.getHtml())) {
-                    ArrayList<String> arrayList = RichEditorUtil.returnImageUrlsFromHtml(richEditor.getHtml());
-                    if (arrayList != null && arrayList.size() >= 9) {
-                        Toast.makeText(CreateArticleActivity.this, "最多添加9张照片", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
                 selectImage(104, selectImages);
                 KeyBoardUtil.hideKeyBoard(CreateArticleActivity.this);
                 break;
@@ -550,20 +596,24 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 selectImages.clear();
                 selectImages.addAll((ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS));
                 againEdit();
-                Log.d("xuruida", String.valueOf(BitmapUtil.getAspectRatio(selectImages.get(0).path)));
-                richEditor.insertImage(selectImages.get(0).path, "picture", 300, (int) (BitmapUtil.getAspectRatio(selectImages.get(0).path) * 300));
+                String url = selectImages.get(0).path;
+                int width = 300;
+                int height = (int) (BitmapUtil.getAspectRatio(url) * 300);
+                richEditor.setAlignCenter();
+                richEditor.insertImage(url, url, width, height);
+                currentImageHtml = getImageHtml(url);
                 KeyBoardUtil.openKeybord(title, CreateArticleActivity.this);
                 richEditor.postDelayed(() -> {
-                    if (richEditor != null)
-                        richEditor.scrollToBottom();
-                    Log.d("xuruida", richEditor.getHtml());
+                    if (richEditor != null) richEditor.scrollToBottom();
                 }, 200);
             }
-        } else if (resultCode == -1) {
+        } else if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 11) {
                 String outPath = data.getStringExtra(EXTRA_OUTPUT_URI);
                 if (!TextUtils.isEmpty(outPath)) {
-                    String newHtml = richEditor.getHtml().replace(currentUrl, outPath);
+                    String newHtml = richEditor.getHtml().replace(currentImageHtml, getImageHtml(outPath));
+                    currentImageHtml = getImageHtml(outPath);
+                    richEditor.setAlignCenter();
                     richEditor.setHtml(newHtml);
                     currentUrl = "";
                 }
