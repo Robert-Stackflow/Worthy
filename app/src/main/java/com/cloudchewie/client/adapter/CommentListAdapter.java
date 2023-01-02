@@ -29,12 +29,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.domin.Comment;
-import com.cloudchewie.client.domin.UserViewInfo;
+import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.fragment.internal.BottomReplyFragment;
 import com.cloudchewie.client.util.basic.DateUtil;
 import com.cloudchewie.client.util.system.ClipBoardUtil;
-import com.cloudchewie.client.widget.ReplyItem;
+import com.cloudchewie.client.util.widget.ReplyItem;
 import com.cloudchewie.ninegrid.NineGridImageView;
+import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;
@@ -80,7 +81,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         }
         holder.contentView.setOnLongClickListener(view -> {
             ClipBoardUtil.copy(context, comment.getContent());
-            Toast.makeText(context, "已复制" + comment.getUser().getUsername() + "的评论", Toast.LENGTH_SHORT).show();
+            IToast.makeTextTop(context, "已复制" + comment.getUser().getUsername() + "的评论", Toast.LENGTH_SHORT).show();
             return false;
         });
         holder.nameView.setText(comment.getUser().getUsername());
@@ -156,7 +157,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
         public IconTextItem thumbup;
         public LinearLayout repliesLayout;
         public CircleImageView avatarView;
-        public NineGridImageView<UserViewInfo> nineGridImageViewer;
+        public NineGridImageView<ImageViewInfo> nineGridImageViewer;
         private MyNineGridImageViewAdapter mAdapter;
         private TextView expandView;
 

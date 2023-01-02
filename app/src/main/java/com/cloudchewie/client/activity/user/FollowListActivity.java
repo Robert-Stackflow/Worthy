@@ -43,7 +43,7 @@ public class FollowListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_follow_list);
         mBackButton = findViewById(R.id.activity_follow_list_back);
         mViewPager = findViewById(R.id.activity_follow_list_viewpager);

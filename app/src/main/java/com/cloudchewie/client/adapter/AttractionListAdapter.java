@@ -25,7 +25,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
 import com.cloudchewie.client.domin.Attraction;
-import com.cloudchewie.client.util.image.CornerTransform;
+import com.cloudchewie.client.util.image.CornerTransformation;
 import com.cloudchewie.ui.FlowTagLayout;
 import com.cloudchewie.ui.TagItem;
 
@@ -85,7 +85,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
             holder.flowTagLayout.addView(tagItem);
         }
         holder.statisticsView.setText(attraction.getStatistics());
-        Glide.with(context).load(attraction.getCoverImageUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransform.getTransform(context, true, true, false, false))).into(holder.imageView);
+        Glide.with(context).load(attraction.getCoverImageUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, true, true, false, false))).into(holder.imageView);
     }
 
     @Override

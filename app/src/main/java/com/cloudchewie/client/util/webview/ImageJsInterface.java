@@ -6,8 +6,10 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.webkit.WebView;
 
-import com.cloudchewie.client.domin.UserViewInfo;
-import com.cloudchewie.client.fragment.ImageViewFragment;
+import androidx.annotation.NonNull;
+
+import com.cloudchewie.client.domin.ImageViewInfo;
+import com.cloudchewie.client.fragment.global.ImageViewFragment;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.previewlibrary.GPreviewBuilder;
 
@@ -18,23 +20,22 @@ public class ImageJsInterface {
     private Rect bounds;
     private Context context;
     private List<String> imageUrls;
-    private List<UserViewInfo> mThumbViewInfoList;
+    private List<ImageViewInfo> mThumbViewInfoList;
 
-    public ImageJsInterface(WebView webView, Context context, List<String> imageUrls) {
+    public ImageJsInterface(WebView webView, Context context, @NonNull List<String> imageUrls) {
         this.context = context;
         this.imageUrls = imageUrls;
         bounds = NineGridUtil.getBounds(webView);
         mThumbViewInfoList = new ArrayList<>();
         for (String img : imageUrls) {
-            UserViewInfo userViewInfo = new UserViewInfo(img);
-            userViewInfo.setBounds(bounds);
-            mThumbViewInfoList.add(userViewInfo);
+            ImageViewInfo imageViewInfo = new ImageViewInfo(img);
+            imageViewInfo.setBounds(bounds);
+            mThumbViewInfoList.add(imageViewInfo);
         }
-
     }
 
     @android.webkit.JavascriptInterface
-    public void openImage(String img) {
+    public void openImage(@NonNull String img) {
         int index = imageUrls.indexOf(img.replace("file://", ""));
         if (index == -1)
             index = 0;

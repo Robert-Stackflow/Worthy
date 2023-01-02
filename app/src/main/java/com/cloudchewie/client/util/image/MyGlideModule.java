@@ -26,7 +26,7 @@ public class MyGlideModule implements GlideModule {
     public static int cacheSize100MegaBytes = 504857600;
 
     @Override
-    public void applyOptions(final Context context, GlideBuilder builder) {
+    public void applyOptions(@NonNull final Context context, GlideBuilder builder) {
         MemorySizeCalculator calculator = new MemorySizeCalculator.Builder(context).build();
         int defaultMemoryCacheSize = calculator.getMemoryCacheSize();
         int defaultBitmapPoolSize = calculator.getBitmapPoolSize();
@@ -40,6 +40,5 @@ public class MyGlideModule implements GlideModule {
 
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
-
     }
 }

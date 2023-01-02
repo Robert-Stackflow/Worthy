@@ -23,13 +23,13 @@ import com.blankj.utilcode.util.VibrateUtils;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
-import com.cloudchewie.client.domin.UserViewInfo;
-import com.cloudchewie.client.util.image.CommonPopupWindow;
+import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
+import com.cloudchewie.client.util.widget.CommonPopupWindow;
 import com.cloudchewie.ninegrid.NineGridImageView;
-import com.cloudchewie.ui.CustomDialog;
+import com.cloudchewie.ui.MyDialog;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -46,7 +46,7 @@ public class CreatePostActivity extends BaseActivity {
     ImageView pickImage;
     TextView cancelButton;
     TextView publishButton;
-    NineGridImageView<UserViewInfo> nineGridImageView;
+    NineGridImageView<ImageViewInfo> nineGridImageView;
     int currentEditIndex;
     int maxSize = 200;
     List<ImageItem> selectImages = new ArrayList<>();
@@ -55,7 +55,7 @@ public class CreatePostActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_create_post);
         content = findViewById(R.id.activity_create_post_content);
         wordCount = findViewById(R.id.activity_create_post_count);
@@ -76,11 +76,11 @@ public class CreatePostActivity extends BaseActivity {
         publishButton.setEnabled(false);
         publishButton.setTextColor(getColor(R.color.text_color_light_gray));
         cancelButton.setOnClickListener(v -> {
-            CustomDialog dialog = new CustomDialog(CreatePostActivity.this);
+            MyDialog dialog = new MyDialog(CreatePostActivity.this);
             dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
             dialog.setNegtive("放弃并退出");
             dialog.setPositive("保存为草稿");
-            dialog.setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
+            dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
                 @Override
                 public void onPositiveClick() {
                     finish();
@@ -159,11 +159,11 @@ public class CreatePostActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        CustomDialog dialog = new CustomDialog(CreatePostActivity.this);
+        MyDialog dialog = new MyDialog(CreatePostActivity.this);
         dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
         dialog.setNegtive("放弃并退出");
         dialog.setPositive("保存为草稿");
-        dialog.setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
+        dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
             @Override
             public void onPositiveClick() {
                 finish();
@@ -204,7 +204,7 @@ public class CreatePostActivity extends BaseActivity {
                 List<String> urls = new ArrayList<>();
                 for (ImageItem imageItem : selectImages)
                     urls.add(imageItem.path);
-                NineGridUtil.setDataSourceWithoutUserFragment(nineGridImageView, ImageUrlUtil.getViewInfos(urls));
+                NineGridUtil.setDataSourceWithoutUserFragment(nineGridImageView, ImageUrlUtil.urlToImageViewInfo(urls));
                 if (nineGridImageView.getChildCount() >= 9)
                     pickImage.setVisibility(View.GONE);
                 else
@@ -215,9 +215,9 @@ public class CreatePostActivity extends BaseActivity {
                 String outPath = data.getStringExtra(EXTRA_OUTPUT_URI);
                 if (!TextUtils.isEmpty(outPath)) {
                     selectImages.get(currentEditIndex).path = outPath;
-                    List<UserViewInfo> userViewInfos = nineGridImageView.getImagesData();
-                    userViewInfos.set(currentEditIndex, new UserViewInfo(outPath));
-                    NineGridUtil.setDataSourceWithoutUserFragment(nineGridImageView, userViewInfos);
+                    List<ImageViewInfo> imageViewInfos = nineGridImageView.getImagesData();
+                    imageViewInfos.set(currentEditIndex, new ImageViewInfo(outPath));
+                    NineGridUtil.setDataSourceWithoutUserFragment(nineGridImageView, imageViewInfos);
                     if (nineGridImageView.getChildCount() >= 9)
                         pickImage.setVisibility(View.GONE);
                     else

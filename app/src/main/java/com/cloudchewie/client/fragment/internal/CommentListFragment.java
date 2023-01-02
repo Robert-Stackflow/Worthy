@@ -17,13 +17,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.CommentListAdapter;
 import com.cloudchewie.client.domin.Comment;
+import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -32,7 +32,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentListFragment extends Fragment implements View.OnClickListener {
+public class CommentListFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
     CommentListAdapter.OnCommentItemClickListener listener;
     List<Comment> comments;
@@ -44,7 +44,7 @@ public class CommentListFragment extends Fragment implements View.OnClickListene
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             comments.addAll((List<Comment>) msg.obj);
             commentListAdapter.notifyItemInserted(comments.size());
         }
@@ -113,6 +113,7 @@ public class CommentListFragment extends Fragment implements View.OnClickListene
         footer.setTextSizeTitle(14);
     }
 
+    @Override
     public void performRefresh() {
         swipeRefreshLayout.autoRefresh();
     }

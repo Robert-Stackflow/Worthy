@@ -28,12 +28,13 @@ import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
 import com.cloudchewie.client.activity.discover.PostDetailActivity;
 import com.cloudchewie.client.activity.discover.TopicDetailActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
+import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.domin.Post;
-import com.cloudchewie.client.domin.UserViewInfo;
 import com.cloudchewie.client.util.basic.DateUtil;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.ninegrid.NineGridImageView;
+import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;
@@ -104,7 +105,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             } else {
-                Toast.makeText(context, "已经在看" + post.getTopics().get(0).getName() + "了喔", Toast.LENGTH_SHORT).show();
+                IToast.makeTextTop(context, "已经在看" + post.getTopics().get(0).getName() + "了喔", Toast.LENGTH_SHORT).show();
             }
         });
         holder.attraction.setOnClickListener(v -> {
@@ -115,7 +116,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             } else {
-                Toast.makeText(context, "已经在看" + post.getAttraction().getName() + "了喔", Toast.LENGTH_SHORT).show();
+                IToast.makeTextTop(context, "已经在看" + post.getAttraction().getName() + "了喔", Toast.LENGTH_SHORT).show();
             }
         });
         holder.thumbup.setOnClickListener(v -> {
@@ -137,7 +138,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
             intent.putExtras(bundle);
             context.startActivity(intent);
         });
-        NineGridUtil.setDataSource(holder.nineGridImageViewer, ImageUrlUtil.getViewInfos(post.getImageUrls()));
+        NineGridUtil.setDataSource(holder.nineGridImageViewer, ImageUrlUtil.urlToImageViewInfo(post.getImageUrls()));
         Glide.with(context).load(post.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.avatarView);
     }
 
@@ -156,7 +157,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.MyView
         public IconTextItem comment;
         public IconTextItem thumbup;
         public CircleImageView avatarView;
-        public NineGridImageView<UserViewInfo> nineGridImageViewer;
+        public NineGridImageView<ImageViewInfo> nineGridImageViewer;
         private MyNineGridImageViewAdapter mAdapter;
 
         public MyViewHolder(View view) {

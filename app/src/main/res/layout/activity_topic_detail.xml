@@ -111,7 +111,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="10dp"
-                            android:background="@drawable/shape_button"
+                            android:background="@drawable/shape_button_light"
                             android:minWidth="0dp"
                             android:minHeight="0dp"
                             android:text="@string/follow_topic"
@@ -167,13 +167,16 @@
                     app:tabTextColor="@color/color_accent" />
 
                 <Button
+                    android:id="@+id/activity_topic_detail_sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/shape_button_dark"
+                    android:background="@drawable/shape_button"
+                    android:backgroundTint="@color/button_background_gray"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
-                    android:text="@string/filter"
+                    android:stateListAnimator="@null"
+                    android:text="@string/sort_comprehensive"
                     android:textColor="@color/color_accent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -216,6 +219,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="@color/content_background"
+        android:clickable="true"
+        android:focusable="true"
         android:paddingTop="10dp">
 
         <ImageButton
@@ -237,13 +242,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/shape_button_dark"
+            android:background="@drawable/shape_button_frame"
             android:minWidth="0dp"
             android:minHeight="0dp"
+            android:stateListAnimator="@null"
             android:text="@string/follow_topic"
-            android:textColor="@color/text_color_white"
+            android:textColor="@color/color_accent"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -259,6 +265,7 @@
             android:singleLine="true"
             android:textColor="@color/color_accent"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -270,5 +277,44 @@
             android:layout_height="1px"
             android:background="@color/color_divider"
             app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_topic_detail_fab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="700dp"
+        android:background="@drawable/shape_button_round"
+        android:backgroundTint="@color/color_prominent"
+        android:paddingStart="5dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/activity_topic_detail_fab_avatar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/img_default_avatar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/activity_topic_detail_fab_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@android:color/transparent"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="发布内容"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/button_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/activity_topic_detail_fab_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

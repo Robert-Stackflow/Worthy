@@ -14,35 +14,37 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
+
 public class KeyBoardUtil {
+    /**
+     * 隐藏软键盘
+     */
     public static void hideKeyBoard(Activity activity) {
-        if (null == activity)
-            return;
-        InputMethodManager imm =
-                (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if (null == activity) return;
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         View v = activity.getWindow().peekDecorView();
-        if (null != v) {
-            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-        }
+        if (null != v) imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
-    public static void openKeybord(EditText mEditText, Context mContext) {
-        InputMethodManager imm = (InputMethodManager) mContext
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
+    /**
+     * 打开软键盘
+     */
+    public static void openKeybord(EditText mEditText, @NonNull Context mContext) {
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,
-                InputMethodManager.HIDE_IMPLICIT_ONLY);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
+    @Contract("null, _ -> false")
     public static boolean isShouldHideInput(View v, MotionEvent event) {
         if ((v instanceof EditText)) {
             int[] leftTop = {0, 0};
             v.getLocationInWindow(leftTop);
-            int left = leftTop[0], top = leftTop[1], bottom = top + v.getHeight(), right = left
-                    + v.getWidth();
-            // 保留点击EditText的事件
-            return !(event.getX() > left) || !(event.getX() < right)
-                    || !(event.getY() > top) || !(event.getY() < bottom);
+            int left = leftTop[0], top = leftTop[1], bottom = top + v.getHeight(), right = left + v.getWidth();
+            return !(event.getX() > left) || !(event.getX() < right) || !(event.getY() > top) || !(event.getY() < bottom);
         }
         return false;
     }

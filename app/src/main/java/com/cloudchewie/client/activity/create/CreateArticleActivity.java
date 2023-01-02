@@ -25,26 +25,29 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.blankj.utilcode.util.VibrateUtils;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.ArticleDetailActivity;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.util.basic.DomainUtil;
-import com.cloudchewie.client.util.image.CommonPopupWindow;
-import com.cloudchewie.client.util.ui.BitmapUtil;
+import com.cloudchewie.client.util.image.BitmapUtil;
 import com.cloudchewie.client.util.ui.KeyBoardUtil;
 import com.cloudchewie.client.util.ui.RichEditorUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
-import com.cloudchewie.client.widget.RichEditor;
-import com.cloudchewie.ui.CustomDialog;
+import com.cloudchewie.client.util.widget.CommonPopupWindow;
+import com.cloudchewie.client.util.widget.RichEditor;
+import com.cloudchewie.ui.IToast;
+import com.cloudchewie.ui.MyDialog;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.yalantis.ucrop.UCropActivity;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CreateArticleActivity extends BaseActivity implements View.OnClickListener {
@@ -53,7 +56,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     EditText content;
     RichEditor richEditor;
     ConstraintLayout operationLayout;
-    String currentUrl = "";
+    String currentImageUrl = "";
     String currentImageHtml = "";
     CommonPopupWindow popupWindow;
     TextView cancelButton;
@@ -67,12 +70,12 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     int maxTextSize = 7;
     int currentPenColor = Color.BLACK;
     boolean isSelectingPenColor = false;
-    private ArrayList<ImageItem> selectImages = new ArrayList<>();
+    private List<ImageItem> selectImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_create_article);
         title = findViewById(R.id.activity_create_article_title);
         content = findViewById(R.id.activity_create_article_content);
@@ -214,10 +217,14 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             }
         });
         richEditor.setImageClickListener(imageUrl -> {
-            currentUrl = imageUrl;
-            currentImageHtml = getImageHtml(imageUrl);
+            try {
+                imageUrl = URLDecoder.decode(imageUrl, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            currentImageUrl = imageUrl;
+            currentImageHtml = getImageHtml(currentImageUrl);
             popupWindow.showBottom(getWindow().getDecorView().findViewById(android.R.id.content), 0.5f);
-            VibrateUtils.vibrate(50);
         });
     }
 
@@ -226,24 +233,31 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         View view = LayoutInflater.from(CreateArticleActivity.this).inflate(R.layout.layout_post_image_operation, null);
         view.findViewById(R.id.linear_cancle).setOnClickListener(v -> popupWindow.dismiss());
         view.findViewById(R.id.linear_editor).setOnClickListener(v -> {
-            Intent intent = new Intent(CreateArticleActivity.this, UCropActivity.class);
-            intent.putExtra("filePath", currentUrl);
-            String destDir = getFilesDir().getAbsolutePath();
-            String fileName = "img_" + System.currentTimeMillis() + ".png";
-            intent.putExtra("outPath", destDir + fileName);
-            startActivityForResult(intent, 11);
-            popupWindow.dismiss();
+            if (currentImageUrl.endsWith(".gif")) {
+                IToast.makeTextTop(this, "暂不支持编辑.gif类型的图片", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(CreateArticleActivity.this, UCropActivity.class);
+                intent.putExtra("filePath", currentImageUrl);
+                String destDir = getFilesDir().getAbsolutePath();
+                String fileName = "img_" + System.currentTimeMillis() + ".png";
+                intent.putExtra("outPath", destDir + fileName);
+                startActivityForResult(intent, 11);
+                popupWindow.dismiss();
+            }
         });
         view.findViewById(R.id.linear_delete_pic).setOnClickListener(v -> {
-            currentUrl = "";
             richEditor.setHtml(richEditor.getHtml().replace(currentImageHtml, ""));
             if (RichEditorUtil.isEmpty(richEditor.getHtml()))
                 richEditor.setHtml("");
+            currentImageUrl = "";
+            currentImageHtml = "";
             popupWindow.dismiss();
         });
         view.findViewById(R.id.linear_download_pic).setOnClickListener(v -> {
-            Toast.makeText(this, "图片保存成功", Toast.LENGTH_SHORT).show();
+            IToast.makeTextTop(this, "图片保存成功", Toast.LENGTH_SHORT).show();
             popupWindow.dismiss();
+            currentImageUrl = "";
+            currentImageHtml = "";
         });
         popupWindow = new CommonPopupWindow.Builder(CreateArticleActivity.this)
                 .setView(view)
@@ -263,11 +277,11 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     void initView() {
         title.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxTitleLength)});
         cancelButton.setOnClickListener(v -> {
-            CustomDialog dialog = new CustomDialog(CreateArticleActivity.this);
+            MyDialog dialog = new MyDialog(CreateArticleActivity.this);
             dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
             dialog.setNegtive("放弃并退出");
             dialog.setPositive("保存为草稿");
-            dialog.setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
+            dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
                 @Override
                 public void onPositiveClick() {
                     finish();
@@ -292,11 +306,15 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             startActivity(intent);
         });
         publishButton.setOnClickListener(v -> {
-            Intent intent = new Intent(CreateArticleActivity.this, ArticleDetailActivity.class);
-            Post post = DomainUtil.getPost(this);
-            post.setContent(richEditor.getHtml());
-            intent.putExtra("post", post);
-            startActivity(intent);
+            if (richEditor.getHtml().length() < 200)
+                IToast.makeTextTop(this, "您的文章字数过少,暂时无法发布!", Toast.LENGTH_SHORT).show();
+            else {
+                Intent intent = new Intent(CreateArticleActivity.this, ArticleDetailActivity.class);
+                Post post = DomainUtil.getPost(this);
+                post.setContent(richEditor.getHtml());
+                intent.putExtra("post", post);
+                startActivity(intent);
+            }
         });
         findViewById(R.id.activity_create_article_operation_redo).setOnClickListener(this);
         findViewById(R.id.activity_create_article_operation_undo).setOnClickListener(this);
@@ -376,11 +394,11 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        CustomDialog dialog = new CustomDialog(CreateArticleActivity.this);
+        MyDialog dialog = new MyDialog(CreateArticleActivity.this);
         dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
         dialog.setNegtive("放弃并退出");
         dialog.setPositive("保存为草稿");
-        dialog.setOnClickBottomListener(new CustomDialog.OnClickBottomListener() {
+        dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
             @Override
             public void onPositiveClick() {
                 finish();
@@ -573,13 +591,12 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    public void selectImage(int requestCode, ArrayList<ImageItem> imageItems) {
+    public void selectImage(int requestCode, List<ImageItem> imageItems) {
         ImagePicker imagePicker = ImagePicker.getInstance();
         imagePicker.setCrop(false);
-        imagePicker.setMultiMode(false);
+        imagePicker.setMultiMode(true);
         imagePicker.setShowCamera(true);
         Intent intent = new Intent(this, ImageGridActivity.class);
-        intent.putExtra(ImageGridActivity.EXTRAS_IMAGES, imageItems);
         startActivityForResult(intent, requestCode);
     }
 
@@ -596,12 +613,16 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 selectImages.clear();
                 selectImages.addAll((ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS));
                 againEdit();
-                String url = selectImages.get(0).path;
-                int width = 300;
-                int height = (int) (BitmapUtil.getAspectRatio(url) * 300);
-                richEditor.setAlignCenter();
-                richEditor.insertImage(url, url, width, height);
-                currentImageHtml = getImageHtml(url);
+                for (ImageItem imageItem : selectImages) {
+                    String url = imageItem.path;
+                    int width = 300;
+                    int height = (int) (BitmapUtil.getAspectRatio(url) * 300);
+                    richEditor.setAlignCenter();
+                    richEditor.insertImage(url, url, width, height);
+                }
+                selectImages.clear();
+                currentImageUrl = "";
+                currentImageHtml = "";
                 KeyBoardUtil.openKeybord(title, CreateArticleActivity.this);
                 richEditor.postDelayed(() -> {
                     if (richEditor != null) richEditor.scrollToBottom();
@@ -611,11 +632,10 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             if (requestCode == 11) {
                 String outPath = data.getStringExtra(EXTRA_OUTPUT_URI);
                 if (!TextUtils.isEmpty(outPath)) {
-                    String newHtml = richEditor.getHtml().replace(currentImageHtml, getImageHtml(outPath));
-                    currentImageHtml = getImageHtml(outPath);
                     richEditor.setAlignCenter();
-                    richEditor.setHtml(newHtml);
-                    currentUrl = "";
+                    richEditor.setHtml(richEditor.getHtml().replace(currentImageHtml, getImageHtml(outPath)));
+                    currentImageUrl = "";
+                    currentImageHtml = "";
                 }
             }
         }

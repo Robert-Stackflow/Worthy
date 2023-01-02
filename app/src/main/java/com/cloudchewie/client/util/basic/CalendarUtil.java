@@ -13,6 +13,9 @@ import androidx.annotation.Nullable;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+/**
+ * 日期工具类
+ */
 public class CalendarUtil {
     private static final TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
 
@@ -32,7 +35,7 @@ public class CalendarUtil {
     }
 
     @NonNull
-    public static Calendar parseToJavaCalendar(com.haibin.calendarview.Calendar calendar) {
+    public static Calendar parseToJavaCalendar(@NonNull com.haibin.calendarview.Calendar calendar) {
         Calendar javaCalendar = Calendar.getInstance();
         javaCalendar.setTimeZone(timeZone);
         javaCalendar.set(calendar.getYear(), calendar.getMonth() - 1, calendar.getDay());
@@ -75,10 +78,11 @@ public class CalendarUtil {
     }
 
     @NonNull
-    public static com.haibin.calendarview.Calendar getSchemeCalendar(Calendar javaCalendar, int color, String text) {
+    public static com.haibin.calendarview.Calendar getSchemeCalendar(@NonNull Calendar javaCalendar, int color, String text) {
         return getSchemeCalendar(javaCalendar.get(Calendar.YEAR), javaCalendar.get(Calendar.MONTH), javaCalendar.get(Calendar.DATE), color, text);
     }
 
+    @NonNull
     public static Calendar getJavaCalendar() {
         Calendar cd = Calendar.getInstance();
         cd.setTimeZone(timeZone);

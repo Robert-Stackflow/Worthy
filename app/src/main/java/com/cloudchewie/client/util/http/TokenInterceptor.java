@@ -24,9 +24,9 @@ public class TokenInterceptor implements Interceptor {
 
     @NonNull
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         Request originRequest = chain.request();
-        if (!HttpRequestUtil.isAuth(originRequest.url().toString())) {
+        if (!HttpRequestUtil.isAuthRequest(originRequest.url().toString())) {
             Request newRequest = originRequest.newBuilder()
                     .addHeader("token", LocalStorage.getToken())
                     .build();

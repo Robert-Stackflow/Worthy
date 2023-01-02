@@ -76,7 +76,7 @@ public class Notice implements Serializable {
             case REPLY:
                 return "有人回复了你的评论:\n" + ((obj2 == null || !(obj2 instanceof Comment)) ? "" : ((Comment) obj2).getContent());
             case THUMBUP:
-                return "有人点赞了你的帖子";
+                return "有人赞了你的帖子";
             case COLLECT:
                 return "有人收藏了你的帖子";
             case FOLLOW:

@@ -14,7 +14,7 @@ public class ArticleDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_about);
         ((TitleBar) findViewById(R.id.activity_about_titlebar)).setLeftButtonClickListener(v -> finish());
         initSwipeRefresh();

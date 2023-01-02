@@ -26,11 +26,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.SearchActivity;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.fragment.internal.AttractionListFragment;
 import com.cloudchewie.client.fragment.internal.PostListFragment;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
-import com.cloudchewie.client.widget.FollowingPopupWindow;
+import com.cloudchewie.client.util.widget.FollowingPopupWindow;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -59,7 +59,7 @@ public class DiscoverFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_discover, null);
-        StatusBarUtil.setStatusBarMargin(mainView.findViewById(R.id.discover_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+        StatusBarUtil.setStatusBarMarginTop(mainView.findViewById(R.id.discover_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         context = getContext();
         tabLayout = mainView.findViewById(R.id.discover_tab_layout);
         viewPager = mainView.findViewById(R.id.discover_viewpager);

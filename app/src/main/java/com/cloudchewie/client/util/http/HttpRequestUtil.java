@@ -7,8 +7,6 @@
 
 package com.cloudchewie.client.util.http;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
@@ -24,12 +22,19 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 public class HttpRequestUtil {
-    public static final MediaType mediaType_JSON = MediaType.get("application/json; charset=utf-8");
-    public static final MediaType mediaType_FORM = MediaType.get("application/x-www-form-urlencoded; charset=utf-8");
-    private static final String baseUrl = "https://116.62.239.181:443";
-    private final OkHttpClient okHttpClient = null;
+    public static final MediaType MEDIA_TYPE_JSON = MediaType.get("application/json; charset=utf-8");
+    public static final MediaType MEDIA_TYPE_FORM = MediaType.get("application/x-www-form-urlencoded; charset=utf-8");
+    private static final String serverUrl = "https://116.62.239.181:443";
 
-    public static JSONObject post(MediaType contentType, String url, Object body) {
+    /**
+     * 向默认服务器地址发送POST请求
+     *
+     * @param contentType 请求文件类型
+     * @param url         请求路径
+     * @param body        请求体
+     * @return 响应结果
+     */
+    public static JSONObject postToServer(MediaType contentType, String url, Object body) {
         if (body instanceof JSONObject)
             body = ((JSONObject) body).toJSONString();
         if (!(body instanceof String))
@@ -39,34 +44,47 @@ public class HttpRequestUtil {
                 .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), SSLSocketClient.getX509TrustManager())
                 .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
                 .build();
-        RequestBody requestBody = RequestBody.create((String) body, contentType);
-        Request request = new Request.Builder().url(baseUrl + url).post(requestBody).build();
+        Request request = new Request.Builder().url(serverUrl + url).post(RequestBody.create((String) body, contentType)).build();
         Call call = okHttpClient.newCall(request);
         try {
             responseString[0] = (Objects.requireNonNull(call.execute().body())).string();
         } catch (IOException e) {
-            Log.d("xuruida", e.toString());
+            e.printStackTrace();
         }
         return JSON.parseObject(responseString[0]);
     }
 
-    public static JSONObject get(MediaType contentType, String url) {
+    /**
+     * 向默认服务器地址发送GET请求
+     *
+     * @param contentType 请求文件类型
+     * @param url         请求路径
+     * @return 响应结果
+     */
+    public static JSONObject getFromServer(MediaType contentType, String url) {
         final String[] responseString = {null};
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new TokenInterceptor())
                 .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), SSLSocketClient.getX509TrustManager())
                 .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
                 .build();
-        Request request = new Request.Builder().url(baseUrl + url).get().build();
+        Request request = new Request.Builder().url(serverUrl + url).get().build();
         Call call = okHttpClient.newCall(request);
         try {
             responseString[0] = (Objects.requireNonNull(call.execute().body())).string();
         } catch (IOException e) {
-            Log.d("xuruida", e.toString());
+            e.printStackTrace();
         }
         return JSON.parseObject(responseString[0]);
     }
 
-    public static JSONObject getOf(MediaType contentType, String url) {
+    /**
+     * 使用完整路径发送GET请求
+     *
+     * @param contentType 请求文件类型
+     * @param url         请求路径
+     * @return 响应结果
+     */
+    public static JSONObject get(MediaType contentType, String url) {
         final String[] responseString = {null};
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(url).get().build();
@@ -78,23 +96,13 @@ public class HttpRequestUtil {
         return JSON.parseObject(responseString[0]);
     }
 
-    public static JSONObject delete(MediaType contentType, String url) {
-        final String[] responseString = {null};
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new TokenInterceptor())
-                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), SSLSocketClient.getX509TrustManager())
-                .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
-                .build();
-        Request request = new Request.Builder().url(baseUrl + url).delete().build();
-        Call call = okHttpClient.newCall(request);
-        try {
-            responseString[0] = (Objects.requireNonNull(call.execute().body())).string();
-        } catch (IOException e) {
-            Log.d("xuruida", e.toString());
-        }
-        return JSON.parseObject(responseString[0]);
-    }
-
-    public static boolean isAuth(@NonNull String url) {
+    /**
+     * 判断请求路径是否为认证类型请求
+     *
+     * @param url
+     * @return
+     */
+    public static boolean isAuthRequest(@NonNull String url) {
         return url.contains("/user/signup") || url.contains("/user/signin");
     }
 }

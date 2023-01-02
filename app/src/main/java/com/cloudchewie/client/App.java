@@ -9,7 +9,7 @@ package com.cloudchewie.client;
 
 import android.app.Application;
 
-import com.cloudchewie.client.util.image.ImageLoader;
+import com.cloudchewie.client.util.image.MyImageLoader;
 import com.previewlibrary.ZoomMediaLoader;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -31,6 +31,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ZoomMediaLoader.getInstance().init(new ImageLoader());
+        ZoomMediaLoader.getInstance().init(new MyImageLoader());
     }
 }

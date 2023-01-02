@@ -15,21 +15,21 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.domin.UserViewInfo;
+import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.ninegrid.NineGridImageViewAdapter;
 
 import java.util.List;
 
-public class MyNineGridImageViewAdapter extends NineGridImageViewAdapter<UserViewInfo> {
+public class MyNineGridImageViewAdapter extends NineGridImageViewAdapter<ImageViewInfo> {
     public MyNineGridImageViewAdapter() {
     }
 
-    public MyNineGridImageViewAdapter(Context context, List<UserViewInfo> imageInfo) {
+    public MyNineGridImageViewAdapter(Context context, List<ImageViewInfo> imageInfo) {
         super(context, imageInfo);
     }
 
     @Override
-    protected void onDisplayImage(Context context, ImageView imageView, @NonNull UserViewInfo s) {
+    protected void onDisplayImage(Context context, ImageView imageView, @NonNull ImageViewInfo s) {
         Glide.with(context).load(s.getUrl()).apply(RequestOptions.placeholderOf(R.drawable.ic_state_background).error(R.drawable.ic_state_image_load_fail)).into(imageView);
     }
 
@@ -39,6 +39,6 @@ public class MyNineGridImageViewAdapter extends NineGridImageViewAdapter<UserVie
     }
 
     @Override
-    protected void onItemImageClick(Context context, ImageView imageView, int index, List<UserViewInfo> list) {
+    protected void onItemImageClick(Context context, ImageView imageView, int index, List<ImageViewInfo> list) {
     }
 }

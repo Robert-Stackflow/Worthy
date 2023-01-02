@@ -5,9 +5,11 @@ import static com.cloudchewie.client.util.basic.DateUtil.beautifyTime;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +27,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.domin.Post;
-import com.cloudchewie.client.fragment.internal.CommentListFragment;
+import com.cloudchewie.client.fragment.global.StateFragment;
+import com.cloudchewie.client.util.listener.AppBarStateChangeListener;
 import com.cloudchewie.client.util.ui.DarkModeUtil;
 import com.cloudchewie.client.util.ui.RichEditorUtil;
 import com.cloudchewie.client.util.webview.ImageJsInterface;
@@ -66,7 +69,10 @@ public class ArticlePreviewActivity extends BaseActivity {
     private InputItem mInputItem;
     private EditText mEditText;
     private TextView mSendView;
+    private TextView mPageTitleView;
+    private TextView mSmallTitleView;
     private LinearLayout mBottomInputLayout;
+    private Button mSortButton;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
@@ -86,6 +92,8 @@ public class ArticlePreviewActivity extends BaseActivity {
         mTabLayout = findViewById(R.id.activity_article_preview_comment_tab_layout);
         mUserNameView = findViewById(R.id.activity_article_preview_username);
         mTimeView = findViewById(R.id.activity_article_preview_time);
+        mPageTitleView = findViewById(R.id.activity_article_preview_page_title);
+        mSmallTitleView = findViewById(R.id.activity_article_preview_small_title);
         mTitleView = findViewById(R.id.activity_article_preview_title);
         mContentView = findViewById(R.id.activity_article_preview_content);
         mTopicView = findViewById(R.id.activity_article_preview_topic);
@@ -102,6 +110,7 @@ public class ArticlePreviewActivity extends BaseActivity {
         mBottomInputLayout = findViewById(R.id.activity_article_preview_statistics_layout);
         swipeRefreshLayout = findViewById(R.id.activity_article_preview_swipe_refresh);
         header = findViewById(R.id.activity_article_preview_swipe_refresh_header);
+        mSortButton = findViewById(R.id.activity_article_preview_sort);
         initSwipeRefresh();
         initView();
         initViewPager();
@@ -127,6 +136,7 @@ public class ArticlePreviewActivity extends BaseActivity {
         mLocationView.setText(mPost.getAttraction().getName());
         mTopicView.setText(mPost.getTopics().get(0).getName());
         mTitleView.setText(mPost.getTitle());
+        mSmallTitleView.setText(mPost.getTitle());
         mCollectionCountView.setText(String.valueOf(mPost.getCollectionCount()));
         mCommentsCountView.setText(String.valueOf(mPost.getCommentCount()));
         mThumbupCountView.setText(String.valueOf(mPost.getThumbupCount()));
@@ -141,6 +151,18 @@ public class ArticlePreviewActivity extends BaseActivity {
             mCollectionCountView.toggle();
             mPost.setCollectionCount(mPost.getCollectionCount() + (mCollectionCountView.isChecked() ? 1 : -1));
             mCollectionCountView.setText(String.valueOf(mPost.getCollectionCount()));
+        });
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state, int offset) {
+                if (state == State.COLLAPSED) {
+                    mSmallTitleView.setVisibility(View.VISIBLE);
+                    mPageTitleView.setVisibility(View.GONE);
+                } else {
+                    mSmallTitleView.setVisibility(View.GONE);
+                    mPageTitleView.setVisibility(View.VISIBLE);
+                }
+            }
         });
         Glide.with(this).load(mPost.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
     }
@@ -174,7 +196,7 @@ public class ArticlePreviewActivity extends BaseActivity {
                     "<style>ul{ padding-left: 1em;margin-top:0em}</style>" +
                     "<style>ol{ padding-left: 1.2em;margin-top:0em}</style>" +
                     "</head>" + mPost.getContent();
-        ArrayList<String> arrayList = RichEditorUtil.returnImageUrlsFromHtml(data);
+        ArrayList<String> arrayList = RichEditorUtil.getImageUrls(data);
         if (arrayList.size() > 0) {
             for (int i = 0; i < arrayList.size(); i++) {
                 if (!arrayList.get(i).contains("http")) {
@@ -190,14 +212,7 @@ public class ArticlePreviewActivity extends BaseActivity {
         mFragments = new ArrayList<>();
         mTitles = Arrays.asList(getResources().getStringArray(R.array.post_detail_comment_tab_titles));
         mTitles.set(mTitles.size() - 1, mTitles.get(mTitles.size() - 1) + "(" + mPost.getCommentCount() + ")");
-        mFragments.add(new CommentListFragment().setOnCommentClickListener((v, comment) -> {
-            if (mEditText != null) {
-                mEditText.requestFocus();
-                mEditText.performClick();
-                mEditText.setHint("回复 " + comment.getUser().getUsername());
-            }
-        }));
-        mFragments.add(new CommentListFragment());
+        mFragments.add(new StateFragment());
         mAdapter = new ArticlePreviewActivity.ArticlePreviewFragmentAdapter(getSupportFragmentManager(), getLifecycle(), mFragments);
         mViewPager.setAdapter(mAdapter);
         new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText(mTitles.get(position))).attach();

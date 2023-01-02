@@ -21,7 +21,7 @@ public class NotificationSettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_notification_settings);
         ((TitleBar) findViewById(R.id.notification_settings_titlebar)).setLeftButtonClickListener(v -> finish());
         initSwipeRefresh();

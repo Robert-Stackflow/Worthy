@@ -16,8 +16,9 @@ import android.widget.Toast;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
-import com.cloudchewie.ui.SearchLayout;
-import com.cloudchewie.ui.SearchList;
+import com.cloudchewie.ui.IToast;
+import com.cloudchewie.ui.search.SearchLayout;
+import com.cloudchewie.ui.search.SearchList;
 
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
     SearchLayout searchLayout;
@@ -28,7 +29,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_search);
         searchLayout = findViewById(R.id.search_layout);
         searchList = findViewById(R.id.search_list);
@@ -54,6 +55,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     }
 
     public void performSearch() {
-        Toast.makeText(this, "执行搜索" + searchInput.getText().toString(), Toast.LENGTH_SHORT).show();
+        IToast.makeTextTop(this, "执行搜索" + searchInput.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 }

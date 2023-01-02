@@ -9,6 +9,8 @@ package com.cloudchewie.client.util.ui;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 public class ViewUtil {
 
     /**
@@ -30,7 +32,7 @@ public class ViewUtil {
     /**
      * 测量控件的尺寸
      */
-    private static void calculateViewMeasure(View view) {
+    private static void calculateViewMeasure(@NonNull View view) {
         int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         view.measure(w, h);

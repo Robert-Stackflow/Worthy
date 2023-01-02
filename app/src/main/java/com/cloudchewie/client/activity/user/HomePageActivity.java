@@ -29,15 +29,15 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.domin.User;
-import com.cloudchewie.client.domin.UserViewInfo;
-import com.cloudchewie.client.fragment.BaseFragment;
-import com.cloudchewie.client.fragment.ImageViewFragment;
-import com.cloudchewie.client.fragment.StateFragment;
+import com.cloudchewie.client.fragment.global.BaseFragment;
+import com.cloudchewie.client.fragment.global.ImageViewFragment;
+import com.cloudchewie.client.fragment.global.StateFragment;
 import com.cloudchewie.client.fragment.internal.PostListFragment;
 import com.cloudchewie.client.util.image.NineGridUtil;
+import com.cloudchewie.client.util.listener.AppBarStateChangeListener;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
-import com.cloudchewie.client.widget.AppBarStateChangeListener;
 import com.cloudchewie.ui.BottomSheet;
 import com.cloudchewie.ui.IconTextItem;
 import com.google.android.material.appbar.AppBarLayout;
@@ -58,9 +58,9 @@ public class HomePageActivity extends AppCompatActivity {
     private List<String> mTitles;
     private List<Fragment> mFragments;
     private boolean mIsBlurred = false;
-    private UserViewInfo mAvatarInfo;
-    private UserViewInfo mBackGroundInfo;
-    private UserViewInfo mSmallAvatarInfo;
+    private ImageViewInfo mAvatarInfo;
+    private ImageViewInfo mBackGroundInfo;
+    private ImageViewInfo mSmallAvatarInfo;
     //基本控件
     private Toolbar mToolBar;
     private AppBarLayout mAppBar;
@@ -121,9 +121,9 @@ public class HomePageActivity extends AppCompatActivity {
     void initView() {
         Intent intent = this.getIntent();
         mUser = (User) intent.getSerializableExtra("user");
-        mAvatarInfo = new UserViewInfo(mUser.getAvatarUrl());
-        mSmallAvatarInfo = new UserViewInfo(mUser.getAvatarUrl());
-        mBackGroundInfo = new UserViewInfo(mUser.getBackgroundUrl());
+        mAvatarInfo = new ImageViewInfo(mUser.getAvatarUrl());
+        mSmallAvatarInfo = new ImageViewInfo(mUser.getAvatarUrl());
+        mBackGroundInfo = new ImageViewInfo(mUser.getBackgroundUrl());
         mBackButton.setOnClickListener(v -> finish());
         mMoreButton.setOnClickListener(v -> {
             BottomSheet bottomSheet = new BottomSheet(this);
@@ -132,19 +132,19 @@ public class HomePageActivity extends AppCompatActivity {
             bottomSheet.findViewById(R.id.home_page_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
         });
         mBackGroundView.setOnClickListener(v -> {
-            List<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
+            List<ImageViewInfo> mThumbViewInfoList = new ArrayList<>();
             mBackGroundInfo.setBounds(NineGridUtil.getBounds(mBackGroundView));
             mThumbViewInfoList.add(mBackGroundInfo);
             GPreviewBuilder.from(HomePageActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
         });
         mAvatarView.setOnClickListener(v -> {
-            List<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
+            List<ImageViewInfo> mThumbViewInfoList = new ArrayList<>();
             mAvatarInfo.setBounds(NineGridUtil.getBounds(mAvatarView));
             mThumbViewInfoList.add(mAvatarInfo);
             GPreviewBuilder.from(HomePageActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
         });
         mSmallAvatarView.setOnClickListener(v -> {
-            List<UserViewInfo> mThumbViewInfoList = new ArrayList<>();
+            List<ImageViewInfo> mThumbViewInfoList = new ArrayList<>();
             mSmallAvatarInfo.setBounds(NineGridUtil.getBounds(mSmallAvatarView));
             mThumbViewInfoList.add(mSmallAvatarInfo);
             GPreviewBuilder.from(HomePageActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();

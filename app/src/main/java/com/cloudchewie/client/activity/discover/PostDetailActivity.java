@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,12 +34,13 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
+import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.domin.Post;
-import com.cloudchewie.client.domin.UserViewInfo;
+import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.fragment.internal.CommentListFragment;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.image.NineGridUtil;
-import com.cloudchewie.client.util.system.OnKeyboardChangeListener;
+import com.cloudchewie.client.util.listener.OnKeyboardChangeListener;
 import com.cloudchewie.ninegrid.NineGridImageView;
 import com.cloudchewie.ui.BottomSheet;
 import com.cloudchewie.ui.EntryItem;
@@ -78,6 +80,7 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
     private EditText mEditText;
     private TextView mSendView;
     private LinearLayout mBottomInputLayout;
+    private Button mSortButton;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
@@ -85,7 +88,7 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
     private AppBarLayout mAppBarLayout;
     private RefreshLayout swipeRefreshLayout;
     private ClassicsHeader header;
-    private NineGridImageView<UserViewInfo> mNineGridImageView;
+    private NineGridImageView<ImageViewInfo> mNineGridImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +117,7 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
         mBottomInputLayout = findViewById(R.id.activity_post_detail_statistics_layout);
         swipeRefreshLayout = findViewById(R.id.activity_post_detail_swipe_refresh);
         header = findViewById(R.id.activity_post_detail_swipe_refresh_header);
+        mSortButton = findViewById(R.id.activity_post_detail_sort);
         initSwipeRefresh();
         initView();
         initViewPager();
@@ -186,6 +190,16 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
             userNameIntent.putExtras(bundle);
             startActivity(userNameIntent);
         });
+        mSortButton.setOnClickListener(v -> {
+            List<String> sortList = Arrays.asList(getResources().getStringArray(R.array.sort));
+            for (String str : sortList) {
+                if (Objects.equals(mSortButton.getText(), str)) {
+                    mSortButton.setText(sortList.get((sortList.indexOf(str) + 1) % sortList.size()));
+                    ((BaseFragment) mFragments.get(mViewPager.getCurrentItem())).performRefresh();
+                    break;
+                }
+            }
+        });
         ((View) mEditText.getParent()).getViewTreeObserver().addOnGlobalLayoutListener(new OnKeyboardChangeListener(((View) mEditText.getParent()), this));
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -210,7 +224,7 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
             }
         });
         mNineGridImageView.setAdapter(new MyNineGridImageViewAdapter());
-        NineGridUtil.setDataSource(mNineGridImageView, ImageUrlUtil.getViewInfos(mPost.getImageUrls()));
+        NineGridUtil.setDataSource(mNineGridImageView, ImageUrlUtil.urlToImageViewInfo(mPost.getImageUrls()));
         Glide.with(this).load(mPost.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
     }
 
@@ -225,7 +239,6 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
                 mEditText.setHint("回复 " + comment.getUser().getUsername());
             }
         }));
-        mFragments.add(new CommentListFragment());
         mAdapter = new PostDetailFragmentAdapter(getSupportFragmentManager(), getLifecycle(), mFragments);
         mViewPager.setAdapter(mAdapter);
         new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText(mTitles.get(position))).attach();

@@ -10,7 +10,7 @@ import java.util.List;
 public class MapRequest {
     public static List<PoiItem> request(String url) {
         final JSONObject[] response = new JSONObject[1];
-        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.getOf(HttpRequestUtil.mediaType_JSON, url));
+        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.get(HttpRequestUtil.MEDIA_TYPE_JSON, url));
         thread.start();
         try {
             thread.join();
@@ -23,7 +23,7 @@ public class MapRequest {
     public static List<PoiItem> request(double lat, double lng, String query) {
         String url = BaiduRequestBuilder.centroidOf(lat, lng).query(query).tag("旅游景点").radius(3000).build();
         final JSONObject[] response = new JSONObject[1];
-        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.getOf(HttpRequestUtil.mediaType_JSON, url));
+        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.get(HttpRequestUtil.MEDIA_TYPE_JSON, url));
         thread.start();
         try {
             thread.join();

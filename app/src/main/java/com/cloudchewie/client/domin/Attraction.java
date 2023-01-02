@@ -27,12 +27,14 @@ public class Attraction implements Serializable {
     int wantCount;
     String coverImageUrl;
     List<String> tags;
+    FOLLOW_TYPE myType;
 
     public Attraction() {
     }
 
-    public Attraction(String name, String location, String describe, int authorId, double longtitude, double latitude, int wantCount, int recommendCount, int goneCount, List<String> tags) {
+    public Attraction(String name, String location, String describe, int authorId, double longtitude, double latitude, int wantCount, int recommendCount, int goneCount, List<String> tags, FOLLOW_TYPE type) {
         this.name = name;
+        this.myType = type;
         this.location = location;
         this.describe = describe;
         this.authorId = authorId;
@@ -43,6 +45,14 @@ public class Attraction implements Serializable {
         this.goneCount = goneCount;
         this.tags = tags;
         coverImageUrl = ImageUrlUtil.getUrls(1).get(0);
+    }
+
+    public FOLLOW_TYPE getMyType() {
+        return myType;
+    }
+
+    public void setMyType(FOLLOW_TYPE myType) {
+        this.myType = myType;
     }
 
     public List<String> getTags() {
@@ -141,5 +151,11 @@ public class Attraction implements Serializable {
     @Override
     public String toString() {
         return "Attraction{" + "name='" + name + '\'' + ", location='" + location + '\'' + ", detail='" + describe + '\'' + ", authorId=" + authorId + ", longtitude=" + longtitude + ", latitude=" + latitude + ", followerCount=" + wantCount + ", visitorCount=" + recommendCount + ", postCount=" + goneCount + '}';
+    }
+
+    public enum FOLLOW_TYPE {
+        NONE,
+        WANT,
+        GONE
     }
 }

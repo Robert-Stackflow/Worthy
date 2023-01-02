@@ -21,6 +21,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/image_operation_share_recyclerview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.cloudchewie.ui.EntryItem
                 android:id="@+id/image_operation_wechat"
                 android:layout_width="wrap_content"
@@ -34,9 +44,8 @@
                 app:entry_item_icon_size="50dp"
                 app:entry_item_spacing="10dp"
                 app:entry_item_text="微信"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/image_operation_pengyouquan"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_operation_share_recyclerview"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.cloudchewie.ui.EntryItem
@@ -50,7 +59,6 @@
                 app:entry_item_icon_size="50dp"
                 app:entry_item_spacing="10dp"
                 app:entry_item_text="朋友圈"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/image_operation_qq"
                 app:layout_constraintStart_toEndOf="@id/image_operation_wechat"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +74,6 @@
                 app:entry_item_icon_size="50dp"
                 app:entry_item_spacing="10dp"
                 app:entry_item_text="QQ"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/image_operation_qqzone"
                 app:layout_constraintStart_toEndOf="@id/image_operation_pengyouquan"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +89,6 @@
                 app:entry_item_icon_size="50dp"
                 app:entry_item_spacing="10dp"
                 app:entry_item_text="QQ空间"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/image_operation_weibo"
                 app:layout_constraintStart_toEndOf="@id/image_operation_qq"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -98,7 +104,6 @@
                 app:entry_item_icon_size="50dp"
                 app:entry_item_spacing="10dp"
                 app:entry_item_text="微博"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/image_operation_more"
                 app:layout_constraintStart_toEndOf="@id/image_operation_qqzone"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -113,7 +118,6 @@
                 app:entry_item_icon_size="50dp"
                 app:entry_item_spacing="10dp"
                 app:entry_item_text="更多"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image_operation_weibo"
                 app:layout_constraintTop_toTopOf="parent" />

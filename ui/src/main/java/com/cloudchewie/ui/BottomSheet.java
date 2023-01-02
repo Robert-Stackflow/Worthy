@@ -20,9 +20,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import org.jetbrains.annotations.Contract;
+
 public class BottomSheet extends BottomSheetDialog {
     protected View mainView;
-    BottomSheetBehavior bottomSheetBehavior;
+    private BottomSheetBehavior bottomSheetBehavior;
     private TextView titleView;
     private ImageButton leftButton;
     private ConstraintLayout titleBarLayout;
@@ -51,6 +53,7 @@ public class BottomSheet extends BottomSheetDialog {
 
         }
 
+        @Contract(pure = true)
         @Override
         public void onSlide(@NonNull View bottomSheet, float slideOffset) {
         }

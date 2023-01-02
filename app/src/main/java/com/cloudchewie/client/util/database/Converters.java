@@ -12,15 +12,19 @@ import androidx.room.TypeConverter;
 
 import com.cloudchewie.client.util.basic.CalendarUtil;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Calendar;
 import java.util.Date;
 
 public class Converters {
+    @Contract("null -> null; !null -> new")
     @TypeConverter
     public static Date fromTimestamp(Long value) {
         return value == null ? null : new Date(value);
     }
 
+    @Contract("null -> null")
     @TypeConverter
     public static Long dateToTimestamp(Date date) {
         return date == null ? null : date.getTime();

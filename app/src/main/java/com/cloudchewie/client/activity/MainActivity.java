@@ -27,14 +27,15 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.fragment.BaseFragment;
-import com.cloudchewie.client.fragment.CreateDialogFragment;
+import com.cloudchewie.client.fragment.global.BaseFragment;
+import com.cloudchewie.client.fragment.global.CreateDialogFragment;
 import com.cloudchewie.client.fragment.nav.DiscoverFragment;
 import com.cloudchewie.client.fragment.nav.MapFragment;
 import com.cloudchewie.client.fragment.nav.MessageFragment;
 import com.cloudchewie.client.fragment.nav.UserFragment;
 import com.cloudchewie.client.util.database.AppDatabase;
 import com.cloudchewie.client.util.system.LocalStorage;
+import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.NoScrollViewPager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yh.bottomnavigation_base.IMenuListener;
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         bottomNavigation.setSmallTextSize(11);
         bottomNavigation.setLargeTextSize(12);
         bottomNavigation.setIconSize(20);
+        bottomNavigation.setBNMenuViewHeight(140);
         {
             fragments = new ArrayList<>();
             fragments.add(new MapFragment());
@@ -148,7 +150,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-            Toast.makeText(this, "授予权限成功", Toast.LENGTH_SHORT).show();
+            IToast.makeTextTop(this, "授予权限成功", Toast.LENGTH_SHORT).show();
         }
     }
 

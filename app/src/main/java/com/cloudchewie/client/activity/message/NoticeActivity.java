@@ -44,7 +44,7 @@ public class NoticeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_notice);
         mBackButton = findViewById(R.id.activity_notice_back);
         mViewPager = findViewById(R.id.activity_notice_viewpager);

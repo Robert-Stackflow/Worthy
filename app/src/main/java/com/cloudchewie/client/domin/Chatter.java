@@ -101,6 +101,6 @@ public class Chatter implements Serializable {
     }
 
     public enum CHATTER_STATE {
-        DEFAULT, PIN, DONTDISTURB, BLOCK,
+        DEFAULT, PIN, DONTDISTURB, BLOCK
     }
 }

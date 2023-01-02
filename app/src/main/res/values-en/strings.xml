@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Zhaoxi</string>
+    <string name="follow_attraction">Follow Attraction</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_discover">Discover</string>
+    <string name="nav_message">Message</string>
+    <string name="nav_user">Home</string>
+    <string name="follow_topic">Follow Topic</string>
+    <string name="cd_daynight">Dark Mode</string>
+    <string name="cd_settings">Settings</string>
+    <string name="entry_home_page">Home Page</string>
+    <string name="cd_poi_icon">POI</string>
+    <string name="cancel">Cancel</string>
+    <string name="fragement_message_title">Message</string>
+    <string name="cd_clear_unread">Clear Unread</string>
+    <string name="post_detail_title">Post Detail</string>
+    <string name="back">Back</string>
+    <string name="more">More</string>
+    <string name="sort_comprehensive">Comprehensive</string>
+    <string name="sort_newest">Newest</string>
+    <string name="sort_earliest">Earliest</string>
+    <string name="cd_home_page_background">Background</string>
+    <string name="zero">zero</string>
+    <string name="filter">Filter</string>
+    <string name="fab">Publish</string>
+    <string name="comment_detail_title">Reply Detail</string>
+</resources>

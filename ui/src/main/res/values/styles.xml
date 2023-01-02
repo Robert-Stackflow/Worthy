@@ -1,17 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-    </style>
-
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+        <item name="bottomSheetStyle">@style/BottomSheetStyleWrapper</item>
     </style>
 
-    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+    <style name="BottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="DialogFullScreen" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
+    </style>
+
+    <style name="MyDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/color_selector_tab</item>
+    </style>
+
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/tab_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SmallTabLayoutTextStyle">
+        <item name="android:textSize">@dimen/tab_title_small</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <declare-styleable name="TitleBar">
@@ -25,17 +55,6 @@
         <attr name="left_button_visibility" format="boolean" />
         <attr name="right_button_visibility" format="boolean" />
     </declare-styleable>
-
-    <style name="DialogFullScreen" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowAnimationStyle">@style/FadeAnimation</item>
-    </style>
 
     <declare-styleable name="SettingItem">
         <attr name="setting_item_simple_mode" format="boolean" />
@@ -87,14 +106,6 @@
         <attr name="chatter_item_bottom_radius_enable" format="boolean" />
     </declare-styleable>
 
-    <style name="CustomDialog" parent="android:style/Theme.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-    </style>
-
     <declare-styleable name="InputItem">
         <attr name="input_item_mode" format="enum">
             <enum name="text" value="0" />
@@ -114,37 +125,10 @@
         <attr name="input_item_right_icon" format="reference" />
         <attr name="input_item_right_icon_visibility" format="boolean" />
     </declare-styleable>
-
-    <style name="AnimActivity" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowAnimationStyle">@style/anim_fade</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <item name="textAllCaps">false</item>
-        <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@color/color_selector_tab</item>
-    </style>
-
-    <style name="anim_fade" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/anim_fade_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/anim_fade_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/anim_fade_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/anim_fade_out</item>
-    </style>
-
     <declare-styleable name="FlowTagLayout">
         <attr name="horizontal_diver" format="dimension" />
         <attr name="vertical_diver" format="dimension" />
     </declare-styleable>
-
-    <style name="TabLayoutTextStyle">
-        <item name="android:textSize">@dimen/tab_title</item>
-    </style>
-
-    <style name="SmallTabLayoutTextStyle">
-        <item name="android:textSize">@dimen/tab_title_small</item>
-    </style>
 
     <declare-styleable name="IconTextItem">
         <attr name="icon_text_item_text" format="string" />
@@ -184,91 +168,41 @@
         <attr name="entry_item_icon_background" format="reference" />
         <attr name="entry_item_icon_background_enable" format="boolean" />
     </declare-styleable>
-    <!--搜索框-->
-    <declare-styleable name="SearchLayout">
-        <!--搜索图标-->
-        <attr name="search_icon" format="reference" />
-        <!--搜索图标的宽-->
-        <attr name="search_icon_width" format="dimension" />
-        <!--搜索图标的高-->
-        <attr name="search_icon_height" format="dimension" />
-        <!--搜索图标距离左边的距离-->
-        <attr name="search_icon_left" format="dimension" />
-        <!--搜索删除图标-->
-        <attr name="search_icon_delete" format="reference" />
-        <!--搜索删除图标的宽-->
-        <attr name="search_icon_delete_width" format="dimension" />
-        <!--搜索删除图标的高-->
-        <attr name="search_icon_delete_height" format="dimension" />
-        <!--搜索删除图标距离右边的距离-->
-        <attr name="search_icon_delete_right" format="dimension" />
-        <!--搜索框占位字符-->
-        <attr name="search_hint" format="string" />
-        <!--搜索框占位字符颜色-->
-        <attr name="search_hint_color" format="color" />
-        <!--搜索框文字颜色-->
-        <attr name="search_color" format="color" />
-        <!--搜索框文字大小-->
-        <attr name="search_size" format="dimension" />
-        <!--搜索框光标-->
-        <attr name="search_text_cursor" format="reference" />
-        <!--整个搜索框背景-->
-        <attr name="search_bg" format="reference" />
 
+    <declare-styleable name="SearchLayout">
+        <attr name="search_icon" format="reference" />
+        <attr name="search_icon_width" format="dimension" />
+        <attr name="search_icon_height" format="dimension" />
+        <attr name="search_icon_left" format="dimension" />
+        <attr name="search_icon_delete" format="reference" />
+        <attr name="search_icon_delete_width" format="dimension" />
+        <attr name="search_icon_delete_height" format="dimension" />
+        <attr name="search_icon_delete_right" format="dimension" />
+        <attr name="search_hint" format="string" />
+        <attr name="search_hint_color" format="color" />
+        <attr name="search_color" format="color" />
+        <attr name="search_size" format="dimension" />
+        <attr name="search_text_cursor" format="reference" />
+        <attr name="search_bg" format="reference" />
     </declare-styleable>
 
-    <!--搜索框下面的搜索列表-->
     <declare-styleable name="SearchList">
-        <!--历史搜索列表样式，是网格还是流式布局-->
         <attr name="is_history_flex_box_or_grid" format="boolean" />
-        <!--历史搜索列表，最多展示几个item，默认10-->
         <attr name="history_flex_box_count" format="integer" />
-        <!--历史搜索列表样式，内容是否居中-->
         <attr name="is_history_center" format="boolean" />
-        <!--历史搜索列表样式，如果是网格布局，条目列数，默认2-->
         <attr name="history_grid_span_count" format="integer" />
-        <!--历史搜索列表 item距离上边的距离-->
         <attr name="history_item_top_margin" format="integer" />
-        <!--历史搜索列表 item 文字颜色-->
         <attr name="history_item_color" format="color" />
-        <!--历史搜索列表 item 文字大小-->
         <attr name="history_item_size" format="dimension" />
-        <!--历史搜索列表 item 距离上边的距离-->
         <attr name="history_item_margin_top" format="dimension" />
-
-        <!--历史搜索右边是否展示删除小按钮-->
         <attr name="is_visibility_history_clear" format="boolean" />
-        <!--历史搜索右边的删除小按钮-->
         <attr name="history_clear_icon" format="reference" />
-        <!--历史搜索右边的删除文字-->
         <attr name="history_clear_text" format="string" />
-        <!--历史搜索右边的删除文字大小-->
         <attr name="history_clear_size" format="dimension" />
-        <!--历史搜索右边的删除文字颜色-->
         <attr name="history_clear_color" format="color" />
-
-        <!--历史搜索列表 内边距，左-->
         <attr name="history_padding_left" format="dimension" />
-        <!--历史搜索列表 内边距，上-->
         <attr name="history_padding_top" format="dimension" />
-        <!--历史搜索列表 内边距，右-->
         <attr name="history_padding_right" format="dimension" />
-        <!--历史搜索列表 内边距，下-->
         <attr name="history_padding_bottom" format="dimension" />
     </declare-styleable>
-
-    <style name="UpDownAnimation">
-        <item name="android:windowEnterAnimation">@anim/anim_bottomsheet_up</item>
-        <item name="android:windowExitAnimation">@anim/anim_bottomsheet_down</item>
-    </style>
-
-    <style name="ShadeAnimation">
-        <item name="android:windowEnterAnimation">@anim/anim_shade_in</item>
-        <item name="android:windowExitAnimation">@anim/anim_shade_out</item>
-    </style>
-
-    <style name="FadeAnimation">
-        <item name="android:windowEnterAnimation">@anim/anim_fade_in</item>
-        <item name="android:windowExitAnimation">@anim/anim_fade_out</item>
-    </style>
 </resources>

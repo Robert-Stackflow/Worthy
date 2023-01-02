@@ -54,8 +54,10 @@ import com.yalantis.ucrop.view.UCropView;
 import com.yalantis.ucrop.view.widget.AspectRatioTextView;
 import com.yalantis.ucrop.view.widget.HorizontalProgressWheelView;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -167,7 +169,6 @@ public class UCropActivity extends AppCompatActivity {
         txt_one = findViewById(R.id.txt_one);
         txt_two = findViewById(R.id.txt_two);
         txt_three = findViewById(R.id.txt_three);
-
 
         txt_one.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,7 +313,11 @@ public class UCropActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(outPath)) {
             outPath = "";
         }
-
+        try {
+            pathFile = URLDecoder.decode(pathFile, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         FastBitmapDrawable fastBitmapDrawable = new FastBitmapDrawable(BitmapFactory.decodeFile(pathFile));
         mGestureCropImageView.setImageDrawable(fastBitmapDrawable);
     }

@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 
 public class AnimationUtil {
-
-    //动画持续时间
     public final static int ANIMATION_IN_TIME = 500;
     public final static int ANIMATION_OUT_TIME = 500;
     private static AlphaAnimation mHideAnimation = null;
@@ -33,14 +31,11 @@ public class AnimationUtil {
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(isIn ? -toYDelta : 0, isIn ? 0 : -toYDelta);
         valueAnimator.setDuration(isIn ? ANIMATION_IN_TIME : ANIMATION_OUT_TIME);
         valueAnimator.setRepeatCount(0);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float currentValue = (Float) animation.getAnimatedValue();
-                target.setY(currentValue);
-                if (!isIn) {//因为在setAnimationStyle(R.style.SelectPopupWindow);设置了进入动画,所以执行进入动画时不再设置
-                    rootView.setAlpha(1 - Math.abs(currentValue) / animation.getDuration());
-                }
+        valueAnimator.addUpdateListener(animation -> {
+            float currentValue = (Float) animation.getAnimatedValue();
+            target.setY(currentValue);
+            if (!isIn) {
+                rootView.setAlpha(1 - Math.abs(currentValue) / animation.getDuration());
             }
         });
         valueAnimator.addListener(new AnimatorListenerAdapter() {

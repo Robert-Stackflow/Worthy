@@ -36,6 +36,7 @@
             android:src="@drawable/ic_light_arrow_left"
             android:text="@string/post_detail_title"
             android:textColor="@color/color_accent"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/activity_post_detail_back"
             app:layout_constraintTop_toTopOf="parent" />
@@ -240,13 +241,15 @@
                         app:tabTextColor="@color/color_accent" />
 
                     <Button
+                        android:id="@+id/activity_post_detail_sort"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
-                        android:background="@drawable/shape_button_dark"
+                        android:background="@drawable/shape_button"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
-                        android:text="@string/sort"
+                        android:stateListAnimator="@null"
+                        android:text="@string/sort_comprehensive"
                         android:textColor="@color/color_accent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -369,7 +372,7 @@
             android:id="@+id/activity_post_detail_send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
             android:minWidth="0dp"
             android:minHeight="0dp"

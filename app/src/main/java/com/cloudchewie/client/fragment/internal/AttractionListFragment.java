@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.AttractionListAdapter;
 import com.cloudchewie.client.domin.Attraction;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;

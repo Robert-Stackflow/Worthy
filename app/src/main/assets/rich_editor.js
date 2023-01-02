@@ -40,6 +40,7 @@ RE.callback = function() {
 
 RE.setHtml = function(contents) {
     RE.editor.innerHTML = decodeURIComponent(contents.replace(/\+/g, '%20'));
+    RE.callback();
 }
 
 RE.getHtml = function() {
@@ -370,9 +371,6 @@ RE.blurFocus = function() {
 RE.removeFormat = function() {
     document.execCommand('removeFormat', false, null);
 }
-
-
-
 
 // Event Listeners
 RE.editor.addEventListener("input", RE.callback);

@@ -22,18 +22,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.PostListAdapter;
+import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.domin.Topic;
+import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
 public class PostListFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
@@ -43,6 +43,8 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
     RefreshLayout swipeRefreshLayout;
     ClassicsHeader header;
     ClassicsFooter footer;
+    POSTLIST_TYPE type;
+    Object obj = null;
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
@@ -53,20 +55,67 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        message.obj = DomainUtil.getPostList(getContext());
+        switch (type) {
+            case TOPIC:
+            case ATTRACTION:
+                message.obj = DomainUtil.getPostList(getContext(), obj);
+                break;
+            case DEFAULT:
+                message.obj = DomainUtil.getPostList(getContext());
+                break;
+        }
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
     Runnable getMoreDatas = () -> {
         Message message = handler.obtainMessage();
-        message.obj = DomainUtil.getPostList(getContext());
+        switch (type) {
+            case TOPIC:
+            case ATTRACTION:
+                message.obj = DomainUtil.getPostList(getContext(), obj);
+                break;
+            case DEFAULT:
+                message.obj = DomainUtil.getPostList(getContext());
+                break;
+        }
         handler.sendMessage(message);
         swipeRefreshLayout.finishLoadMore();
     };
 
+    public PostListFragment() {
+    }
+
+    public PostListFragment(Object object) {
+        this.obj = object;
+        if (obj != null) {
+            if (obj instanceof Topic) {
+                type = POSTLIST_TYPE.TOPIC;
+            } else if (obj instanceof Attraction) {
+                type = POSTLIST_TYPE.ATTRACTION;
+            } else {
+                type = POSTLIST_TYPE.DEFAULT;
+            }
+        } else {
+            type = POSTLIST_TYPE.DEFAULT;
+        }
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null)
+            obj = getArguments().getSerializable("obj");
+        if (obj != null) {
+            if (obj instanceof Topic) {
+                type = POSTLIST_TYPE.TOPIC;
+            } else if (obj instanceof Attraction) {
+                type = POSTLIST_TYPE.ATTRACTION;
+            } else {
+                type = POSTLIST_TYPE.DEFAULT;
+            }
+        } else {
+            type = POSTLIST_TYPE.DEFAULT;
+        }
     }
 
     @Nullable
@@ -81,11 +130,14 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
     void initRecyclerView() {
         posts = new ArrayList<>();
         followingRecyclerView = mainView.findViewById(R.id.fragment_following_recyclerview);
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
-            posts.addAll(DomainUtil.getPostList(getContext()));
-        } catch (Exception e) {
-            e.printStackTrace();
+        switch (type) {
+            case TOPIC:
+            case ATTRACTION:
+                posts.addAll(DomainUtil.getPostList(getContext(), obj));
+                break;
+            case DEFAULT:
+                posts.addAll(DomainUtil.getPostList(getContext()));
+                break;
         }
         postListAdapter = new PostListAdapter(getActivity(), posts);
         followingRecyclerView.setAdapter(postListAdapter);
@@ -118,6 +170,12 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+    }
+
+    public enum POSTLIST_TYPE {
+        DEFAULT,
+        ATTRACTION,
+        TOPIC
     }
 
 }

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,8 +30,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.domin.Topic;
+import com.cloudchewie.client.fragment.global.BaseFragment;
+import com.cloudchewie.client.fragment.global.CreateDialogFragment;
 import com.cloudchewie.client.fragment.internal.PostListFragment;
-import com.cloudchewie.client.widget.AppBarStateChangeListener;
+import com.cloudchewie.client.util.listener.AppBarStateChangeListener;
 import com.cloudchewie.ui.BottomSheet;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -39,8 +42,9 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class TopicDetailActivity extends BaseActivity {
+public class TopicDetailActivity extends BaseActivity implements View.OnClickListener {
     private Topic mTopic;
     private List<String> mTitles;
     private List<Fragment> mFragments;
@@ -56,6 +60,10 @@ public class TopicDetailActivity extends BaseActivity {
     private RelativeLayout mMainLayout;
     private ConstraintLayout mContentBar;
     private AppBarLayout mAppBar;
+    private Button mFollowButton;
+    private Button mSmallFollowButton;
+    private Button mSortButton;
+    private ConstraintLayout mFabLayout;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
@@ -79,6 +87,10 @@ public class TopicDetailActivity extends BaseActivity {
         mTitleBar2 = findViewById(R.id.activity_topic_detail_titlebar_2);
         mMainLayout = findViewById(R.id.activity_topic_detail_layout);
         mContentBar = findViewById(R.id.activity_topic_detail_content_bar);
+        mFollowButton = findViewById(R.id.activity_topic_detail_follow);
+        mSmallFollowButton = findViewById(R.id.activity_topic_detail_follow_2);
+        mSortButton = findViewById(R.id.activity_topic_detail_sort);
+        mFabLayout = findViewById(R.id.activity_topic_detail_fab_layout);
         mTitleBar2.setAlpha(0f);
         initView();
         initViewPager();
@@ -86,19 +98,26 @@ public class TopicDetailActivity extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     void initView() {
-        mBackButton.setOnClickListener(v -> finish());
-        mMoreButton.setOnClickListener(v -> {
-            BottomSheet bottomSheet = new BottomSheet(this);
-            bottomSheet.setMainLayout(R.layout.layout_detail_more);
-            bottomSheet.show();
-            bottomSheet.findViewById(R.id.detail_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
-        });
+        mBackButton.setOnClickListener(this);
+        mMoreButton.setOnClickListener(this);
+        mFollowButton.setOnClickListener(this);
+        mSmallFollowButton.setOnClickListener(this);
+        mSortButton.setOnClickListener(this);
+        mFabLayout.setOnClickListener(view -> new CreateDialogFragment().show(getSupportFragmentManager(), ""));
+        findViewById(R.id.activity_topic_detail_fab_button).setOnClickListener(view -> new CreateDialogFragment().show(getSupportFragmentManager(), ""));
+        List<String> sortList = Arrays.asList(getResources().getStringArray(R.array.sort));
+        mSortButton.setText(sortList.get(0));
+        findViewById(R.id.activity_topic_detail_back_2).setOnClickListener(this);
         Intent intent = this.getIntent();
         mTopic = (Topic) intent.getSerializableExtra("topic");
         mNameView.setText(mTopic.getName());
         mSmallNameView.setText(mTopic.getName());
         mDescribeView.setText(mTopic.getDescribe());
         mHotValueView.setText(mTopic.getVisitorCount() + "热度 · " + mTopic.getFollowerCount() + "人关注");
+        if (mTopic.getMyType() != Topic.FOLLOW_TYPE.FOLLOWED) {
+            mFollowButton.setText("已关注");
+            mSmallFollowButton.setText("已关注");
+        }
         mAppBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state, int offset) {
@@ -126,8 +145,8 @@ public class TopicDetailActivity extends BaseActivity {
     void initViewPager() {
         mFragments = new ArrayList<>();
         mTitles = Arrays.asList(getResources().getStringArray(R.array.topic_detail_tab_titles));
-        mFragments.add(new PostListFragment());
-        mFragments.add(new PostListFragment());
+        mFragments.add(new PostListFragment(mTopic));
+        mFragments.add(new PostListFragment(mTopic));
         mAdapter = new TopicDetailFragmentAdapter(getSupportFragmentManager(), getLifecycle(), mFragments);
         mViewPager.setAdapter(mAdapter);
         new TabLayoutMediator(mTabLayout, mViewPager, (tab, position) -> tab.setText(mTitles.get(position))).attach();
@@ -144,6 +163,37 @@ public class TopicDetailActivity extends BaseActivity {
 
     public String getTopic() {
         return mTopic.getName();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == mFollowButton || view == mSmallFollowButton) {
+            if (mTopic.getMyType() == Topic.FOLLOW_TYPE.UNFOLLOWED) {
+                mTopic.setMyType(Topic.FOLLOW_TYPE.FOLLOWED);
+                mFollowButton.setText("已关注");
+                mSmallFollowButton.setText("已关注");
+            } else {
+                mTopic.setMyType(Topic.FOLLOW_TYPE.UNFOLLOWED);
+                mFollowButton.setText("关注话题");
+                mSmallFollowButton.setText("关注话题");
+            }
+        } else if (view == mBackButton || view == findViewById(R.id.activity_topic_detail_back_2)) {
+            finish();
+        } else if (view == mMoreButton) {
+            BottomSheet bottomSheet = new BottomSheet(this);
+            bottomSheet.setMainLayout(R.layout.layout_detail_more);
+            bottomSheet.show();
+            bottomSheet.findViewById(R.id.detail_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
+        } else if (view == mSortButton) {
+            List<String> sortList = Arrays.asList(getResources().getStringArray(R.array.sort));
+            for (String str : sortList) {
+                if (Objects.equals(mSortButton.getText(), str)) {
+                    mSortButton.setText(sortList.get((sortList.indexOf(str) + 1) % sortList.size()));
+                    ((BaseFragment) mFragments.get(mViewPager.getCurrentItem())).performRefresh();
+                    break;
+                }
+            }
+        }
     }
 
     public class TopicDetailFragmentAdapter extends FragmentStateAdapter {

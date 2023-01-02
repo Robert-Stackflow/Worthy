@@ -45,7 +45,7 @@
             app:tabMode="fixed"
             app:tabRippleColor="@android:color/transparent"
             app:tabSelectedTextColor="@color/color_prominent"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextAppearance="@style/SmallTabLayoutTextStyle"
             app:tabTextColor="@color/color_accent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

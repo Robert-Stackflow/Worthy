@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.NonNull;
+
 public class MyWebViewClient extends WebViewClient {
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void onPageFinished(WebView view, String url) {
+    public void onPageFinished(@NonNull WebView view, String url) {
         view.getSettings().setJavaScriptEnabled(true);
         super.onPageFinished(view, url);
         addImageClickListener(view);
@@ -16,12 +18,12 @@ public class MyWebViewClient extends WebViewClient {
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+    public void onPageStarted(@NonNull WebView view, String url, Bitmap favicon) {
         view.getSettings().setJavaScriptEnabled(true);
         super.onPageStarted(view, url, favicon);
     }
 
-    private void addImageClickListener(WebView webView) {
+    private void addImageClickListener(@NonNull WebView webView) {
         webView.loadUrl("javascript:(function(){" +
                 "var objs = document.getElementsByTagName(\"img\"); " +
                 "for(var i=0;i<objs.length;i++)  " +

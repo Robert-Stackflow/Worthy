@@ -9,6 +9,10 @@ package com.cloudchewie.client.util.http;
 
 import android.annotation.SuppressLint;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
+
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
@@ -33,6 +37,8 @@ public class SSLSocketClient {
         }
     }
 
+    @NonNull
+    @Contract(" -> new")
     @SuppressLint("CustomX509TrustManager")
     private static TrustManager[] getTrustManager() {
         return new TrustManager[]{
@@ -55,6 +61,8 @@ public class SSLSocketClient {
         };
     }
 
+    @NonNull
+    @Contract(pure = true)
     public static HostnameVerifier getHostnameVerifier() {
         return (s, sslSession) -> true;
     }

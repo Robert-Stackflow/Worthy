@@ -29,7 +29,7 @@ import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.domin.Notice;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.util.basic.DateUtil;
-import com.cloudchewie.client.widget.SmallPostItem;
+import com.cloudchewie.client.util.widget.SmallPostItem;
 
 import java.util.List;
 

@@ -45,7 +45,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_user, null);
-        StatusBarUtil.setStatusBarMargin(mainView.findViewById(R.id.user_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+        StatusBarUtil.setStatusBarMarginTop(mainView.findViewById(R.id.user_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.user_settings).setOnClickListener(this);
         mainView.findViewById(R.id.switch_daynight).setOnClickListener(this);
         mainView.findViewById(R.id.entry_home_page).setOnClickListener(this);

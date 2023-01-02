@@ -9,6 +9,9 @@ package com.cloudchewie.client.util.basic;
 
 import androidx.annotation.NonNull;
 
+/**
+ * 字符串工具类
+ */
 public class StringUtil {
     @NonNull
     public static String handleLineBreaks(@NonNull String string) {

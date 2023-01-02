@@ -23,7 +23,7 @@ public class AccountSettingsActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_account_settings);
         findViewById(R.id.entry_change_password).setOnClickListener(this);
         ((TitleBar) findViewById(R.id.activity_account_settings_titlebar)).setLeftButtonClickListener(v -> finish());

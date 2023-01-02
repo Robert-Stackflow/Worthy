@@ -21,7 +21,7 @@ public class PrivacySettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_privacy_settings);
         ((TitleBar) findViewById(R.id.privacy_settings_titlebar)).setLeftButtonClickListener(v -> finish());
         initSwipeRefresh();

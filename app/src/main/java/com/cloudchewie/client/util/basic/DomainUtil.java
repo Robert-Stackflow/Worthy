@@ -12,7 +12,7 @@ import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.domin.User;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
-import com.cloudchewie.client.util.map.LocationUtil;
+import com.cloudchewie.client.util.map.CountyUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -95,14 +95,14 @@ public class DomainUtil {
                 for (String name : words) {
                     if (--randomJumpLineCount < 0) {
                         if (--count < 0) break;
-                        return new Topic(name, getContent(), ((int) (Math.random() * 100000)), ((int) (Math.random() * 100000)));
+                        return new Topic(name, getContent(), ((int) (Math.random() * 100000)), ((int) (Math.random() * 100000)), Topic.FOLLOW_TYPE.values()[((int) (Math.random() * 100)) % Topic.FOLLOW_TYPE.values().length]);
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Topic("生活圈", getContent(), ((int) (Math.random() * 100000)), ((int) (Math.random() * 100000)));
+        return new Topic("生活圈", getContent(), ((int) (Math.random() * 100000)), ((int) (Math.random() * 100000)), Topic.FOLLOW_TYPE.values()[((int) (Math.random() * 100)) % Topic.FOLLOW_TYPE.values().length]);
     }
 
     public static List<Topic> getTopicList(Context context) {
@@ -118,7 +118,7 @@ public class DomainUtil {
                 for (String name : words) {
                     if (--randomJumpLineCount < 0) {
                         if (--count < 0) break;
-                        Topic topic = new Topic(name, getContent(), ((int) (Math.random() * 100000)), ((int) (Math.random() * 100000)));
+                        Topic topic = new Topic(name, getContent(), ((int) (Math.random() * 100000)), ((int) (Math.random() * 100000)), Topic.FOLLOW_TYPE.values()[((int) (Math.random() * 100)) % Topic.FOLLOW_TYPE.values().length]);
                         topicList.add(topic);
                     }
                 }
@@ -177,7 +177,7 @@ public class DomainUtil {
     }
 
     public static String getCity() {
-        ArrayList<ArrayList<String>> lists = LocationUtil.getCities();
+        ArrayList<ArrayList<String>> lists = CountyUtil.getCities();
         if (lists.size() == 0)
             return "";
         List<String> list = lists.get(((int) (Math.random() * 1000)) % lists.size());
@@ -198,7 +198,7 @@ public class DomainUtil {
                 while (--randomJumpLineCount > 0) bufferedReader.readLine();
                 while ((line = bufferedReader.readLine()) != null && --count > 0) {
                     String[] words = line.split(",");
-                    Attraction attraction = new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context));
+                    Attraction attraction = new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context), Attraction.FOLLOW_TYPE.values()[((int) (Math.random() * 100)) % Attraction.FOLLOW_TYPE.values().length]);
                     attractionList.add(attraction);
                 }
             }
@@ -219,12 +219,12 @@ public class DomainUtil {
                 int randomJumpLineCount = ((int) (Math.random() * 1000)) % 50;
                 while (--randomJumpLineCount > 0) bufferedReader.readLine();
                 String[] words = bufferedReader.readLine().split(",");
-                return new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context));
+                return new Attraction(words[0], words[1] + "省" + words[2] + "市" + words[3] + words[6] + words[7] + words[0], getContent(), ((int) (Math.random() * 1000)), Double.parseDouble(words[10]), Double.parseDouble(words[11]), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context), Attraction.FOLLOW_TYPE.values()[((int) (Math.random() * 100)) % Attraction.FOLLOW_TYPE.values().length]);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new Attraction("东湖", "湖北省武汉市洪山区东湖", getContent(), ((int) (Math.random() * 1000)), 114.383034, 30.581009, ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context));
+        return new Attraction("东湖", "湖北省武汉市洪山区东湖", getContent(), ((int) (Math.random() * 1000)), 114.383034, 30.581009, ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getTagList(context), Attraction.FOLLOW_TYPE.values()[((int) (Math.random() * 100)) % Attraction.FOLLOW_TYPE.values().length]);
     }
 
     public static List<Message> getMessageList(Context context) {
@@ -253,6 +253,24 @@ public class DomainUtil {
         while (--count > 0)
             postList.add(new Post(getUser(context), getDate(), getContent(), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getAttraction(context), getTopic(context)));
         return postList;
+    }
+
+    public static List<Post> getPostList(Context context, Object obj) {
+        if (obj instanceof Topic) {
+            List<Post> postList = new ArrayList<>();
+            int count = ((int) (Math.random() * 1000)) % 15 + 3;
+            while (--count > 0)
+                postList.add(new Post(getUser(context), getDate(), getContent(), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getAttraction(context), (Topic) obj));
+            return postList;
+        } else if (obj instanceof Attraction) {
+            List<Post> postList = new ArrayList<>();
+            int count = ((int) (Math.random() * 1000)) % 15 + 3;
+            while (--count > 0)
+                postList.add(new Post(getUser(context), getDate(), getContent(), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), (Attraction) obj, getTopic(context)));
+            return postList;
+        } else {
+            return getPostList(context);
+        }
     }
 
     public static Comment getComment(Context context, int level) {

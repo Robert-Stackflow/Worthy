@@ -4,12 +4,7 @@
         <item>文章</item>
         <item>相册</item>
     </string-array>
-    <string-array name="comment_detail_tab_titles">
-        <item>热门回复</item>
-        <item>全部回复</item>
-    </string-array>
     <string-array name="post_detail_comment_tab_titles">
-        <item>热门评论</item>
         <item>全部评论</item>
     </string-array>
     <string-array name="topic_detail_tab_titles">

@@ -64,8 +64,7 @@
         <activity android:name=".activity.discover.TopicDetailActivity" />
         <activity
             android:name=".activity.discover.AttractionDetailActivity"
-            android:launchMode="singleTop"
-            android:theme="@style/TranslucentTheme" />
+            android:launchMode="singleTop" />
         <activity android:name=".activity.discover.ArticleDetailActivity" />
         <!--创作-->
         <activity android:name=".activity.create.CreatePostActivity" />
@@ -92,7 +91,8 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/AppTheme.Full" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Full"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 </manifest>

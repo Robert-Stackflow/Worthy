@@ -41,7 +41,9 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.CustomMapStyleCallBack;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapCustomStyleOptions;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
@@ -67,10 +69,12 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.SugListAdapter;
-import com.cloudchewie.client.util.map.LocationUtil;
+import com.cloudchewie.client.util.map.CountyUtil;
+import com.cloudchewie.client.util.ui.DarkModeUtil;
 import com.cloudchewie.client.util.ui.KeyBoardUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
-import com.cloudchewie.ui.SearchLayout;
+import com.cloudchewie.ui.IToast;
+import com.cloudchewie.ui.search.SearchLayout;
 
 import org.jetbrains.annotations.Contract;
 
@@ -90,6 +94,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         BaiduMap.OnMapClickListener, BaiduMap.OnMarkerClickListener {
     private static final String CUSTOM_FILE_NAME_DARK = "dark.sty";
     private static final String CUSTOM_FILE_NAME_TEA = "tea.sty";
+    private static String DARK_ID = "972468541ad9993b7b3a5f8bfecd3ec7";
+    private static String LIGHT_ID = "20709c4bb8da59110666942b516f20b0";
     boolean itemClicked = false;
     View mainView;
     MapView mapView;
@@ -136,7 +142,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_map, null);
         mainView.findViewById(R.id.goto_mylocation).setOnClickListener(this);
-        StatusBarUtil.setStatusBarMargin(mainView.findViewById(R.id.map_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+        StatusBarUtil.setStatusBarMarginTop(mainView.findViewById(R.id.map_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         initMap();
         locateMyLocation();
         initSpinner();
@@ -195,9 +201,25 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             mapView.showScaleControl(false);
             mapView.showZoomControls(false);
         });
-        String customStyleFilePath = getCustomStyleFilePath(getActivity(), CUSTOM_FILE_NAME_DARK);
-        mapView.setMapCustomStylePath(customStyleFilePath);
-        mapView.setMapCustomStyleEnable(true);
+        MapCustomStyleOptions mapCustomStyleOptions = new MapCustomStyleOptions();
+        mapCustomStyleOptions.localCustomStylePath(getCustomStyleFilePath(getActivity(), DarkModeUtil.isDarkMode(getContext()) ? CUSTOM_FILE_NAME_DARK : CUSTOM_FILE_NAME_TEA));
+        mapCustomStyleOptions.customStyleId(DarkModeUtil.isDarkMode(getContext()) ? DARK_ID : LIGHT_ID);
+        mapView.setMapCustomStyle(mapCustomStyleOptions, new CustomMapStyleCallBack() {
+            @Override
+            public boolean onPreLoadLastCustomMapStyle(String customStylePath) {
+                return false;
+            }
+
+            @Override
+            public boolean onCustomMapStyleLoadSuccess(boolean hasUpdate, String customStylePath) {
+                return false;
+            }
+
+            @Override
+            public boolean onCustomMapStyleLoadFailed(int status, String Message, String customStylePath) {
+                return false;
+            }
+        });
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(this);
         suggestionSearch = SuggestionSearch.newInstance();
@@ -205,10 +227,10 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     }
 
     void initSpinner() {
-        LocationUtil.initJsonData(getActivity());
-        provinces = LocationUtil.getProvices();
-        cities = LocationUtil.getCities();
-        counties = LocationUtil.getCounties();
+        CountyUtil.loadData(getActivity());
+        provinces = CountyUtil.getProvices();
+        cities = CountyUtil.getCities();
+        counties = CountyUtil.getCounties();
         adapter_province = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, provinces);
         adapter_province.setDropDownViewResource(R.layout.widget_spinner_item);
         adapter_city = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, cities.get(0));
@@ -329,7 +351,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     public void onGetPoiResult(PoiResult poiResult) {
         if (poiResult == null || poiResult.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
             loadIndex = 0;
-            Toast.makeText(getActivity(), "未找到结果", Toast.LENGTH_LONG).show();
+            IToast.makeTextTop(getActivity(), "未找到结果", Toast.LENGTH_LONG).show();
             return;
         }
         List<PoiInfo> poiInfos = poiResult.getAllPoi();
@@ -359,7 +381,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     public void onGetSuggestionResult(SuggestionResult suggestionResult) {
         if (suggestionResult == null || suggestionResult.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
             loadIndex = 0;
-            Toast.makeText(getActivity(), "未找到结果", Toast.LENGTH_LONG).show();
+            IToast.makeTextTop(getActivity(), "未找到结果", Toast.LENGTH_LONG).show();
             return;
         }
         List<SuggestionResult.SuggestionInfo> suggesInfos = suggestionResult.getAllSuggestions();
@@ -664,7 +686,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             double longitude = location.getLongitude();
             String coorType = location.getCoorType();
             if (errorCode == BDLocation.TYPE_NO_PERMISSION_LOCATION_FAIL)
-                Toast.makeText(getActivity(), "定位失败，请授予定位权限!", Toast.LENGTH_SHORT).show();
+                IToast.makeTextTop(getActivity(), "定位失败，请授予定位权限!", Toast.LENGTH_SHORT).show();
             else {
                 locationOption.setScanSpan(0);
                 locationClient.stop();

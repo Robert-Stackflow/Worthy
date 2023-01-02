@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.UserListAdapter;
 import com.cloudchewie.client.domin.User;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -41,7 +41,7 @@ public class UserListFragment extends BaseFragment implements View.OnClickListen
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             users.add((User) msg.obj);
             userAdapter.notifyItemInserted(users.size());
         }

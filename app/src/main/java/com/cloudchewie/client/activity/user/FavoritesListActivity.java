@@ -38,7 +38,7 @@ public class FavoritesListActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarMargin(this);
+        StatusBarUtil.setStatusBarMarginTop(this);
         setContentView(R.layout.activity_favorites_list);
         mTitleBar = findViewById(R.id.activity_favorites_list_titlebar);
         mRecyclerView = findViewById(R.id.activity_favorites_list_recyclerview);

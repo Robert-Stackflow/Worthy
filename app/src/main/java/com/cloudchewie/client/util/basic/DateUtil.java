@@ -9,15 +9,21 @@ package com.cloudchewie.client.util.basic;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.Contract;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * 时间工具类
+ */
 public class DateUtil {
     private static final TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
 
-    public static String beautifyTime(Date date) {
+    @NonNull
+    public static String beautifyTime(@NonNull Date date) {
         Date curDate = getNow();
         Date today = getStartOfToDay();
         Date yesterday = getYesterday();
@@ -36,14 +42,18 @@ public class DateUtil {
         else return mdFormat.format(date);
     }
 
+    @NonNull
     public static Date getYesterday() {
         return getStartOfDay(new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24));
     }
 
+    @NonNull
     public static Date getDayBeforeYesterday() {
         return getStartOfDay(new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24 * 2));
     }
 
+    @NonNull
+    @Contract(" -> new")
     public static Date getNow() {
         return new Date(System.currentTimeMillis());
     }

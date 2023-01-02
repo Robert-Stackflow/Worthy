@@ -1,5 +1,9 @@
 package com.cloudchewie.client.util.map;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +48,8 @@ public class BaiduRequestBuilder {
             scope = SCOPE_TYPE.SIMPLE;
     }
 
+    @NonNull
+    @Contract(" -> new")
     public static BaiduRequestBuilder init() {
         return new BaiduRequestBuilder();
     }

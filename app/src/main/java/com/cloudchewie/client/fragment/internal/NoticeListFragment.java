@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.NoticeListAdapter;
 import com.cloudchewie.client.domin.Notice;
-import com.cloudchewie.client.fragment.BaseFragment;
+import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -42,7 +42,7 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             notices.addAll((List<Notice>) msg.obj);
             noticeListAdapter.notifyItemInserted(notices.size());
         }

@@ -5,10 +5,17 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Contract;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class AssetsUtil {
     /**
@@ -18,7 +25,7 @@ public class AssetsUtil {
      * @param fileName 文件名
      * @return Bitmap图片
      */
-    public static Bitmap getImageFromAssetsFile(Context context, String fileName) {
+    public static Bitmap getImageFromAssetsFile(@NonNull Context context, String fileName) {
         Bitmap bitmap = null;
         AssetManager assetManager = context.getAssets();
         try {
@@ -34,13 +41,14 @@ public class AssetsUtil {
 
     /**
      * 获取assets目录下的单个文件
-     * 这种方式只能用于webview加载
-     * 读取文件夹，直接取路径是不行的
+     * 这种方式只能用于webview加载读取文件夹，不能直接取路径
      *
      * @param context  上下文
      * @param fileName 文件夹名
      * @return File
      */
+    @NonNull
+    @Contract("_, _ -> new")
     public static File getFileFromAssetsFile(Context context, String fileName) {
         String path = "file:///android_asset/" + fileName;
         return new File(path);
@@ -51,9 +59,9 @@ public class AssetsUtil {
      *
      * @param context 上下文
      * @param path    文件地址
-     * @return files[] 文件列表
+     * @return 文件列表
      */
-    public static String[] getFilesFromAssets(Context context, String path) {
+    public static String[] getFilesFromAssets(@NonNull Context context, String path) {
         AssetManager assetManager = context.getAssets();
         String[] files = null;
         try {
@@ -82,56 +90,62 @@ public class AssetsUtil {
      * @param assetsPath assets下的路径
      * @param sdCardPath sd卡的路径
      */
-    public static void putAssetsToSDCard(Context context, String assetsPath, String sdCardPath) {
+    public static void putAssetsToSDCard(@NonNull Context context, String assetsPath, String sdCardPath) {
         AssetManager assetManager = context.getAssets();
         try {
             String[] files = assetManager.list(assetsPath);
             if (files.length == 0) {
-                // 说明assetsPath为空,或者assetsPath是一个文件
                 InputStream is = assetManager.open(assetsPath);
                 byte[] mByte = new byte[1024];
                 int bt;
                 File file = new File(sdCardPath + File.separator
                         + assetsPath.substring(assetsPath.lastIndexOf('/')));
                 if (!file.exists()) {
-                    // 创建文件
                     file.createNewFile();
                 } else {
-                    //已经存在直接退出
                     return;
                 }
-
-                // 写入流
                 FileOutputStream fos = new FileOutputStream(file);
-                // assets为文件,从文件中读取流
                 while ((bt = is.read(mByte)) != -1) {
-                    // 写入流到文件中
                     fos.write(mByte, 0, bt);
                 }
-
-                // 刷新缓冲区
                 fos.flush();
-                // 关闭读取流
                 is.close();
-                // 关闭写入流
                 fos.close();
             } else {
-                // 当mString长度大于0,说明其为文件夹
                 sdCardPath = sdCardPath + File.separator + assetsPath;
                 File file = new File(sdCardPath);
                 if (!file.exists()) {
-                    // 在sd下创建目录
                     file.mkdirs();
                 }
-
-                // 进行递归
-                for (String stringFile : files) {
-                    putAssetsToSDCard(context, assetsPath + File.separator
-                            + stringFile, sdCardPath);
-                }
+                for (String stringFile : files)
+                    putAssetsToSDCard(context, assetsPath + File.separator + stringFile, sdCardPath);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 获取纯文本文件的内容
+     *
+     * @param context  Context对象
+     * @param fileName 文件路径
+     * @return 文件内容
+     */
+    @NonNull
+    public static String getTextFileContent(@NonNull Context context, String fileName) {
+        StringBuilder stringBuilder = new StringBuilder();
+        AssetManager assetManager = context.getAssets();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(assetManager.open(fileName),
+                    StandardCharsets.UTF_8));
+            String line;
+            while ((line = bufferedReader.readLine()) != null)
+                stringBuilder.append(line);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 }

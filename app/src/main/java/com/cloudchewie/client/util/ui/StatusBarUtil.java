@@ -7,6 +7,7 @@
 
 package com.cloudchewie.client.util.ui;
 
+import static com.cloudchewie.client.util.image.BitmapUtil.isDarkBitmap;
 import static com.cloudchewie.client.util.ui.ColorUtil.isDarkColor;
 
 import android.annotation.SuppressLint;
@@ -22,8 +23,6 @@ import android.view.WindowManager;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.ColorUtils;
-import androidx.palette.graphics.Palette;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
@@ -37,6 +36,12 @@ import java.lang.reflect.Method;
 
 public class StatusBarUtil {
 
+    /**
+     * 获取状态栏高度
+     *
+     * @param context context对象
+     * @return 返回状态栏高度
+     */
     public static int getStatusBarHeight(Context context) {
         int statusBarHeight = 0;
         try {
@@ -49,6 +54,12 @@ public class StatusBarUtil {
         return statusBarHeight;
     }
 
+    /**
+     * 设置状态栏颜色
+     *
+     * @param window         window对象
+     * @param statusBarColor 状态栏颜色
+     */
     public static void setStatusBarColor(@NonNull Window window, @ColorInt int statusBarColor) {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -58,29 +69,35 @@ public class StatusBarUtil {
         setStatusBarTextColor(window, !isDarkColor(statusBarColor));
     }
 
-    public static void setStatusBarColor(Context context, @ColorInt int color) {
+    /**
+     * 设置状态栏颜色
+     *
+     * @param context        context对象
+     * @param statusBarColor 状态栏颜色
+     */
+    public static void setStatusBarColor(Context context, @ColorInt int statusBarColor) {
         if (context instanceof Activity) {
-            setStatusBarColor(((Activity) context).getWindow(), color);
+            setStatusBarColor(((Activity) context).getWindow(), statusBarColor);
         }
     }
 
+    /**
+     * 根据深色模式，设置状态栏字体图标颜色
+     *
+     * @param window     window对象
+     * @param isDarkMode 是否为深色模式
+     */
     private static void setStatusBarTextColor(Window window, boolean isDarkMode) {
         if (isDarkMode) setDarkStatusBar(window);
         else setLightStatusBar(window);
     }
 
-    private static void setLightStatusBar(Window window) {
-        View decorView = window.getDecorView();
-        int systemUiVisibility = decorView.getSystemUiVisibility();
-        decorView.setSystemUiVisibility(systemUiVisibility | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-    }
-
-    private static void setDarkStatusBar(Window window) {
-        View decorView = window.getDecorView();
-        int systemUiVisibility = decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        decorView.setSystemUiVisibility(systemUiVisibility ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-    }
-
+    /**
+     * 根据深色模式，设置状态栏字体图标颜色
+     *
+     * @param context    context对象
+     * @param isDarkMode 是否为深色模式
+     */
     public static void setStatusBarTextColor(Context context, boolean isDarkMode) {
         if (context instanceof Activity) {
             setStatusBarTextColor(((Activity) context).getWindow(), isDarkMode);
@@ -88,28 +105,11 @@ public class StatusBarUtil {
     }
 
     /**
-     * 返回某个Bitmap是否为深色图片
+     * 根据状态栏背景的Bitmap颜色，设置状态栏字体图标颜色
      *
-     * @param bitmap 图片
-     * @param left   左边界
-     * @param top    上边界
-     * @param right  右边界
-     * @param bottom 下边界
-     * @return -1表示不确定；0表示不是深色；1表示是深色
+     * @param context context对象
+     * @param bitmap  bitmap对象
      */
-    public static int isDarkBitmap(Bitmap bitmap, int left, int top, int right, int bottom) {
-        final int[] isDark = {1};
-        Palette.from(bitmap).setRegion(left, top, right, bottom).generate(palette -> {
-            Palette.Swatch mostPopularSwatch = null;
-            for (Palette.Swatch swatch : palette.getSwatches())
-                if (mostPopularSwatch == null || mostPopularSwatch.getPopulation() < swatch.getPopulation())
-                    mostPopularSwatch = swatch;
-            if (mostPopularSwatch != null)
-                isDark[0] = ColorUtils.calculateLuminance(mostPopularSwatch.getRgb()) < 0.5 ? 1 : 0;
-        });
-        return isDark[0];
-    }
-
     public static boolean setStatusBarTextColor(Context context, Bitmap bitmap) {
         boolean isDark = DarkModeUtil.isDarkMode(context);
         switch (isDarkBitmap(bitmap, 0, 0, MatricsUtil.getScreenWidth(context), getStatusBarHeight(context))) {
@@ -126,6 +126,12 @@ public class StatusBarUtil {
         return isDark;
     }
 
+    /**
+     * 根据url对应的图片颜色，设置状态栏字体图标颜色
+     *
+     * @param context context对象
+     * @param url     图片路径
+     */
     public static boolean setStatusBarTextColor(Context context, String url) {
         final boolean[] isDark = new boolean[1];
         RequestBuilder<Bitmap> requestBuilder = Glide.with(context).asBitmap();
@@ -138,6 +144,34 @@ public class StatusBarUtil {
         return isDark[0];
     }
 
+    /**
+     * 设置状态栏字体图标为浅色
+     *
+     * @param window window对象
+     */
+    private static void setLightStatusBar(@NonNull Window window) {
+        View decorView = window.getDecorView();
+        int systemUiVisibility = decorView.getSystemUiVisibility();
+        decorView.setSystemUiVisibility(systemUiVisibility | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+    }
+
+    /**
+     * 设置状态栏字体图标为深色
+     *
+     * @param window window对象
+     */
+    private static void setDarkStatusBar(@NonNull Window window) {
+        View decorView = window.getDecorView();
+        int systemUiVisibility = decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        decorView.setSystemUiVisibility(systemUiVisibility ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+    }
+
+    /**
+     * 设置MIUI系统状态栏字体图标为深色
+     *
+     * @param window window对象
+     * @param isDark 是否设置为深色
+     */
     private static void setMIUIDark(Window window, boolean isDark) {
         try {
             Class<? extends Window> clazz = window.getClass();
@@ -152,6 +186,12 @@ public class StatusBarUtil {
         }
     }
 
+    /**
+     * 设置Flyme系统状态栏字体图标为深色
+     *
+     * @param window window对象
+     * @param isDark 是否设置为深色
+     */
     private static void setFlymeDark(Window window, boolean isDark) {
         if (window != null) {
             try {
@@ -175,6 +215,11 @@ public class StatusBarUtil {
         }
     }
 
+    /**
+     * 设置状态栏透明
+     *
+     * @param window window对象
+     */
     public static void setStatusBarTransparent(@NonNull Window window) {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -183,19 +228,38 @@ public class StatusBarUtil {
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
+    /**
+     * 设置状态栏透明
+     *
+     * @param context context对象
+     */
     public static void setStatusBarTransparent(Context context) {
         if (context instanceof Activity) setStatusBarTransparent(((Activity) context).getWindow());
     }
 
-    public static void setStatusBarMargin(Context context) {
-        setStatusBarMargin(((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content), 0, getStatusBarHeight(context), 0, 0);
+    /**
+     * 设置状态栏的marginTop，防止遮挡布局
+     *
+     * @param context context对象
+     */
+    public static void setStatusBarMarginTop(Context context) {
+        setStatusBarMarginTop(((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content), 0, getStatusBarHeight(context), 0, 0);
     }
 
-    public static void setStatusBarMargin(View v, int l, int t, int r, int b) {
-        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            p.setMargins(l, t, r, b);
-            v.requestLayout();
+    /**
+     * 设置状态栏的margin
+     *
+     * @param view   内容根布局
+     * @param left   左margin
+     * @param top    上margin
+     * @param right  右margin
+     * @param bottom 下margin
+     */
+    public static void setStatusBarMarginTop(@NonNull View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
         }
     }
 
