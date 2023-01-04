@@ -186,13 +186,13 @@ public class ArticlePreviewActivity extends BaseActivity {
         mContentView.setWebChromeClient(new WebChromeClient());
         String data;
         if (DarkModeUtil.isDarkMode(this))
-            data = "</Div><head><style>body{font-size:16px;color:#FFFFFF;background-color:#000000;}</style>" +
+            data = "</Div><head><style>body{font-size:16px;line-height:1.5;color:#FFFFFF;background-color:#000000;}</style>" +
                     "<style>img{margin-top:0.4em;margin-bottom:0.4em}</style>" +
                     "<style>ul{ padding-left: 1em;margin-top:0em}</style>" +
                     "<style>ol{ padding-left: 1.2em;margin-top:0em}</style>" +
                     "</head>" + mPost.getContent();
         else
-            data = "</Div><head><style>body{font-size:16px;color:#000000;background-color:#FFFFFF;}</style>" +
+            data = "</Div><head><style>body{font-size:16px;line-height:1.5;color:#000000;background-color:#FFFFFF;}</style>" +
                     "<style>img{margin-top:0.4em;margin-bottom:0.4em}</style>" +
                     "<style>ul{ padding-left: 1em;margin-top:0em}</style>" +
                     "<style>ol{ padding-left: 1.2em;margin-top:0em}</style>" +

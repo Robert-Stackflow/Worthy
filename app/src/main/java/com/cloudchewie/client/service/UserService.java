@@ -9,7 +9,7 @@ package com.cloudchewie.client.service;
 
 import com.blankj.utilcode.util.ThreadUtils;
 import com.cloudchewie.client.domin.User;
-import com.cloudchewie.client.request.UserRequest;
+import com.cloudchewie.client.request.UserAuthRequest;
 import com.cloudchewie.client.util.system.LocalStorage;
 
 import java.util.Date;
@@ -42,7 +42,7 @@ public class UserService {
         ThreadUtils.executeByIo(new ThreadUtils.SimpleTask<Object>() {
             @Override
             public Object doInBackground() {
-                new UserRequest().logout();
+                new UserAuthRequest().logout();
                 return null;
             }
 

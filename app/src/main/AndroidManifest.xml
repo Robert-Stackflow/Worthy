@@ -82,15 +82,10 @@
             android:launchMode="singleTop" />
         <activity android:name=".activity.discover.ArticleDetailActivity" />
         <!--创作-->
-        <activity
-            android:name=".activity.create.CreatePostActivity"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activity.create.ArticlePreviewActivity"
-            android:launchMode="singleInstance" />
+        <activity android:name=".activity.create.CreatePostActivity" />
+        <activity android:name=".activity.create.ArticlePreviewActivity" />
         <activity
             android:name=".activity.create.CreateArticleActivity"
-            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan" />
         <!--消息-->
         <activity android:name=".activity.message.NoticeActivity" />

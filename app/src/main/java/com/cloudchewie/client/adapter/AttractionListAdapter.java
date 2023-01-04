@@ -113,7 +113,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
             int width = ((Activity) imageView.getContext()).getWindowManager().getDefaultDisplay().getWidth();
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            params.height = (int) (200 + Math.random() * 400);
+            params.height = (int) (400 + Math.random() * 400);
             imageView.setLayoutParams(params);
         }
     }

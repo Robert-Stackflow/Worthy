@@ -13,15 +13,15 @@ import com.cloudchewie.client.domin.User;
 import com.cloudchewie.client.util.enumeration.ResponseCode;
 import com.cloudchewie.client.util.http.HttpRequestUtil;
 
-public class UserRequest {
+public class UserAuthRequest {
 
     public void signUp(User user) {
-        new Thread(() -> HttpRequestUtil.postToServer(HttpRequestUtil.MEDIA_TYPE_JSON, "/user/signup", user)).start();
+        new Thread(() -> HttpRequestUtil.postToServer(HttpRequestUtil.MEDIA_TYPE_JSON, "/user/auth/signup", user)).start();
     }
 
     public String login(User user) {
         final JSONObject[] response = new JSONObject[1];
-        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.postToServer(HttpRequestUtil.MEDIA_TYPE_JSON, "/user/signin", user));
+        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.postToServer(HttpRequestUtil.MEDIA_TYPE_JSON, "/user/auth/signin", user));
         thread.start();
         try {
             thread.join();
@@ -35,12 +35,12 @@ public class UserRequest {
     }
 
     public void logout() {
-        new Thread(() -> HttpRequestUtil.postToServer(HttpRequestUtil.MEDIA_TYPE_FORM, "/user/logout", "")).start();
+        new Thread(() -> HttpRequestUtil.postToServer(HttpRequestUtil.MEDIA_TYPE_FORM, "/user/auth/logout", "")).start();
     }
 
-    public User find() {
+    public User info() {
         final JSONObject[] response = new JSONObject[1];
-        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.getFromServer(HttpRequestUtil.MEDIA_TYPE_FORM, "/user/find/"));
+        Thread thread = new Thread(() -> response[0] = HttpRequestUtil.getFromServer(HttpRequestUtil.MEDIA_TYPE_FORM, "/user/auth/info"));
         thread.start();
         try {
             thread.join();
@@ -49,5 +49,4 @@ public class UserRequest {
         }
         return JSONObject.toJavaObject(response[0].getJSONObject("data"), User.class);
     }
-
 }

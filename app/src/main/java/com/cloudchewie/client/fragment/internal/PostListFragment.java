@@ -17,16 +17,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.adapter.PostListAdapter;
+import com.cloudchewie.client.adapter.StaggerPostListAdapter;
 import com.cloudchewie.client.domin.Attraction;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.domin.Topic;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
+import com.cloudchewie.client.util.mess.StaggerItemDecoration;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -38,7 +39,7 @@ import java.util.List;
 public class PostListFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
     List<Post> posts;
-    PostListAdapter postListAdapter;
+    StaggerPostListAdapter postListAdapter;
     RecyclerView followingRecyclerView;
     RefreshLayout swipeRefreshLayout;
     ClassicsHeader header;
@@ -139,9 +140,10 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
                 posts.addAll(DomainUtil.getPostList(getContext()));
                 break;
         }
-        postListAdapter = new PostListAdapter(getActivity(), posts);
+        postListAdapter = new StaggerPostListAdapter(getActivity(), posts);
         followingRecyclerView.setAdapter(postListAdapter);
-        followingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        followingRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        followingRecyclerView.addItemDecoration(new StaggerItemDecoration(getContext()));
     }
 
     void initSwipeRefresh() {
@@ -156,7 +158,7 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
         swipeRefreshLayout.setDisableContentWhenLoading(true);
         swipeRefreshLayout.setOnRefreshListener(v -> handler.post(getRefreshDatas));
         swipeRefreshLayout.setOnLoadMoreListener(v -> handler.post(getMoreDatas));
-//        swipeRefreshLayout.autoRefresh();
+        swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
         header.setTextSizeTitle(14);
         footer.setTextSizeTitle(14);

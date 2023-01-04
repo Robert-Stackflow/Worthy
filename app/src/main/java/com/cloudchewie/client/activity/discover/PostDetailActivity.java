@@ -10,6 +10,7 @@ package com.cloudchewie.client.activity.discover;
 import static com.cloudchewie.client.util.basic.DateUtil.beautifyTime;
 import static com.cloudchewie.client.util.basic.StringUtil.handleLineBreaks;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -130,15 +131,17 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
         swipeRefreshLayout.setEnableOverScrollDrag(true);
         swipeRefreshLayout.setEnableOverScrollBounce(true);
         swipeRefreshLayout.setEnableLoadMore(false);
+        swipeRefreshLayout.setEnableRefresh(false);
         header.setEnableLastTime(false);
     }
 
+    @SuppressLint("SetTextI18n")
     private void initView() {
         Intent intent = this.getIntent();
         mPost = (Post) intent.getSerializableExtra("post");
         mAppBarLayout.setExpanded(intent.getBooleanExtra("jumptocomment", true));
         mUserNameView.setText(mPost.getUser().getUsername());
-        mTimeView.setText(beautifyTime(mPost.getDate()));
+        mTimeView.setText("发布于 " + beautifyTime(mPost.getDate()));
         mContentView.setText(handleLineBreaks(mPost.getContent()));
         mLocationView.setText(mPost.getAttraction().getName());
         mTopicView.setText(mPost.getTopics().get(0).getName());
