@@ -57,6 +57,8 @@ public class IToast {
     public void setGravity(int gravity) {
         if (gravity == Gravity.TOP) {
             toast.setGravity(gravity, 0, dp2px(context, 150));
+        } else if (gravity == Gravity.BOTTOM) {
+            toast.setGravity(gravity, 0, dp2px(context, 150));
         } else {
             toast.setGravity(gravity, 0, 0);
         }

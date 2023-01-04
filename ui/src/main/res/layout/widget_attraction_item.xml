@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:maxHeight="80dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_state_background" />
 
         <LinearLayout
             android:id="@+id/attraction_card_title_layout"
@@ -40,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:maxLines="3"
                 android:textColor="@color/color_accent"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -52,9 +54,8 @@
                 android:layout_marginStart="5dp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:singleLine="true"
                 android:textColor="@color/text_color_gray"
-                android:textSize="14sp"
+                android:textSize="@dimen/sp12"
                 tools:text="430人推荐 · 82人看过 · 99+人想去 · 54张照片" />
 
             <TextView
@@ -64,13 +65,14 @@
                 android:layout_marginStart="5dp"
                 android:singleLine="true"
                 android:textColor="@color/text_color_gray"
-                android:textSize="13sp"
+                android:textSize="@dimen/sp11"
                 tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
             <com.cloudchewie.ui.FlowTagLayout
                 android:id="@+id/attraction_card_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:horizontal_diver="5dp"
                 app:vertical_diver="5dp" />
         </LinearLayout>

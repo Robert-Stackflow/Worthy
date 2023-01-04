@@ -34,6 +34,7 @@
             android:background="@android:color/transparent"
             android:text="文章预览"
             android:textColor="@color/color_accent"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/activity_article_preview_back"
@@ -71,6 +72,7 @@
         android:id="@+id/activity_article_preview_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/activity_article_preview_statistics_divider"
         android:layout_below="@id/activity_article_preview_titlebar">
 
         <com.scwang.smart.refresh.header.ClassicsHeader

@@ -90,7 +90,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
             chatterListAdapter.notifyDataSetChanged();
             swipeRefreshLayout.finishRefresh();
         });
-        swipeRefreshLayout.autoRefresh();
+//        swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
     }
 
@@ -109,6 +109,11 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 public void onNegtiveClick() {
                     dialog.dismiss();
                     IToast.makeTextTop(getActivity(), "取消清除未读消息", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCloseClick() {
+                    dialog.dismiss();
                 }
             }).show();
         } else if (view == mainView.findViewById(R.id.message_entry_comment_layout)) {
@@ -129,6 +134,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
             bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.FOLLOW);
             intent.putExtras(bundle);
             getContext().startActivity(intent);
+        } else if (view == mainView.findViewById(R.id.message_entry_system_layout)) {
+            IToast.makeTextBottom(getContext(), "系统维护中,暂时无法查看系统通知", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -56,21 +56,41 @@
         <!--主界面-->
         <activity android:name=".activity.MainActivity" />
         <!--通用-->
-        <activity android:name=".activity.global.LoginActivity" />
+        <activity
+            android:name=".activity.auth.LoginActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".activity.auth.LoginByMobileActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".activity.auth.SignupActivity"
+            android:launchMode="singleInstance" />
         <!--地图-->
         <!--发现-->
-        <activity android:name=".activity.discover.SearchActivity" />
+        <activity
+            android:name=".activity.discover.SearchActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".activity.discover.PostDetailActivity" />
-        <activity android:name=".activity.discover.TopicDetailActivity" />
+        <activity
+            android:name=".activity.discover.TopicDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.discover.LocationDetailActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.discover.AttractionDetailActivity"
             android:launchMode="singleTop" />
         <activity android:name=".activity.discover.ArticleDetailActivity" />
         <!--创作-->
-        <activity android:name=".activity.create.CreatePostActivity" />
-        <activity android:name=".activity.create.ArticlePreviewActivity" />
+        <activity
+            android:name=".activity.create.CreatePostActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".activity.create.ArticlePreviewActivity"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".activity.create.CreateArticleActivity"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustPan" />
         <!--消息-->
         <activity android:name=".activity.message.NoticeActivity" />

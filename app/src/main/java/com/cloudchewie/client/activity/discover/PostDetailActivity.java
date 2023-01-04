@@ -34,13 +34,14 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
-import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.fragment.internal.CommentListFragment;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
+import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.client.util.listener.OnKeyboardChangeListener;
+import com.cloudchewie.client.util.ui.KeyBoardUtil;
 import com.cloudchewie.ninegrid.NineGridImageView;
 import com.cloudchewie.ui.BottomSheet;
 import com.cloudchewie.ui.EntryItem;
@@ -236,6 +237,7 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
             if (mEditText != null) {
                 mEditText.requestFocus();
                 mEditText.performClick();
+                KeyBoardUtil.openKeybord(mEditText, PostDetailActivity.this);
                 mEditText.setHint("回复 " + comment.getUser().getUsername());
             }
         }));

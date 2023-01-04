@@ -2,7 +2,7 @@
 <resources>
     <string name="appname">朝夕</string>
     <string name="version">Version 1.0.0</string>
-    <string name="username_sample">未登录</string>
+    <string name="unlogin">点击登录</string>
     <!--设置相关-->
     <string name="activity_setting_title">设置</string>
     <string name="entry_account">帐号安全</string>

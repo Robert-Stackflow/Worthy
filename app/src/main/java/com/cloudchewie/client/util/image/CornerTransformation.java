@@ -37,9 +37,17 @@ public class CornerTransformation implements Transformation<Bitmap> {
         this.radius = radius;
     }
 
+    @NonNull
+    public static CornerTransformation getTransform(Context context, int radius, boolean leftTop, boolean rightTop, boolean leftBottom, boolean rightBottom) {
+        CornerTransformation cornerTransformation = new CornerTransformation(context, SizeUtil.dp2px(context, radius));
+        cornerTransformation.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
+        return cornerTransformation;
+    }
+
+    @NonNull
     public static CornerTransformation getTransform(Context context, boolean leftTop, boolean rightTop, boolean leftBottom, boolean rightBottom) {
         CornerTransformation cornerTransformation = new CornerTransformation(context, SizeUtil.dp2px(context, 10));
-        cornerTransformation.setNeedCorner(true, true, false, false);
+        cornerTransformation.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
         return cornerTransformation;
     }
 

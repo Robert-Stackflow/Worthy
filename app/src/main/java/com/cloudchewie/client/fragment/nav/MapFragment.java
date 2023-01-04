@@ -7,8 +7,13 @@
 
 package com.cloudchewie.client.fragment.nav;
 
+import static com.cloudchewie.client.util.map.MapUtil.CUSTOM_FILE_NAME_DARK;
+import static com.cloudchewie.client.util.map.MapUtil.CUSTOM_FILE_NAME_TEA;
+import static com.cloudchewie.client.util.map.MapUtil.DARK_ID;
+import static com.cloudchewie.client.util.map.MapUtil.LIGHT_ID;
+import static com.cloudchewie.client.util.map.MapUtil.getCustomStyleFilePath;
+
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.text.Editable;
@@ -39,12 +44,11 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.CustomMapStyleCallBack;
 import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapCustomStyleOptions;
 import com.baidu.mapapi.map.MapPoi;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -68,8 +72,9 @@ import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.adapter.SugListAdapter;
+import com.cloudchewie.client.adapter.SuggestListAdapter;
 import com.cloudchewie.client.util.map.CountyUtil;
+import com.cloudchewie.client.util.map.MapUtil;
 import com.cloudchewie.client.util.ui.DarkModeUtil;
 import com.cloudchewie.client.util.ui.KeyBoardUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
@@ -78,10 +83,6 @@ import com.cloudchewie.ui.search.SearchLayout;
 
 import org.jetbrains.annotations.Contract;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -90,12 +91,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class MapFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnGetPoiSearchResultListener, OnGetSuggestionResultListener,
-        BaiduMap.OnMapClickListener, BaiduMap.OnMarkerClickListener {
-    private static final String CUSTOM_FILE_NAME_DARK = "dark.sty";
-    private static final String CUSTOM_FILE_NAME_TEA = "tea.sty";
-    private static String DARK_ID = "972468541ad9993b7b3a5f8bfecd3ec7";
-    private static String LIGHT_ID = "20709c4bb8da59110666942b516f20b0";
+public class MapFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnGetPoiSearchResultListener, OnGetSuggestionResultListener, BaiduMap.OnMapClickListener, BaiduMap.OnMarkerClickListener {
     boolean itemClicked = false;
     View mainView;
     MapView mapView;
@@ -110,17 +106,16 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     String seletced_province;
     String seletced_county;
     String seletced_city;
-    ArrayAdapter<String> adapter_province;
-    ArrayAdapter<String> adapter_city;
-    ArrayAdapter<String> adapter_county;
+    ArrayAdapter<String> provinceAdapter;
+    ArrayAdapter<String> cityAdapter;
+    ArrayAdapter<String> countyAdapter;
     ArrayList<String> provinces;
     ArrayList<ArrayList<String>> cities;
     ArrayList<ArrayList<ArrayList<String>>> counties;
     private PoiSearch poiSearch;
     private SuggestionSearch suggestionSearch;
     private RecyclerView recyclerView;
-    private SugListAdapter poiItemAdaper;
-    private BitmapDescriptor bitmapdescwaterdrop = BitmapDescriptorFactory.fromResource(R.drawable.img_poi);
+    private SuggestListAdapter suggestListAdapter;
     private int loadIndex = 0;
     private TextView poiTitle;
     private TextView poiAddress;
@@ -141,46 +136,40 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mainView = View.inflate(getContext(), R.layout.fragment_map, null);
-        mainView.findViewById(R.id.goto_mylocation).setOnClickListener(this);
         StatusBarUtil.setStatusBarMarginTop(mainView.findViewById(R.id.map_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+        initView();
         initMap();
-        locateMyLocation();
         initSpinner();
+        locateMyLocation();
         return mainView;
     }
 
-    void initMap() {
+    void initView() {
         mapView = mainView.findViewById(R.id.map_view);
-        baiduMap = mapView.getMap();
-        baiduMap.setMyLocationEnabled(true);
-        baiduMap.setOnMapClickListener(this);
-        baiduMap.setOnMarkerClickListener(this);
         searchLayout = mainView.findViewById(R.id.map_search_layout);
-        searchInput = searchLayout.getSearchEdit();
-        searchInput.addTextChangedListener(new MyTextWatcher());
         recyclerView = mainView.findViewById(R.id.map_sug_recyclerview);
         layoutDetailInfo = mainView.findViewById(R.id.poiInfo);
         poiTitle = mainView.findViewById(R.id.poiTitle);
         poiAddress = mainView.findViewById(R.id.poiAddress);
-        poiItemAdaper = new SugListAdapter();
         provinceSpinner = mainView.findViewById(R.id.map_search_province_filter);
         citySpinner = mainView.findViewById(R.id.map_search_city_filter);
         countySpinner = mainView.findViewById(R.id.map_search_county_filter);
+        mainView.findViewById(R.id.goto_mylocation).setOnClickListener(this);
+        searchInput = searchLayout.getSearchEdit();
+        searchInput.addTextChangedListener(new MyTextWatcher());
         searchLayout.setOnTextSearchListener(s -> null, s -> {
-            searchPoiInCity();
+            searchInCity();
             return null;
         });
-        poiItemAdaper.setOnItemClickListener((parent, view, position, id) -> {
-            SuggestionResult.SuggestionInfo suggestInfo =
-                    poiItemAdaper.getItemSuggestInfo(position);
-            locateSuggestPoi(suggestInfo);
+        suggestListAdapter = new SuggestListAdapter();
+        suggestListAdapter.setOnItemClickListener((view, position, suggestInfo) -> {
+            locateSuggestionInfo(suggestInfo);
             setPoiTextWithLocateSuggestInfo(suggestInfo);
         });
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        if (null == recyclerView)
-            return;
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(poiItemAdaper);
+        if (null == recyclerView) return;
+        recyclerView.setVisibility(View.GONE);
+        recyclerView.setAdapter(suggestListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -188,7 +177,13 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
                 KeyBoardUtil.hideKeyBoard(getActivity());
             }
         });
-        recyclerView.setVisibility(View.GONE);
+    }
+
+    void initMap() {
+        baiduMap = mapView.getMap();
+        baiduMap.setMyLocationEnabled(true);
+        baiduMap.setOnMapClickListener(this);
+        baiduMap.setOnMarkerClickListener(this);
         MyLocationConfiguration myLocationConfiguration = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, null);
         myLocationConfiguration.accuracyCircleFillColor = 0x00000000;
         myLocationConfiguration.accuracyCircleStrokeColor = 0x00000000;
@@ -201,6 +196,15 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             mapView.showScaleControl(false);
             mapView.showZoomControls(false);
         });
+        setMapStyle();
+        poiSearch = PoiSearch.newInstance();
+        poiSearch.setOnGetPoiSearchResultListener(this);
+        suggestionSearch = SuggestionSearch.newInstance();
+        suggestionSearch.setOnGetSuggestionResultListener(this);
+    }
+
+    void setMapStyle() {
+        if (mapView == null) return;
         MapCustomStyleOptions mapCustomStyleOptions = new MapCustomStyleOptions();
         mapCustomStyleOptions.localCustomStylePath(getCustomStyleFilePath(getActivity(), DarkModeUtil.isDarkMode(getContext()) ? CUSTOM_FILE_NAME_DARK : CUSTOM_FILE_NAME_TEA));
         mapCustomStyleOptions.customStyleId(DarkModeUtil.isDarkMode(getContext()) ? DARK_ID : LIGHT_ID);
@@ -220,10 +224,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
                 return false;
             }
         });
-        poiSearch = PoiSearch.newInstance();
-        poiSearch.setOnGetPoiSearchResultListener(this);
-        suggestionSearch = SuggestionSearch.newInstance();
-        suggestionSearch.setOnGetSuggestionResultListener(this);
     }
 
     void initSpinner() {
@@ -231,25 +231,25 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         provinces = CountyUtil.getProvices();
         cities = CountyUtil.getCities();
         counties = CountyUtil.getCounties();
-        adapter_province = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, provinces);
-        adapter_province.setDropDownViewResource(R.layout.widget_spinner_item);
-        adapter_city = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, cities.get(0));
-        adapter_city.setDropDownViewResource(R.layout.widget_spinner_item);
-        adapter_county = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, counties.get(0).get(0));
-        adapter_county.setDropDownViewResource(R.layout.widget_spinner_item);
-        provinceSpinner.setAdapter(adapter_province);
+        provinceAdapter = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, provinces);
+        provinceAdapter.setDropDownViewResource(R.layout.widget_spinner_item);
+        cityAdapter = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, cities.get(0));
+        cityAdapter.setDropDownViewResource(R.layout.widget_spinner_item);
+        countyAdapter = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, counties.get(0).get(0));
+        countyAdapter.setDropDownViewResource(R.layout.widget_spinner_item);
+        provinceSpinner.setAdapter(provinceAdapter);
         provinceSpinner.setSelection(0);
-        citySpinner.setAdapter(adapter_city);
+        citySpinner.setAdapter(cityAdapter);
         citySpinner.setSelection(0);
-        countySpinner.setAdapter(adapter_county);
+        countySpinner.setAdapter(countyAdapter);
         countySpinner.setSelection(0);
         provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 province_postion = i;
-                adapter_city = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, cities.get(i));
-                adapter_city.setDropDownViewResource(R.layout.widget_spinner_item);
-                citySpinner.setAdapter(adapter_city);
+                cityAdapter = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, cities.get(i));
+                cityAdapter.setDropDownViewResource(R.layout.widget_spinner_item);
+                citySpinner.setAdapter(cityAdapter);
                 seletced_province = provinces.get(i);
             }
 
@@ -262,9 +262,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 city_postion = i;
-                adapter_county = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, new ArrayList<>(new HashSet<>(counties.get(province_postion).get(city_postion))));
-                adapter_county.setDropDownViewResource(R.layout.widget_spinner_item);
-                countySpinner.setAdapter(adapter_county);
+                countyAdapter = new ArrayAdapter<>(getActivity(), R.layout.widget_spinner, new ArrayList<>(new HashSet<>(counties.get(province_postion).get(city_postion))));
+                countyAdapter.setDropDownViewResource(R.layout.widget_spinner_item);
+                countySpinner.setAdapter(countyAdapter);
                 seletced_city = cities.get(province_postion).get(i);
             }
 
@@ -309,37 +309,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         locationClient.start();
     }
 
-    @NonNull
-    private String getCustomStyleFilePath(@NonNull Context context, String customStyleFileName) {
-        FileOutputStream outputStream = null;
-        InputStream inputStream = null;
-        String parentPath = null;
-        try {
-            inputStream = context.getAssets().open(customStyleFileName);
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-            parentPath = context.getFilesDir().getAbsolutePath();
-            File customStyleFile = new File(parentPath + "/" + customStyleFileName);
-            if (customStyleFile.exists())
-                customStyleFile.delete();
-            customStyleFile.createNewFile();
-            outputStream = new FileOutputStream(customStyleFile);
-            outputStream.write(buffer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (inputStream != null)
-                    inputStream.close();
-                if (outputStream != null)
-                    outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return parentPath + "/" + customStyleFileName;
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -355,10 +324,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             return;
         }
         List<PoiInfo> poiInfos = poiResult.getAllPoi();
-        if (null == poiInfos)
-            return;
-        recyclerView.setVisibility(View.GONE);
+        if (null == poiInfos) return;
         setPoiResult(poiInfos);
+        recyclerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -381,22 +349,21 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     public void onGetSuggestionResult(SuggestionResult suggestionResult) {
         if (suggestionResult == null || suggestionResult.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
             loadIndex = 0;
-            IToast.makeTextTop(getActivity(), "未找到结果", Toast.LENGTH_LONG).show();
             return;
         }
         List<SuggestionResult.SuggestionInfo> suggesInfos = suggestionResult.getAllSuggestions();
-        if (null == suggesInfos)
-            return;
-        hideInfoLayout();
-        if (suggesInfos.size() > 0 && !itemClicked)
-            recyclerView.setVisibility(View.VISIBLE);
-        else
-            recyclerView.setVisibility(View.GONE);
-        if (null == poiItemAdaper)
-            poiItemAdaper = new SugListAdapter(suggesInfos);
-        else
-            poiItemAdaper.updateData(suggesInfos);
-        poiItemAdaper.notifyDataSetChanged();
+        if (null == suggesInfos) return;
+        hidePoiInfoLayout();
+        if (suggesInfos.size() > 0 && !itemClicked) recyclerView.setVisibility(View.VISIBLE);
+        else recyclerView.setVisibility(View.GONE);
+        if (null == suggestListAdapter) {
+            suggestListAdapter = new SuggestListAdapter(suggesInfos);
+            suggestListAdapter.setOnItemClickListener((view, position, suggestInfo) -> {
+                locateSuggestionInfo(suggestInfo);
+                setPoiTextWithLocateSuggestInfo(suggestInfo);
+            });
+        } else suggestListAdapter.updateData(suggesInfos);
+        suggestListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -406,13 +373,12 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
 
     @Override
     public void onMapPoiClick(MapPoi mapPoi) {
-
+        KeyBoardUtil.hideKeyBoard(getActivity());
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if (null == marker || null == markerPoiInfo || markerPoiInfo.size() <= 0)
-            return false;
+        if (null == marker || null == markerPoiInfo || markerPoiInfo.size() <= 0) return false;
         Iterator<Map.Entry<Marker, PoiInfo>> itr = markerPoiInfo.entrySet().iterator();
         Marker tmpMarker;
         PoiInfo poiInfo = null;
@@ -420,33 +386,24 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         while (itr.hasNext()) {
             markerPoiInfoEntry = itr.next();
             tmpMarker = markerPoiInfoEntry.getKey();
-            if (null == tmpMarker) {
-                continue;
-            }
+            if (null == tmpMarker) continue;
             if (Objects.equals(tmpMarker.getId(), marker.getId())) {
                 poiInfo = markerPoiInfoEntry.getValue();
                 break;
             }
         }
-        if (null == poiInfo)
-            return false;
-        InfoWindow infoWindow = getPoiInfoWindow(poiInfo);
-        LatLng center = poiInfo.getLocation();
-        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLngZoom(center, 12);
-        baiduMap.setMapStatus(mapStatusUpdate);
-        baiduMap.showInfoWindow(infoWindow);
+        if (null == poiInfo) return false;
+        baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().target(poiInfo.getLocation()).zoom(12.0f).build()));
+        baiduMap.showInfoWindow(getPoiInfoWindow(poiInfo));
         showPoiInfoLayout(poiInfo);
-        if (null != preSelectMarker) {
-            preSelectMarker.setScale(1.0f);
-        }
+        if (null != preSelectMarker) preSelectMarker.setScale(1.0f);
         marker.setScale(2f);
         preSelectMarker = marker;
         return true;
     }
 
     private void setPoiTextWithLocateSuggestInfo(SuggestionResult.SuggestionInfo suggestInfo) {
-        if (null == suggestInfo)
-            return;
+        if (null == suggestInfo) return;
         searchInput.removeTextChangedListener(myTextWatcher);
         searchInput.setText(suggestInfo.getKey());
         searchInput.setSelection(suggestInfo.getKey().length());
@@ -454,43 +411,37 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         itemClicked = true;
     }
 
-    private void locateSuggestPoi(SuggestionResult.SuggestionInfo suggestInfo) {
-        if (null == suggestInfo)
-            return;
-        if (null == recyclerView || null == mapView)
-            return;
-        recyclerView.setVisibility(View.INVISIBLE);
-        LatLng latLng = suggestInfo.getPt();
-        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
-        baiduMap.setMapStatus(mapStatusUpdate);
+    private void locateSuggestionInfo(SuggestionResult.SuggestionInfo suggestInfo) {
+        if (null == suggestInfo) return;
+        if (null == recyclerView || null == mapView) return;
         KeyBoardUtil.hideKeyBoard(getActivity());
+        recyclerView.setVisibility(View.INVISIBLE);
+        baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(new MapStatus.Builder().target(suggestInfo.getPt()).zoom(12.0f).build()));
         clearData();
-        if (showSuggestMarker(latLng)) {
-            showPoiInfoLayout(suggestInfo);
-        } else {
+        if (!showSuggestMarker(suggestInfo)) {
             setPoiTextWithLocateSuggestInfo(suggestInfo);
-            searchPoiInCity();
+            searchInCity();
         }
     }
 
-    private void searchPoiInCity() {
+
+    @Contract("null -> false")
+    private boolean showSuggestMarker(SuggestionResult.SuggestionInfo suggestionInfo) {
+        if (null == suggestionInfo) return false;
+        baiduMap.addOverlay(new MarkerOptions().position(suggestionInfo.getPt()).icon(MapUtil.getMarkerIcon()).scaleX(2f).scaleY(2f));
+        return true;
+    }
+
+    private void searchInCity() {
         String cityStr = citySpinner.getSelectedItem().toString();
         String keyWordStr = searchInput.getText().toString();
-        if (TextUtils.isEmpty(cityStr) || TextUtils.isEmpty(keyWordStr))
-            return;
-        if (View.VISIBLE == recyclerView.getVisibility())
-            recyclerView.setVisibility(View.INVISIBLE);
-        poiSearch.searchInCity((new PoiCitySearchOption())
-                .city(cityStr)
-                .keyword(keyWordStr)
-                .pageNum(loadIndex)
-                .cityLimit(true)
-                .scope(1));
+        if (TextUtils.isEmpty(cityStr) || TextUtils.isEmpty(keyWordStr)) return;
+        recyclerView.setVisibility(View.INVISIBLE);
+        poiSearch.searchInCity((new PoiCitySearchOption()).city(cityStr).keyword(keyWordStr).pageNum(loadIndex).cityLimit(true).scope(1));
     }
 
     private void setPoiResult(List<PoiInfo> poiInfos) {
-        if (null == poiInfos || poiInfos.size() <= 0)
-            return;
+        if (null == poiInfos || poiInfos.size() <= 0) return;
         clearData();
         LatLng latLng = poiInfos.get(0).getLocation();
         MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
@@ -501,12 +452,10 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         int i = 0;
         while (itr.hasNext()) {
             poiInfo = itr.next();
-            if (null == poiInfo)
-                continue;
+            if (null == poiInfo) continue;
             locatePoiInfo(poiInfo, i);
             latLngs.add(poiInfo.getLocation());
-            if (0 == i)
-                showPoiInfoLayout(poiInfo);
+            if (0 == i) showPoiInfoLayout(poiInfo);
             i++;
         }
         setBounds(latLngs);
@@ -530,9 +479,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         if (null == poiInfo) {
             return;
         }
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(poiInfo.getLocation())
-                .icon(bitmapdescwaterdrop);
+        MarkerOptions markerOptions = new MarkerOptions().position(poiInfo.getLocation()).icon(MapUtil.getMarkerIcon());
         if (0 == i) {
             InfoWindow infoWindow = getPoiInfoWindow(poiInfo);
             markerOptions.scaleX(2f).scaleY(2f).infoWindow(infoWindow);
@@ -550,48 +497,13 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
     @Contract("_ -> new")
     @SuppressLint("UseCompatLoadingForDrawables")
     private InfoWindow getPoiInfoWindow(@NonNull PoiInfo poiInfo) {
-        @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_map_infowindow, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_map_infowindow, null);
         ((TextView) view.findViewById(R.id.infowindow_title)).setText(poiInfo.getName());
         ((TextView) view.findViewById(R.id.infowindow_address)).setText(poiInfo.getAddress());
         return new InfoWindow(view, poiInfo.getLocation(), -150);
     }
 
-    private boolean showSuggestMarker(LatLng latLng) {
-        if (null == latLng)
-            return false;
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(latLng)
-                .icon(bitmapdescwaterdrop)
-                .scaleX(2f)
-                .scaleY(2f);
-        baiduMap.addOverlay(markerOptions);
-        return true;
-    }
-
-    private void showPoiInfoLayout(SuggestionResult.SuggestionInfo suggestInfo) {
-        if (null == layoutDetailInfo || null == suggestInfo) {
-            return;
-        }
-        if (null == poiTitle) {
-            return;
-        }
-        if (null == poiAddress) {
-            return;
-        }
-        layoutDetailInfo.setVisibility(View.VISIBLE);
-        poiTitle.setText(suggestInfo.getKey());
-        String address = suggestInfo.getAddress();
-        if (TextUtils.isEmpty(address)) {
-            poiAddress.setVisibility(View.GONE);
-        } else {
-            poiAddress.setText(suggestInfo.getAddress());
-            poiAddress.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void showPoiInfoLayout(PoiInfo poiInfo) {
-
         if (null == layoutDetailInfo || null == poiInfo) {
             return;
         }
@@ -612,9 +524,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         }
     }
 
-    private void hideInfoLayout() {
-        if (null == layoutDetailInfo)
-            return;
+    private void hidePoiInfoLayout() {
+        if (null == layoutDetailInfo) return;
         layoutDetailInfo.setVisibility(View.GONE);
     }
 
@@ -626,16 +537,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
         int verticalPaddingBottom = 400;
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         builder.include(latLngs);
-        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLngBounds(builder.build(),
-                horizontalPadding,
-                verticalPaddingBottom,
-                horizontalPadding,
-                verticalPaddingBottom);
+        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLngBounds(builder.build(), horizontalPadding, verticalPaddingBottom, horizontalPadding, verticalPaddingBottom);
         baiduMap.setMapStatus(mapStatusUpdate);
-        baiduMap.setViewPadding(0,
-                0,
-                0,
-                verticalPaddingBottom);
+        baiduMap.setViewPadding(0, 0, 0, verticalPaddingBottom);
     }
 
     @Override
@@ -664,21 +568,16 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             mapView.onDestroy();
             mapView = null;
         }
-        if (locationClient != null)
-            locationClient.stop();
-        if (baiduMap != null)
-            baiduMap.setMyLocationEnabled(false);
+        if (locationClient != null) locationClient.stop();
+        if (baiduMap != null) baiduMap.setMyLocationEnabled(false);
         super.onDestroy();
     }
 
     public class MyLocationListener extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(BDLocation location) {
-            if (location == null || mapView == null)
-                return;
-            MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius())
-                    .direction(location.getDirection()).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
+            if (location == null || mapView == null) return;
+            MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius()).direction(location.getDirection()).latitude(location.getLatitude()).longitude(location.getLongitude()).build();
             baiduMap.setMyLocationData(locData);
             int errorCode = location.getLocType();
             float radius = location.getRadius();
@@ -686,12 +585,11 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             double longitude = location.getLongitude();
             String coorType = location.getCoorType();
             if (errorCode == BDLocation.TYPE_NO_PERMISSION_LOCATION_FAIL)
-                IToast.makeTextTop(getActivity(), "定位失败，请授予定位权限!", Toast.LENGTH_SHORT).show();
+                IToast.makeTextBottom(getActivity(), "定位失败，请授予定位权限!", Toast.LENGTH_SHORT).show();
             else {
                 locationOption.setScanSpan(0);
                 locationClient.stop();
                 locationClient.setLocOption(locationOption);
-
             }
         }
     }
@@ -714,15 +612,11 @@ public class MapFragment extends Fragment implements View.OnClickListener, View.
             itemClicked = false;
             String cityStr = citySpinner.getSelectedItem().toString();
             String keyWordStr = searchInput.getText().toString();
-            if (TextUtils.isEmpty(cityStr) || TextUtils.isEmpty(keyWordStr)) {
+            if (TextUtils.isEmpty(cityStr) || TextUtils.isEmpty(keyWordStr))
                 return;
-            }
             if (View.VISIBLE == recyclerView.getVisibility())
                 recyclerView.setVisibility(View.INVISIBLE);
-            suggestionSearch.requestSuggestion(new SuggestionSearchOption()
-                    .city(cityStr)
-                    .keyword(keyWordStr)
-                    .citylimit(true));
+            suggestionSearch.requestSuggestion(new SuggestionSearchOption().city(cityStr).keyword(keyWordStr).citylimit(true));
         }
     }
 }

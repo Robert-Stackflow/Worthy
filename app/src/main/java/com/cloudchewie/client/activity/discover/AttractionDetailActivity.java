@@ -104,6 +104,7 @@ public class AttractionDetailActivity extends BaseActivity implements View.OnCli
         mFollowButton.setOnClickListener(this);
         mSmallFollowButton.setOnClickListener(this);
         mSortButton.setOnClickListener(this);
+        findViewById(R.id.activity_attraction_detail_jump_to_map).setOnClickListener(this);
         mFabLayout.setOnClickListener(view -> new CreateDialogFragment().show(getSupportFragmentManager(), ""));
         findViewById(R.id.activity_attraction_detail_fab_button).setOnClickListener(view -> new CreateDialogFragment().show(getSupportFragmentManager(), ""));
         List<String> sortList = Arrays.asList(getResources().getStringArray(R.array.sort));
@@ -192,6 +193,12 @@ public class AttractionDetailActivity extends BaseActivity implements View.OnCli
                     break;
                 }
             }
+        } else if (view == findViewById(R.id.activity_attraction_detail_jump_to_map)) {
+            Intent intent = new Intent(this, LocationDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("attraction", mAttraction);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 

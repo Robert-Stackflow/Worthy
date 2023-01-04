@@ -35,6 +35,7 @@ import com.cloudchewie.client.fragment.nav.MessageFragment;
 import com.cloudchewie.client.fragment.nav.UserFragment;
 import com.cloudchewie.client.util.database.AppDatabase;
 import com.cloudchewie.client.util.system.LocalStorage;
+import com.cloudchewie.client.util.ui.SizeUtil;
 import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.NoScrollViewPager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -72,7 +73,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         bottomNavigation.setSmallTextSize(11);
         bottomNavigation.setLargeTextSize(12);
         bottomNavigation.setIconSize(20);
-        bottomNavigation.setBNMenuViewHeight(140);
+        bottomNavigation.setBNMenuViewHeight(SizeUtil.dp2px(this, 55));
         {
             fragments = new ArrayList<>();
             fragments.add(new MapFragment());

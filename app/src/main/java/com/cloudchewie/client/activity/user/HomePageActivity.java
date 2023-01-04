@@ -7,19 +7,18 @@
 
 package com.cloudchewie.client.activity.user;
 
-import static java.lang.Math.abs;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
@@ -29,12 +28,12 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.domin.User;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.fragment.global.ImageViewFragment;
 import com.cloudchewie.client.fragment.global.StateFragment;
 import com.cloudchewie.client.fragment.internal.PostListFragment;
+import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.client.util.listener.AppBarStateChangeListener;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
@@ -50,19 +49,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import jp.wasabeef.blurry.Blurry;
-
 public class HomePageActivity extends AppCompatActivity {
     private User mUser;
     private Context mContext;
     private List<String> mTitles;
     private List<Fragment> mFragments;
-    private boolean mIsBlurred = false;
     private ImageViewInfo mAvatarInfo;
     private ImageViewInfo mBackGroundInfo;
     private ImageViewInfo mSmallAvatarInfo;
     //基本控件
-    private Toolbar mToolBar;
     private AppBarLayout mAppBar;
     private ImageView mBackButton;
     private ImageView mMoreButton;
@@ -70,9 +65,13 @@ public class HomePageActivity extends AppCompatActivity {
     private ImageView mAvatarView;
     private TextView mUsernameView;
     private ImageView mSmallAvatarView;
+    private ConstraintLayout mTitleBar;
+    private ConstraintLayout mTitleBar2;
+    private RelativeLayout mMainLayout;
     private TextView mSmallUsernameView;
     private IconTextItem mLocationView;
     private IconTextItem mGenderView;
+    private ConstraintLayout mContentBar;
     //主要控件
     private TabLayout mTabLayout;
     private ViewPager2 mViewPager;
@@ -82,7 +81,6 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         mContext = getApplicationContext();
-        mToolBar = findViewById(R.id.home_page_toolbar);
         mAppBar = findViewById(R.id.home_page_appbar);
         mBackButton = findViewById(R.id.home_page_back);
         mMoreButton = findViewById(R.id.home_page_more);
@@ -95,8 +93,11 @@ public class HomePageActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.home_page_content_viewpager);
         mLocationView = findViewById(R.id.home_page_ipaddress);
         mGenderView = findViewById(R.id.home_page_gender);
+        mTitleBar = findViewById(R.id.home_page_titlebar);
+        mTitleBar2 = findViewById(R.id.home_page_titlebar_2);
+        mMainLayout = findViewById(R.id.home_page_layout);
+        mContentBar = findViewById(R.id.home_page_content_bar);
         initView();
-        initBlur();
         initTabLayout();
         initGlide();
     }
@@ -104,17 +105,13 @@ public class HomePageActivity extends AppCompatActivity {
     void initGlide() {
         Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
         Glide.with(HomePageActivity.this).load(mAvatarInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mSmallAvatarView);
-        //        mBackGroundInfo = new UserViewInfo("https://hellorfimg.zcool.cn/provider_image/preview260/2234602281.jpg");
-        //        mBackGroundInfo = new UserViewInfo("https://iknow-pic.cdn.bcebos.com/7e3e6709c93d70cfc0e42a59f7dcd100baa12b4c");
         Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
         if (StatusBarUtil.setStatusBarTextColor(HomePageActivity.this, mBackGroundInfo.getUrl())) {
             mBackButton.setImageTintList(getColorStateList(R.color.color_selector_icon_light));
             mMoreButton.setImageTintList(getColorStateList(R.color.color_selector_icon_light));
-            mSmallUsernameView.setTextColor(getColor(R.color.text_color_light));
         } else {
             mBackButton.setImageTintList(getColorStateList(R.color.color_selector_icon_dark));
             mMoreButton.setImageTintList(getColorStateList(R.color.color_selector_icon_dark));
-            mSmallUsernameView.setTextColor(getColor(R.color.text_color_dark));
         }
     }
 
@@ -125,6 +122,7 @@ public class HomePageActivity extends AppCompatActivity {
         mSmallAvatarInfo = new ImageViewInfo(mUser.getAvatarUrl());
         mBackGroundInfo = new ImageViewInfo(mUser.getBackgroundUrl());
         mBackButton.setOnClickListener(v -> finish());
+        findViewById(R.id.home_page_back_2).setOnClickListener(v -> finish());
         mMoreButton.setOnClickListener(v -> {
             BottomSheet bottomSheet = new BottomSheet(this);
             bottomSheet.setMainLayout(R.layout.layout_home_page_more);
@@ -153,31 +151,25 @@ public class HomePageActivity extends AppCompatActivity {
         mSmallUsernameView.setText(mUser.getUsername());
         mGenderView.setText(mUser.getGenderInfo());
         mLocationView.setText(mUser.getCurrentLocation());
-    }
-
-    void initBlur() {
+        mTitleBar2.setAlpha(0f);
         UltimateBarX.statusBarOnly(this).fitWindow(true).transparent().apply();
-        UltimateBarX.addStatusBarTopPadding(mToolBar);
-        mToolBar.setContentInsetsRelative(0, 0);
+        UltimateBarX.addStatusBarTopPadding(mTitleBar);
+        UltimateBarX.addStatusBarTopPadding(mTitleBar2);
+        UltimateBarX.addStatusBarTopPadding(mContentBar);
         mAppBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state, int offset) {
                 if (state == State.EXPANDED) {
+                    mTitleBar2.setAlpha(0f);
+                    mTitleBar2.setVisibility(View.GONE);
                     Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
-                    mIsBlurred = false;
                 } else if (state == State.COLLAPSED) {
-                    mIsBlurred = true;
-                    Blurry.with(mContext).animate(500).radius(abs(offset) % 40).async().capture(mBackGroundView).into(mBackGroundView);
+                    mTitleBar2.setAlpha(1f);
+                    mTitleBar2.setVisibility(View.VISIBLE);
                 }
-                if (abs(offset) > 2 * appBarLayout.getTotalScrollRange() / 3) {
-                    mSmallAvatarView.setVisibility(View.VISIBLE);
-                    mSmallUsernameView.setVisibility(View.VISIBLE);
-                } else {
-                    mSmallAvatarView.setVisibility(View.GONE);
-                    mSmallUsernameView.setVisibility(View.GONE);
-                    Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
-                    mIsBlurred = false;
-                }
+                mTitleBar2.setVisibility(View.VISIBLE);
+                mTitleBar2.setAlpha(1f * Math.abs(offset) / appBarLayout.getTotalScrollRange());
+                Glide.with(HomePageActivity.this).load(mBackGroundInfo.getUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mBackGroundView);
             }
         });
     }

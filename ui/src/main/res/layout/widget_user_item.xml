@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:textColor="@color/color_accent"
             app:layout_constraintStart_toEndOf="@id/user_item_avatar"
             app:layout_constraintTop_toTopOf="@id/user_item_avatar"
             tools:text="余湍" />
@@ -37,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon_text_item_icon_size="11dp"
+            app:icon_text_item_text_max_length="5"
             app:layout_constraintBottom_toBottomOf="@id/user_item_avatar"
             app:layout_constraintStart_toStartOf="@id/user_item_username"
             tools:icon_text_item_text="武汉" />

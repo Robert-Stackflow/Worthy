@@ -30,14 +30,22 @@
         <item>我的动态</item>
     </string-array>
     <string-array name="follow_list_tab_titles">
-        <item>关注的人</item>
-        <item>关注的地点</item>
-        <item>关注的话题</item>
+        <item>人</item>
+        <item>地点</item>
+        <item>话题</item>
     </string-array>
     <string-array name="home_page_tab_titles">
         <item>相册</item>
         <item>帖子</item>
         <item>文章</item>
         <item>成就</item>
+    </string-array>
+    <string-array name="search_result_titles">
+        <item>综合</item>
+        <item>地点</item>
+        <item>帖子</item>
+        <item>文章</item>
+        <item>用户</item>
+        <item>话题</item>
     </string-array>
 </resources>

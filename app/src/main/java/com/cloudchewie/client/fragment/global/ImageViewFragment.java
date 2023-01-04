@@ -15,15 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.ShareItemAdapter;
-import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.domin.ShareItem;
 import com.cloudchewie.client.util.enumeration.Direction;
+import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.mess.LinearItemDecoration;
 import com.cloudchewie.client.util.system.ShareUtil;
 import com.cloudchewie.client.util.ui.SizeUtil;
@@ -40,7 +41,7 @@ public class ImageViewFragment extends BasePhotoFragment {
     private Map<String, String> appPackageNameMap = new HashMap<>();
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bean = (ImageViewInfo) getBeanViewInfo();
         imageView.setOnLongClickListener(v -> {

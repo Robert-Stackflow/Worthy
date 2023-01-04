@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/small_post_item_layout"
     android:layout_width="match_parent"
@@ -14,44 +13,43 @@
         android:id="@+id/small_post_item_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_default_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/img_default_background" />
 
     <TextView
         android:id="@+id/small_post_item_username"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/small_post_item_image"
         android:singleLine="true"
         android:textColor="@color/text_color_gray"
         android:textSize="11sp"
-        app:layout_constraintStart_toEndOf="@id/small_post_item_image"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="用户昵称" />
 
     <TextView
         android:id="@+id/small_post_item_time"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:textColor="@color/text_color_light_gray"
         android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="2022年10月20日" />
 
     <TextView
         android:id="@+id/small_post_item_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@id/small_post_item_username"
+        android:layout_alignBottom="@id/small_post_item_image"
+        android:layout_alignParentEnd="true"
         android:maxLines="2"
         android:textColor="@color/color_accent"
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/small_post_item_username"
-        app:layout_constraintTop_toBottomOf="@id/small_post_item_username"
-        tools:text="有时相信在某个平行的宇宙\n你的爱还一如既往陪在我左右\n有时相信在某个平行的宇宙\n你的爱还一如既往陪在我左右" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        tools:text="有时相信在某个平行的宇宙你的爱还一如既往陪在我左右有时相信在某个平行的宇宙你的爱还一如既往陪在我左右" />
+</RelativeLayout>

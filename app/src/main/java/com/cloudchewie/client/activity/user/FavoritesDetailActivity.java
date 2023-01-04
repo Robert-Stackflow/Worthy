@@ -26,9 +26,15 @@ import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.adapter.SmallPostListAdapter;
 import com.cloudchewie.client.domin.Favorites;
 import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.fragment.global.ImageViewFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
+import com.cloudchewie.client.util.image.CornerTransformation;
+import com.cloudchewie.client.util.image.ImageViewInfo;
+import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.ui.BottomSheet;
+import com.cloudchewie.ui.EntryItem;
 import com.cloudchewie.ui.IconTextItem;
+import com.previewlibrary.GPreviewBuilder;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
@@ -66,12 +72,11 @@ public class FavoritesDetailActivity extends BaseActivity implements View.OnClic
         favorites = (Favorites) intent.getSerializableExtra("favorites");
         ((TextView) findViewById(R.id.favorites_detail_name)).setText(favorites.getName());
         ((TextView) findViewById(R.id.favorites_detail_author)).setText("创建者:" + favorites.getUsername());
-        ((TextView) findViewById(R.id.favorites_detail_ispublic)).setText(favorites.isPublic() ? "公开" : "私密");
         ((TextView) findViewById(R.id.favorites_detail_describe)).setText("简介:" + favorites.getDescribe());
         ((IconTextItem) findViewById(R.id.favorites_detail_count)).setText(String.valueOf(favorites.getItemCount()));
-        ((IconTextItem) findViewById(R.id.favorites_detail_collection)).setText(String.valueOf(favorites.getFollowerCount()));
-        ((IconTextItem) findViewById(R.id.favorites_detail_thumbup)).setText(String.valueOf(favorites.getThumbupCount()));
-        ((IconTextItem) findViewById(R.id.favorites_detail_visitor)).setText(String.valueOf(favorites.getVisitorCount()));
+        ((EntryItem) findViewById(R.id.favorites_detail_collection_count)).setText(String.valueOf(favorites.getFollowerCount()));
+        ((EntryItem) findViewById(R.id.favorites_detail_thumbup_count)).setText(String.valueOf(favorites.getThumbupCount()));
+        ((EntryItem) findViewById(R.id.favorites_detail_visitor_count)).setText(String.valueOf(favorites.getVisitorCount()));
         findViewById(R.id.favorites_detail_back).setOnClickListener(v -> finish());
         findViewById(R.id.favorites_detail_more).setOnClickListener(v -> {
             BottomSheet bottomSheet = new BottomSheet(this);
@@ -79,9 +84,16 @@ public class FavoritesDetailActivity extends BaseActivity implements View.OnClic
             bottomSheet.show();
             bottomSheet.findViewById(R.id.detail_more_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
         });
+        findViewById(R.id.favorites_detail_cover).setOnClickListener(v -> {
+            List<ImageViewInfo> mThumbViewInfoList = new ArrayList<>();
+            ImageViewInfo mCoverInfo = new ImageViewInfo(favorites.getCoverUrl());
+            mCoverInfo.setBounds(NineGridUtil.getBounds((ImageView) findViewById(R.id.favorites_detail_cover)));
+            mThumbViewInfoList.add(mCoverInfo);
+            GPreviewBuilder.from(FavoritesDetailActivity.this).setUserFragment(ImageViewFragment.class).setSingleShowType(false).setIsScale(true).setData(mThumbViewInfoList).setCurrentIndex(0).setSingleFling(true).isDisableDrag(false).setFullscreen(true).start();
+        });
         initSwipeRefresh();
         initRecyclerView();
-        Glide.with(this).load(favorites.getCoverUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into((ImageView) findViewById(R.id.favorites_detail_cover));
+        Glide.with(this).load(favorites.getCoverUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(this, 5, true, true, true, true))).into((ImageView) findViewById(R.id.favorites_detail_cover));
     }
 
     void initSwipeRefresh() {

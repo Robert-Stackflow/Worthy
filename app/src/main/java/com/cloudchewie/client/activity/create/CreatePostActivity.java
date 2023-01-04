@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -23,12 +24,13 @@ import com.blankj.utilcode.util.VibrateUtils;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
-import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
+import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.client.util.widget.CommonPopupWindow;
 import com.cloudchewie.ninegrid.NineGridImageView;
+import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.MyDialog;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -71,15 +73,18 @@ public class CreatePostActivity extends BaseActivity {
     void initView() {
         wordCount.setText("0/" + maxSize);
         content.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxSize)});
-        publishButton.setOnClickListener(v -> finish());
+        publishButton.setOnClickListener(v -> {
+            IToast.makeTextBottom(this, "帖子发布成功", Toast.LENGTH_SHORT).show();
+            finish();
+        });
         publishButton.setSelected(false);
         publishButton.setEnabled(false);
         publishButton.setTextColor(getColor(R.color.text_color_light_gray));
         cancelButton.setOnClickListener(v -> {
             MyDialog dialog = new MyDialog(CreatePostActivity.this);
-            dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
-            dialog.setNegtive("放弃并退出");
-            dialog.setPositive("保存为草稿");
+            dialog.setMessage("是否将本次编辑保存为草稿？保存后下次可以继续编写");
+            dialog.setNegtive("不保存");
+            dialog.setPositive("保存");
             dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
                 @Override
                 public void onPositiveClick() {
@@ -89,6 +94,11 @@ public class CreatePostActivity extends BaseActivity {
                 @Override
                 public void onNegtiveClick() {
                     finish();
+                }
+
+                @Override
+                public void onCloseClick() {
+                    dialog.dismiss();
                 }
             });
             dialog.show();
@@ -160,9 +170,9 @@ public class CreatePostActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         MyDialog dialog = new MyDialog(CreatePostActivity.this);
-        dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
-        dialog.setNegtive("放弃并退出");
-        dialog.setPositive("保存为草稿");
+        dialog.setMessage("是否将本次编辑保存为草稿？保存后下次可以继续编写");
+        dialog.setNegtive("不保存");
+        dialog.setPositive("保存");
         dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
             @Override
             public void onPositiveClick() {
@@ -172,6 +182,11 @@ public class CreatePostActivity extends BaseActivity {
             @Override
             public void onNegtiveClick() {
                 finish();
+            }
+
+            @Override
+            public void onCloseClick() {
+                dialog.dismiss();
             }
         });
         dialog.show();

@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/searchbox_layout"
+        android:id="@+id/activity_search_searchbox_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/activity_search_back"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_arrow_left" />
 
         <com.cloudchewie.ui.search.SearchLayout
-            android:id="@+id/search_layout"
+            android:id="@+id/activity_search_search_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="0.7"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            android:layout_marginBottom="@dimen/dp10"
+            android:layout_weight="1"
             app:search_bg="@drawable/shape_tag_round"
             app:search_color="@color/color_accent"
             app:search_text_cursor="@drawable/shape_cursor" />
 
         <TextView
-            android:id="@+id/search_cancel"
+            android:id="@+id/activity_search_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/dp10"
             android:clickable="true"
             android:focusable="true"
-            android:text="取消"
+            android:paddingStart="@dimen/dp10"
+            android:paddingEnd="@dimen/dp10"
+            android:text="搜索"
             android:textAlignment="center"
-            android:textColor="@color/text_color_gray" />
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/sp16" />
     </LinearLayout>
 
     <com.cloudchewie.ui.search.SearchList
-        android:id="@+id/search_list"
+        android:id="@+id/activity_search_search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/activity_search_searchbox_layout"
         android:layout_margin="10dp"
         android:padding="10dp"
         app:history_clear_icon="@drawable/ic_light_delete"
@@ -48,7 +60,45 @@
         app:history_padding_left="18dp"
         app:history_padding_right="18dp"
         app:history_padding_top="8dp"
-        app:is_visibility_history_clear="true"
-        app:layout_constraintTop_toBottomOf="@id/searchbox_layout" />
+        app:is_visibility_history_clear="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_search_result_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_search_searchbox_layout">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/activity_search_result_tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabBackground="@android:color/transparent"
+            app:tabGravity="center"
+            app:tabIndicator="@drawable/shape_tab_indicator"
+            app:tabIndicatorColor="@color/color_prominent"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="fixed"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/color_prominent"
+            app:tabTextAppearance="@style/SmallTabLayoutTextStyle"
+            app:tabTextColor="@color/color_accent" />
+
+        <View
+            android:id="@+id/activity_search_result_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_divider"
+            app:layout_constraintTop_toBottomOf="@id/activity_search_result_tab_layout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/activity_search_result_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/activity_search_result_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+</RelativeLayout>

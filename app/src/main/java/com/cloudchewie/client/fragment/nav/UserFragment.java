@@ -16,20 +16,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.cloudchewie.client.R;
+import com.cloudchewie.client.activity.auth.LoginActivity;
 import com.cloudchewie.client.activity.settings.SettingsActivity;
 import com.cloudchewie.client.activity.user.FavoritesListActivity;
 import com.cloudchewie.client.activity.user.FollowListActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.domin.User;
-import com.cloudchewie.client.util.ui.DarkModeUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
+import com.cloudchewie.ui.IToast;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
@@ -53,6 +54,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         mainView.findViewById(R.id.user_entry_following).setOnClickListener(this);
         mainView.findViewById(R.id.user_entry_creation).setOnClickListener(this);
         mainView.findViewById(R.id.user_entry_footprint).setOnClickListener(this);
+        mainView.findViewById(R.id.fragment_user_username).setOnClickListener(this);
+        mainView.findViewById(R.id.fragment_user_avatar).setOnClickListener(this);
         initSwipeRefresh();
         return mainView;
     }
@@ -71,25 +74,29 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent(getActivity(), SettingsActivity.class);
             startActivity(intent);
         } else if (view == mainView.findViewById(R.id.switch_daynight)) {
-            ImageButton switchDaynight = (ImageButton) view;
-            if (switchDaynight != null) {
-                DarkModeUtil.toggle(getActivity());
-            }
+//            ImageButton switchDaynight = (ImageButton) view;
+//            if (switchDaynight != null) {
+//                DarkModeUtil.toggle(getActivity());
+//            }
+            IToast.makeTextBottom(getContext(), "功能维护中,暂时无法切换深色模式", Toast.LENGTH_SHORT).show();
         } else if (view == mainView.findViewById(R.id.user_entry_collection)) {
             Intent intent = new Intent(getActivity(), FavoritesListActivity.class);
             startActivity(intent);
         } else if (view == mainView.findViewById(R.id.user_entry_creation)) {
-
+            IToast.makeTextBottom(getContext(), "系统维护中,暂时无法进入创作中心", Toast.LENGTH_SHORT).show();
         } else if (view == mainView.findViewById(R.id.user_entry_following)) {
             Intent intent = new Intent(getActivity(), FollowListActivity.class);
             startActivity(intent);
         } else if (view == mainView.findViewById(R.id.user_entry_footprint)) {
-
+            IToast.makeTextBottom(getContext(), "功能维护中,暂时无法查看我的足迹", Toast.LENGTH_SHORT).show();
         } else if (view == mainView.findViewById(R.id.entry_home_page)) {
             Intent intent = new Intent(getActivity(), HomePageActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", new User(((int) (Math.random() * 1000)), "Ruida", getPhone(), "", User.GENDER.values()[((int) (Math.random() * 1000)) % User.GENDER.values().length], getDate(), getCity()));
             intent.putExtras(bundle);
+            startActivity(intent);
+        } else if (view == mainView.findViewById(R.id.fragment_user_username) || view == mainView.findViewById(R.id.fragment_user_avatar)) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }
     }

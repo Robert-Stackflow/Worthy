@@ -10,7 +10,7 @@ android {
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.targetSdk
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
@@ -40,6 +40,7 @@ dependencies {
     implementation project(':ninegrid')
     implementation project(':ucrop')
     implementation project(':imagepicker')
+    implementation project(':imagepreview')
     implementation libs.kotlin.stdlib
     implementation files('libs/BaiduLBS_Android.jar')
     //Androidx
@@ -75,8 +76,7 @@ dependencies {
     implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'
     implementation group: 'com.haibin', name: 'calendarview', version: '3.7.1'
     //Image
-    implementation 'jp.wasabeef:blurry:4.0.1'  //毛玻璃
-    implementation 'com.ycjiang:ImagePreview:2.3.7'  //图片预览
+//    implementation 'jp.wasabeef:blurry:4.0.1'  //毛玻璃
     implementation 'de.hdodenhof:circleimageview:3.1.0'  //圆形头像
     implementation 'com.gitee.zackratos:UltimateBarX:0.8.0'  //状态栏
     implementation 'com.github.bumptech.glide:glide:4.9.0'  //Glide

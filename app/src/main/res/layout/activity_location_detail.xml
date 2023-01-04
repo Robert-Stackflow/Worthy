@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/activity_location_detail_map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <ImageButton
+        android:id="@+id/activity_location_detail_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp30"
+        android:background="@drawable/shape_card_round"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_light_arrow_left" />
+
+    <ImageButton
+        android:id="@+id/activity_location_detail_goto_location"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_above="@id/activity_location_detail_goto_mylocation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_card_round"
+        android:clickable="true"
+        android:contentDescription="定位至景点位置"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_light_attraction"
+        app:tint="@color/color_prominent" />
+
+    <ImageButton
+        android:id="@+id/activity_location_detail_goto_mylocation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_above="@id/activity_location_detail_bottom_layout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_card_round"
+        android:clickable="true"
+        android:contentDescription="定位至我的位置"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_light_location" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_location_detail_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_content_top_radius_unclickable"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp15">
+
+        <TextView
+            android:id="@+id/activity_location_detail_attraction_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="清明上河园" />
+
+        <TextView
+            android:id="@+id/activity_location_detail_attraction_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/sp14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_location_detail_attraction_name"
+            tools:text="河南省开封市龙亭西路5号" />
+
+        <LinearLayout
+            android:id="@+id/activity_location_detail_button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:paddingBottom="@dimen/dp10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_location_detail_attraction_location">
+
+            <Button
+                android:id="@+id/activity_location_detail_attraction_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/shape_button_round_frame"
+                android:paddingStart="@dimen/dp20"
+                android:paddingTop="@dimen/dp10"
+                android:paddingEnd="@dimen/dp20"
+                android:paddingBottom="@dimen/dp10"
+                android:stateListAnimator="@null"
+                android:text="分享景点" />
+
+            <Button
+                android:id="@+id/activity_location_detail_baidumap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp10"
+                android:layout_weight="0.7"
+                android:background="@drawable/shape_button_round"
+                android:backgroundTint="@color/color_prominent"
+                android:paddingStart="@dimen/dp20"
+                android:paddingTop="@dimen/dp10"
+                android:paddingEnd="@dimen/dp20"
+                android:paddingBottom="@dimen/dp10"
+                android:stateListAnimator="@null"
+                android:text="使用百度地图导航"
+                android:textColor="@color/text_color_white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

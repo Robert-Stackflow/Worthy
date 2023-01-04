@@ -13,18 +13,25 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.cloudchewie.ui.util.MatricsUtil;
+import com.cloudchewie.ui.util.SizeUtil;
 
 public class MyDialog extends Dialog {
     public OnClickBottomListener onClickBottomListener;
     private TextView titleTv;
     private TextView messageTv;
     private Button negtiveBn, positiveBn;
-    private View columnLineView;
+    private ImageView closeBn;
     private String message;
-    private String title;
+    private String title = "消息提示";
     private String positive, negtive;
     private int imageResId = -1;
+    private ConstraintLayout mainLayout;
     private boolean isSingle = false;
 
     public MyDialog(Context context) {
@@ -52,6 +59,11 @@ public class MyDialog extends Dialog {
                 onClickBottomListener.onNegtiveClick();
             }
         });
+        closeBn.setOnClickListener(v -> {
+            if (onClickBottomListener != null) {
+                onClickBottomListener.onCloseClick();
+            }
+        });
     }
 
     private void refreshView() {
@@ -75,11 +87,9 @@ public class MyDialog extends Dialog {
             negtiveBn.setText("取消");
         }
         if (isSingle) {
-            columnLineView.setVisibility(View.GONE);
             negtiveBn.setVisibility(View.GONE);
         } else {
             negtiveBn.setVisibility(View.VISIBLE);
-            columnLineView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -90,11 +100,13 @@ public class MyDialog extends Dialog {
     }
 
     private void initView() {
-        negtiveBn = findViewById(R.id.negtive);
-        positiveBn = findViewById(R.id.positive);
-        titleTv = findViewById(R.id.title);
-        messageTv = findViewById(R.id.message);
-        columnLineView = findViewById(R.id.column_line);
+        negtiveBn = findViewById(R.id.widget_dialog_negtive);
+        positiveBn = findViewById(R.id.widget_dialog_positive);
+        titleTv = findViewById(R.id.widget_dialog_title);
+        messageTv = findViewById(R.id.widget_dialog_message);
+        mainLayout = findViewById(R.id.widget_dialog_main_layout);
+        closeBn = findViewById(R.id.widget_dialog_close);
+        mainLayout.setMinWidth(SizeUtil.dp2px(getContext(), MatricsUtil.getScreenWidth(getContext()) - 10));
     }
 
     public MyDialog setOnClickBottomListener(OnClickBottomListener onClickBottomListener) {
@@ -156,6 +168,8 @@ public class MyDialog extends Dialog {
         void onPositiveClick();
 
         void onNegtiveClick();
+
+        void onCloseClick();
     }
 
 }

@@ -5,12 +5,6 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-/**
- * Created by Jaeger on 16/2/24.
- * <p>
- * Email: chjie.jaeger@gmail.com
- * GitHub: https://github.com/laobie
- */
 public abstract class NineGridImageViewAdapter<T> {
     protected Context context;
     private List<T> imageInfo;
@@ -24,7 +18,7 @@ public abstract class NineGridImageViewAdapter<T> {
 
     }
 
-    protected abstract void onDisplayImage(Context context, ImageView imageView, T t);
+    protected abstract void onDisplayImage(Context context, ImageView imageView, int count, int index, T t);
 
     protected void onItemImageClick(Context context, ImageView imageView, int index, List<T> list) {
     }

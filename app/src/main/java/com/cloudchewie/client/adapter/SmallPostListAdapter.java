@@ -16,11 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +29,7 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.PostDetailActivity;
 import com.cloudchewie.client.domin.Post;
 import com.cloudchewie.client.util.basic.DateUtil;
+import com.cloudchewie.client.util.image.CornerTransformation;
 
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class SmallPostListAdapter extends RecyclerView.Adapter<SmallPostListAdap
         holder.contentView.setText(handleLineBreaks(post.getContent()));
         holder.mainLayout.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_content));
         if (holder.imageView != null)
-            Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.imageView);
+            Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, 5, true, true, true, true))).into(holder.imageView);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class SmallPostListAdapter extends RecyclerView.Adapter<SmallPostListAdap
         public TextView nameView;
         public TextView timeView;
         public TextView contentView;
-        public ConstraintLayout mainLayout;
+        public RelativeLayout mainLayout;
         public ImageView imageView;
 
         public MyViewHolder(View view) {

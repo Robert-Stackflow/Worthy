@@ -123,6 +123,7 @@ public class ArticlePreviewActivity extends BaseActivity {
         swipeRefreshLayout.setEnableOverScrollDrag(true);
         swipeRefreshLayout.setEnableOverScrollBounce(true);
         swipeRefreshLayout.setEnableLoadMore(false);
+        swipeRefreshLayout.setEnablePureScrollMode(true);
         header.setEnableLastTime(false);
     }
 

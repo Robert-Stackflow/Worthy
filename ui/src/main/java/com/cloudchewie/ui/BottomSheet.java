@@ -7,6 +7,8 @@
 
 package com.cloudchewie.ui;
 
+import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,8 +22,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import org.jetbrains.annotations.Contract;
-
 public class BottomSheet extends BottomSheetDialog {
     protected View mainView;
     private BottomSheetBehavior bottomSheetBehavior;
@@ -30,34 +30,6 @@ public class BottomSheet extends BottomSheetDialog {
     private ConstraintLayout titleBarLayout;
     private View dragBar;
     private Context context;
-    private BottomSheetBehavior.BottomSheetCallback mBottomSheetCallback
-            = new BottomSheetBehavior.BottomSheetCallback() {
-        @Override
-        public void onStateChanged(@NonNull View bottomSheet,
-                                   @BottomSheetBehavior.State int newState) {
-            if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-            if (newState == BottomSheetBehavior.STATE_SETTLING) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-            if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-            if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-
-        }
-
-        @Contract(pure = true)
-        @Override
-        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-        }
-    };
 
     public BottomSheet(@NonNull Context context) {
         super(context, R.style.BottomSheetDialog);
@@ -74,11 +46,10 @@ public class BottomSheet extends BottomSheetDialog {
         initView(context);
     }
 
-    public void setBottomSheetCallback(View sheetView) {
-        if (bottomSheetBehavior == null) {
-            bottomSheetBehavior = BottomSheetBehavior.from(sheetView);
-        }
-        bottomSheetBehavior.setBottomSheetCallback(mBottomSheetCallback);
+    public void setPeekHeight(int height) {
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(findViewById(R.id.design_bottom_sheet));
+        behavior.setPeekHeight(height);
+        behavior.setState(STATE_EXPANDED);
     }
 
     void initView(Context context) {
@@ -97,7 +68,7 @@ public class BottomSheet extends BottomSheetDialog {
     public void setMainLayout(int mainLayoutId) {
         ConstraintLayout main_layout = findViewById(R.id.bottom_sheet_content);
         main_layout.removeAllViews();
-        getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
+        getBehavior().setState(STATE_EXPANDED);
         LayoutInflater inflater = LayoutInflater.from(context);
         ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;

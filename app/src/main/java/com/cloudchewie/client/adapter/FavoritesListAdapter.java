@@ -25,6 +25,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.user.FavoritesDetailActivity;
 import com.cloudchewie.client.domin.Favorites;
+import com.cloudchewie.client.util.image.CornerTransformation;
 import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;
@@ -70,11 +71,10 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
             context.startActivity(intent);
         });
         holder.nameView.setText(favorites.getName());
-        holder.authorView.setText("创建者:" + favorites.getUsername());
+        holder.authorView.setText("创建者: " + favorites.getUsername());
         holder.isPublicView.setText(favorites.isPublic() ? "公开" : "私密");
-        holder.describeView.setText("简介:" + favorites.getDescribe());
         holder.itemCount.setText(String.valueOf(favorites.getItemCount()));
-        Glide.with(context).load(favorites.getCoverUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.coverView);
+        Glide.with(context).load(favorites.getCoverUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, 5, true, true, true, true))).into(holder.coverView);
     }
 
     @Override
@@ -87,7 +87,6 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
         public TextView nameView;
         public TextView authorView;
         public TextView isPublicView;
-        public TextView describeView;
         public IconTextItem itemCount;
         public ImageView coverView;
 
@@ -96,7 +95,6 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
             mItemView = view;
             nameView = view.findViewById(R.id.favorites_item_name);
             authorView = view.findViewById(R.id.favorites_item_author);
-            describeView = view.findViewById(R.id.favorites_item_describe);
             itemCount = view.findViewById(R.id.favorites_item_count);
             isPublicView = view.findViewById(R.id.favorites_item_ispublic);
             coverView = view.findViewById(R.id.favorites_item_cover);

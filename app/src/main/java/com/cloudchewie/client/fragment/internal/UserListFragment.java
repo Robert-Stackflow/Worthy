@@ -87,7 +87,7 @@ public class UserListFragment extends BaseFragment implements View.OnClickListen
         swipeRefreshLayout.setDisableContentWhenRefresh(true);
         swipeRefreshLayout.setDisableContentWhenLoading(true);
         swipeRefreshLayout.setOnRefreshListener(v -> handler.post(getRefreshDatas));
-        swipeRefreshLayout.autoRefresh();
+//        swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
         header.setTextSizeTitle(14);
     }

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class NineGridImageView<T> extends ViewGroup {
     private int mRowCount;                      // 行数
     private int mColumnCount;                   // 列数
 
+    private int radius;
     private int mMaxSize;                       // 最大图片数
     private int mShowStyle;                     // 显示风格
     private int mGap;                           // 宫格间距
@@ -37,7 +40,7 @@ public class NineGridImageView<T> extends ViewGroup {
     private int mGridSize;                      // 宫格大小,即图片大小
     private int mSpanType;                      // 跨行跨列的类型
 
-    private List<ImageView> mImageViewList = new ArrayList<>();
+    private List<NiceImageView> mImageViewList = new ArrayList<>();
     private List<T> mImgDataList;
 
     private NineGridImageViewAdapter<T> mAdapter;
@@ -124,7 +127,7 @@ public class NineGridImageView<T> extends ViewGroup {
             bottom = top + mGridSize;
             childrenView.layout(left, top, right, bottom);
             if (mAdapter != null) {
-                mAdapter.onDisplayImage(getContext(), childrenView, mImgDataList.get(i));
+                mAdapter.onDisplayImage(getContext(), childrenView, getImagesData().size(), i, mImgDataList.get(i));
             }
         }
     }
@@ -195,7 +198,16 @@ public class NineGridImageView<T> extends ViewGroup {
                     break;
             }
             if (mAdapter != null) {
-                mAdapter.onDisplayImage(getContext(), childrenView, mImgDataList.get(i));
+                mAdapter.onDisplayImage(getContext(), childrenView, getImagesData().size(), i, mImgDataList.get(i));
+                if (i == 0) {
+                    NiceImageView niceImageView = (NiceImageView) getChildAt(i);
+                    niceImageView.setCornerTopLeftRadius(5);
+                    niceImageView.setCornerBottomLeftRadius(5);
+                } else if (i == 2) {
+                    NiceImageView niceImageView = (NiceImageView) getChildAt(i);
+                    niceImageView.setCornerTopRightRadius(5);
+                    niceImageView.setCornerBottomRightRadius(5);
+                }
             }
         }
     }
@@ -281,7 +293,7 @@ public class NineGridImageView<T> extends ViewGroup {
                     break;
             }
             if (mAdapter != null) {
-                mAdapter.onDisplayImage(getContext(), childrenView, mImgDataList.get(i));
+                mAdapter.onDisplayImage(getContext(), childrenView, getImagesData().size(), i, mImgDataList.get(i));
             }
         }
     }
@@ -382,7 +394,7 @@ public class NineGridImageView<T> extends ViewGroup {
                     break;
             }
             if (mAdapter != null) {
-                mAdapter.onDisplayImage(getContext(), childrenView, mImgDataList.get(i));
+                mAdapter.onDisplayImage(getContext(), childrenView, getImagesData().size(), i, mImgDataList.get(i));
             }
         }
     }
@@ -498,7 +510,7 @@ public class NineGridImageView<T> extends ViewGroup {
                     break;
             }
             if (mAdapter != null) {
-                mAdapter.onDisplayImage(getContext(), childrenView, mImgDataList.get(i));
+                mAdapter.onDisplayImage(getContext(), childrenView, getImagesData().size(), i, mImgDataList.get(i));
             }
         }
     }
@@ -577,7 +589,7 @@ public class NineGridImageView<T> extends ViewGroup {
         if (mImgDataList == null) {
             int i = 0;
             while (i < newShowCount) {
-                ImageView iv = getImageView(i);
+                ImageView iv = getImageView(lists.size(), i);
                 if (iv == null) {
                     return;
                 }
@@ -590,7 +602,7 @@ public class NineGridImageView<T> extends ViewGroup {
                 removeViews(newShowCount, oldShowCount - newShowCount);
             } else if (oldShowCount < newShowCount) {
                 for (int i = oldShowCount; i < newShowCount; i++) {
-                    ImageView iv = getImageView(i);
+                    ImageView iv = getImageView(lists.size(), i);
                     if (iv == null) {
                         return;
                     }
@@ -604,6 +616,40 @@ public class NineGridImageView<T> extends ViewGroup {
             if (childrenView != null) childrenView.setMoreNum(mImgDataList.size() - mMaxSize);
         }
         requestLayout();
+    }
+
+    private void setCornerRadius(ImageView imageView, int count, int index) {
+        switch (count) {
+            case 1:
+                loadWithOneChildren(getContext(), imageView, index);
+                break;
+            case 2:
+                loadWithTwoChildren(getContext(), imageView, index);
+                break;
+            case 3:
+                loadWithThreeChildren(getContext(), imageView, index);
+                break;
+            case 4:
+                loadWithFourChildren(getContext(), imageView, index);
+                break;
+            case 5:
+                loadWithFiveChildren(getContext(), imageView, index);
+                break;
+            case 6:
+                loadWithSixChildren(getContext(), imageView, index);
+                break;
+            case 7:
+                loadWithSevenChildren(getContext(), imageView, index);
+                break;
+            case 8:
+                loadWithEightChildren(getContext(), imageView, index);
+                break;
+            case 9:
+            default:
+                loadWithNineChildren(getContext(), imageView, index);
+                break;
+        }
+        invalidate();
     }
 
     private int getNeedShowCount(int size) {
@@ -621,19 +667,19 @@ public class NineGridImageView<T> extends ViewGroup {
         mImageViewList.remove(pos);
         setImagesData(mImgDataList);
         removeViewAt(pos);
-        for (ImageView imageView : mImageViewList) {
+        for (NiceImageView imageView : mImageViewList) {
             imageView.setOnClickListener(v -> {
-                mAdapter.onItemImageClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
+                mAdapter.onItemImageClick(getContext(), (NiceImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
                 if (mItemImageClickListener != null) {
-                    mItemImageClickListener.onItemImageClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
+                    mItemImageClickListener.onItemImageClick(getContext(), (NiceImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
                 }
             });
         }
-        for (ImageView imageView : mImageViewList) {
+        for (NiceImageView imageView : mImageViewList) {
             imageView.setOnLongClickListener(v -> {
-                boolean consumedEvent = mAdapter.onItemImageLongClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
+                boolean consumedEvent = mAdapter.onItemImageLongClick(getContext(), (NiceImageView) v, mImageViewList.indexOf(imageView), mImgDataList);
                 if (mItemImageLongClickListener != null) {
-                    consumedEvent = mItemImageLongClickListener.onItemImageLongClick(getContext(), (ImageView) v, mImageViewList.indexOf(imageView), mImgDataList) || consumedEvent;
+                    consumedEvent = mItemImageLongClickListener.onItemImageLongClick(getContext(), (NiceImageView) v, mImageViewList.indexOf(imageView), mImgDataList) || consumedEvent;
                 }
                 return consumedEvent;
             });
@@ -648,12 +694,14 @@ public class NineGridImageView<T> extends ViewGroup {
      *
      * @param position 位置
      */
-    private ImageView getImageView(final int position) {
+    @Nullable
+    private NiceImageView getImageView(int count, final int position) {
         if (position < mImageViewList.size()) {
             return mImageViewList.get(position);
         } else {
             if (mAdapter != null) {
-                ImageView imageView = mAdapter.generateImageView(getContext());
+                NiceImageView imageView = (NiceImageView) mAdapter.generateImageView(getContext());
+                setCornerRadius(imageView, count, position);
                 mImageViewList.add(imageView);
                 imageView.setOnClickListener(v -> {
                     mAdapter.onItemImageClick(getContext(), (ImageView) v, position, mImgDataList);
@@ -748,5 +796,142 @@ public class NineGridImageView<T> extends ViewGroup {
 
     public void setItemImageLongClickListener(ItemImageLongClickListener<T> itemImageViewLongClickListener) {
         mItemImageLongClickListener = itemImageViewLongClickListener;
+    }
+
+    void loadWithOneChildren(Context context, ImageView imageView, int index) {
+        ((NiceImageView) imageView).setCornerRadius(radius);
+    }
+
+    void loadWithTwoChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                break;
+            case 1:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
+    }
+
+    void loadWithThreeChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                break;
+            case 2:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
+    }
+
+    void loadWithFourChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                break;
+            case 1:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                break;
+            case 2:
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                break;
+            case 3:
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
+    }
+
+    void loadWithFiveChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                break;
+            case 2:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+            case 3:
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                break;
+            case 4:
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
+    }
+
+    void loadWithSixChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                break;
+            case 2:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                break;
+            case 3:
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                break;
+            case 5:
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
+    }
+
+    void loadWithSevenChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                break;
+            case 2:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                break;
+            case 5:
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+            case 6:
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
+    }
+
+    void loadWithEightChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                break;
+            case 2:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                break;
+            case 5:
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+            case 6:
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                break;
+            case 7:
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
+    }
+
+    void loadWithNineChildren(Context context, ImageView imageView, int index) {
+        switch (index) {
+            case 0:
+                ((NiceImageView) imageView).setCornerTopLeftRadius(radius);
+                break;
+            case 2:
+                ((NiceImageView) imageView).setCornerTopRightRadius(radius);
+                break;
+            case 6:
+                ((NiceImageView) imageView).setCornerBottomLeftRadius(radius);
+                break;
+            case 8:
+                ((NiceImageView) imageView).setCornerBottomRightRadius(radius);
+                break;
+        }
     }
 }

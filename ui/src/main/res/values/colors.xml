@@ -12,7 +12,7 @@
     <color name="color_toolbar_icon">#060606</color>
     <color name="color_toolbar_icon_pressed">#88060606</color>
     <color name="color_prominent">#0066FF</color>
-    <color name="color_prominent_background">#a2c0ff</color>
+    <color name="color_prominent_background">#EBF7FF</color>
     <color name="light_translucent">#12000000</color>
     <color name="dark_translucent">#AC000000</color>
     <color name="nav_bar_scrim">@color/background</color>
@@ -25,7 +25,7 @@
     <color name="content_background">#FFFFFF</color>
     <color name="content_background_below">@color/background</color>
     <color name="content_pressed_background">#E5E5E5</color>
-    <color name="tag_background">#F1F1F1</color>
+    <color name="tag_background">#EFF1F4</color>
     <color name="button_background_gray">#F1F1F1</color>
     <color name="titlebar_background">#F6F6F6</color>
     <color name="color_divider">#E6E6E6</color>

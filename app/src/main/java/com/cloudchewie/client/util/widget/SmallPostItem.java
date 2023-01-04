@@ -16,22 +16,23 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.PostDetailActivity;
 import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.util.image.CornerTransformation;
 
-public class SmallPostItem extends ConstraintLayout {
+public class SmallPostItem extends RelativeLayout {
     Post mPost;
     Context context;
-    private ConstraintLayout mainLayout;
+    private RelativeLayout mainLayout;
     private TextView username;
     private TextView content;
     private TextView time;
@@ -85,6 +86,6 @@ public class SmallPostItem extends ConstraintLayout {
             intent.putExtras(bundle);
             context.startActivity(intent);
         });
-        Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(imageView);
+        Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(getContext(), 5, true, true, true, true))).into(imageView);
     }
 }

@@ -1,7 +1,13 @@
 package com.cloudchewie.client.fragment.internal;
 
+import static com.cloudchewie.client.util.ui.MatricsUtil.getScreenHeight;
+
 import android.content.Context;
+import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +17,7 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.CommentListAdapter;
 import com.cloudchewie.client.domin.Comment;
 import com.cloudchewie.ui.BottomSheet;
+import com.cloudchewie.ui.util.MatricsUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -29,29 +36,49 @@ public class BottomReplyFragment extends BottomSheet implements View.OnClickList
     public BottomReplyFragment(@NonNull Context context, List<Comment> comments) {
         super(context);
         this.comments = comments;
-        setMainLayout(R.layout.fragment_comments);
-        initRecyclerView();
-        initSwipeRefresh();
+        init(context);
     }
 
     public BottomReplyFragment(@NonNull Context context, int theme) {
         super(context, theme);
-        setMainLayout(R.layout.fragment_comments);
-        initRecyclerView();
-        initSwipeRefresh();
+        init(context);
     }
 
     protected BottomReplyFragment(@NonNull Context context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
+        init(context);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        int screenHeight = getScreenHeight(getContext());
+        if (screenHeight == 0)
+            screenHeight = 1920;
+        Window window = getWindow();
+        //设置成沉浸式
+//        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, dialogHeight);
+//        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, (int) (dialogHeight - reduceHeight));
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, screenHeight / 3 * 2);
+        window.setGravity(Gravity.BOTTOM);
+        getBehavior().setPeekHeight(3000);
+
+    }
+
+    void init(Context context) {
         setMainLayout(R.layout.fragment_comments);
+//        getBehavior().setDraggable(false);
+        getBehavior().setPeekHeight(3000);
+        setPeekHeight(MatricsUtil.getDisplayHeight(context));
         initRecyclerView();
         initSwipeRefresh();
+        setDragBarVisible(false);
+        if (mainView != null)
+            mainView.setMinimumHeight(3000);
     }
 
     void initRecyclerView() {
         setTitle("回复详情");
-//        setBottomSheetCallback((View) mainView.getParent());
-        getBehavior().setDraggable(false);
         if (comments == null)
             comments = new ArrayList<>();
         commentsRecyclerView = mainView.findViewById(R.id.fragment_comments_recyclerview);
@@ -66,6 +93,7 @@ public class BottomReplyFragment extends BottomSheet implements View.OnClickList
         footer = mainView.findViewById(R.id.fragment_comments_swipe_footer);
         swipeRefreshLayout.setRefreshHeader(header);
         swipeRefreshLayout.setRefreshFooter(footer);
+        swipeRefreshLayout.setEnableRefresh(false);
         swipeRefreshLayout.setEnableOverScrollDrag(true);
         swipeRefreshLayout.setEnableOverScrollBounce(true);
         swipeRefreshLayout.setDisableContentWhenRefresh(true);

@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/favorites_item_cover"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/dp120"
+        android:layout_height="@dimen/dp70"
         android:scaleType="centerCrop"
         android:src="@drawable/img_default_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,13 +24,20 @@
         android:id="@+id/favorites_item_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/dark_translucent"
-        android:padding="2dp"
-        app:icon_text_item_icon="@drawable/ic_light_note"
+        android:layout_marginEnd="@dimen/dp5"
+        android:layout_marginBottom="@dimen/dp5"
+        android:background="@drawable/shape_round_dp3"
+        android:backgroundTint="@color/dark_translucent"
+        android:paddingStart="4dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="2dp"
+        app:icon_text_item_icon="@drawable/ic_light_integral"
         app:icon_text_item_icon_color="@color/text_color_white"
-        app:icon_text_item_icon_size="11dp"
+        app:icon_text_item_icon_size="10dp"
         app:icon_text_item_text="3"
         app:icon_text_item_text_color="@color/text_color_white"
+        app:icon_text_item_text_size="@dimen/sp10"
         app:layout_constraintBottom_toBottomOf="@id/favorites_item_cover"
         app:layout_constraintEnd_toEndOf="@id/favorites_item_cover" />
 
@@ -42,41 +49,15 @@
         android:layout_marginStart="10dp"
         android:singleLine="true"
         android:textColor="@color/color_accent"
-        android:textSize="13sp"
+        android:textSize="@dimen/sp15"
         app:layout_constraintStart_toEndOf="@id/favorites_item_cover"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="默认收藏夹" />
 
-    <TextView
-        android:id="@+id/favorites_item_dot"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="2dp"
-        android:singleLine="true"
-        android:text="·"
-        android:textColor="@color/color_accent"
-        android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@id/favorites_item_name"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/favorites_item_ispublic"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="2dp"
-        android:singleLine="true"
-        android:textColor="@color/color_accent"
-        android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@id/favorites_item_dot"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="公开" />
-
     <ImageView
         android:id="@+id/favorites_item_more"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="@dimen/dp20"
+        android:layout_height="@dimen/dp20"
         android:src="@drawable/ic_light_ellipsis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,20 +69,32 @@
         android:layout_marginTop="10dp"
         android:maxLines="2"
         android:textColor="@color/text_color_gray"
-        android:textSize="11sp"
+        android:textSize="@dimen/sp12"
+        app:layout_constraintBottom_toTopOf="@id/favorites_item_ispublic"
         app:layout_constraintStart_toStartOf="@id/favorites_item_name"
-        app:layout_constraintTop_toBottomOf="@id/favorites_item_name"
-        tools:text="创建者:余湍" />
+        tools:text="创建者：余湍" />
 
     <TextView
-        android:id="@+id/favorites_item_describe"
+        android:id="@+id/favorites_item_dot"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:text="收藏夹 · "
+        android:textColor="@color/text_color_gray"
+        android:textSize="@dimen/sp12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/favorites_item_name" />
+
+    <TextView
+        android:id="@+id/favorites_item_ispublic"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
         android:singleLine="true"
         android:textColor="@color/text_color_gray"
-        android:textSize="11sp"
+        android:textSize="@dimen/sp12"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/favorites_item_name"
-        app:layout_constraintTop_toBottomOf="@id/favorites_item_author"
-        tools:text="简介:主要收藏个人喜欢的一些影视、游戏、音乐赏析或解说" />
+        app:layout_constraintStart_toEndOf="@id/favorites_item_dot"
+        tools:text="公开" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

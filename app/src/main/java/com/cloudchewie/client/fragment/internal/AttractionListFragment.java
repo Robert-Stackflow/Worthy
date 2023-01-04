@@ -8,6 +8,7 @@
 package com.cloudchewie.client.fragment.internal;
 
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,8 +18,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.AttractionListAdapter;
@@ -94,7 +95,8 @@ public class AttractionListFragment extends BaseFragment implements View.OnClick
         attractionsRecyclerView = mainView.findViewById(R.id.fragment_attractions_recyclerview);
         attractionListAdapter = new AttractionListAdapter(getActivity(), attractions);
         attractionsRecyclerView.setAdapter(attractionListAdapter);
-        attractionsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        attractionsRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        attractionsRecyclerView.addItemDecoration(new MyDecoration());
     }
 
     @Override
@@ -115,11 +117,20 @@ public class AttractionListFragment extends BaseFragment implements View.OnClick
         swipeRefreshLayout.setDisableContentWhenLoading(true);
         swipeRefreshLayout.setOnRefreshListener(refreshlayout -> handler.post(getRefreshDatas));
         swipeRefreshLayout.setOnLoadMoreListener(refreshlayout -> handler.post(getMoreDatas));
-        swipeRefreshLayout.autoRefresh();
+//        swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
     }
 
     @Override
     public void onClick(View view) {
+    }
+
+    class MyDecoration extends RecyclerView.ItemDecoration {
+        @Override
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+            super.getItemOffsets(outRect, view, parent, state);
+            int gap = getResources().getDimensionPixelSize(R.dimen.dp5);
+            outRect.set(gap, 0, gap, 0);
+        }
     }
 }

@@ -134,7 +134,6 @@
                 app:entry_item_icon_size="50dp"
                 app:entry_item_spacing="10dp"
                 app:entry_item_text="加入黑名单"
-                app:entry_item_text_color="@color/text_color_red"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/home_page_more_report"

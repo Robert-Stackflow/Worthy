@@ -107,7 +107,7 @@ public class CommentListFragment extends BaseFragment implements View.OnClickLis
         swipeRefreshLayout.setDisableContentWhenLoading(true);
         swipeRefreshLayout.setOnRefreshListener(v -> handler.post(getRefreshDatas));
         swipeRefreshLayout.setOnLoadMoreListener(v -> handler.post(getMoreDatas));
-        swipeRefreshLayout.autoRefresh();
+//        swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
         header.setTextSizeTitle(14);
         footer.setTextSizeTitle(14);

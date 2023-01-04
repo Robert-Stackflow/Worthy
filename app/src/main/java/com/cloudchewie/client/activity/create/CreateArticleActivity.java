@@ -234,7 +234,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         view.findViewById(R.id.linear_cancle).setOnClickListener(v -> popupWindow.dismiss());
         view.findViewById(R.id.linear_editor).setOnClickListener(v -> {
             if (currentImageUrl.endsWith(".gif")) {
-                IToast.makeTextTop(this, "暂不支持编辑.gif类型的图片", Toast.LENGTH_SHORT).show();
+                IToast.makeTextBottom(this, "暂不支持编辑.gif类型的图片", Toast.LENGTH_SHORT).show();
             } else {
                 Intent intent = new Intent(CreateArticleActivity.this, UCropActivity.class);
                 intent.putExtra("filePath", currentImageUrl);
@@ -254,7 +254,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             popupWindow.dismiss();
         });
         view.findViewById(R.id.linear_download_pic).setOnClickListener(v -> {
-            IToast.makeTextTop(this, "图片保存成功", Toast.LENGTH_SHORT).show();
+            IToast.makeTextBottom(this, "图片保存成功", Toast.LENGTH_SHORT).show();
             popupWindow.dismiss();
             currentImageUrl = "";
             currentImageHtml = "";
@@ -278,9 +278,9 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         title.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxTitleLength)});
         cancelButton.setOnClickListener(v -> {
             MyDialog dialog = new MyDialog(CreateArticleActivity.this);
-            dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
-            dialog.setNegtive("放弃并退出");
-            dialog.setPositive("保存为草稿");
+            dialog.setMessage("是否将本次编辑保存为草稿？保存后下次可以继续编写");
+            dialog.setNegtive("不保存");
+            dialog.setPositive("保存");
             dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
                 @Override
                 public void onPositiveClick() {
@@ -290,6 +290,11 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 @Override
                 public void onNegtiveClick() {
                     finish();
+                }
+
+                @Override
+                public void onCloseClick() {
+                    dialog.dismiss();
                 }
             });
             dialog.show();
@@ -309,6 +314,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             if (richEditor.getHtml().length() < 200)
                 IToast.makeTextTop(this, "您的文章字数过少,暂时无法发布!", Toast.LENGTH_SHORT).show();
             else {
+                IToast.makeTextBottom(this, "文章发布成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CreateArticleActivity.this, ArticleDetailActivity.class);
                 Post post = DomainUtil.getPost(this);
                 post.setContent(richEditor.getHtml());
@@ -395,9 +401,9 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         MyDialog dialog = new MyDialog(CreateArticleActivity.this);
-        dialog.setMessage("是否将本次编辑保存为草稿？\n保存后下次可以继续编写");
-        dialog.setNegtive("放弃并退出");
-        dialog.setPositive("保存为草稿");
+        dialog.setMessage("是否将本次编辑保存为草稿？保存后下次可以继续编写");
+        dialog.setNegtive("不保存");
+        dialog.setPositive("保存");
         dialog.setOnClickBottomListener(new MyDialog.OnClickBottomListener() {
             @Override
             public void onPositiveClick() {
@@ -407,6 +413,11 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onNegtiveClick() {
                 finish();
+            }
+
+            @Override
+            public void onCloseClick() {
+                dialog.dismiss();
             }
         });
         dialog.show();

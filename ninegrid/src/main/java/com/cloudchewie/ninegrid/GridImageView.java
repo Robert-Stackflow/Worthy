@@ -11,23 +11,15 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
-/**
- * Created by Jaeger on 16/2/24.
- * <p>
- * Email: chjie.jaeger@gamil.com
- * GitHub: https://github.com/laobie
- */
-public class GridImageView extends ImageView {
+public class GridImageView extends NiceImageView {
 
-    private int moreNum = 0;              //显示更多的数量
-    private int maskColor = 0x88000000;   //默认的遮盖颜色
-    private float textSize = 35;          //显示文字的大小单位sp
-    private int textColor = 0xFFFFFFFF;   //显示文字的颜色
-
-    private TextPaint textPaint;              //文字的画笔
-    private String msg = "";                  //要绘制的文字
+    private int moreNum = 0;
+    private int maskColor = 0x88000000;
+    private float textSize = 35;
+    private int textColor = 0xFFFFFFFF;
+    private TextPaint textPaint;
+    private String msg = "";
 
     public GridImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -42,10 +34,10 @@ public class GridImageView extends ImageView {
         //转化单位
         textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, textSize, getContext().getResources().getDisplayMetrics());
         textPaint = new TextPaint();
-        textPaint.setTextAlign(Paint.Align.CENTER);  //文字居中对齐
-        textPaint.setAntiAlias(true);                //抗锯齿
-        textPaint.setTextSize(textSize);             //设置文字大小
-        textPaint.setColor(textColor);               //设置文字颜色
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setAntiAlias(true);
+        textPaint.setTextSize(textSize);
+        textPaint.setColor(textColor);
     }
 
     @Override
@@ -99,14 +91,14 @@ public class GridImageView extends ImageView {
         invalidate();
     }
 
-    public int getMaskColor() {
-        return maskColor;
-    }
-
-    public void setMaskColor(int maskColor) {
-        this.maskColor = maskColor;
-        invalidate();
-    }
+//    public int getMaskColor() {
+//        return maskColor;
+//    }
+//
+//    public void setMaskColor(int maskColor) {
+//        this.maskColor = maskColor;
+//        invalidate();
+//    }
 
     public float getTextSize() {
         return textSize;

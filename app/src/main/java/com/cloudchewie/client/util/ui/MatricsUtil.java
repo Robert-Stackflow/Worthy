@@ -33,7 +33,7 @@ public class MatricsUtil {
             WindowManager windowManager = ((Activity) context).getWindowManager();
             DisplayMetrics outMetrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getMetrics(outMetrics);
-            return outMetrics.widthPixels;
+            return outMetrics.heightPixels;
         }
         return 0;
     }
@@ -65,7 +65,7 @@ public class MatricsUtil {
             WindowManager windowManager = ((Activity) context).getWindowManager();
             DisplayMetrics outMetrics = new DisplayMetrics();
             windowManager.getDefaultDisplay().getRealMetrics(outMetrics);
-            return outMetrics.widthPixels;
+            return outMetrics.heightPixels;
         }
         return 0;
     }

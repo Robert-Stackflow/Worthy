@@ -7,6 +7,7 @@
 
 package com.cloudchewie.client.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -109,6 +110,11 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
             imageView = view.findViewById(R.id.attraction_card_image);
             flowTagLayout = view.findViewById(R.id.attraction_card_tags);
             statisticsView = view.findViewById(R.id.attraction_card_statistics);
+            int width = ((Activity) imageView.getContext()).getWindowManager().getDefaultDisplay().getWidth();
+            ViewGroup.LayoutParams params = imageView.getLayoutParams();
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.height = (int) (200 + Math.random() * 400);
+            imageView.setLayoutParams(params);
         }
     }
 }

@@ -4,15 +4,18 @@ package com.cloudchewie.client.util.webview;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.util.Log;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 
-import com.cloudchewie.client.domin.ImageViewInfo;
 import com.cloudchewie.client.fragment.global.ImageViewFragment;
+import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.previewlibrary.GPreviewBuilder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +39,14 @@ public class ImageJsInterface {
 
     @android.webkit.JavascriptInterface
     public void openImage(@NonNull String img) {
-        int index = imageUrls.indexOf(img.replace("file://", ""));
+        Log.d("xuruida", "Clicked:" + img);
+        Log.d("xuruida", String.valueOf(imageUrls));
+        int index = 0;
+        try {
+            index = imageUrls.indexOf(URLDecoder.decode(img.replace("file://", ""), "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         if (index == -1)
             index = 0;
         if (imageUrls.size() > 9)

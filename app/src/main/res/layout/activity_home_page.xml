@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_page_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/home_page_test"
@@ -20,311 +22,272 @@
             android:fadingEdge="none"
             app:elevation="0dp">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/home_page_collapsing_toolbar_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/home_page_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                android:background="@color/content_background"
+                app:layout_scrollFlags="scroll">
+
+                <ImageView
+                    android:id="@+id/home_page_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/cd_home_page_background"
+                    android:maxHeight="300dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_state_background"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/home_page_banner"
+                    android:id="@+id/home_page_titlebar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/content_background"
-                    android:paddingBottom="20dp"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.7">
+                    android:layout_gravity="start"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/home_page_background"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="@string/cd_home_page_background"
-                        android:maxHeight="300dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_state_background"
+                    <ImageButton
+                        android:id="@+id/home_page_back"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/back"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_light_arrow_left"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <View
-                        android:id="@+id/home_page_foreground"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:background="@drawable/shape_content_top_radius_unclickable"
-                        android:clickable="true"
-                        android:focusable="true"
-                        app:layout_constraintBottom_toBottomOf="@id/home_page_background"
+                    <ImageButton
+                        android:id="@+id/home_page_more"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/more"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_light_ellipsis"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/home_page_avatar"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="-60dp"
-                        android:src="@drawable/img_default_avatar"
-                        app:civ_border_color="@color/background"
-                        app:civ_border_width="2dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/home_page_foreground"
-                        tools:ignore="RtlSymmetry" />
-
-                    <TextView
-                        android:id="@+id/home_page_username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="用户昵称"
-                        android:textAlignment="center"
-                        android:textColor="@color/color_accent"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@id/home_page_avatar"
-                        app:layout_constraintStart_toStartOf="@id/home_page_avatar"
-                        app:layout_constraintTop_toBottomOf="@id/home_page_avatar" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/home_page_info_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingTop="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/home_page_username">
-
-                        <com.cloudchewie.ui.IconTextItem
-                            android:id="@+id/home_page_gender"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:icon_text_item_icon="@drawable/ic_light_gender"
-                            app:icon_text_item_icon_size="13dp"
-                            app:icon_text_item_text="男"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/home_page_info_divider"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text=" | "
-                            android:textColor="@color/color_prominent"
-                            android:textSize="11sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/home_page_gender"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.cloudchewie.ui.IconTextItem
-                            android:id="@+id/home_page_ipaddress"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            app:icon_text_item_icon="@drawable/ic_light_ip"
-                            app:icon_text_item_icon_size="13dp"
-                            app:icon_text_item_text="豫"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/home_page_info_divider"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/home_page_statistics_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/home_page_info_layout">
-
-                        <com.cloudchewie.ui.EntryItem
-                            android:id="@+id/home_page_follow_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:entry_item_big_text="0"
-                            app:entry_item_mode="text"
-                            app:entry_item_text="关注"
-                            app:entry_item_text_color="@color/text_color_light_gray"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/home_page_fans_count"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.cloudchewie.ui.EntryItem
-                            android:id="@+id/home_page_fans_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:entry_item_big_text="0"
-                            app:entry_item_mode="text"
-                            app:entry_item_text="粉丝"
-                            app:entry_item_text_color="@color/text_color_light_gray"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/home_page_hot_value"
-                            app:layout_constraintStart_toEndOf="@id/home_page_follow_count"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.cloudchewie.ui.EntryItem
-                            android:id="@+id/home_page_hot_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:entry_item_big_text="0"
-                            app:entry_item_mode="text"
-                            app:entry_item_text="主持"
-                            app:entry_item_text_color="@color/text_color_light_gray"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/home_page_gone_count"
-                            app:layout_constraintStart_toEndOf="@id/home_page_fans_count"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.cloudchewie.ui.EntryItem
-                            android:id="@+id/home_page_gone_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:entry_item_big_text="0"
-                            app:entry_item_mode="text"
-                            app:entry_item_text="去过"
-                            app:entry_item_text_color="@color/text_color_light_gray"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/home_page_want_count"
-                            app:layout_constraintStart_toEndOf="@id/home_page_hot_value"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.cloudchewie.ui.EntryItem
-                            android:id="@+id/home_page_want_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:entry_item_big_text="0"
-                            app:entry_item_mode="text"
-                            app:entry_item_text="想去"
-                            app:entry_item_text_color="@color/text_color_light_gray"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/home_page_gone_count"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/home_page_statistics_layout">
-
-                        <Button
-                            android:id="@+id/home_page_follow"
-                            style="?android:attr/buttonBarButtonStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/shape_button"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:paddingStart="20dp"
-                            android:paddingEnd="20dp"
-                            android:text="关注"
-                            android:textColor="@color/text_color_white" />
-
-                        <Button
-                            android:id="@+id/home_page_sendmessage"
-                            style="?android:attr/buttonBarButtonStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/shape_button"
-                            android:minWidth="0dp"
-                            android:minHeight="0dp"
-                            android:text="私信"
-                            android:textColor="@color/text_color_white" />
-                    </LinearLayout>
-
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Toolbar
-                    android:id="@+id/home_page_toolbar"
+                <View
+                    android:id="@+id/home_page_foreground"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@drawable/shape_content_top_radius_unclickable"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:layout_constraintBottom_toBottomOf="@id/home_page_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/home_page_avatar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="-60dp"
+                    android:src="@drawable/img_default_avatar"
+                    app:civ_border_color="@color/background"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_page_foreground"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:id="@+id/home_page_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="用户昵称"
+                    android:textAlignment="center"
+                    android:textColor="@color/color_accent"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/home_page_avatar"
+                    app:layout_constraintStart_toStartOf="@id/home_page_avatar"
+                    app:layout_constraintTop_toBottomOf="@id/home_page_avatar" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/home_page_info_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_page_username">
+
+                    <com.cloudchewie.ui.IconTextItem
+                        android:id="@+id/home_page_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:icon_text_item_icon="@drawable/ic_light_gender"
+                        app:icon_text_item_icon_size="13dp"
+                        app:icon_text_item_text="男"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/home_page_info_divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=" | "
+                        android:textColor="@color/color_prominent"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/home_page_gender"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.cloudchewie.ui.IconTextItem
+                        android:id="@+id/home_page_ipaddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:icon_text_item_icon="@drawable/ic_light_ip"
+                        app:icon_text_item_icon_size="13dp"
+                        app:icon_text_item_text="豫"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/home_page_info_divider"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/home_page_statistics_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
-                    app:contentInsetEnd="0dp"
-                    app:contentInsetLeft="0dp"
-                    app:contentInsetStart="0dp"
-                    app:layout_collapseMode="pin"
-                    app:titleMargin="0dp">
+                    android:gravity="center"
+                    android:paddingStart="@dimen/dp20"
+                    android:paddingTop="@dimen/dp20"
+                    android:paddingEnd="@dimen/dp20"
+                    android:paddingBottom="@dimen/dp20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_page_info_layout">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/home_page_titlebar"
-                        android:layout_width="match_parent"
+                    <com.cloudchewie.ui.EntryItem
+                        android:id="@+id/home_page_follow_count"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="start">
+                        android:layout_gravity="center"
+                        app:entry_item_big_text="0"
+                        app:entry_item_mode="text"
+                        app:entry_item_text="关注"
+                        app:entry_item_text_color="@color/text_color_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/home_page_fans_count"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageButton
-                            android:id="@+id/home_page_back"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="@string/back"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/ic_light_arrow_left"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <com.cloudchewie.ui.EntryItem
+                        android:id="@+id/home_page_fans_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:entry_item_big_text="0"
+                        app:entry_item_mode="text"
+                        app:entry_item_text="粉丝"
+                        app:entry_item_text_color="@color/text_color_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/home_page_hot_value"
+                        app:layout_constraintStart_toEndOf="@id/home_page_follow_count"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/home_page_small_avatar"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/img_default_avatar"
-                            android:visibility="gone"
-                            app:civ_border_color="@color/background"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/home_page_back"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="RtlSymmetry" />
+                    <com.cloudchewie.ui.EntryItem
+                        android:id="@+id/home_page_hot_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:entry_item_big_text="0"
+                        app:entry_item_mode="text"
+                        app:entry_item_text="主持"
+                        app:entry_item_text_color="@color/text_color_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/home_page_gone_count"
+                        app:layout_constraintStart_toEndOf="@id/home_page_fans_count"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/home_page_small_username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:paddingStart="10dp"
-                            android:text="用户昵称"
-                            android:textAlignment="center"
-                            android:textColor="@color/color_accent"
-                            android:textSize="15sp"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/home_page_small_avatar"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="RtlSymmetry" />
+                    <com.cloudchewie.ui.EntryItem
+                        android:id="@+id/home_page_gone_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:entry_item_big_text="0"
+                        app:entry_item_mode="text"
+                        app:entry_item_text="去过"
+                        app:entry_item_text_color="@color/text_color_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/home_page_want_count"
+                        app:layout_constraintStart_toEndOf="@id/home_page_hot_value"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageButton
-                            android:id="@+id/home_page_more"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="@string/more"
-                            android:scaleType="centerInside"
-                            android:src="@drawable/ic_light_ellipsis"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </Toolbar>
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+                    <com.cloudchewie.ui.EntryItem
+                        android:id="@+id/home_page_want_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:entry_item_big_text="0"
+                        app:entry_item_mode="text"
+                        app:entry_item_text="想去"
+                        app:entry_item_text_color="@color/text_color_light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/home_page_gone_count"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/home_page_button_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_content"
+                android:paddingStart="@dimen/dp40"
+                android:paddingTop="@dimen/dp10"
+                android:paddingEnd="@dimen/dp40"
+                android:paddingBottom="@dimen/dp10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/home_page_sendmessage"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_button_round_frame"
+                    android:backgroundTint="@color/color_accent"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="私信"
+                    android:textColor="@color/color_accent" />
+
+                <Button
+                    android:id="@+id/home_page_follow"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_button_round"
+                    android:backgroundTint="@color/color_prominent"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="关注"
+                    android:textColor="@color/text_color_white" />
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_page_content_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:background="@color/content_background">
 
                 <View
@@ -341,7 +304,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_page_content_divider"
                     app:tabBackground="@android:color/transparent"
                     app:tabGravity="center"
                     app:tabIndicator="@drawable/shape_tab_indicator"
@@ -379,4 +342,52 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_page_titlebar_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/content_background"
+        android:paddingBottom="@dimen/dp10">
+
+        <ImageButton
+            android:id="@+id/home_page_back_2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_light_arrow_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/home_page_small_avatar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/img_default_avatar"
+            app:civ_border_color="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/home_page_back_2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/home_page_small_username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:text="用户昵称"
+            android:textAlignment="center"
+            android:textColor="@color/color_accent"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/home_page_small_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

@@ -12,7 +12,7 @@
     <color name="color_toolbar_icon">#FFFFFF</color>
     <color name="color_toolbar_icon_pressed">#88FFFFFF</color>
     <color name="color_prominent">#0066FF</color>
-    <color name="color_prominent_background">#a2c0ff</color>
+    <color name="color_prominent_background">#EBF7FF</color>
     <color name="light_translucent">#12000000</color>
     <color name="dark_translucent">#AC000000</color>
     <color name="nav_bar_scrim">@color/background</color>

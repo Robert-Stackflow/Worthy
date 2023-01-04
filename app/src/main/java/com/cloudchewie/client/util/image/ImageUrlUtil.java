@@ -7,8 +7,6 @@
 
 package com.cloudchewie.client.util.image;
 
-import com.cloudchewie.client.domin.ImageViewInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 

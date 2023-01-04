@@ -88,7 +88,7 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
         swipeRefreshLayout.setDisableContentWhenRefresh(true);
         swipeRefreshLayout.setDisableContentWhenLoading(true);
         swipeRefreshLayout.setOnRefreshListener(v -> handler.post(getRefreshDatas));
-        swipeRefreshLayout.autoRefresh();
+//        swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
         header.setTextSizeTitle(14);
     }
