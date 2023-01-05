@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shape_card_round_shadow_without_padding">
+    android:background="@drawable/shape_round_shadow_nopadding">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
             android:id="@+id/infowindow_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_card_top_radius"
+            android:background="@drawable/shape_round_top_dp10"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center|start"
@@ -42,7 +42,7 @@
             android:id="@+id/infowindow_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_card_bottom_radius"
+            android:background="@drawable/shape_round_bottom_dp10"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center|start"
@@ -54,7 +54,7 @@
             android:paddingBottom="10dp"
             android:singleLine="true"
             android:textAlignment="center"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/color_gray"
             android:textSize="11sp"
             tools:text="提示消息提示消息提示消息提示消息提示消息提示消息提示消息提示消息" />
 

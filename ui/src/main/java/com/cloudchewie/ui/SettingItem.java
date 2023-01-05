@@ -109,13 +109,13 @@ public class SettingItem extends ConstraintLayout {
     @SuppressLint("UseCompatLoadingForDrawables")
     void setRadiusEnbale(boolean top, boolean bottom) {
         if (!top && !bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_rect));
         else if (top && bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card_round));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_dp10));
         else if (!top && bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card_bottom_radius));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_bottom_dp10));
         else if (top && !bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card_top_radius));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_top_dp10));
     }
 
     private void setRightButton(boolean visibility, int iconId, int backgroundColor) {

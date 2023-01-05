@@ -4,7 +4,8 @@
     android:id="@+id/small_post_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_reply_round"
+    android:background="@drawable/shape_round_dp5"
+    android:backgroundTint="@color/reply_background"
     android:clickable="true"
     android:focusable="true"
     android:padding="10dp">
@@ -27,7 +28,7 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@id/small_post_item_image"
         android:singleLine="true"
-        android:textColor="@color/text_color_gray"
+        android:textColor="@color/color_gray"
         android:textSize="11sp"
         tools:text="用户昵称" />
 
@@ -37,7 +38,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/text_color_light_gray"
+        android:textColor="@color/color_light_gray"
         android:textSize="11sp"
         tools:text="2022年10月20日" />
 

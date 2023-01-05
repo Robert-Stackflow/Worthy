@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:maxEms="5"
         android:textAlignment="center"
-        android:textColor="@color/text_color_gray"
+        android:textColor="@color/color_gray"
         android:textSize="@dimen/entry_item_default_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -16,10 +16,6 @@ android {
     lintOptions {
         abortOnError false
     }
-    dexOptions {
-        incremental false
-
-    }
 }
 
 dependencies {
@@ -27,7 +23,7 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.android.support:support-fragment:28.0.0'
     implementation "com.android.support:support-core-utils:28.0.0"
 }

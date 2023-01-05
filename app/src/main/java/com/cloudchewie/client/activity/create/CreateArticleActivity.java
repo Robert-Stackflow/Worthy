@@ -105,8 +105,8 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             publishButton.setEnabled(false);
             previewButton.setSelected(false);
             previewButton.setEnabled(false);
-            publishButton.setTextColor(getColor(R.color.text_color_light_gray));
-            previewButton.setTextColor(getColor(R.color.text_color_light_gray));
+            publishButton.setTextColor(getColor(R.color.color_light_gray));
+            previewButton.setTextColor(getColor(R.color.color_light_gray));
         }
     }
 
@@ -159,59 +159,59 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             for (int i = 0; i < types.size(); i++)
                 flagArr.add(types.get(i).name());
             if (flagArr.contains("BOLD")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_bold)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_bold)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_bold)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("ITALIC")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_italic)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_italic)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_italic)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("UNDERLINE")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_underline)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_underline)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_underline)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("STRIKETHROUGH")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_strikethrough)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_strikethrough)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_strikethrough)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("ORDEREDLIST")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_ol)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_ol)).setColorFilter(getColor(R.color.color_red));
                 ((ImageView) findViewById(R.id.activity_create_article_operation_ul)).setColorFilter(getColor(R.color.color_selector_icon));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_ol)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("UNORDEREDLIST")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_ul)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_ul)).setColorFilter(getColor(R.color.color_red));
                 ((ImageView) findViewById(R.id.activity_create_article_operation_ol)).setColorFilter(getColor(R.color.color_selector_icon));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_ul)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("SUPERSCRIPT")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_superscript)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_superscript)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_superscript)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("SUBSCRIPT")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_subscript)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_subscript)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_subscript)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("JUSTIFYLEFT")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_leftalignment)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_leftalignment)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_leftalignment)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("JUSTIFYCENTER")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_centeralignment)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_centeralignment)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_centeralignment)).setColorFilter(getColor(R.color.color_selector_icon));
             }
             if (flagArr.contains("JUSTIFYRIGHT")) {
-                ((ImageView) findViewById(R.id.activity_create_article_operation_rightalignment)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(R.id.activity_create_article_operation_rightalignment)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(R.id.activity_create_article_operation_rightalignment)).setColorFilter(getColor(R.color.color_selector_icon));
             }
@@ -434,12 +434,12 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     void changeColor(int id, boolean isSelected, boolean isEnable) {
         if (isEnable) {
             if (isSelected) {
-                ((ImageView) findViewById(id)).setColorFilter(getColor(R.color.color_fe0000));
+                ((ImageView) findViewById(id)).setColorFilter(getColor(R.color.color_red));
             } else {
                 ((ImageView) findViewById(id)).setColorFilter(getColor(R.color.color_selector_icon));
             }
         } else {
-            ((ImageView) findViewById(id)).setColorFilter(getColor(R.color.text_color_light_gray));
+            ((ImageView) findViewById(id)).setColorFilter(getColor(R.color.color_light_gray));
         }
     }
 

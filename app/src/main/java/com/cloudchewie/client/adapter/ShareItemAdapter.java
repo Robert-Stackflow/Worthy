@@ -48,7 +48,7 @@ public class ShareItemAdapter extends RecyclerView.Adapter<ShareItemAdapter.MyVi
         }
         holder.mainView.setIcon(shareItem.getIcon());
         holder.mainView.setText(shareItem.getName());
-        holder.mainView.setIconBackground(R.drawable.shape_card_round);
+        holder.mainView.setIconBackground(R.drawable.shape_round_dp10);
         holder.mainView.setIconSize(dp2px(context, 50));
         holder.mainView.setSpacing(dp2px(context, 10));
         holder.mainView.setScaleType(0);

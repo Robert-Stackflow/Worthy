@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -18,10 +19,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.previewlibrary.enitity.IThumbViewInfo;
 import com.previewlibrary.view.BasePhotoFragment;
-import com.previewlibrary.view.StatusBarUtil;
 import com.previewlibrary.wight.BezierBannerView;
 import com.previewlibrary.wight.PhotoViewPager;
 import com.previewlibrary.wight.SmoothImageView;
+
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +53,44 @@ public class GPreviewActivity extends FragmentActivity {
     /***默认显示***/
     private boolean isShow = true;
 
+    /**
+     * 设置状态栏透明
+     *
+     * @param window window对象
+     */
+    private static void setStatusBarTransparent(@NonNull Window window) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        window.setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    /**
+     * 根据深色模式，设置状态栏字体图标颜色
+     *
+     * @param window     window对象
+     * @param isDarkMode 是否为深色模式
+     */
+    @Contract(pure = true)
+    private static void setStatusBarTextColor(Window window, boolean isDarkMode) {
+        if (isDarkMode) {
+            View decorView = window.getDecorView();
+            int systemUiVisibility = decorView.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            decorView.setSystemUiVisibility(systemUiVisibility ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        } else {
+            View decorView = window.getDecorView();
+            int systemUiVisibility = decorView.getSystemUiVisibility();
+            decorView.setSystemUiVisibility(systemUiVisibility | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
+
     @CallSuper
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setStatusBarTransparent(this);
-        StatusBarUtil.setStatusBarTextColor(this, true);
+        setStatusBarTransparent(getWindow());
+        setStatusBarTextColor(getWindow(), true);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         initData();

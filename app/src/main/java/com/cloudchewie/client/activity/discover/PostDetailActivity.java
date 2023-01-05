@@ -218,7 +218,7 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
                     mSendView.setTextColor(getColor(R.color.color_prominent));
                 } else {
                     mSendView.setEnabled(false);
-                    mSendView.setTextColor(getColor(R.color.text_color_light_gray));
+                    mSendView.setTextColor(getColor(R.color.color_light_gray));
                 }
             }
 
@@ -260,7 +260,7 @@ public class PostDetailActivity extends BaseActivity implements OnKeyboardChange
             mSendView.setTextColor(getColor(R.color.color_prominent));
         } else {
             mSendView.setEnabled(false);
-            mSendView.setTextColor(getColor(R.color.text_color_light_gray));
+            mSendView.setTextColor(getColor(R.color.color_light_gray));
         }
         if (!Objects.equals(inputString, "") && mEditText.getText().toString().equals(""))
             mEditText.setText(inputString);

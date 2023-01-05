@@ -143,7 +143,7 @@ public class PostListFragment extends BaseFragment implements View.OnClickListen
         postListAdapter = new StaggerPostListAdapter(getActivity(), posts);
         followingRecyclerView.setAdapter(postListAdapter);
         followingRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        followingRecyclerView.addItemDecoration(new StaggerItemDecoration(getContext()));
+        followingRecyclerView.addItemDecoration(new StaggerItemDecoration(getContext(), getResources().getDimensionPixelSize(R.dimen.dp3)));
     }
 
     void initSwipeRefresh() {

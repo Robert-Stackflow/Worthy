@@ -9,6 +9,7 @@ package com.cloudchewie.client.activity.discover;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -126,17 +127,20 @@ public class TopicDetailActivity extends BaseActivity implements View.OnClickLis
                     mTitleBar2.setVisibility(View.GONE);
                     mMainLayout.setBackgroundColor(getColor(R.color.color_prominent));
                     mTitleBar.setBackgroundColor(getColor(R.color.color_prominent));
-                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_content_top_radius_unclickable));
+                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_round_top_dp15));
+                    mContentBar.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.content_background)));
                 } else if (state == State.COLLAPSED) {
                     mTitleBar2.setAlpha(1f);
                     mTitleBar2.setVisibility(View.VISIBLE);
                     mMainLayout.setBackgroundColor(getColor(R.color.content_background));
-                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_content));
+                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_rect));
+                    mContentBar.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.content_background)));
                 } else {
                     mTitleBar2.setVisibility(View.VISIBLE);
                     mTitleBar2.setAlpha(1f * Math.abs(offset) / appBarLayout.getTotalScrollRange());
                     mMainLayout.setBackgroundColor(ColorUtils.blendARGB(getColor(R.color.color_prominent), getColor(R.color.content_background), 1f * Math.abs(offset) / appBarLayout.getTotalScrollRange()));
-                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_content_top_radius_unclickable));
+                    mContentBar.setBackground(AppCompatResources.getDrawable(getApplicationContext(), R.drawable.shape_round_top_dp15));
+                    mContentBar.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.content_background)));
                 }
             }
         });

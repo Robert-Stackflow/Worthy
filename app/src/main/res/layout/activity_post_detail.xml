@@ -154,7 +154,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="@dimen/dp8"
-                                android:textColor="@color/text_color_gray"
+                                android:textColor="@color/color_gray"
                                 android:textSize="@dimen/sp13"
                                 app:layout_constraintStart_toStartOf="@id/activity_post_detail_avatar"
                                 app:layout_constraintTop_toBottomOf="@id/activity_post_detail_avatar"

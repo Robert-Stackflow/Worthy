@@ -25,6 +25,7 @@ import com.cloudchewie.client.adapter.CommentListAdapter;
 import com.cloudchewie.client.domin.Comment;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
+import com.cloudchewie.client.util.mess.DividerItemDecoration;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -93,6 +94,7 @@ public class CommentListFragment extends BaseFragment implements View.OnClickLis
         }
         commentsRecyclerView.setAdapter(commentListAdapter);
         commentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        commentsRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
     }
 
     void initSwipeRefresh() {

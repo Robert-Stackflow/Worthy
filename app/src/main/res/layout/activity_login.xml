@@ -93,7 +93,7 @@
             android:autoLink="web"
             android:padding="@dimen/dp5"
             android:text="点击登录即表示您已阅读并同意《用户协议》和《隐私政策》"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/color_gray"
             android:textSize="@dimen/sp12" />
     </LinearLayout>
 
@@ -114,7 +114,7 @@
             android:focusable="true"
             android:text="注册帐号"
             android:textAlignment="center"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/color_gray"
             android:textSize="@dimen/sp12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +127,7 @@
             android:layout_marginStart="@dimen/dp10"
             android:text=" | "
             android:textAlignment="center"
-            android:textColor="@color/text_color_light_gray"
+            android:textColor="@color/color_light_gray"
             android:textSize="@dimen/sp12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/login_signup"
@@ -142,7 +142,7 @@
             android:focusable="true"
             android:text="登录问题"
             android:textAlignment="center"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/color_gray"
             android:textSize="@dimen/sp12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/login_divider"

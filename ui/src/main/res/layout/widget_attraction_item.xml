@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:background="@drawable/shape_card_round"
+    android:background="@drawable/shape_round_dp5"
+    android:backgroundTint="@color/color_selector_card"
     android:clickable="true"
     android:focusable="true">
 
@@ -54,7 +55,7 @@
                 android:layout_marginStart="5dp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:textColor="@color/text_color_gray"
+                android:textColor="@color/color_gray"
                 android:textSize="@dimen/sp12"
                 tools:text="430人推荐 · 82人看过 · 99+人想去 · 54张照片" />
 
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:singleLine="true"
-                android:textColor="@color/text_color_gray"
+                android:textColor="@color/color_gray"
                 android:textSize="@dimen/sp11"
                 tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 

@@ -5,7 +5,8 @@
     android:id="@+id/user_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_content">
+    android:background="@drawable/shape_rect"
+    android:backgroundTint="@color/content_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

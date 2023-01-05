@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_bottom_sheet">
+    android:background="@drawable/shape_round_top_dp10"
+    android:backgroundTint="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_sheet_titlebar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_content_top_radius_unclickable"
+        android:background="@drawable/shape_round_top_dp15"
+        android:backgroundTint="@color/content_background"
         app:layout_constraintTop_toTopOf="parent">
 
         <View

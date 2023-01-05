@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--主要颜色-->
-    <color name="background">#F6F6F6</color>
+    <color name="background">#F5F5F5</color>
     <color name="color_accent">#000000</color>
-    <color name="color_icon">#060606</color>
-    <color name="color_icon_pressed">#88060606</color>
+    <color name="color_icon">#191919</color>
+    <color name="color_icon_pressed">#88191919</color>
     <color name="color_icon_light">#FFFFFF</color>
     <color name="color_icon_pressed_light">#88FFFFFF</color>
     <color name="color_icon_dark">#060606</color>
     <color name="color_icon_pressed_dark">#88060606</color>
     <color name="color_toolbar_icon">#060606</color>
     <color name="color_toolbar_icon_pressed">#88060606</color>
-    <color name="color_prominent">#0066FF</color>
+    <color name="color_prominent">#0099FF</color>
     <color name="color_prominent_background">#EBF7FF</color>
     <color name="light_translucent">#12000000</color>
     <color name="dark_translucent">#AC000000</color>
@@ -19,7 +19,7 @@
     <color name="status_bar_scrim">@color/background</color>
     <color name="ic_launcher_background">@color/background</color>
     <!--控件颜色-->
-    <color name="toast_background">#AA000000</color>
+    <color name="toast_background">#BB000000</color>
     <color name="card_background">#FFFFFF</color>
     <color name="card_pressed_background">#E5E5E5</color>
     <color name="content_background">#FFFFFF</color>
@@ -38,12 +38,9 @@
     <color name="text_color_white">#FFFFFF</color>
     <color name="text_color_black">#000000</color>
     <color name="text_color_entry">#444444</color>
-    <color name="text_color_gray">#999999</color>
-    <color name="text_color_light_gray">#BFBFBF</color>
     <!--显式颜色-->
-    <color name="color_222222">#222222</color>
-    <color name="color_666666">#666666</color>
-    <color name="color_e8e8e8">#e8e8e8</color>
-    <color name="color_fe0000">#fe0000</color>
-    <color name="color_f5810b">#f5810b</color>
+    <color name="color_red">#FF6370</color>
+    <color name="color_gray">#999999</color>
+    <color name="color_light_gray">#CCCCCC</color>
+    <color name="color_blue">#2E77E5</color>
 </resources>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_content"
+    android:background="@drawable/shape_rect"
+    android:backgroundTint="@color/content_background"
     android:clickable="true"
     android:focusable="true">
 
@@ -35,7 +36,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:singleLine="true"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/color_gray"
             android:textSize="@dimen/post_item_username"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/post_item_avatar"
@@ -46,7 +47,7 @@
             android:id="@+id/post_item_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/text_color_light_gray"
+            android:textColor="@color/color_light_gray"
             android:textSize="@dimen/post_item_time"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -135,10 +136,10 @@
             android:clickable="true"
             android:focusable="true"
             app:icon_text_item_icon="@drawable/ic_light_comment"
-            app:icon_text_item_icon_color="@color/text_color_gray"
+            app:icon_text_item_icon_color="@color/color_gray"
             app:icon_text_item_icon_size="@dimen/icon_text_item_default_icon_size"
             app:icon_text_item_text="0"
-            app:icon_text_item_text_color="@color/text_color_gray" />
+            app:icon_text_item_text_color="@color/color_gray" />
 
         <com.cloudchewie.ui.IconTextItem
             android:id="@+id/post_item_thumbup"
@@ -150,10 +151,10 @@
             android:focusable="true"
             app:icon_text_item_checked_icon="@drawable/ic_light_thumbup_fill"
             app:icon_text_item_icon="@drawable/ic_light_thumbup"
-            app:icon_text_item_icon_color="@color/text_color_gray"
+            app:icon_text_item_icon_color="@color/color_gray"
             app:icon_text_item_icon_size="@dimen/icon_text_item_default_icon_size"
             app:icon_text_item_text="0"
-            app:icon_text_item_text_color="@color/text_color_gray" />
+            app:icon_text_item_text_color="@color/color_gray" />
     </RelativeLayout>
 
     <View

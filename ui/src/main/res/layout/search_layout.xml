@@ -38,7 +38,7 @@
             android:paddingLeft="5dp"
             android:singleLine="true"
             android:textColor="#9C9C9C"
-            android:textCursorDrawable="@drawable/shape_line"
+            android:textCursorDrawable="@drawable/shape_cursor"
             android:textSize="15sp" />
 
         <ImageView

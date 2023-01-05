@@ -95,13 +95,13 @@ public class EntryItem extends ConstraintLayout {
             checkedIconColor = attr.getColor(R.styleable.EntryItem_entry_item_checked_icon_color, getResources().getColor(R.color.color_prominent, getResources().newTheme()));
             int iconSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_icon_size, getResources().getDimension(R.dimen.entry_item_default_icon_size));
             String text = attr.getString(R.styleable.EntryItem_entry_item_text);
-            int textColor = attr.getColor(R.styleable.EntryItem_entry_item_text_color, getResources().getColor(R.color.text_color_gray, getResources().newTheme()));
+            int textColor = attr.getColor(R.styleable.EntryItem_entry_item_text_color, getResources().getColor(R.color.color_gray, getResources().newTheme()));
             int textSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_text_size, getResources().getDimension(R.dimen.entry_item_default_text_size));
             String bigText = attr.getString(R.styleable.EntryItem_entry_item_big_text);
             int bigTextColor = attr.getColor(R.styleable.EntryItem_entry_item_big_text_color, getResources().getColor(R.color.color_accent, getResources().newTheme()));
             int bigTextSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_big_text_size, getResources().getDimension(R.dimen.entry_item_default_big_text_size));
             int spacing = (int) attr.getDimension(R.styleable.EntryItem_entry_item_spacing, 3);
-            int backgroundId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon_background, R.drawable.shape_tag_round);
+            int backgroundId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon_background, R.drawable.shape_round_dp10);
             boolean backgroundEnable = attr.getBoolean(R.styleable.EntryItem_entry_item_icon_background_enable, false);
             int iconScaleType = attr.getInt(R.styleable.EntryItem_entry_item_icon_scale_type, 0);
             setScaleType(iconScaleType);

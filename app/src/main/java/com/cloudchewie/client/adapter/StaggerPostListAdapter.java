@@ -99,7 +99,7 @@ public class StaggerPostListAdapter extends RecyclerView.Adapter<StaggerPostList
             intent.putExtras(bundle);
             context.startActivity(intent);
         });
-        Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, true, true, false, false))).into(holder.imageView);
+        Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, 5, true, true, false, false))).into(holder.imageView);
         Glide.with(context).load(post.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(holder.avatarView);
     }
 
@@ -127,7 +127,7 @@ public class StaggerPostListAdapter extends RecyclerView.Adapter<StaggerPostList
             int width = ((Activity) imageView.getContext()).getWindowManager().getDefaultDisplay().getWidth();
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            params.height = (int) (400 + Math.random() * 400);
+            params.height = (int) (200 + Math.random() * 400);
             imageView.setLayoutParams(params);
         }
     }

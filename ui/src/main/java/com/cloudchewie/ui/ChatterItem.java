@@ -68,9 +68,9 @@ public class ChatterItem extends ConstraintLayout {
             int tagBackgroundColor = attr.getColor(R.styleable.ChatterItem_chatter_item_tag_color, Color.RED);
             boolean tagVisibility = attr.getBoolean(R.styleable.ChatterItem_chatter_item_tag_visibility, false);
             String time = attr.getString(R.styleable.ChatterItem_chatter_item_time);
-            int timeColor = attr.getColor(R.styleable.ChatterItem_chatter_item_time_color, getResources().getColor(R.color.text_color_light_gray, getResources().newTheme()));
+            int timeColor = attr.getColor(R.styleable.ChatterItem_chatter_item_time_color, getResources().getColor(R.color.color_light_gray, getResources().newTheme()));
             String content = attr.getString(R.styleable.ChatterItem_chatter_item_content);
-            int contentColor = attr.getColor(R.styleable.ChatterItem_chatter_item_content_color, getResources().getColor(R.color.text_color_gray, getResources().newTheme()));
+            int contentColor = attr.getColor(R.styleable.ChatterItem_chatter_item_content_color, getResources().getColor(R.color.color_gray, getResources().newTheme()));
             boolean splitterEnable = attr.getBoolean(R.styleable.ChatterItem_chatter_item_splitter_enable, true);
             boolean topRadiusEnable = attr.getBoolean(R.styleable.ChatterItem_chatter_item_top_radius_enable, false);
             boolean bottomRadiusEnable = attr.getBoolean(R.styleable.ChatterItem_chatter_item_bottom_radius_enable, false);
@@ -99,13 +99,13 @@ public class ChatterItem extends ConstraintLayout {
     @SuppressLint("UseCompatLoadingForDrawables")
     public void setRadiusEnbale(boolean top, boolean bottom) {
         if (!top && !bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_rect));
         else if (top && bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card_round));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_dp10));
         else if (!top && bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card_bottom_radius));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_bottom_dp10));
         else if (top && !bottom)
-            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_card_top_radius));
+            mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_top_dp10));
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

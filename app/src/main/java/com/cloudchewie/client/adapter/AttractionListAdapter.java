@@ -10,6 +10,7 @@ package com.cloudchewie.client.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,12 +82,13 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
             tagItem.setPadding(8, 4, 8, 4);
             tagItem.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             tagItem.setTextColor(context.getColor(R.color.text_color_entry));
-            tagItem.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_small_tag));
+            tagItem.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_round_dp3));
+            tagItem.setBackgroundTintList(ColorStateList.valueOf(context.getColor(R.color.tag_background)));
             tagItem.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             holder.flowTagLayout.addView(tagItem);
         }
         holder.statisticsView.setText(attraction.getStatistics());
-        Glide.with(context).load(attraction.getCoverImageUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, true, true, false, false))).into(holder.imageView);
+        Glide.with(context).load(attraction.getCoverImageUrl()).apply(new RequestOptions().error(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, 5, true, true, false, false))).into(holder.imageView);
     }
 
     @Override
@@ -113,7 +115,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
             int width = ((Activity) imageView.getContext()).getWindowManager().getDefaultDisplay().getWidth();
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            params.height = (int) (400 + Math.random() * 400);
+            params.height = (int) (200 + Math.random() * 400);
             imageView.setLayoutParams(params);
         }
     }

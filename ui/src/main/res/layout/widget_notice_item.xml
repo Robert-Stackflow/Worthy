@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_content"
+    android:background="@drawable/shape_rect"
+    android:backgroundTint="@color/content_background"
     android:clickable="true"
     android:focusable="true">
 
@@ -34,7 +35,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:singleLine="true"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/color_gray"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@id/notice_item_avatar"
             app:layout_constraintStart_toEndOf="@id/notice_item_avatar"
@@ -45,7 +46,7 @@
             android:id="@+id/notice_item_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/text_color_light_gray"
+            android:textColor="@color/color_light_gray"
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@id/notice_item_avatar"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +74,8 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/shape_reply_round"
+        android:background="@drawable/shape_round_dp5"
+        android:backgroundTint="@color/reply_background"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/notice_item_top_layout" />

@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_card"
+            android:background="@drawable/shape_rect"
             android:clickable="true"
             android:focusable="true">
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_card"
+            android:background="@drawable/shape_rect"
             android:clickable="true"
             android:focusable="true">
 
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/shape_card"
+            android:background="@drawable/shape_rect"
             android:clickable="true"
             android:focusable="true">
 
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_card"
+            android:background="@drawable/shape_rect"
             android:clickable="true"
             android:focusable="true"
             android:paddingStart="10dp"
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_card"
+            android:background="@drawable/shape_rect"
             android:clickable="true"
             android:focusable="true"
             android:paddingStart="10dp"
@@ -160,5 +160,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/layout_create_text_layout"
         app:layout_constraintStart_toStartOf="@id/layout_create_text_layout"
-        app:tint="@color/text_color_gray" />
+        app:tint="@color/color_gray" />
 </androidx.constraintlayout.widget.ConstraintLayout>

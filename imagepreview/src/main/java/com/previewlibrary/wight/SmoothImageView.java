@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,7 +15,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
@@ -22,7 +25,6 @@ import androidx.annotation.NonNull;
 
 import com.previewlibrary.R;
 import com.previewlibrary.view.ImageUtils;
-import com.previewlibrary.view.MatricsUtil;
 
 import uk.co.senab2.photoview2.PhotoView;
 
@@ -100,6 +102,38 @@ public class SmoothImageView extends PhotoView {
      * **/
     public static void setIsScale(boolean isScale) {
         ISSCALE = isScale;
+    }
+
+    /**
+     * 获取屏幕宽度(包括状态栏、导航栏等修饰)
+     *
+     * @param context Context对象
+     * @return 屏幕宽度
+     */
+    private static int getScreenWidth(Context context) {
+        if (context instanceof Activity) {
+            WindowManager windowManager = ((Activity) context).getWindowManager();
+            DisplayMetrics outMetrics = new DisplayMetrics();
+            windowManager.getDefaultDisplay().getRealMetrics(outMetrics);
+            return outMetrics.widthPixels;
+        }
+        return 0;
+    }
+
+    /**
+     * 获取屏幕高度(包括状态栏、导航栏等修饰)
+     *
+     * @param context Context对象
+     * @return 屏幕高度
+     */
+    private static int getScreenHeight(Context context) {
+        if (context instanceof Activity) {
+            WindowManager windowManager = ((Activity) context).getWindowManager();
+            DisplayMetrics outMetrics = new DisplayMetrics();
+            windowManager.getDefaultDisplay().getRealMetrics(outMetrics);
+            return outMetrics.heightPixels;
+        }
+        return 0;
     }
 
     @Override
@@ -507,8 +541,8 @@ public class SmoothImageView extends PhotoView {
         startTransform = new Transform();
         startTransform.alpha = 0;
         if (thumbRect == null || (thumbRect.left == 0 && thumbRect.top == 0 && thumbRect.right == 0 && thumbRect.bottom == 0)) {
-            int width = MatricsUtil.getScreenWidth(getContext());
-            int height = MatricsUtil.getScreenHeight(getContext());
+            int width = getScreenWidth(getContext());
+            int height = getScreenHeight(getContext());
             thumbRect = new Rect(width / 2 - 10, height / 2 - 10, width / 2 + 10, height / 2 + 10);
         }
 

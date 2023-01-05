@@ -5,7 +5,8 @@
     android:id="@+id/chatter_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_content">
+    android:background="@drawable/shape_rect"
+    android:backgroundTint="@color/color_selector_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,7 +82,7 @@
                         android:layout_gravity="end|center"
                         android:singleLine="true"
                         android:textAlignment="center"
-                        android:textColor="@color/text_color_gray"
+                        android:textColor="@color/color_gray"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -99,7 +100,7 @@
                         android:layout_weight="0.5"
                         android:gravity="center_vertical"
                         android:singleLine="true"
-                        android:textColor="@color/text_color_gray"
+                        android:textColor="@color/color_gray"
                         android:textSize="13sp"
                         tools:ignore="NestedWeights" />
 

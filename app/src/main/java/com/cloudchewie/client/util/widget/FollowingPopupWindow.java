@@ -8,6 +8,7 @@
 package com.cloudchewie.client.util.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -47,7 +48,8 @@ public class FollowingPopupWindow extends BasePopupWindow implements View.OnClic
             tagItem.setOnClickListener(this);
             tagItem.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             tagItem.setTextColor(getContext().getColor(R.color.text_color_entry));
-            tagItem.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_tag_round));
+            tagItem.setBackgroundTintList(ColorStateList.valueOf(context.getColor(R.color.tag_background)));
+            tagItem.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_dp10));
             tagItem.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             tagItemList.add(tagItem);
             flowTagLayout.addView(tagItem);
@@ -76,10 +78,12 @@ public class FollowingPopupWindow extends BasePopupWindow implements View.OnClic
         currentOption = option;
         for (TagItem tagItem : tagItemList) {
             tagItem.setTextColor(getContext().getColor(R.color.text_color_entry));
-            tagItem.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_tag_round));
+            tagItem.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.tag_background)));
+            tagItem.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_dp10));
         }
         tagItemList.get(option - 1).setTextColor(getContext().getColor(R.color.color_prominent));
-        tagItemList.get(option - 1).setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_tag_round_checked));
+        tagItemList.get(option - 1).setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_dp10));
+        tagItemList.get(option - 1).setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.color_prominent_background)));
     }
 
     public boolean isOptionChanged() {

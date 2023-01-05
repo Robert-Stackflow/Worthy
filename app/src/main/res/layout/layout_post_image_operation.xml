@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/shape_content_round"
+        android:background="@drawable/shape_round_dp10"
+        android:backgroundTint="@color/content_background"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 

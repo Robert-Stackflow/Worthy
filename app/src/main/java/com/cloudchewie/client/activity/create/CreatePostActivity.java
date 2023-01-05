@@ -79,7 +79,7 @@ public class CreatePostActivity extends BaseActivity {
         });
         publishButton.setSelected(false);
         publishButton.setEnabled(false);
-        publishButton.setTextColor(getColor(R.color.text_color_light_gray));
+        publishButton.setTextColor(getColor(R.color.color_light_gray));
         cancelButton.setOnClickListener(v -> {
             MyDialog dialog = new MyDialog(CreatePostActivity.this);
             dialog.setMessage("是否将本次编辑保存为草稿？保存后下次可以继续编写");
@@ -120,7 +120,7 @@ public class CreatePostActivity extends BaseActivity {
                 } else {
                     publishButton.setSelected(false);
                     publishButton.setEnabled(false);
-                    publishButton.setTextColor(getColor(R.color.text_color_light_gray));
+                    publishButton.setTextColor(getColor(R.color.color_light_gray));
                 }
             }
 

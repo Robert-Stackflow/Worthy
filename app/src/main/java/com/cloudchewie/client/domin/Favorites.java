@@ -23,8 +23,10 @@ public class Favorites implements Serializable {
     int visitorCount;
     int followerCount;
     String coverUrl;
+
     public Favorites() {
     }
+
     public Favorites(String name, String username, String describe, String coverUrl, Date createTime, boolean isPublic, int thumbupCount, int itemCount, int followerCount, int visitorCount) {
         this.name = name;
         this.username = username;

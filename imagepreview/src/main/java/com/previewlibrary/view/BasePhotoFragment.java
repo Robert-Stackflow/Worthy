@@ -49,6 +49,7 @@ public class BasePhotoFragment extends Fragment {
     private IThumbViewInfo beanViewInfo;
     private boolean isTransPhoto = false;
 
+    @NonNull
     public static BasePhotoFragment getInstance(Class<? extends BasePhotoFragment> fragmentClass,
                                                 IThumbViewInfo item,
                                                 boolean currentIndex,

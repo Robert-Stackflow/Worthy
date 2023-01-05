@@ -31,8 +31,10 @@ public class Post implements Serializable {
     String title;
     int collectionCount;
     POST_TYPE type;
+
     public Post() {
     }
+
     public Post(User user, Date date, String content, int commentCount, int thumbupCount, int collectionCount, Attraction attraction, Topic topic) {
         this.user = user;
         this.date = date;

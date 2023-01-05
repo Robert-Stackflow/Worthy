@@ -21,12 +21,26 @@ public class GridImageView extends NiceImageView {
     private TextPaint textPaint;
     private String msg = "";
 
-    public GridImageView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
 
     public GridImageView(Context context) {
         this(context, null);
+    }
+
+    public GridImageView(Context context, int radius) {
+        this(context, null);
+        setCornerRadius(radius);
+    }
+
+    public GridImageView(Context context, int radius, boolean leftBottom, boolean leftTop, boolean rightBottom, boolean rightTop) {
+        this(context, null);
+        if (leftBottom) setCornerBottomLeftRadius(radius);
+        if (leftTop) setCornerTopLeftRadius(radius);
+        if (rightBottom) setCornerBottomRightRadius(radius);
+        if (rightTop) setCornerTopRightRadius(radius);
+    }
+
+    public GridImageView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
     public GridImageView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -53,13 +67,13 @@ public class GridImageView extends NiceImageView {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Drawable drawable = getDrawable();
                 if (drawable != null) {
                     drawable.mutate().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
                 }
+//                setMaskColor(Color.argb(120, 0, 0, 0));
                 break;
             case MotionEvent.ACTION_MOVE:
                 break;
@@ -69,6 +83,7 @@ public class GridImageView extends NiceImageView {
                 if (drawableUp != null) {
                     drawableUp.mutate().clearColorFilter();
                 }
+//                setMaskColor(0);
                 break;
         }
 

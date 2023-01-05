@@ -201,7 +201,7 @@ class SearchList : LinearLayout {
             )
         }
         //设置item 背景
-        setHistoryItemBg(R.drawable.shape_tag_round)
+        setHistoryItemBg(R.drawable.shape_round_dp10)
 
         //首次进来获取历史搜索
         doSearchContent("")

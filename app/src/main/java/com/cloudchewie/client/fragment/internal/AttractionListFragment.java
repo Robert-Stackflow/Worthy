@@ -96,7 +96,7 @@ public class AttractionListFragment extends BaseFragment implements View.OnClick
         attractionListAdapter = new AttractionListAdapter(getActivity(), attractions);
         attractionsRecyclerView.setAdapter(attractionListAdapter);
         attractionsRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        attractionsRecyclerView.addItemDecoration(new StaggerItemDecoration(getContext()));
+        attractionsRecyclerView.addItemDecoration(new StaggerItemDecoration(getContext(), getResources().getDimensionPixelSize(R.dimen.dp3)));
     }
 
     @Override

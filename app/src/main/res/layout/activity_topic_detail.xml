@@ -99,7 +99,7 @@
                                 android:id="@+id/activity_topic_detail_hotvalue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:textColor="@color/text_color_light_gray"
+                                android:textColor="@color/color_light_gray"
                                 tools:text="占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符占位符" />
 
                         </LinearLayout>
@@ -126,7 +126,8 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="20dp"
-                        android:background="@drawable/shape_card_transparent"
+                        android:background="@drawable/shape_round_dp5"
+                        android:backgroundTint="@color/light_translucent"
                         android:padding="10dp">
 
                         <TextView
@@ -146,7 +147,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@drawable/shape_content_top_radius">
+                android:background="@drawable/shape_round_top_dp10"
+                android:backgroundTint="@color/background">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/activity_topic_detail_content_tab_layout"
@@ -187,7 +189,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_content"
+            android:background="@drawable/shape_rect"
+            android:backgroundTint="@color/background"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout

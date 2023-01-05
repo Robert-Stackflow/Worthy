@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:background="@drawable/shape_card_round"
+    android:background="@drawable/shape_round_dp5"
+    android:backgroundTint="@color/color_selector_card"
     android:clickable="true"
     android:focusable="true">
 
@@ -57,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:maxLines="3"
+            android:maxLines="2"
             android:textColor="@color/color_accent"
             android:textSize="@dimen/sp13"
             android:textStyle="bold"
@@ -83,7 +84,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/dp5"
             android:singleLine="true"
-            android:textColor="@color/text_color_gray"
+            android:textColor="@color/color_gray"
             android:textSize="@dimen/sp12"
             app:layout_constraintBottom_toBottomOf="@id/widget_stagger_post_item_avatar"
             app:layout_constraintStart_toEndOf="@id/widget_stagger_post_item_avatar"

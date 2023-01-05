@@ -8,6 +8,7 @@
 package com.cloudchewie.ui;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -48,7 +49,7 @@ public class TagItem extends RelativeLayout {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.TagItem);
         String text;
         if (attr != null) {
-            int backgroundId = attr.getResourceId(R.styleable.TagItem_tag_item_background, R.drawable.shape_tag_round);
+            int backgroundId = attr.getResourceId(R.styleable.TagItem_tag_item_background, R.drawable.shape_round_dp10);
             text = attr.getString(R.styleable.TagItem_tag_item_text);
             int textColor = attr.getColor(R.styleable.TagItem_tag_item_text_color, getResources().getColor(R.color.text_color_entry, getResources().newTheme()));
             int textSize = (int) attr.getDimension(R.styleable.TagItem_tag_item_text_size, 14);
@@ -76,6 +77,12 @@ public class TagItem extends RelativeLayout {
         textView.setBackground(AppCompatResources.getDrawable(getContext(), resId));
     }
 
+    @Override
+    public void setBackgroundTintList(ColorStateList tintList) {
+        textView.setBackgroundTintList(tintList);
+    }
+
+    @Override
     public void setBackground(Drawable drawable) {
         textView.setBackground(drawable);
     }

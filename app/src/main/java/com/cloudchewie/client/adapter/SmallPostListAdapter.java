@@ -11,6 +11,7 @@ import static com.cloudchewie.client.util.basic.StringUtil.handleLineBreaks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +76,8 @@ public class SmallPostListAdapter extends RecyclerView.Adapter<SmallPostListAdap
         holder.nameView.setText(post.getUser().getUsername());
         holder.timeView.setText(DateUtil.beautifyTime(post.getDate()));
         holder.contentView.setText(handleLineBreaks(post.getContent()));
-        holder.mainLayout.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_content));
+        holder.mainLayout.setBackground(AppCompatResources.getDrawable(context, R.drawable.shape_rect));
+        holder.mainLayout.setBackgroundTintList(ColorStateList.valueOf(context.getColor(R.color.content_background)));
         if (holder.imageView != null)
             Glide.with(context).load(post.getImageUrls().get(0)).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background).transform(CornerTransformation.getTransform(context, 5, true, true, true, true))).into(holder.imageView);
     }

@@ -70,7 +70,7 @@
                 android:autoLink="web"
                 android:padding="@dimen/dp5"
                 android:text="点击注册即表示您已阅读并同意《用户协议》和《隐私政策》"
-                android:textColor="@color/text_color_gray"
+                android:textColor="@color/color_gray"
                 android:textSize="@dimen/sp12"
                 app:layout_constraintTop_toBottomOf="@id/activity_signup_password" />
 

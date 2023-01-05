@@ -28,7 +28,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:textColor="@color/color_666666"
+            android:textColor="@color/color_gray"
             android:textSize="14sp" />
     </RelativeLayout>
 

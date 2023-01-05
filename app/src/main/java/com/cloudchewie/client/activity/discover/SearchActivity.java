@@ -79,7 +79,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             if (TextUtils.isEmpty(s)) {
                 confirmView.setEnabled(false);
                 confirmView.setClickable(false);
-                confirmView.setTextColor(getColor(R.color.text_color_gray));
+                confirmView.setTextColor(getColor(R.color.color_gray));
                 toggleMode(false);
             } else {
                 confirmView.setEnabled(true);
@@ -99,7 +99,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         });
         confirmView.setEnabled(false);
         confirmView.setClickable(false);
-        confirmView.setTextColor(getColor(R.color.text_color_gray));
+        confirmView.setTextColor(getColor(R.color.color_gray));
     }
 
     void toggleMode(boolean isSearchResult) {

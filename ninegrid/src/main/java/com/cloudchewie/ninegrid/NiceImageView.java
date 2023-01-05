@@ -39,6 +39,7 @@ public class NiceImageView extends ImageView {
     private int maskColor; // 遮罩颜色
 
     private Xfermode xfermode;
+    private Xfermode srcInMode;
 
     private int width;
     private int height;
@@ -113,7 +114,7 @@ public class NiceImageView extends ImageView {
             xfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
             srcPath = new Path();
         }
-
+        srcInMode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);
         calculateRadii();
         clearInnerBorderWidth();
     }
@@ -151,7 +152,6 @@ public class NiceImageView extends ImageView {
         } else {
             path.addRoundRect(srcRectF, srcRadii, Path.Direction.CCW);
         }
-
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
         paint.setXfermode(xfermode);
@@ -163,13 +163,14 @@ public class NiceImageView extends ImageView {
             srcPath.op(path, Path.Op.DIFFERENCE);
             canvas.drawPath(srcPath, paint);
         }
-        paint.setXfermode(null);
 
         // 绘制遮罩
-        if (maskColor != 0) {
-            paint.setColor(maskColor);
-            canvas.drawPath(path, paint);
-        }
+//        if (maskColor != 0) {
+//            paint.setXfermode(null);
+//            paint.setColor(maskColor);
+//            canvas.drawPath(path, paint);
+//        }
+
         // 恢复画布
         canvas.restore();
         // 绘制边框
@@ -338,6 +339,7 @@ public class NiceImageView extends ImageView {
 
     public void setMaskColor(@ColorInt int maskColor) {
         this.maskColor = maskColor;
+        calculateRadiiAndRectF(cornerRadius == 0);
         invalidate();
     }
 }

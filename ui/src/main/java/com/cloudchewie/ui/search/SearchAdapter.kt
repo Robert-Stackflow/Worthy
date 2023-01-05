@@ -53,7 +53,7 @@ class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchAdapter.Searc
 
             //选中 改变文字颜色
             if (searchBean.textColor == 0) {
-                setTextColor(ContextCompat.getColor(mContext!!, R.color.color_666666))
+                setTextColor(ContextCompat.getColor(mContext!!, R.color.color_gray))
             } else {
                 setTextColor(ContextCompat.getColor(mContext!!, searchBean.textColor))
             }

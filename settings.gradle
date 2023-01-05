@@ -1,7 +1,6 @@
-include ':app'
 include ':ui'
+include ':app'
+include ':ucrop'
 include ':ninegrid'
 include ':imagepicker'
 include ':imagepreview'
-include ':ucrop'
-enableFeaturePreview("VERSION_CATALOGS")

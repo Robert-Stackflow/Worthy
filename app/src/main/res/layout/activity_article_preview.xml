@@ -215,7 +215,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:paddingTop="10dp"
-                                android:textColor="@color/text_color_light_gray"
+                                android:textColor="@color/color_light_gray"
                                 android:textSize="@dimen/sp11"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/activity_article_preview_location"
