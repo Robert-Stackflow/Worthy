@@ -26,7 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.fragment.global.StateFragment;
 import com.cloudchewie.client.util.listener.AppBarStateChangeListener;
 import com.cloudchewie.client.util.ui.DarkModeUtil;

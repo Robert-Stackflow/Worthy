@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.domin.Chatter;
+import com.cloudchewie.client.entity.Chatter;
 import com.cloudchewie.ui.ChatterItem;
 
 import java.util.List;

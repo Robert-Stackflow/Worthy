@@ -14,7 +14,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.User;
 
 import java.util.List;
 

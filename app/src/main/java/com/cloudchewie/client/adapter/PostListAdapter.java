@@ -28,7 +28,7 @@ import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
 import com.cloudchewie.client.activity.discover.PostDetailActivity;
 import com.cloudchewie.client.activity.discover.TopicDetailActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
-import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.util.basic.DateUtil;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.image.ImageViewInfo;

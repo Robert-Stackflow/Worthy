@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.user.HomePageActivity;
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.User;
 import com.cloudchewie.ui.IconTextItem;
 
 import java.util.List;

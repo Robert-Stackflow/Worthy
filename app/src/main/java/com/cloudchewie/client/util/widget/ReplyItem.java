@@ -21,7 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.cloudchewie.client.activity.user.HomePageActivity;
-import com.cloudchewie.client.domin.Comment;
+import com.cloudchewie.client.entity.Comment;
 
 public class ReplyItem extends ConstraintLayout {
     Comment mComment;

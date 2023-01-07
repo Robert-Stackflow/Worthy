@@ -26,7 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.AttractionDetailActivity;
-import com.cloudchewie.client.domin.Attraction;
+import com.cloudchewie.client.entity.Attraction;
 import com.cloudchewie.client.util.image.CornerTransformation;
 import com.cloudchewie.ui.FlowTagLayout;
 import com.cloudchewie.ui.TagItem;

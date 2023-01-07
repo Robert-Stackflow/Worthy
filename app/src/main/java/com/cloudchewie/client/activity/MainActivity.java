@@ -150,8 +150,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-            IToast.makeTextTop(this, "授予权限成功", Toast.LENGTH_SHORT).show();
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE && requestCode == RESULT_OK) {
+            IToast.makeTextBottom(this, "授予权限成功", Toast.LENGTH_SHORT).show();
         }
     }
 

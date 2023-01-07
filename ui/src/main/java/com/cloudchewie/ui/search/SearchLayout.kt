@@ -8,6 +8,7 @@
 package com.cloudchewie.ui.search
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Editable
@@ -17,11 +18,13 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import androidx.core.content.ContextCompat
 import com.cloudchewie.ui.R
 
 class SearchLayout : LinearLayout {
     private var mLayoutSearch: RelativeLayout? = null
     private var mSearchBg: Drawable? = null
+    private var mSearchBgtint: Int? = null
     private var mSearchIconDeleteRight: Float = 0f
     private var mSearchIconLeft: Float = 0f
     private var mIvSearch: ImageView? = null
@@ -54,6 +57,10 @@ class SearchLayout : LinearLayout {
         mSearchIcon = os.getDrawable(R.styleable.SearchLayout_search_icon)
         //搜索背景
         mSearchBg = os.getDrawable(R.styleable.SearchLayout_search_bg)
+        mSearchBgtint = os.getColor(
+            R.styleable.SearchLayout_search_bg_tint,
+            ContextCompat.getColor(context, R.color.tag_background)
+        )
         //搜索框光标
         mSearchTextCursorDrawable = os.getDrawable(R.styleable.SearchLayout_search_text_cursor)
         //搜索图标宽
@@ -221,6 +228,8 @@ class SearchLayout : LinearLayout {
             //设置搜索框的背景
             if (mSearchBg != null) {
                 mLayoutSearch?.background = mSearchBg
+                mLayoutSearch?.backgroundTintList =
+                    mSearchBgtint?.let { ColorStateList.valueOf(it) }
             }
         } catch (e: Exception) {
             e.printStackTrace()

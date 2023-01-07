@@ -8,8 +8,11 @@
 package com.cloudchewie.client;
 
 import android.app.Application;
+import android.content.IntentFilter;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.cloudchewie.client.util.image.MyImageLoader;
+import com.cloudchewie.client.util.map.BaiduSdkReceiver;
 import com.previewlibrary.ZoomMediaLoader;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -25,5 +28,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         ZoomMediaLoader.getInstance().init(new MyImageLoader());
+        IntentFilter iFilter = new IntentFilter();
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK);
+        BaiduSdkReceiver mReceiver = new BaiduSdkReceiver();
+        registerReceiver(mReceiver, iFilter);
     }
 }

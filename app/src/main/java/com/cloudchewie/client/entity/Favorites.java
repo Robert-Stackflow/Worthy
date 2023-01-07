@@ -5,7 +5,7 @@
  * Copyright(c) 2022 Ruida https://cloudchewie.com
  */
 
-package com.cloudchewie.client.domin;
+package com.cloudchewie.client.entity;
 
 import java.io.Serializable;
 import java.util.Date;

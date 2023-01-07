@@ -28,7 +28,7 @@ import com.cloudchewie.client.activity.settings.SettingsActivity;
 import com.cloudchewie.client.activity.user.FavoritesListActivity;
 import com.cloudchewie.client.activity.user.FollowListActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.User;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.ui.IToast;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;

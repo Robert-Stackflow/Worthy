@@ -22,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.CommentListAdapter;
-import com.cloudchewie.client.domin.Comment;
+import com.cloudchewie.client.entity.Comment;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
-import com.cloudchewie.client.util.mess.DividerItemDecoration;
+import com.cloudchewie.client.util.decoration.DividerItemDecoration;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;

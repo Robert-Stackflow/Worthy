@@ -26,7 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.PostDetailActivity;
-import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.util.image.CornerTransformation;
 
 public class SmallPostItem extends RelativeLayout {

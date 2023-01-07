@@ -18,7 +18,7 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.cloudchewie.client.dao.UserDao;
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.User;
 
 @Database(entities = {User.class}, version = 1, exportSchema = false)
 @TypeConverters(Converters.class)

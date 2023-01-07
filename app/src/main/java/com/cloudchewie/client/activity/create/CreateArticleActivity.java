@@ -28,7 +28,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.ArticleDetailActivity;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.cloudchewie.client.util.image.BitmapUtil;
 import com.cloudchewie.client.util.ui.KeyBoardUtil;

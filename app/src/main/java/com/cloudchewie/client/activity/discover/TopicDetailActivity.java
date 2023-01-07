@@ -30,7 +30,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.domin.Topic;
+import com.cloudchewie.client.entity.Topic;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.fragment.global.CreateDialogFragment;
 import com.cloudchewie.client.fragment.internal.PostListFragment;

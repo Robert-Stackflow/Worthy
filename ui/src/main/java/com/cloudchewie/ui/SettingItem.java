@@ -32,6 +32,7 @@ public class SettingItem extends ConstraintLayout {
 
     public SettingItem(@NonNull Context context) {
         super(context);
+        initView(context, null);
     }
 
     public SettingItem(@NonNull Context context, @Nullable AttributeSet attrs) {

@@ -1,5 +1,8 @@
 package com.cloudchewie.client.util.map;
 
+import static com.cloudchewie.client.util.basic.Constant.BAIDU_POI_BASE_URL;
+import static com.cloudchewie.client.util.basic.Constant.BAIDU_SECRET_KEY_WEB;
+
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
@@ -8,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BaiduRequestBuilder {
-    public static String SECRET = "xKtqavfLtLQlNWYFoOuCtVkQSWB0rtei";
-    public static String SECRET_WEB = "5WyAOjBwhhdlWhtbUrTGUK4TFbh9GOdq";
-    public static String BASE_URL = "https://api.map.baidu.com/place/v2/search";
     //公园、动物园、植物园、游乐园、博物馆、水族馆、海滨浴场、文物古迹、教堂、风景区、景点、寺庙、其他
     public static String TAG_ATTRACTION = "旅游景点";
     //度假村、农家院
@@ -39,7 +39,7 @@ public class BaiduRequestBuilder {
     List<double[]> pointList;
 
     public BaiduRequestBuilder() {
-        setAk(SECRET_WEB);
+        setAk(BAIDU_SECRET_KEY_WEB);
         if (type == null)
             type = SEARCH_TYPE.DEFAULT;
         if (output == null)
@@ -114,6 +114,12 @@ public class BaiduRequestBuilder {
         return builder.radius(radius);
     }
 
+    public static BaiduRequestBuilder typeOf(SEARCH_TYPE type) {
+        if (builder == null)
+            builder = new BaiduRequestBuilder();
+        return builder.type(type);
+    }
+
     public static BaiduRequestBuilder pointOf(double lat, double lon) {
         if (builder == null)
             builder = new BaiduRequestBuilder();
@@ -133,20 +139,25 @@ public class BaiduRequestBuilder {
     }
 
     public String build() {
-        StringBuilder url = new StringBuilder(BASE_URL);
+        StringBuilder url = new StringBuilder(BAIDU_POI_BASE_URL);
         url.append("?").append("scope=").append(scope == SCOPE_TYPE.SIMPLE ? 0 : 1);
-        url.append("&").append("tag=").append(tag);
+//        url.append("&").append("tag=").append(tag);
         url.append("&").append("page_num=").append(pageNum);
         url.append("&").append("page_size=").append(pageSize);
         url.append("&").append("ak=").append(ak);
         url.append("&").append("output=").append(output == OUTPUT_TYPE.JSON ? "json" : "xml");
         switch (type) {
             case DEFAULT:
+                if (queryList == null)
+                    queryList = new ArrayList<>();
+                queryList.add(tag);
                 url.append("&").append("query=");
                 url.append(queryList.get(0));
                 url.append("&").append("region=").append(region);
                 break;
             case CIRCLE:
+                if (queryList == null)
+                    queryList = new ArrayList<>();
                 queryList.add(tag);
                 url.append("&").append("query=");
                 for (int i = 0; i < queryList.size(); i++)
@@ -156,6 +167,8 @@ public class BaiduRequestBuilder {
                 url.append("&").append("radius=").append(radius);
                 break;
             case POLYGON:
+                if (queryList == null)
+                    queryList = new ArrayList<>();
                 queryList.add(tag);
                 url.append("&").append("query=");
                 for (int i = 0; i < queryList.size(); i++)
@@ -222,6 +235,11 @@ public class BaiduRequestBuilder {
 
     public BaiduRequestBuilder radius(int radius) {
         setRadius(radius);
+        return this;
+    }
+
+    public BaiduRequestBuilder type(SEARCH_TYPE type) {
+        setType(type);
         return this;
     }
 

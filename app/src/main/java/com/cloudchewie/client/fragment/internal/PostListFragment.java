@@ -22,12 +22,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.StaggerPostListAdapter;
-import com.cloudchewie.client.domin.Attraction;
-import com.cloudchewie.client.domin.Post;
-import com.cloudchewie.client.domin.Topic;
+import com.cloudchewie.client.entity.Attraction;
+import com.cloudchewie.client.entity.Post;
+import com.cloudchewie.client.entity.Topic;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
-import com.cloudchewie.client.util.mess.StaggerItemDecoration;
+import com.cloudchewie.client.util.decoration.StaggerItemDecoration;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;

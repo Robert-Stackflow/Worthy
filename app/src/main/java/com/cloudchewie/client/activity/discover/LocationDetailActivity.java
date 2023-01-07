@@ -36,9 +36,10 @@ import com.baidu.mapapi.utils.route.BaiduMapRoutePlan;
 import com.baidu.mapapi.utils.route.RouteParaOption;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.domin.Attraction;
+import com.cloudchewie.client.entity.Attraction;
+import com.cloudchewie.client.request.MapRequest;
 import com.cloudchewie.client.util.map.MapUtil;
-import com.cloudchewie.client.util.system.AppUtil;
+import com.cloudchewie.client.util.system.AppVersionUtil;
 import com.cloudchewie.client.util.system.ShareUtil;
 import com.cloudchewie.client.util.ui.DarkModeUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
@@ -139,7 +140,7 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
             if (mAttraction == null) {
                 IToast.makeTextBottom(this, "获取景点位置失败,请稍后再试", Toast.LENGTH_SHORT).show();
             } else {
-                if (!AppUtil.isAppInstalled(this, ShareUtil.getBaiduMapPackageName())) {
+                if (!AppVersionUtil.isAppInstalled(this, ShareUtil.getBaiduMapPackageName())) {
                     MyDialog dialog = new MyDialog(this);
                     dialog.setMessage("未安装百度地图APP,是否跳转到浏览器进行导航");
                     dialog.setNegtive("否");
@@ -162,7 +163,7 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
                         }
                     });
                     dialog.show();
-                } else if (!MapUtil.isBaiduMapVersionSupport(AppUtil.getAppVersionName(this, ShareUtil.getBaiduMapPackageName()))) {
+                } else if (!MapUtil.isBaiduMapVersionSupport(AppVersionUtil.getAppVersionName(this, ShareUtil.getBaiduMapPackageName()))) {
                     MyDialog dialog = new MyDialog(this);
                     dialog.setMessage("您安装的百度地图APP版本过低,是否跳转到浏览器进行导航");
                     dialog.setNegtive("否");
@@ -212,7 +213,7 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
             IToast.makeTextBottom(this, "获取景点位置失败,请稍后再试", Toast.LENGTH_SHORT).show();
         } else {
             MapStatus.Builder builder = new MapStatus.Builder();
-            LatLng latLng = new LatLng(mAttraction.getLatitude(), mAttraction.getLongtitude());
+            LatLng latLng = MapRequest.getGeoCoding(mAttraction.getLocation()).getLocation().toLatLng();
             builder.target(latLng).zoom(18.0f);
             baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
             MarkerOptions option = new MarkerOptions().icon(MapUtil.getMarkerIcon()).position(latLng);
@@ -233,7 +234,6 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
         locationOption.setIsNeedAddress(true);
         locationOption.setNeedDeviceDirect(false);
         locationClient.setLocOption(locationOption);
-        locationOption.setIsNeedLocationDescribe(true);
         locationOption.setIsNeedLocationDescribe(true);
         locationClient.registerLocationListener(new MyLocationListener(option));
         locationOption.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
@@ -263,7 +263,7 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
         super.onDestroy();
     }
 
-    public enum onReceiveLocationOption {
+    private enum onReceiveLocationOption {
         NONE,
         JUMPTO,
         JUMPTOBAIDUMAP,

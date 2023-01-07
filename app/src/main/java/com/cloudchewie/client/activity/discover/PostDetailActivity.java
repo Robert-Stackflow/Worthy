@@ -35,7 +35,7 @@ import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.activity.user.HomePageActivity;
 import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
-import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.fragment.internal.CommentListFragment;
 import com.cloudchewie.client.util.image.ImageUrlUtil;

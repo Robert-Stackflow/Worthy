@@ -110,7 +110,6 @@ public class SuggestListAdapter extends RecyclerView.Adapter<SuggestListAdapter.
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         public View mItemView;
-        public View mLocateImg;
         public TextView mPoiNamePreFix;
         public TextView mPoiName;
         public TextView mPoiAddress;
@@ -119,7 +118,6 @@ public class SuggestListAdapter extends RecyclerView.Adapter<SuggestListAdapter.
         public MyViewHolder(View view) {
             super(view);
             mItemView = view;
-            mLocateImg = view.findViewById(R.id.imgLocate);
             mPoiNamePreFix = view.findViewById(R.id.namePrefix);
             mPoiName = view.findViewById(R.id.poiResultName);
             mPoiAddress = view.findViewById(R.id.poiAddress);

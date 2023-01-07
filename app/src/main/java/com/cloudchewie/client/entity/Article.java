@@ -1,4 +1,4 @@
-package com.cloudchewie.client.domin;
+package com.cloudchewie.client.entity;
 
 import androidx.annotation.NonNull;
 

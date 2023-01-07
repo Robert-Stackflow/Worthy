@@ -13,92 +13,6 @@
         android:clickable="true"
         android:focusable="true" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/map_titlebar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/shape_round_shadow"
-        android:paddingStart="10dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="10dp">
-
-        <LinearLayout
-            android:id="@+id/map_search_filter_layout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Spinner
-                android:id="@+id/map_search_province_filter"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_spinner"
-                android:spinnerMode="dialog"
-                android:textAlignment="center" />
-
-            <Spinner
-                android:id="@+id/map_search_city_filter"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_spinner"
-                android:entries="@array/solar_term"
-                android:spinnerMode="dialog"
-                android:textAlignment="center" />
-
-            <Spinner
-                android:id="@+id/map_search_county_filter"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/shape_spinner"
-                android:entries="@array/solar_term"
-                android:spinnerMode="dialog"
-                android:textAlignment="center" />
-        </LinearLayout>
-
-        <com.cloudchewie.ui.search.SearchLayout
-            android:id="@+id/map_search_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/tag_background"
-            app:layout_constraintTop_toBottomOf="@id/map_search_filter_layout"
-            app:search_bg="@drawable/shape_round_dp10"
-            app:search_color="@color/color_accent"
-            app:search_hint="搜索地点"
-            app:search_text_cursor="@drawable/shape_cursor" />
-
-        <View
-            android:id="@+id/map_titlebar_line"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="5dp"
-            android:background="@color/color_divider"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/map_search_layout" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/map_sug_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/map_titlebar"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/shape_round_dp10"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
-
     <ImageButton
         android:id="@+id/goto_mylocation"
         android:layout_width="40dp"
@@ -108,12 +22,163 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/shape_round_dp10"
+        android:background="@drawable/shape_round_dp5"
+        android:backgroundTint="@color/color_selector_card"
         android:clickable="true"
         android:contentDescription="定位至我的位置"
         android:focusable="true"
-        android:padding="10dp"
+        android:padding="@dimen/dp10"
         android:src="@drawable/ic_light_location" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/map_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/shape_round_shadow"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="10dp"
+        android:paddingTop="15dp"
+        android:paddingEnd="10dp">
+
+        <com.cloudchewie.ui.search.SearchLayout
+            android:id="@+id/map_search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:search_bg="@drawable/shape_round_dp10"
+            app:search_bg_tint="@color/tag_background"
+            app:search_color="@color/color_accent"
+            app:search_hint="搜索地点"
+            app:search_text_cursor="@drawable/shape_cursor" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/map_search_filter_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/map_search_layout">
+
+            <com.cloudchewie.ui.MySpinner
+                android:id="@+id/map_search_filter_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/tag_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/map_search_filter_distance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spinner_background="@drawable/shape_spinner"
+                app:spinner_background_checked_tint="@color/color_prominent_background"
+                app:spinner_checked_icon="@drawable/ic_light_arrow_up"
+                app:spinner_icon="@drawable/ic_light_arrow_down"
+                app:spinner_icon_checked_color="@color/color_blue"
+                app:spinner_text="北京市"
+                app:spinner_text_checked_color="@color/color_blue" />
+
+            <com.cloudchewie.ui.MySpinner
+                android:id="@+id/map_search_filter_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp10"
+                android:backgroundTint="@color/tag_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/map_search_filter_type"
+                app:layout_constraintStart_toEndOf="@id/map_search_filter_city"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spinner_background="@drawable/shape_spinner"
+                app:spinner_background_checked_tint="@color/color_prominent_background"
+                app:spinner_checked_icon="@drawable/ic_light_arrow_up"
+                app:spinner_icon="@drawable/ic_light_arrow_down"
+                app:spinner_icon_checked_color="@color/color_blue"
+                app:spinner_text="不限距离"
+                app:spinner_text_checked_color="@color/color_blue" />
+
+            <com.cloudchewie.ui.MySpinner
+                android:id="@+id/map_search_filter_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp10"
+                android:backgroundTint="@color/tag_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/map_search_filter_more"
+                app:layout_constraintStart_toEndOf="@id/map_search_filter_distance"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spinner_background="@drawable/shape_spinner"
+                app:spinner_background_checked_tint="@color/color_prominent_background"
+                app:spinner_checked_icon="@drawable/ic_light_arrow_up"
+                app:spinner_icon="@drawable/ic_light_arrow_down"
+                app:spinner_icon_checked_color="@color/color_blue"
+                app:spinner_text="全部景点"
+                app:spinner_text_checked_color="@color/color_blue" />
+
+            <com.cloudchewie.ui.MySpinner
+                android:id="@+id/map_search_filter_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/dp10"
+                android:backgroundTint="@color/tag_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/map_search_filter_type"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spinner_background="@drawable/shape_spinner"
+                app:spinner_background_checked_tint="@color/color_prominent_background"
+                app:spinner_checked_icon="@drawable/ic_light_arrow_up"
+                app:spinner_icon="@drawable/ic_light_arrow_down"
+                app:spinner_icon_checked_color="@color/color_blue"
+                app:spinner_text="更多筛选"
+                app:spinner_text_checked_color="@color/color_blue" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/map_search_filter_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/map_search_filter_layout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/map_sug_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/map_search_filter_recyclerview" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/map_sug_recyclerview"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_above="@id/goto_mylocation"-->
+    <!--        android:layout_below="@id/map_titlebar"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        android:layout_marginBottom="50dp"-->
+    <!--        android:background="@drawable/shape_round_shadow_nopadding"-->
+    <!--        android:paddingTop="10dp"-->
+    <!--        android:paddingBottom="10dp" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/map_poi_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp" />
 
     <FrameLayout
         android:id="@+id/poiInfo_layout"

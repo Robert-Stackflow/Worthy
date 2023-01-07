@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.message.NoticeActivity;
 import com.cloudchewie.client.adapter.ChatterListAdapter;
-import com.cloudchewie.client.domin.Chatter;
+import com.cloudchewie.client.entity.Chatter;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.ui.IToast;

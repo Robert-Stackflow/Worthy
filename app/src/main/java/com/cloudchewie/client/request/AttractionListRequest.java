@@ -1,7 +1,7 @@
 package com.cloudchewie.client.request;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cloudchewie.client.domin.Attraction;
+import com.cloudchewie.client.entity.Attraction;
 import com.cloudchewie.client.util.enumeration.ResponseCode;
 import com.cloudchewie.client.util.http.HttpRequestUtil;
 

@@ -1,6 +1,8 @@
-package com.cloudchewie.client.domin;
+package com.cloudchewie.client.bean;
 
 import androidx.annotation.NonNull;
+
+import com.baidu.mapapi.model.LatLng;
 
 public class PoiLocation {
     double lat;
@@ -29,5 +31,9 @@ public class PoiLocation {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public LatLng toLatLng() {
+        return new LatLng(lat, lng);
     }
 }

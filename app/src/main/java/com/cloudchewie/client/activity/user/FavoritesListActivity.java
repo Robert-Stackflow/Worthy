@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.adapter.FavoritesListAdapter;
-import com.cloudchewie.client.domin.Favorites;
+import com.cloudchewie.client.entity.Favorites;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.ui.TitleBar;

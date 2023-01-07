@@ -29,7 +29,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.user.HomePageActivity;
-import com.cloudchewie.client.domin.Comment;
+import com.cloudchewie.client.entity.Comment;
 import com.cloudchewie.client.fragment.internal.BottomReplyFragment;
 import com.cloudchewie.client.util.basic.DateUtil;
 import com.cloudchewie.client.util.image.ImageUrlUtil;

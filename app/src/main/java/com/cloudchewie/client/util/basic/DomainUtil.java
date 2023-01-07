@@ -3,14 +3,14 @@ package com.cloudchewie.client.util.basic;
 import android.content.Context;
 import android.content.res.AssetManager;
 
-import com.cloudchewie.client.domin.Attraction;
-import com.cloudchewie.client.domin.Chatter;
-import com.cloudchewie.client.domin.Comment;
-import com.cloudchewie.client.domin.Message;
-import com.cloudchewie.client.domin.Notice;
-import com.cloudchewie.client.domin.Post;
-import com.cloudchewie.client.domin.Topic;
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.Attraction;
+import com.cloudchewie.client.entity.Chatter;
+import com.cloudchewie.client.entity.Comment;
+import com.cloudchewie.client.entity.Message;
+import com.cloudchewie.client.entity.Notice;
+import com.cloudchewie.client.entity.Post;
+import com.cloudchewie.client.entity.Topic;
+import com.cloudchewie.client.entity.User;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.map.CountyUtil;
 

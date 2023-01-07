@@ -1,6 +1,6 @@
 package com.cloudchewie.client.request;
 
-import com.cloudchewie.client.domin.Attraction;
+import com.cloudchewie.client.entity.Attraction;
 import com.cloudchewie.client.util.http.HttpRequestUtil;
 
 public class AttractionCreationRequest {

@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.user.FavoritesDetailActivity;
-import com.cloudchewie.client.domin.Favorites;
+import com.cloudchewie.client.entity.Favorites;
 import com.cloudchewie.client.util.image.CornerTransformation;
 import com.cloudchewie.ui.IconTextItem;
 

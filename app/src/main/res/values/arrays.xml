@@ -22,4 +22,44 @@
         <item>最新</item>
         <item>最早</item>
     </string-array>
+    <string-array name="poi_filter_type">
+        <item>全部景点</item>
+        <item>公园</item>
+        <item>动物园</item>
+        <item>植物园</item>
+        <item>游乐园</item>
+        <item>博物馆</item>
+        <item>水族馆</item>
+        <item>海滨浴场</item>
+        <item>文物古迹</item>
+        <item>教堂</item>
+        <item>风景区</item>
+        <item>景点</item>
+        <item>寺庙</item>
+        <item>更多</item>
+    </string-array>
+    <string-array name="poi_filter_distance">
+        <item>不限距离</item>
+        <item>1km</item>
+        <item>3km</item>
+        <item>5km</item>
+        <item>10km</item>
+        <item>30km</item>
+        <item>50km</item>
+        <item>100km</item>
+        <item>200km</item>
+        <item>300km</item>
+        <item>400km</item>
+        <item>500km</item>
+    </string-array>
+    <string-array name="poi_more_filter_scope">
+        <item>只看我关注的</item>
+        <item>只看关注的人关注的</item>
+    </string-array>
+    <string-array name="poi_more_filter_score">
+        <item>3星以上</item>
+        <item>3.5星以上</item>
+        <item>4星以上</item>
+        <item>4.5星以上</item>
+    </string-array>
 </resources>

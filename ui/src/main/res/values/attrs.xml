@@ -140,6 +140,7 @@
         <attr name="search_size" format="dimension" />
         <attr name="search_text_cursor" format="reference" />
         <attr name="search_bg" format="reference" />
+        <attr name="search_bg_tint" format="reference|color" />
     </declare-styleable>
 
     <declare-styleable name="SearchList">
@@ -160,5 +161,24 @@
         <attr name="history_padding_top" format="dimension" />
         <attr name="history_padding_right" format="dimension" />
         <attr name="history_padding_bottom" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MySpinner">
+        <attr name="spinner_text" format="string" />
+        <attr name="spinner_text_size" format="dimension" />
+        <attr name="spinner_text_color" format="reference|color" />
+        <attr name="spinner_text_checked_color" format="reference|color" />
+        <attr name="spinner_background" format="reference" />
+        <attr name="spinner_background_tint" format="reference|color" />
+        <attr name="spinner_background_checked_tint" format="reference|color" />
+        <attr name="spinner_icon" format="reference" />
+        <attr name="spinner_checked_icon" format="reference" />
+        <attr name="spinner_icon_size" format="dimension" />
+        <attr name="spinner_icon_color" format="reference|color" />
+        <attr name="spinner_icon_checked_color" format="reference|color" />
+        <attr name="spinner_padding_left" format="dimension" />
+        <attr name="spinner_padding_top" format="dimension" />
+        <attr name="spinner_padding_right" format="dimension" />
+        <attr name="spinner_padding_bottom" format="dimension" />
     </declare-styleable>
 </resources>

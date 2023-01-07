@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.domin.ShareItem;
+import com.cloudchewie.client.bean.ShareItem;
 import com.cloudchewie.ui.EntryItem;
 
 import java.util.List;

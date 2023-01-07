@@ -1,4 +1,4 @@
-package com.cloudchewie.client.util.mess;
+package com.cloudchewie.client.util.decoration;
 
 import android.content.Context;
 import android.graphics.Canvas;

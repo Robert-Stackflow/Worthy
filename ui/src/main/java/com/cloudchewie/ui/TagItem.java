@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.content.res.AppCompatResources;
 
+import com.cloudchewie.ui.util.SizeUtil;
+
 public class TagItem extends RelativeLayout {
     private TextView textView;
     private RelativeLayout mainLayout;
@@ -62,7 +64,7 @@ public class TagItem extends RelativeLayout {
     }
 
     public void setPadding(int left, int top, int right, int bottom) {
-        textView.setPadding(left, top, right, bottom);
+        textView.setPadding(SizeUtil.dp2px(getContext(), left), SizeUtil.dp2px(getContext(), top), SizeUtil.dp2px(getContext(), right), SizeUtil.dp2px(getContext(), bottom));
     }
 
     public void setTextSize(int size) {
@@ -80,6 +82,14 @@ public class TagItem extends RelativeLayout {
     @Override
     public void setBackgroundTintList(ColorStateList tintList) {
         textView.setBackgroundTintList(tintList);
+    }
+
+    public void setMinEms(int ems) {
+        textView.setMinEms(ems);
+    }
+
+    public void setMaxEms(int ems) {
+        textView.setMaxEms(ems);
     }
 
     @Override

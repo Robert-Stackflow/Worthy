@@ -20,7 +20,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.domin.Notice;
+import com.cloudchewie.client.entity.Notice;
 import com.cloudchewie.client.fragment.internal.NoticeListFragment;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.google.android.material.tabs.TabLayout;

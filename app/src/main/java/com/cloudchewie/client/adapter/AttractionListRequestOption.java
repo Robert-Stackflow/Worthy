@@ -1,7 +1,7 @@
 package com.cloudchewie.client.adapter;
 
-import com.cloudchewie.client.domin.Attraction;
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.Attraction;
+import com.cloudchewie.client.entity.User;
 
 import java.util.List;
 

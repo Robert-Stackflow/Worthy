@@ -4,7 +4,6 @@ package com.cloudchewie.client.util.webview;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
-import android.util.Log;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
@@ -39,8 +38,6 @@ public class ImageJsInterface {
 
     @android.webkit.JavascriptInterface
     public void openImage(@NonNull String img) {
-        Log.d("xuruida", "Clicked:" + img);
-        Log.d("xuruida", String.valueOf(imageUrls));
         int index = 0;
         try {
             index = imageUrls.indexOf(URLDecoder.decode(img.replace("file://", ""), "utf-8"));

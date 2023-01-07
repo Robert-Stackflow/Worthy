@@ -28,7 +28,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.User;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.fragment.global.ImageViewFragment;
 import com.cloudchewie.client.fragment.global.StateFragment;

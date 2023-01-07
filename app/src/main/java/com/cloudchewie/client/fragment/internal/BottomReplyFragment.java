@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.CommentListAdapter;
-import com.cloudchewie.client.domin.Comment;
+import com.cloudchewie.client.entity.Comment;
 import com.cloudchewie.ui.BottomSheet;
 import com.cloudchewie.ui.util.MatricsUtil;
 import com.scwang.smart.refresh.footer.ClassicsFooter;

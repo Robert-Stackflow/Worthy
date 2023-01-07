@@ -1,6 +1,6 @@
 package com.cloudchewie.client.request;
 
-import com.cloudchewie.client.domin.Post;
+import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.util.http.HttpRequestUtil;
 
 public class PostCreationRequest {

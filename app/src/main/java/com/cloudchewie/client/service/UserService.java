@@ -8,7 +8,7 @@
 package com.cloudchewie.client.service;
 
 import com.blankj.utilcode.util.ThreadUtils;
-import com.cloudchewie.client.domin.User;
+import com.cloudchewie.client.entity.User;
 import com.cloudchewie.client.request.UserAuthRequest;
 import com.cloudchewie.client.util.system.LocalStorage;
 
