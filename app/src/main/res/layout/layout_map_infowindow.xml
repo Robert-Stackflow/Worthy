@@ -21,14 +21,17 @@
             android:background="@drawable/shape_round_top_dp10"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center|start"
+            android:gravity="center"
             android:lineSpacingExtra="3dp"
             android:lineSpacingMultiplier="1.2"
+            android:maxEms="10"
+            android:minEms="10"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
+            android:textAlignment="center"
             android:textColor="@color/color_accent"
             android:textSize="13sp"
             tools:text="提示消息提示消息提示消息提示消息提示消息提示消息提示消息提示消息" />
@@ -45,9 +48,11 @@
             android:background="@drawable/shape_round_bottom_dp10"
             android:clickable="true"
             android:focusable="true"
-            android:gravity="center|start"
+            android:gravity="center"
             android:lineSpacingExtra="3dp"
             android:lineSpacingMultiplier="1.2"
+            android:maxEms="10"
+            android:minEms="10"
             android:paddingStart="5dp"
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
@@ -57,45 +62,5 @@
             android:textColor="@color/color_gray"
             android:textSize="11sp"
             tools:text="提示消息提示消息提示消息提示消息提示消息提示消息提示消息提示消息" />
-
-        <!--        <View-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="1px"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:background="@color/divider_color" />-->
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:orientation="horizontal">-->
-
-        <!--            <ImageButton-->
-        <!--                android:id="@+id/infowindow_collect"-->
-        <!--                android:layout_width="0dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:background="@drawable/shape_card_bottom_left_radius"-->
-        <!--                android:gravity="center"-->
-        <!--                android:paddingTop="5dp"-->
-        <!--                android:paddingBottom="5dp"-->
-        <!--                android:src="@drawable/ic_light_star" />-->
-
-        <!--            <View-->
-        <!--                android:id="@+id/column_line"-->
-        <!--                android:layout_width="1px"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:background="@color/divider_color" />-->
-
-        <!--            <ImageButton-->
-        <!--                android:id="@+id/infowindow_detail"-->
-        <!--                android:layout_width="0dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_weight="1"-->
-        <!--                android:background="@drawable/shape_card_bottom_right_radius"-->
-        <!--                android:gravity="center"-->
-        <!--                android:paddingTop="5dp"-->
-        <!--                android:paddingBottom="5dp"-->
-        <!--                android:src="@drawable/ic_light_map" />-->
-        <!--        </LinearLayout>-->
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

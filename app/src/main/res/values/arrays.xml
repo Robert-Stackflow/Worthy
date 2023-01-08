@@ -36,7 +36,6 @@
         <item>风景区</item>
         <item>景点</item>
         <item>寺庙</item>
-        <item>更多</item>
     </string-array>
     <string-array name="poi_filter_distance">
         <item>不限距离</item>

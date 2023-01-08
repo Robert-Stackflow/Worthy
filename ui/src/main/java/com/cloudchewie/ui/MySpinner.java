@@ -81,7 +81,7 @@ public class MySpinner extends RelativeLayout {
         return dataSource == null ? new ArrayList<>() : dataSource;
     }
 
-    public void setDataSource(@NonNull List<String> dataSource) {
+    public void setEntry(@NonNull List<String> dataSource) {
         this.dataSource = dataSource == null ? new ArrayList<>() : dataSource;
         this.currentIndex = dataSource.size() == 0 ? -1 : 0;
         setText(currentIndex == -1 ? "" : dataSource.get(currentIndex));

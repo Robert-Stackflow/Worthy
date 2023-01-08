@@ -1,4 +1,4 @@
-package com.cloudchewie.client.activity.discover;
+package com.cloudchewie.client.activity.map;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -59,7 +59,7 @@ public class SelectCityActivity extends BaseActivity implements View.OnClickList
     View topDivider;
     boolean isMoveOut;
     int index;
-    int maxHistoryCount = 15;
+    int maxHistoryCount = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,14 +243,16 @@ public class SelectCityActivity extends BaseActivity implements View.OnClickList
     void addHistory(String history) {
         List<String> histories = SharedPreferenceUtil.getStringArray(SharedPreferenceCode.CITY_HISTORY.getKey(), this);
         if (histories == null) histories = new ArrayList<>();
-        if (!histories.contains(history))
-            histories.add(0, history);
+        if (!histories.contains(history)) histories.add(0, history);
         else {
             histories.remove(history);
             histories.add(0, history);
         }
-        SharedPreferenceUtil.putStringArray(SharedPreferenceCode.CITY_HISTORY.getKey(), histories, this);
-        setHistory(histories);
+        List<String> newHistories = new ArrayList<>();
+        for (int i = 0; i < maxHistoryCount && i < histories.size(); i++)
+            newHistories.add(histories.get(i));
+        SharedPreferenceUtil.putStringArray(SharedPreferenceCode.CITY_HISTORY.getKey(), newHistories, this);
+        setHistory(newHistories);
     }
 
     public void initLocationBar() {

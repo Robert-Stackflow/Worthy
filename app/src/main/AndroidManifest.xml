@@ -66,17 +66,19 @@
             android:name=".activity.auth.SignupActivity"
             android:launchMode="singleInstance" />
         <!--地图-->
+        <activity android:name=".activity.map.SelectCityActivity" />
+        <activity android:name=".activity.map.SelectLocationActivity" />
+        <activity android:name=".activity.map.SelectAttractionActivity" />
+        <activity
+            android:name=".activity.map.LocationDetailActivity"
+            android:launchMode="singleTop" />
         <!--发现-->
         <activity
             android:name=".activity.discover.SearchActivity"
             android:launchMode="singleTop" />
         <activity android:name=".activity.discover.PostDetailActivity" />
-        <activity android:name=".activity.discover.SelectCityActivity" />
         <activity
             android:name=".activity.discover.TopicDetailActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".activity.discover.LocationDetailActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".activity.discover.AttractionDetailActivity"
@@ -85,6 +87,9 @@
         <!--创作-->
         <activity android:name=".activity.create.CreatePostActivity" />
         <activity android:name=".activity.create.ArticlePreviewActivity" />
+        <activity android:name=".activity.create.CreateAttractionActivity" />
+        <activity android:name=".activity.create.CreateTopicActivity" />
+        <activity android:name=".activity.create.DraftActivity" />
         <activity
             android:name=".activity.create.CreateArticleActivity"
             android:windowSoftInputMode="adjustPan" />

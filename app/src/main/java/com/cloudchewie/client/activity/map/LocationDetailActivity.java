@@ -1,4 +1,4 @@
-package com.cloudchewie.client.activity.discover;
+package com.cloudchewie.client.activity.map;
 
 import static com.cloudchewie.client.util.map.MapUtil.CUSTOM_FILE_NAME_DARK;
 import static com.cloudchewie.client.util.map.MapUtil.CUSTOM_FILE_NAME_TEA;
@@ -7,14 +7,16 @@ import static com.cloudchewie.client.util.map.MapUtil.LIGHT_ID;
 import static com.cloudchewie.client.util.map.MapUtil.getCustomStyleFilePath;
 
 import android.content.Intent;
-import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ZoomControls;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -31,7 +33,16 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.TextOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeOption;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.baidu.mapapi.utils.route.BaiduMapRoutePlan;
 import com.baidu.mapapi.utils.route.RouteParaOption;
 import com.cloudchewie.client.R;
@@ -46,19 +57,26 @@ import com.cloudchewie.client.util.ui.StatusBarUtil;
 import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.MyDialog;
 
-public class LocationDetailActivity extends BaseActivity implements View.OnClickListener {
-    MapView mapView;
-    BaiduMap baiduMap;
-    LocationClient locationClient;
-    LocationClientOption locationOption;
-    LatLng myLocation;
-    private ImageView mBackButton;
-    private TextView mNameView;
-    private TextView mLocationView;
-    private Attraction mAttraction;
+public class LocationDetailActivity extends BaseActivity implements SensorEventListener, View.OnClickListener, OnGetGeoCoderResultListener {
+    //Map
+    private MapView mapView;
+    private BaiduMap baiduMap;
+    private GeoCoder geoCoder;
+    private SensorManager sensorManager;
+    private LocationClient locationClient;
+    private LocationClientOption locationOption;
+    //控件
     private Button shareButton;
+    private TextView mNameView;
     private Button locateButton;
+    private ImageView mBackButton;
+    private TextView mLocationView;
     private ConstraintLayout bottomLayout;
+    //变量
+    private double lastX = 0.0;
+    private BDLocation myLocation;
+    private Attraction mAttraction;
+    private LatLng attractionLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +97,7 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
         StatusBarUtil.setStatusBarMarginTop(mBackButton, 0, StatusBarUtil.getStatusBarHeight(this), 0, 0);
         initView();
         initMap();
+        initMapStyle();
         locateLocation();
     }
 
@@ -92,6 +111,8 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
             mNameView.setText(mAttraction.getName());
             mLocationView.setText(mAttraction.getLocation());
         }
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_UI);
     }
 
     void initMap() {
@@ -101,14 +122,19 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
         myLocationConfiguration.accuracyCircleFillColor = 0x00000000;
         myLocationConfiguration.accuracyCircleStrokeColor = 0x00000000;
         baiduMap.setMyLocationConfiguration(myLocationConfiguration);
-        View child = mapView.getChildAt(1);
-        if ((child instanceof ImageView || child instanceof ZoomControls))
-            child.setVisibility(View.GONE);
+        MapUtil.hideLogo(mapView);
         baiduMap.setOnMapLoadedCallback(() -> {
-            mapView.setScaleControlPosition(new Point(100, 750));
             mapView.showScaleControl(false);
             mapView.showZoomControls(false);
         });
+        geoCoder = GeoCoder.newInstance();
+        geoCoder.setOnGetGeoCodeResultListener(this);
+        if (mAttraction != null && mAttraction.getLocation() != null && mAttraction.getName() != null) {
+            geoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(new LatLng(mAttraction.getLatitude(), mAttraction.getLongtitude())));
+        }
+    }
+
+    void initMapStyle() {
         MapCustomStyleOptions mapCustomStyleOptions = new MapCustomStyleOptions();
         mapCustomStyleOptions.localCustomStylePath(getCustomStyleFilePath(this, DarkModeUtil.isDarkMode(this) ? CUSTOM_FILE_NAME_DARK : CUSTOM_FILE_NAME_TEA));
         mapCustomStyleOptions.customStyleId(DarkModeUtil.isDarkMode(this) ? DARK_ID : LIGHT_ID);
@@ -196,7 +222,7 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
     }
 
     void jumpToBaiduMap(boolean isSupportWeb) {
-        LatLng startPoint = new LatLng(myLocation.latitude, myLocation.longitude);
+        LatLng startPoint = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
         LatLng endPoint = new LatLng(mAttraction.getLatitude(), mAttraction.getLongtitude());
         RouteParaOption paraOption = new RouteParaOption().startPoint(startPoint).endPoint(endPoint).busStrategyType(RouteParaOption.EBusStrategyType.bus_recommend_way);
         try {
@@ -212,12 +238,18 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
         if (mAttraction == null) {
             IToast.makeTextBottom(this, "获取景点位置失败,请稍后再试", Toast.LENGTH_SHORT).show();
         } else {
+            baiduMap.clear();
             MapStatus.Builder builder = new MapStatus.Builder();
-            LatLng latLng = MapRequest.getGeoCoding(mAttraction.getLocation()).getLocation().toLatLng();
+            LatLng latLng;
+            if (attractionLatLng != null) latLng = attractionLatLng;
+            else
+                latLng = MapRequest.getGeoCoding(mAttraction.getLocation()).getLocation().toLatLng();
             builder.target(latLng).zoom(18.0f);
             baiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            MarkerOptions option = new MarkerOptions().icon(MapUtil.getMarkerIcon()).position(latLng);
+            MarkerOptions option = new MarkerOptions().icon(MapUtil.getMarkerIcon(1)).position(latLng);
             baiduMap.addOverlay(option);
+            OverlayOptions textOptions = new TextOptions().text(mAttraction.getName()).bgColor(0x00000000).fontSize(24).fontColor(getResources().getColor(R.color.color_accent, null)).position(latLng);
+            baiduMap.addOverlay(textOptions);
         }
     }
 
@@ -263,11 +295,35 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
         super.onDestroy();
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        double x = sensorEvent.values[SensorManager.DATA_X];
+        if (myLocation != null && baiduMap != null) if (Math.abs(x - lastX) > 1.0)
+            baiduMap.setMyLocationData(new MyLocationData.Builder().accuracy(myLocation.getRadius()).direction((int) x).latitude(myLocation.getLatitude()).longitude(myLocation.getLongitude()).build());
+        lastX = x;
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) {
+        if (null != geoCodeResult && null != geoCodeResult.getLocation())
+            if (geoCodeResult != null && geoCodeResult.error == SearchResult.ERRORNO.NO_ERROR)
+                attractionLatLng = geoCodeResult.getLocation();
+    }
+
+    @Override
+    public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) {
+        if (null != reverseGeoCodeResult && reverseGeoCodeResult.error == SearchResult.ERRORNO.NO_ERROR && null != reverseGeoCodeResult.getLocation() && null != reverseGeoCodeResult.getAddressDetail() && null != reverseGeoCodeResult.getAddressDetail().city) {
+            geoCoder.geocode(new GeoCodeOption().address(mAttraction.getLocation()).city(reverseGeoCodeResult.getAddressDetail().city));
+        }
+    }
+
     private enum onReceiveLocationOption {
-        NONE,
-        JUMPTO,
-        JUMPTOBAIDUMAP,
-        JUMPTOBAIDUMAP_WEB,
+        NONE, JUMPTO, JUMPTOBAIDUMAP, JUMPTOBAIDUMAP_WEB,
     }
 
     public class MyLocationListener extends BDAbstractLocationListener {
@@ -288,7 +344,7 @@ public class LocationDetailActivity extends BaseActivity implements View.OnClick
             if (errorCode == BDLocation.TYPE_NO_PERMISSION_LOCATION_FAIL)
                 IToast.makeTextTop(LocationDetailActivity.this, "定位失败，请授予定位权限!", Toast.LENGTH_SHORT).show();
             else {
-                myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                myLocation = location;
                 if (option == onReceiveLocationOption.JUMPTO) {
                     MyLocationData locData = new MyLocationData.Builder().accuracy(location.getRadius()).direction(location.getDirection()).latitude(location.getLatitude()).longitude(location.getLongitude()).build();
                     baiduMap.setMyLocationData(locData);

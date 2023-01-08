@@ -1,11 +1,14 @@
 package com.cloudchewie.client.util.map;
 
 import android.content.Context;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapView;
 import com.cloudchewie.client.R;
 
 import java.io.File;
@@ -71,7 +74,22 @@ public class MapUtil {
         return flag;
     }
 
-    public static BitmapDescriptor getMarkerIcon() {
-        return BitmapDescriptorFactory.fromResource(R.drawable.ic_poi_default);
+    public static BitmapDescriptor getMarkerIcon(int size) {
+        switch (size) {
+            case 0:
+                return BitmapDescriptorFactory.fromResource(R.drawable.img_poi_default_24);
+            case 1:
+                return BitmapDescriptorFactory.fromResource(R.drawable.img_poi_default_40);
+            case 2:
+                return BitmapDescriptorFactory.fromResource(R.drawable.img_poi_default_80);
+            default:
+                return BitmapDescriptorFactory.fromResource(R.drawable.img_poi_default_24);
+        }
+    }
+
+    public static void hideLogo(MapView mapView) {
+        if (mapView == null) return;
+        View child = mapView.getChildAt(1);
+        if (child instanceof ImageView) child.setVisibility(View.GONE);
     }
 }

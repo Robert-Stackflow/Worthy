@@ -31,7 +31,7 @@ public class SpinnerAdapter extends RecyclerView.Adapter<SpinnerAdapter.MyViewHo
         return new MyViewHolder(view);
     }
 
-    public SpinnerAdapter setListener(onItemClickedListener listener) {
+    public SpinnerAdapter setOnItemClickListener(onItemClickedListener listener) {
         this.listener = listener;
         return this;
     }
