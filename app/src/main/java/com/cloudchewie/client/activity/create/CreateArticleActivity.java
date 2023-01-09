@@ -28,7 +28,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.ArticleDetailActivity;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.entity.Post;
+import com.cloudchewie.client.entity.Article;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.cloudchewie.client.util.image.BitmapUtil;
 import com.cloudchewie.client.util.ui.KeyBoardUtil;
@@ -44,6 +44,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.yalantis.ucrop.UCropActivity;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ import java.util.List;
 
 
 public class CreateArticleActivity extends BaseActivity implements View.OnClickListener {
+    Article article;
     RefreshLayout swipeRefreshLayout;
     EditText title;
     EditText content;
@@ -123,10 +125,8 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 setPublishEnabled(false);
                 return;
             }
-            if (TextUtils.isEmpty(text))
-                setPublishEnabled(false);
-            else
-                setPublishEnabled(!TextUtils.isEmpty(Html.fromHtml(text)));
+            if (TextUtils.isEmpty(text)) setPublishEnabled(false);
+            else setPublishEnabled(!TextUtils.isEmpty(Html.fromHtml(text)));
         });
         title.addTextChangedListener(new TextWatcher() {
             @Override
@@ -148,8 +148,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                     if (TextUtils.isEmpty(Html.fromHtml(html))) {
                         setPublishEnabled(false);
                         return;
-                    } else
-                        setPublishEnabled(true);
+                    } else setPublishEnabled(true);
                 }
                 setPublishEnabled(!TextUtils.isEmpty(s.toString()));
             }
@@ -229,8 +228,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initImagePopupWindow() {
-        @SuppressLint("InflateParams")
-        View view = LayoutInflater.from(CreateArticleActivity.this).inflate(R.layout.layout_post_image_operation, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(CreateArticleActivity.this).inflate(R.layout.layout_post_image_operation, null);
         view.findViewById(R.id.linear_cancle).setOnClickListener(v -> popupWindow.dismiss());
         view.findViewById(R.id.linear_editor).setOnClickListener(v -> {
             if (currentImageUrl.endsWith(".gif")) {
@@ -247,8 +245,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         });
         view.findViewById(R.id.linear_delete_pic).setOnClickListener(v -> {
             richEditor.setHtml(richEditor.getHtml().replace(currentImageHtml, ""));
-            if (RichEditorUtil.isEmpty(richEditor.getHtml()))
-                richEditor.setHtml("");
+            if (RichEditorUtil.isEmpty(richEditor.getHtml())) richEditor.setHtml("");
             currentImageUrl = "";
             currentImageHtml = "";
             popupWindow.dismiss();
@@ -259,12 +256,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             currentImageUrl = "";
             currentImageHtml = "";
         });
-        popupWindow = new CommonPopupWindow.Builder(CreateArticleActivity.this)
-                .setView(view)
-                .setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                .setOutsideTouchable(true)
-                .setAnimationStyle(R.style.UpDownAnimation)
-                .create();
+        popupWindow = new CommonPopupWindow.Builder(CreateArticleActivity.this).setView(view).setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).setOutsideTouchable(true).setAnimationStyle(R.style.UpDownAnimation).create();
         popupWindow.setOnDismissListener(() -> richEditor.setInputEnabled(true));
     }
 
@@ -301,13 +293,13 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         });
         previewButton.setOnClickListener(v -> {
             Intent intent = new Intent(CreateArticleActivity.this, ArticlePreviewActivity.class);
-            Post post = DomainUtil.getPost(this);
-            post.setThumbupCount(0);
-            post.setCollectionCount(0);
-            post.setCommentCount(0);
-            post.setContent(richEditor.getHtml());
-            post.setTitle(title.getText().toString());
-            intent.putExtra("post", post);
+            Article article = DomainUtil.getArticle(this);
+            article.setThumbupCount(0);
+            article.setCollectionCount(0);
+            article.setCommentCount(0);
+            article.setContent(richEditor.getHtml());
+            article.setTitle(title.getText().toString());
+            intent.putExtra("article", article);
             startActivity(intent);
         });
         publishButton.setOnClickListener(v -> {
@@ -316,9 +308,9 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             else {
                 IToast.makeTextBottom(this, "文章发布成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CreateArticleActivity.this, ArticleDetailActivity.class);
-                Post post = DomainUtil.getPost(this);
-                post.setContent(richEditor.getHtml());
-                intent.putExtra("post", post);
+                Article article = DomainUtil.getArticle(this);
+                article.setContent(richEditor.getHtml());
+                intent.putExtra("article", article);
                 startActivity(intent);
             }
         });
@@ -396,6 +388,15 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 }
             }
         });
+        Intent intent = getIntent();
+        if (intent != null) {
+            Serializable object = intent.getSerializableExtra("article");
+            if (object instanceof Article) {
+                article = (Article) object;
+                title.setText(article.getTitle());
+                richEditor.setHtml(article.getContent());
+            }
+        }
     }
 
     @Override
@@ -460,8 +461,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
                 againEdit();
                 if (!isTextBackGround)
                     richEditor.setTextBackgroundColor(getColor(R.color.tag_background));
-                else
-                    richEditor.setTextBackgroundColor(getColor(R.color.content_background));
+                else richEditor.setTextBackgroundColor(getColor(R.color.content_background));
                 isTextBackGround = !isTextBackGround;
                 changeColor(view.getId(), isTextBackGround, true);
                 break;

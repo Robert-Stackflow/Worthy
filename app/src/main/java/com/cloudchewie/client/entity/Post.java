@@ -28,7 +28,6 @@ public class Post implements Serializable {
     List<Topic> topics;
     int commentCount;
     int thumbupCount;
-    String title;
     int collectionCount;
     POST_TYPE type;
 
@@ -57,14 +56,6 @@ public class Post implements Serializable {
         this.attraction = attraction;
         this.topics = topics;
         this.imageUrls = ImageUrlUtil.getUrls(15);
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public POST_TYPE getType() {

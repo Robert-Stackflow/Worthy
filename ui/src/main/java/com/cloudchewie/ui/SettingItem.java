@@ -28,6 +28,7 @@ public class SettingItem extends ConstraintLayout {
     private ImageView right_icon;
     private TextView title_view;
     private TextView tip_view;
+    private View divider;
     private ConstraintLayout mainLayout;
 
     public SettingItem(@NonNull Context context) {
@@ -57,6 +58,7 @@ public class SettingItem extends ConstraintLayout {
         right_icon = findViewById(R.id.setting_item_right_icon);
         title_view = findViewById(R.id.setting_item_title);
         tip_view = findViewById(R.id.setting_item_tip);
+        divider = findViewById(R.id.setting_item_divider);
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.SettingItem);
         if (attr != null) {
             int titleBarBackground = attr.getResourceId(R.styleable.SettingItem_setting_item_background, Color.TRANSPARENT);
@@ -111,11 +113,13 @@ public class SettingItem extends ConstraintLayout {
     void setRadiusEnbale(boolean top, boolean bottom) {
         if (!top && !bottom)
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_rect));
-        else if (top && bottom)
+        else if (top && bottom) {
+            divider.setVisibility(GONE);
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_dp10));
-        else if (!top && bottom)
+        } else if (!top && bottom) {
+            divider.setVisibility(GONE);
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_bottom_dp10));
-        else if (top && !bottom)
+        } else if (top && !bottom)
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_top_dp10));
     }
 
@@ -128,13 +132,17 @@ public class SettingItem extends ConstraintLayout {
         right_icon.setBackgroundColor(backgroundColor);
     }
 
-    private void setTitle(String title, int titleColor) {
+    public void setTitle(String title, int titleColor) {
         title_view.setText(title);
         title_view.setTextColor(titleColor);
     }
 
-    private void setTip(String tip, int tipColor) {
+    public void setTip(String tip, int tipColor) {
         tip_view.setText(tip);
         tip_view.setTextColor(tipColor);
+    }
+
+    public void setTipText(String tip) {
+        tip_view.setText(tip);
     }
 }

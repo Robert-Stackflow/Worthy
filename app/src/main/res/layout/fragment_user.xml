@@ -104,7 +104,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_user_entry_layout"
+                android:id="@+id/fragment_user_entry_profile_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -114,57 +114,337 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fragment_user_avatar_layout">
 
-                <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/user_entry_creation"
+                <TextView
+                    android:id="@+id/fragment_user_entry_profile_label"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:entry_item_icon="@drawable/ic_light_damp"
-                    app:entry_item_icon_scale_type="centerCrop"
-                    app:entry_item_icon_size="40dp"
-                    app:entry_item_text="我的创作"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/user_entry_following"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp0"
+                    android:paddingBottom="@dimen/dp10"
+                    android:text="我的档案"
+                    android:textColor="@color/color_accent"
+                    android:textSize="@dimen/sp14"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/user_entry_following"
+                    android:id="@+id/fragment_user_entry_profile_fans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_account"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="我的粉丝"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_profile_following"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_profile_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_profile_following"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:entry_item_icon="@drawable/ic_light_heart"
-                    app:entry_item_icon_scale_type="centerCrop"
+                    app:entry_item_icon_scale_type="fitCenter"
                     app:entry_item_icon_size="40dp"
                     app:entry_item_text="我的关注"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/user_entry_collection"
-                    app:layout_constraintStart_toEndOf="@id/user_entry_creation"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_profile_collection"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_profile_fans"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_profile_label" />
 
                 <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/user_entry_collection"
+                    android:id="@+id/fragment_user_entry_profile_collection"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:entry_item_icon="@drawable/ic_light_star"
-                    app:entry_item_icon_scale_type="centerCrop"
+                    app:entry_item_icon_scale_type="fitCenter"
                     app:entry_item_icon_size="40dp"
                     app:entry_item_text="我的收藏"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/user_entry_footprint"
-                    app:layout_constraintStart_toEndOf="@id/user_entry_following"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_profile_footprint"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_profile_following"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_profile_label" />
 
                 <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/user_entry_footprint"
+                    android:id="@+id/fragment_user_entry_profile_footprint"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     app:entry_item_icon="@drawable/ic_light_clock"
-                    app:entry_item_icon_scale_type="centerCrop"
+                    app:entry_item_icon_scale_type="fitCenter"
                     app:entry_item_icon_size="40dp"
                     app:entry_item_text="我的足迹"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/user_entry_collection"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_profile_collection"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_profile_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_user_entry_message_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_round_dp10"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_profile_layout">
+
+                <TextView
+                    android:id="@+id/fragment_user_entry_message_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp0"
+                    android:paddingBottom="@dimen/dp10"
+                    android:text="我的通知"
+                    android:textColor="@color/color_accent"
+                    android:textSize="@dimen/sp14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_message_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_comment"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="评论回复"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_message_thumbup"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_message_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_message_thumbup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_heart"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="点赞收藏"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_message_new_fans"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_message_comment"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_message_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_message_new_fans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_visible"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="新的关注"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_message_system"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_message_thumbup"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_message_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_message_system"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_board"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="系统通知"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_message_new_fans"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_message_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_user_entry_creation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_round_dp10"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_message_layout">
+
+                <TextView
+                    android:id="@+id/fragment_user_entry_creation_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp0"
+                    android:paddingBottom="@dimen/dp10"
+                    android:text="创作平台"
+                    android:textColor="@color/color_accent"
+                    android:textSize="@dimen/sp14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_creation_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_damp"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="创作中心"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_creation_draft"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_creation_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_creation_draft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_integral"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="草稿箱"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_creation_manager"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_creation_center"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_creation_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_creation_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_operation"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="作品管理"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_creation_host"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_creation_draft"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_creation_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_creation_host"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_service"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="主持管理"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_creation_manager"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_creation_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_user_entry_application_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_round_dp10"
+                android:paddingTop="10dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_creation_layout">
+
+                <TextView
+                    android:id="@+id/fragment_user_entry_application_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dp15"
+                    android:paddingEnd="@dimen/dp0"
+                    android:paddingBottom="@dimen/dp10"
+                    android:text="我的应用"
+                    android:textColor="@color/color_accent"
+                    android:textSize="@dimen/sp14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_application_activity_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_smile"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="活动中心"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_application_help_center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_application_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_application_help_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_help"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="帮助中心"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_application_feedback"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_application_activity_center"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_application_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_application_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_feedback"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="意见反馈"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fragment_user_entry_application_host"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_application_help_center"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_application_label" />
+
+                <com.cloudchewie.ui.EntryItem
+                    android:id="@+id/fragment_user_entry_application_host"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:entry_item_icon="@drawable/ic_light_service"
+                    app:entry_item_icon_scale_type="fitCenter"
+                    app:entry_item_icon_size="40dp"
+                    app:entry_item_text="主持管理"
+                    app:entry_item_text_color="@color/color_accent"
+                    app:entry_item_text_size="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/fragment_user_entry_application_feedback"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_user_entry_application_label" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>

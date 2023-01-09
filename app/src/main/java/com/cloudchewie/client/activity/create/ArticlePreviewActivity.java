@@ -26,7 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
-import com.cloudchewie.client.entity.Post;
+import com.cloudchewie.client.entity.Article;
 import com.cloudchewie.client.fragment.global.StateFragment;
 import com.cloudchewie.client.util.listener.AppBarStateChangeListener;
 import com.cloudchewie.client.util.ui.DarkModeUtil;
@@ -49,7 +49,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ArticlePreviewActivity extends BaseActivity {
-    private Post mPost;
+    private Article mArticle;
     private List<String> mTitles;
     private List<Fragment> mFragments;
     private String inputString;
@@ -130,28 +130,28 @@ public class ArticlePreviewActivity extends BaseActivity {
     @SuppressLint("SetTextI18n")
     private void initView() {
         Intent intent = this.getIntent();
-        mPost = (Post) intent.getSerializableExtra("post");
+        mArticle = (Article) intent.getSerializableExtra("article");
         mAppBarLayout.setExpanded(intent.getBooleanExtra("jumptocomment", true));
-        mUserNameView.setText(mPost.getUser().getUsername());
-        mTimeView.setText("文章发表于" + beautifyTime(mPost.getDate()));
-        mLocationView.setText(mPost.getAttraction().getName());
-        mTopicView.setText(mPost.getTopics().get(0).getName());
-        mTitleView.setText(mPost.getTitle());
-        mSmallTitleView.setText(mPost.getTitle());
-        mCollectionCountView.setText(String.valueOf(mPost.getCollectionCount()));
-        mCommentsCountView.setText(String.valueOf(mPost.getCommentCount()));
-        mThumbupCountView.setText(String.valueOf(mPost.getThumbupCount()));
+        mUserNameView.setText(mArticle.getUser().getUsername());
+        mTimeView.setText("文章发表于" + beautifyTime(mArticle.getDate()));
+        mLocationView.setText(mArticle.getAttraction().getName());
+        mTopicView.setText(mArticle.getTopics().get(0).getName());
+        mTitleView.setText(mArticle.getTitle());
+        mSmallTitleView.setText(mArticle.getTitle());
+        mCollectionCountView.setText(String.valueOf(mArticle.getCollectionCount()));
+        mCommentsCountView.setText(String.valueOf(mArticle.getCommentCount()));
+        mThumbupCountView.setText(String.valueOf(mArticle.getThumbupCount()));
         mBackButton.setOnClickListener(v -> finish());
         mThumbupCountView.setOnClickListener(v -> {
             mThumbupCountView.toggle();
-            mPost.setThumbupCount(mPost.getThumbupCount() + (mThumbupCountView.isChecked() ? 1 : -1));
-            mThumbupCountView.setText(String.valueOf(mPost.getThumbupCount()));
+            mArticle.setThumbupCount(mArticle.getThumbupCount() + (mThumbupCountView.isChecked() ? 1 : -1));
+            mThumbupCountView.setText(String.valueOf(mArticle.getThumbupCount()));
         });
         mCommentsCountView.setOnClickListener(v -> mAppBarLayout.setExpanded(false));
         mCollectionCountView.setOnClickListener(v -> {
             mCollectionCountView.toggle();
-            mPost.setCollectionCount(mPost.getCollectionCount() + (mCollectionCountView.isChecked() ? 1 : -1));
-            mCollectionCountView.setText(String.valueOf(mPost.getCollectionCount()));
+            mArticle.setCollectionCount(mArticle.getCollectionCount() + (mCollectionCountView.isChecked() ? 1 : -1));
+            mCollectionCountView.setText(String.valueOf(mArticle.getCollectionCount()));
         });
         mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
@@ -165,7 +165,7 @@ public class ArticlePreviewActivity extends BaseActivity {
                 }
             }
         });
-        Glide.with(this).load(mPost.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
+        Glide.with(this).load(mArticle.getUser().getAvatarUrl()).apply(RequestOptions.errorOf(R.drawable.ic_state_image_load_fail).placeholder(R.drawable.ic_state_background)).into(mAvatarView);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -190,13 +190,13 @@ public class ArticlePreviewActivity extends BaseActivity {
                     "<style>img{margin-top:0.4em;margin-bottom:0.4em}</style>" +
                     "<style>ul{ padding-left: 1em;margin-top:0em}</style>" +
                     "<style>ol{ padding-left: 1.2em;margin-top:0em}</style>" +
-                    "</head>" + mPost.getContent();
+                    "</head>" + mArticle.getContent();
         else
             data = "</Div><head><style>body{font-size:16px;line-height:1.5;color:#000000;background-color:#FFFFFF;}</style>" +
                     "<style>img{margin-top:0.4em;margin-bottom:0.4em}</style>" +
                     "<style>ul{ padding-left: 1em;margin-top:0em}</style>" +
                     "<style>ol{ padding-left: 1.2em;margin-top:0em}</style>" +
-                    "</head>" + mPost.getContent();
+                    "</head>" + mArticle.getContent();
         ArrayList<String> arrayList = RichEditorUtil.getImageUrls(data);
         if (arrayList.size() > 0) {
             for (int i = 0; i < arrayList.size(); i++) {
@@ -212,7 +212,7 @@ public class ArticlePreviewActivity extends BaseActivity {
     private void initViewPager() {
         mFragments = new ArrayList<>();
         mTitles = Arrays.asList(getResources().getStringArray(R.array.post_detail_comment_tab_titles));
-        mTitles.set(mTitles.size() - 1, mTitles.get(mTitles.size() - 1) + "(" + mPost.getCommentCount() + ")");
+        mTitles.set(mTitles.size() - 1, mTitles.get(mTitles.size() - 1) + "(" + mArticle.getCommentCount() + ")");
         mFragments.add(new StateFragment());
         mAdapter = new ArticlePreviewActivity.ArticlePreviewFragmentAdapter(getSupportFragmentManager(), getLifecycle(), mFragments);
         mViewPager.setAdapter(mAdapter);

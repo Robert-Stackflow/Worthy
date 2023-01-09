@@ -626,6 +626,7 @@ public class MapFragment extends Fragment implements SensorEventListener, View.O
         @SuppressLint("InflateParams") View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_map_infowindow, null);
         ((TextView) view.findViewById(R.id.infowindow_title)).setText(poiInfo.getName());
         ((TextView) view.findViewById(R.id.infowindow_address)).setText(poiInfo.getAddress());
+        view.setClickable(true);
         return new InfoWindow(view, poiInfo.getLocation(), -150);
     }
 
@@ -818,9 +819,7 @@ public class MapFragment extends Fragment implements SensorEventListener, View.O
 
     @Override
     public void onMapPoiClick(MapPoi mapPoi) {
-        KeyBoardUtil.hideKeyBoard(getActivity());
-        hideSuggestLayout();
-        hideFilterLayout();
+        IToast.makeTextBottom(getContext(), mapPoi.getName(), Toast.LENGTH_SHORT);
     }
 
     @Override

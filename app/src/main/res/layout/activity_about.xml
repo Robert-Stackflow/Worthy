@@ -82,30 +82,6 @@
                     app:setting_item_top_radius_enable="true" />
 
                 <com.cloudchewie.ui.SettingItem
-                    android:id="@+id/entry_privacy_policy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/entry_update_history"
-                    app:setting_item_left_icon="@drawable/ic_light_security"
-                    app:setting_item_title="@string/entry_privacy_policy" />
-
-                <com.cloudchewie.ui.SettingItem
-                    android:id="@+id/entry_service_terms"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/entry_privacy_policy"
-                    app:setting_item_left_icon="@drawable/ic_light_service"
-                    app:setting_item_title="@string/entry_service_terms" />
-
-                <com.cloudchewie.ui.SettingItem
                     android:id="@+id/entry_opensource"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -113,7 +89,7 @@
                     android:focusable="true"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/entry_service_terms"
+                    app:layout_constraintTop_toBottomOf="@id/entry_update_history"
                     app:setting_item_left_icon="@drawable/ic_light_opensource"
                     app:setting_item_title="@string/entry_opensource" />
 

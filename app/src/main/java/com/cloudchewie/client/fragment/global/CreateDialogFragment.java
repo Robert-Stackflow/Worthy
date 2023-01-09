@@ -20,7 +20,10 @@ import androidx.fragment.app.DialogFragment;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.create.CreateArticleActivity;
+import com.cloudchewie.client.activity.create.CreateAttractionActivity;
 import com.cloudchewie.client.activity.create.CreatePostActivity;
+import com.cloudchewie.client.activity.create.CreateTopicActivity;
+import com.cloudchewie.client.activity.create.DraftActivity;
 
 public class CreateDialogFragment extends DialogFragment {
     View mainView;
@@ -71,6 +74,21 @@ public class CreateDialogFragment extends DialogFragment {
         article.setOnClickListener(view -> {
             dismiss();
             Intent intent = new Intent(getContext(), CreateArticleActivity.class);
+            startActivity(intent);
+        });
+        attraction.setOnClickListener(view -> {
+            dismiss();
+            Intent intent = new Intent(getContext(), CreateAttractionActivity.class);
+            startActivity(intent);
+        });
+        topic.setOnClickListener(view -> {
+            dismiss();
+            Intent intent = new Intent(getContext(), CreateTopicActivity.class);
+            startActivity(intent);
+        });
+        draft.setOnClickListener(view -> {
+            dismiss();
+            Intent intent = new Intent(getContext(), DraftActivity.class);
             startActivity(intent);
         });
         close.setOnClickListener(v -> dismiss());

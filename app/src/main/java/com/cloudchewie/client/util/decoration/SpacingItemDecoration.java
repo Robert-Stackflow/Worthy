@@ -8,13 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.util.enumeration.Direction;
+import com.cloudchewie.client.util.ui.SizeUtil;
 
-public class LinearItemDecoration extends RecyclerView.ItemDecoration {
+public class SpacingItemDecoration extends RecyclerView.ItemDecoration {
     private Direction direction;
     private int spacing;
 
-    public LinearItemDecoration(Context context, int spacing, Direction direction) {
-        this.spacing = spacing;
+    public SpacingItemDecoration(Context context, int spacing, Direction direction) {
+        this.spacing = SizeUtil.dp2px(context, spacing);
         this.direction = direction;
     }
 

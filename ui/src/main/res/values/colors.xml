@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--主要颜色-->
-    <color name="background">#F5F5F5</color>
+    <color name="background">#FAFAFA</color>
     <color name="color_accent">#000000</color>
     <color name="color_icon">#191919</color>
+    <color name="color_hint">#9E9E9E</color>
     <color name="color_icon_pressed">#88191919</color>
     <color name="color_icon_light">#FFFFFF</color>
     <color name="color_icon_pressed_light">#88FFFFFF</color>
@@ -27,19 +28,19 @@
     <color name="content_pressed_background">#E5E5E5</color>
     <color name="tag_background">#EFF1F4</color>
     <color name="button_background_gray">#F1F1F1</color>
-    <color name="titlebar_background">#F6F6F6</color>
+    <color name="titlebar_background">@color/background</color>
     <color name="color_divider">#E6E6E6</color>
     <color name="reply_background">#F6F6F6</color>
     <color name="reply_pressed_background">#AAF6F6F6</color>
     <!--字体颜色-->
     <color name="text_color_dark">#000000</color>
     <color name="text_color_light">#FFFFFF</color>
-    <color name="text_color_red">#E81111</color>
+    <color name="text_color_red">@color/color_red</color>
     <color name="text_color_white">#FFFFFF</color>
     <color name="text_color_black">#000000</color>
     <color name="text_color_entry">#444444</color>
     <!--显式颜色-->
-    <color name="color_red">#FF6370</color>
+    <color name="color_red">#FF6C93</color>
     <color name="color_gray">#999999</color>
     <color name="color_light_gray">#CCCCCC</color>
     <color name="color_blue">#2E77E5</color>

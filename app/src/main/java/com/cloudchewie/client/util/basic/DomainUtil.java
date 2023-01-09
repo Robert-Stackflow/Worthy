@@ -3,12 +3,16 @@ package com.cloudchewie.client.util.basic;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.cloudchewie.client.entity.Article;
 import com.cloudchewie.client.entity.Attraction;
 import com.cloudchewie.client.entity.Chatter;
 import com.cloudchewie.client.entity.Comment;
+import com.cloudchewie.client.entity.Draft;
 import com.cloudchewie.client.entity.Message;
 import com.cloudchewie.client.entity.Notice;
 import com.cloudchewie.client.entity.Post;
+import com.cloudchewie.client.entity.RequestAttraction;
+import com.cloudchewie.client.entity.RequestTopic;
 import com.cloudchewie.client.entity.Topic;
 import com.cloudchewie.client.entity.User;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
@@ -247,6 +251,11 @@ public class DomainUtil {
         return new Post(getUser(context), getDate(), getContent(), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getAttraction(context), getTopic(context));
     }
 
+    public static Article getArticle(Context context) {
+        List<String> strings = getTagList(context);
+        return new Article(getUser(context), getDate(), strings.size() > 0 ? strings.get(0) : "你好", getContent(), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), ((int) (Math.random() * 1000)), getAttraction(context), getTopic(context));
+    }
+
     public static List<Post> getPostList(Context context) {
         List<Post> postList = new ArrayList<>();
         int count = ((int) (Math.random() * 1000)) % 15 + 3;
@@ -290,6 +299,30 @@ public class DomainUtil {
         int count = ((int) (Math.random() * 1000)) % 15 + 3;
         while (--count > 0)
             noticeList.add(new Notice(getUser(context), getDate(), noticeType, getPost(context), getComment(context, 3)));
+        return noticeList;
+    }
+
+    public static List<Draft> getDraftList(Context context, Draft.DRAFT_TYPE draftType) {
+        List<Draft> noticeList = new ArrayList<>();
+        int count = ((int) (Math.random() * 1000)) % 15 + 3;
+        switch (draftType) {
+            case POST:
+                while (--count > 0)
+                    noticeList.add(new Draft(getPost(context), null, getDate(), getDate(), draftType));
+                break;
+            case ARTICLE:
+                while (--count > 0)
+                    noticeList.add(new Draft(getArticle(context), null, getDate(), getDate(), draftType));
+                break;
+            case TOPIC:
+                while (--count > 0)
+                    noticeList.add(new Draft(new RequestTopic(getTopic(context), getContent(), ImageUrlUtil.getUrls(5)), null, getDate(), getDate(), draftType));
+                break;
+            case ATTRACTION:
+                while (--count > 0)
+                    noticeList.add(new Draft(new RequestAttraction(getAttraction(context), getContent(), ImageUrlUtil.getUrls(5)), null, getDate(), getDate(), draftType));
+                break;
+        }
         return noticeList;
     }
 }

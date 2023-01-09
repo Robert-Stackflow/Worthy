@@ -65,7 +65,7 @@ public abstract class NineGridImageViewAdapter<T> {
 //                break;
 //        }
         if (imageView == null)
-            imageView = new GridImageView(context, radius);
+            imageView = new GridImageView(context);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         return imageView;
     }

@@ -1,10 +1,3 @@
-/*
- * Project Name: Worthy
- * Author: Ruida
- * Last Modified: 2022/12/19 14:44:18
- * Copyright(c) 2022 Ruida https://cloudchewie.com
- */
-
 package com.cloudchewie.client.fragment.internal;
 
 import android.annotation.SuppressLint;
@@ -21,35 +14,37 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.adapter.NoticeListAdapter;
-import com.cloudchewie.client.entity.Notice;
+import com.cloudchewie.client.adapter.DraftListAdapter;
+import com.cloudchewie.client.entity.Draft;
 import com.cloudchewie.client.fragment.global.BaseFragment;
 import com.cloudchewie.client.util.basic.DomainUtil;
+import com.cloudchewie.client.util.decoration.SpacingItemDecoration;
+import com.cloudchewie.client.util.enumeration.Direction;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoticeListFragment extends BaseFragment implements View.OnClickListener {
+public class DraftListFragment extends BaseFragment implements View.OnClickListener {
     View mainView;
-    Notice.NOTICE_TYPE type;
-    List<Notice> notices;
-    NoticeListAdapter noticeListAdapter;
-    RecyclerView noticelistRecyclerView;
+    Draft.DRAFT_TYPE type;
+    List<Draft> drafts;
+    DraftListAdapter draftListAdapter;
+    RecyclerView draftlistRecyclerView;
     RefreshLayout swipeRefreshLayout;
     ClassicsHeader header;
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
-            notices.addAll((List<Notice>) msg.obj);
-            noticeListAdapter.notifyItemInserted(notices.size());
+            drafts.addAll((List<Draft>) msg.obj);
+            draftListAdapter.notifyItemInserted(drafts.size());
         }
     };
     Runnable getRefreshDatas = () -> {
         Message message = handler.obtainMessage();
-        message.obj = DomainUtil.getNoticeList(getContext(), type);
+        message.obj = DomainUtil.getDraftList(getContext(), type);
         handler.sendMessage(message);
         swipeRefreshLayout.finishRefresh();
     };
@@ -57,30 +52,31 @@ public class NoticeListFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        type = (Notice.NOTICE_TYPE) getArguments().getSerializable("type");
+        type = (Draft.DRAFT_TYPE) getArguments().getSerializable("type");
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mainView = View.inflate(getContext(), R.layout.fragment_notice_list, null);
+        mainView = View.inflate(getContext(), R.layout.fragment_draft_list, null);
         initRecyclerView();
         initSwipeRefresh();
         return mainView;
     }
 
     void initRecyclerView() {
-        notices = new ArrayList<>();
-        noticelistRecyclerView = mainView.findViewById(R.id.fragment_notice_list_recyclerview);
-        notices.addAll(DomainUtil.getNoticeList(getContext(), type));
-        noticeListAdapter = new NoticeListAdapter(getActivity(), notices, type);
-        noticelistRecyclerView.setAdapter(noticeListAdapter);
-        noticelistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        drafts = new ArrayList<>();
+        draftlistRecyclerView = mainView.findViewById(R.id.fragment_draft_list_recyclerview);
+        drafts.addAll(DomainUtil.getDraftList(getContext(), type));
+        draftListAdapter = new DraftListAdapter(getActivity(), drafts, type);
+        draftlistRecyclerView.setAdapter(draftListAdapter);
+        draftlistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        draftlistRecyclerView.addItemDecoration(new SpacingItemDecoration(getContext(), 10, Direction.BOTTOM));
     }
 
     void initSwipeRefresh() {
-        swipeRefreshLayout = mainView.findViewById(R.id.fragment_notice_list_swipe_refresh);
-        header = mainView.findViewById(R.id.fragment_notice_list_swipe_refresh_header);
+        swipeRefreshLayout = mainView.findViewById(R.id.fragment_draft_list_swipe_refresh);
+        header = mainView.findViewById(R.id.fragment_draft_list_swipe_refresh_header);
         swipeRefreshLayout.setRefreshHeader(header);
         swipeRefreshLayout.setEnableLoadMore(false);
         swipeRefreshLayout.setEnableOverScrollDrag(true);

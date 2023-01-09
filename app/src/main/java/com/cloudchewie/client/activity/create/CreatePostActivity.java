@@ -24,6 +24,7 @@ import com.blankj.utilcode.util.VibrateUtils;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
+import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.image.NineGridUtil;
@@ -38,10 +39,12 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.yalantis.ucrop.UCropActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreatePostActivity extends BaseActivity {
+    Post post;
     RefreshLayout swipeRefreshLayout;
     EditText content;
     TextView wordCount;
@@ -165,6 +168,14 @@ public class CreatePostActivity extends BaseActivity {
             VibrateUtils.vibrate(50);
             return false;
         });
+        Intent intent = getIntent();
+        if (intent != null) {
+            Serializable object = intent.getSerializableExtra("post");
+            if (object instanceof Post) {
+                post = (Post) object;
+                content.setText(post.getContent());
+            }
+        }
     }
 
     @Override

@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Article {
+public class Article implements Serializable {
     //TODO 无效,引用为userId
     User user;
     Date date;
@@ -27,9 +28,10 @@ public class Article {
     public Article() {
     }
 
-    public Article(User user, Date date, String content, int commentCount, int thumbupCount, int collectionCount, Attraction attraction, Topic topic) {
+    public Article(User user, Date date, String title, String content, int commentCount, int thumbupCount, int collectionCount, Attraction attraction, Topic topic) {
         this.user = user;
         this.date = date;
+        this.title = title;
         this.content = content;
         this.commentCount = commentCount;
         this.thumbupCount = thumbupCount;

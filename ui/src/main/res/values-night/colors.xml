@@ -4,6 +4,7 @@
     <color name="background">#000000</color>
     <color name="color_accent">#FFFFFF</color>
     <color name="color_icon">#999999</color>
+    <color name="color_hint">#939393</color>
     <color name="color_icon_pressed">#88999999</color>
     <color name="color_icon_light">#FFFFFF</color>
     <color name="color_icon_pressed_light">#88FFFFFF</color>
@@ -28,7 +29,7 @@
     <color name="content_pressed_background">@color/card_background</color>
     <color name="tag_background">#1B1B1B</color>
     <color name="button_background_gray">#1B1B1B</color>
-    <color name="titlebar_background">#000000</color>
+    <color name="titlebar_background">@color/background</color>
     <color name="color_divider">#3C3C3C</color>
     <color name="reply_background">#3A3A3A</color>
     <color name="reply_pressed_background">#AA3A3A3A</color>
@@ -40,7 +41,7 @@
     <color name="text_color_black">#000000</color>
     <color name="text_color_entry">#C6C6C6</color>
     <!--显式颜色-->
-    <color name="color_red">#FF6370</color>
+    <color name="color_red">#FF6C93</color>
     <color name="color_gray">#999999</color>
     <color name="color_light_gray">#999999</color>
     <color name="color_blue">#2E77E5</color>

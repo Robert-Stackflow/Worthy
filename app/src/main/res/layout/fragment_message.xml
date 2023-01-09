@@ -57,76 +57,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/message_entry_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/shape_round_dp10"
-                android:paddingTop="10dp"
-                android:paddingBottom="20dp">
-
-                <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/message_entry_comment_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:entry_item_icon="@drawable/ic_light_comment"
-                    app:entry_item_icon_scale_type="centerCrop"
-                    app:entry_item_icon_size="40dp"
-                    app:entry_item_text="评论回复"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/message_entry_thumbup_layout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/message_entry_thumbup_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:entry_item_icon="@drawable/ic_light_heart"
-                    app:entry_item_icon_scale_type="centerCrop"
-                    app:entry_item_icon_size="40dp"
-                    app:entry_item_text="点赞收藏"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/message_entry_fans_layout"
-                    app:layout_constraintStart_toEndOf="@id/message_entry_comment_layout"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/message_entry_fans_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:entry_item_icon="@drawable/ic_light_visible"
-                    app:entry_item_icon_scale_type="centerCrop"
-                    app:entry_item_icon_size="40dp"
-                    app:entry_item_text="新的关注"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/message_entry_system_layout"
-                    app:layout_constraintStart_toEndOf="@id/message_entry_thumbup_layout"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.cloudchewie.ui.EntryItem
-                    android:id="@+id/message_entry_system_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:entry_item_icon="@drawable/ic_light_board"
-                    app:entry_item_icon_scale_type="centerCrop"
-                    app:entry_item_icon_size="40dp"
-                    app:entry_item_text="系统通知"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/message_entry_fans_layout"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/messagers_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/message_entry_layout"
                 android:layout_marginTop="10dp" />
         </RelativeLayout>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>

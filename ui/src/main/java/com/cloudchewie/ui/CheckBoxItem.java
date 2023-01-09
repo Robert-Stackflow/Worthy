@@ -13,6 +13,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class CheckBoxItem extends ConstraintLayout {
     private CheckBox right_switch;
     private TextView title_view;
     private ConstraintLayout mainLayout;
+    private View divider;
 
     public CheckBoxItem(@NonNull Context context) {
         super(context);
@@ -50,6 +52,7 @@ public class CheckBoxItem extends ConstraintLayout {
         right_switch = findViewById(R.id.checkbox_item_switch);
         title_view = findViewById(R.id.checkbox_item_title);
         mainLayout = findViewById(R.id.checkbox_item_layout);
+        divider = findViewById(R.id.checkbox_item_divider);
         @SuppressLint("CustomViewStyleable")
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.CheckBoxItem);
         if (attr != null) {
@@ -70,11 +73,13 @@ public class CheckBoxItem extends ConstraintLayout {
     void setRadiusEnbale(boolean top, boolean bottom) {
         if (!top && !bottom)
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_rect));
-        else if (top && bottom)
+        else if (top && bottom) {
+            divider.setVisibility(GONE);
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_dp10));
-        else if (!top && bottom)
+        } else if (!top && bottom) {
+            divider.setVisibility(GONE);
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_bottom_dp10));
-        else if (top && !bottom)
+        } else if (top && !bottom)
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_top_dp10));
     }
 

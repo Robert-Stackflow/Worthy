@@ -11,6 +11,7 @@ import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -23,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class BottomSheet extends BottomSheetDialog {
+    protected ConstraintLayout mainLayout;
     protected View mainView;
     private BottomSheetBehavior bottomSheetBehavior;
     private TextView titleView;
@@ -57,6 +59,7 @@ public class BottomSheet extends BottomSheetDialog {
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(getContext()).inflate(R.layout.widget_bottom_sheet, null);
         setContentView(view);
+        mainLayout = view.findViewById(R.id.bottom_sheet_layout);
         titleView = view.findViewById(R.id.bottom_sheet_titlebar_title);
         leftButton = view.findViewById(R.id.bottom_sheet_titlebar_left_button);
         titleBarLayout = view.findViewById(R.id.bottom_sheet_titlebar_layout);
@@ -82,6 +85,24 @@ public class BottomSheet extends BottomSheetDialog {
         else
             titleBarLayout.setVisibility(View.GONE);
         setDragBarVisible(visible);
+    }
+
+    public void setBackGround(int resId) {
+        if (mainLayout != null) mainLayout.setBackgroundResource(resId);
+    }
+
+    public void setTitleBarBackGroundTint(int resId) {
+        if (titleBarLayout != null) {
+            int color = getContext().getColor(resId);
+            titleBarLayout.setBackgroundTintList(ColorStateList.valueOf(color));
+        }
+    }
+
+    public void setBackGroundTint(int resId) {
+        if (mainLayout != null) {
+            int color = getContext().getColor(resId);
+            mainLayout.setBackgroundTintList(ColorStateList.valueOf(color));
+        }
     }
 
     public void setDragBarVisible(boolean visible) {

@@ -23,11 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.adapter.ShareItemAdapter;
 import com.cloudchewie.client.bean.ShareItem;
-import com.cloudchewie.client.util.decoration.LinearItemDecoration;
+import com.cloudchewie.client.util.decoration.SpacingItemDecoration;
 import com.cloudchewie.client.util.enumeration.Direction;
 import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.system.ShareUtil;
-import com.cloudchewie.client.util.ui.SizeUtil;
 import com.cloudchewie.ui.BottomSheet;
 import com.previewlibrary.view.BasePhotoFragment;
 
@@ -53,7 +52,7 @@ public class ImageViewFragment extends BasePhotoFragment {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             layoutManager.setOrientation(RecyclerView.HORIZONTAL);
             recyclerView.setLayoutManager(layoutManager);
-            recyclerView.addItemDecoration(new LinearItemDecoration(getContext(), SizeUtil.dp2px(getContext(), 20), Direction.RIGHT));
+            recyclerView.addItemDecoration(new SpacingItemDecoration(getContext(), 20, Direction.RIGHT));
             bottomSheet.findViewById(R.id.image_operation_cancel).setOnClickListener(v1 -> bottomSheet.cancel());
             bottomSheet.findViewById(R.id.image_operation_more).setOnClickListener(v2 -> shareSingleImage());
             return false;

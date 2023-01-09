@@ -8,7 +8,6 @@
 package com.cloudchewie.client.fragment.nav;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
-import com.cloudchewie.client.activity.message.NoticeActivity;
 import com.cloudchewie.client.adapter.ChatterListAdapter;
 import com.cloudchewie.client.entity.Chatter;
 import com.cloudchewie.client.util.basic.DomainUtil;
@@ -54,10 +52,6 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         mainView = View.inflate(getContext(), R.layout.fragment_message, null);
         StatusBarUtil.setStatusBarMarginTop(mainView.findViewById(R.id.message_titlebar), 0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         mainView.findViewById(R.id.message_clear_unread).setOnClickListener(this);
-        mainView.findViewById(R.id.message_entry_comment_layout).setOnClickListener(this);
-        mainView.findViewById(R.id.message_entry_thumbup_layout).setOnClickListener(this);
-        mainView.findViewById(R.id.message_entry_fans_layout).setOnClickListener(this);
-        mainView.findViewById(R.id.message_entry_system_layout).setOnClickListener(this);
         initSwipeRefresh();
         initRecyclerView();
         return mainView;
@@ -90,7 +84,6 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
             chatterListAdapter.notifyDataSetChanged();
             swipeRefreshLayout.finishRefresh();
         });
-//        swipeRefreshLayout.autoRefresh();
         header.setEnableLastTime(false);
     }
 
@@ -116,26 +109,6 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                     dialog.dismiss();
                 }
             }).show();
-        } else if (view == mainView.findViewById(R.id.message_entry_comment_layout)) {
-            Intent intent = new Intent(getContext(), NoticeActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.COMMENT_REPLY);
-            intent.putExtras(bundle);
-            getContext().startActivity(intent);
-        } else if (view == mainView.findViewById(R.id.message_entry_thumbup_layout)) {
-            Intent intent = new Intent(getContext(), NoticeActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.THUMBUP_COLLECT);
-            intent.putExtras(bundle);
-            getContext().startActivity(intent);
-        } else if (view == mainView.findViewById(R.id.message_entry_fans_layout)) {
-            Intent intent = new Intent(getContext(), NoticeActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.FOLLOW);
-            intent.putExtras(bundle);
-            getContext().startActivity(intent);
-        } else if (view == mainView.findViewById(R.id.message_entry_system_layout)) {
-            IToast.makeTextBottom(getContext(), "系统维护中,暂时无法查看系统通知", Toast.LENGTH_SHORT).show();
         }
     }
 

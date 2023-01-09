@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/activity_select_location_map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <ImageButton
+        android:id="@+id/activity_select_location_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp30"
+        android:background="@drawable/shape_round_dp10"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_light_arrow_left" />
+
+    <ImageButton
+        android:id="@+id/activity_select_location_confirm"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dp30"
+        android:layout_marginEnd="@dimen/dp10"
+        android:background="@drawable/shape_round_dp10"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_light_right" />
+
+    <ImageButton
+        android:id="@+id/activity_select_location_goto_mylocation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_round_dp10"
+        android:clickable="true"
+        android:contentDescription="定位至我的位置"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_light_location" />
+
+</RelativeLayout>

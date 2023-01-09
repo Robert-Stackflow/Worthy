@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_create_post_titlebar"
+        android:id="@+id/activity_create_topic_titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -17,7 +17,7 @@
         android:paddingBottom="10dp">
 
         <TextView
-            android:id="@+id/activity_create_post_cancel"
+            android:id="@+id/activity_create_topic_cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
@@ -30,11 +30,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/activity_create_post_page_title"
+            android:id="@+id/activity_create_topic_page_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:text="发布帖子"
+            android:text="创建话题"
             android:textColor="@color/color_accent"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -44,12 +44,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/activity_create_post_publish"
+            android:id="@+id/activity_create_topic_publish"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:text="发布"
+            android:text="创建"
             android:textColor="@color/color_prominent"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,148 +58,144 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/activity_create_post_swipe_refresh"
+        android:id="@+id/activity_create_topic_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/activity_create_post_bottom_layout"
-        android:layout_below="@id/activity_create_post_titlebar">
+        android:layout_below="@id/activity_create_topic_titlebar">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/activity_create_post_input_layout"
+                android:id="@+id/activity_create_topic_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@id/activity_create_post_titlebar">
+                app:layout_constraintTop_toBottomOf="@id/activity_create_topic_titlebar">
 
                 <EditText
-                    android:id="@+id/activity_create_post_content"
+                    android:id="@+id/activity_create_topic_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_round_dp10"
                     android:backgroundTint="@color/card_background"
-                    android:gravity="top"
-                    android:hint="分享你的生活、想法"
+                    android:hint="话题名称(最多20字)"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
-                    android:minLines="10"
-                    android:paddingStart="@dimen/dp10"
-                    android:paddingTop="@dimen/dp10"
-                    android:paddingEnd="@dimen/dp10"
-                    android:paddingBottom="@dimen/dp30"
+                    android:padding="10dp"
                     android:textCursorDrawable="@drawable/shape_cursor"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="LabelFor" />
 
+                <EditText
+                    android:id="@+id/activity_create_topic_describe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:background="@drawable/shape_round_dp10"
+                    android:backgroundTint="@color/card_background"
+                    android:gravity="top"
+                    android:hint="简单介绍一下话题"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:minLines="10"
+                    android:padding="@dimen/dp10"
+                    android:textCursorDrawable="@drawable/shape_cursor"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_create_topic_name"
+                    tools:ignore="LabelFor" />
+
                 <TextView
-                    android:id="@+id/activity_create_post_count"
+                    android:id="@+id/activity_create_topic_describe_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp5"
-                    app:layout_constraintBottom_toBottomOf="@id/activity_create_post_content"
-                    app:layout_constraintEnd_toEndOf="@id/activity_create_post_content"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_create_topic_describe"
+                    app:layout_constraintEnd_toEndOf="@id/activity_create_topic_describe"
+                    tools:text="0/200" />
+
+                <EditText
+                    android:id="@+id/activity_create_topic_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:background="@drawable/shape_round_dp10"
+                    android:backgroundTint="@color/card_background"
+                    android:gravity="top"
+                    android:hint="您申请创建该话题的理由"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:minLines="10"
+                    android:padding="@dimen/dp10"
+                    android:textCursorDrawable="@drawable/shape_cursor"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_create_topic_describe"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:id="@+id/activity_create_topic_reason_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp5"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_create_topic_reason"
+                    app:layout_constraintEnd_toEndOf="@id/activity_create_topic_reason"
                     tools:text="0/200" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/activity_create_attraction_image_layout"
+                    android:id="@+id/activity_create_topic_image_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp10"
                     android:background="@drawable/shape_round_dp10"
                     android:backgroundTint="@color/card_background"
                     android:padding="@dimen/dp10"
-                    app:layout_constraintTop_toBottomOf="@id/activity_create_post_count">
+                    app:layout_constraintTop_toBottomOf="@id/activity_create_topic_reason">
 
-                    <com.cloudchewie.ninegrid.NineGridImageView
-                        android:id="@+id/activity_create_post_nine_grid"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/activity_create_topic_image_label"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/dp5"
+                        android:text="上传图片更好地介绍话题"
+                        android:textColor="@color/color_hint"
+                        android:textSize="@dimen/sp15"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.cloudchewie.ninegrid.NineGridImageView
+                        android:id="@+id/activity_create_topic_nine_grid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp10"
+                        android:paddingBottom="5dp"
                         app:imgGap="@dimen/nine_grid_gap"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/activity_create_topic_image_label"
                         app:showStyle="grid"
                         app:singleImgSize="120dp" />
 
                     <ImageView
-                        android:id="@+id/activity_create_post_add_picture"
+                        android:id="@+id/activity_create_topic_add_picture"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:background="@color/tag_background"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_light_camera"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/activity_create_post_nine_grid"
+                        app:layout_constraintTop_toBottomOf="@id/activity_create_topic_nine_grid"
                         app:tint="@color/color_light_gray" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_create_post_bottom_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/card_background"
-        android:padding="10dp">
-
-        <com.cloudchewie.ui.IconTextItem
-            android:id="@+id/activity_create_post_attraction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_round_dp3"
-            android:backgroundTint="@color/tag_background"
-            android:padding="5dp"
-            app:icon_text_item_icon_color="@color/color_gray"
-            app:icon_text_item_icon_size="16dp"
-            app:icon_text_item_text="选择景点"
-            app:icon_text_item_text_color="@color/color_gray"
-            app:icon_text_item_text_size="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.cloudchewie.ui.IconTextItem
-            android:id="@+id/activity_create_post_topic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/shape_round_dp3"
-            android:backgroundTint="@color/tag_background"
-            android:padding="5dp"
-            app:icon_text_item_icon="@drawable/ic_light_tag"
-            app:icon_text_item_icon_color="@color/color_gray"
-            app:icon_text_item_icon_size="13dp"
-            app:icon_text_item_text="选择话题"
-            app:icon_text_item_text_color="@color/color_gray"
-            app:icon_text_item_text_size="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/activity_create_post_attraction"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.cloudchewie.ui.IconTextItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/shape_round_dp3"
-            android:backgroundTint="@color/tag_background"
-            android:padding="5dp"
-            app:icon_text_item_icon="@drawable/ic_light_account"
-            app:icon_text_item_icon_color="@color/color_gray"
-            app:icon_text_item_icon_size="16dp"
-            app:icon_text_item_text="想提及的人"
-            app:icon_text_item_text_color="@color/color_gray"
-            app:icon_text_item_text_size="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/activity_create_post_topic"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

@@ -30,7 +30,6 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.entry_notification).setOnClickListener(this);
         findViewById(R.id.entry_privacy).setOnClickListener(this);
         findViewById(R.id.entry_general).setOnClickListener(this);
-        findViewById(R.id.entry_help).setOnClickListener(this);
         findViewById(R.id.entry_feedback).setOnClickListener(this);
         findViewById(R.id.entry_about).setOnClickListener(this);
         findViewById(R.id.entry_close_app).setOnClickListener(this);
