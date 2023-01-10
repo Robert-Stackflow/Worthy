@@ -102,6 +102,7 @@ public class EntryItem extends ConstraintLayout {
             int bigTextSize = (int) attr.getDimension(R.styleable.EntryItem_entry_item_big_text_size, getResources().getDimension(R.dimen.entry_item_default_big_text_size));
             int spacing = (int) attr.getDimension(R.styleable.EntryItem_entry_item_spacing, 3);
             int backgroundId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon_background, R.drawable.shape_round_dp10);
+            int backgroundTintId = attr.getResourceId(R.styleable.EntryItem_entry_item_icon_background_tint, R.color.color_selector_content);
             boolean backgroundEnable = attr.getBoolean(R.styleable.EntryItem_entry_item_icon_background_enable, false);
             int iconScaleType = attr.getInt(R.styleable.EntryItem_entry_item_icon_scale_type, 0);
             setScaleType(iconScaleType);
@@ -116,7 +117,10 @@ public class EntryItem extends ConstraintLayout {
             setBigTextColor(bigTextColor);
             setBigTextSize(bigTextSize);
             setSpacing(spacing);
-            if (backgroundEnable) setIconBackground(backgroundId);
+            if (backgroundEnable) {
+                setIconBackground(backgroundId);
+                setIconBackgroundTint(backgroundTintId);
+            }
             attr.recycle();
         }
     }
@@ -209,5 +213,9 @@ public class EntryItem extends ConstraintLayout {
 
     public void setIconBackground(int backgroundId) {
         icon.setBackground(AppCompatResources.getDrawable(getContext(), backgroundId));
+    }
+
+    public void setIconBackgroundTint(int backgroundTintId) {
+        icon.setBackgroundTintList(getContext().getColorStateList(backgroundTintId));
     }
 }

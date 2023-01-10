@@ -22,6 +22,19 @@
         <item>最新</item>
         <item>最早</item>
     </string-array>
+    <string-array name="creation_image_operation">
+        <item>删除图片</item>
+        <item>编辑图片</item>
+        <item>保存图片</item>
+    </string-array>
+    <string-array name="feedback_type">
+        <item>账号信息相关</item>
+        <item>发布内容相关</item>
+        <item>推荐推送相关</item>
+        <item>消息聊天相关</item>
+        <item>创作工具相关</item>
+        <item>其他反馈建议</item>
+    </string-array>
     <string-array name="poi_filter_type">
         <item>全部景点</item>
         <item>公园</item>

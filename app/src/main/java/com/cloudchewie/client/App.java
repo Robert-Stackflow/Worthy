@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import com.baidu.mapapi.SDKInitializer;
 import com.cloudchewie.client.util.image.MyImageLoader;
 import com.cloudchewie.client.util.map.BaiduSdkReceiver;
+import com.cloudchewie.client.util.system.LanguageUtil;
 import com.previewlibrary.ZoomMediaLoader;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -27,6 +28,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        registerActivityLifecycleCallbacks(LanguageUtil.callbacks);
         ZoomMediaLoader.getInstance().init(new MyImageLoader());
         IntentFilter iFilter = new IntentFilter();
         iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);

@@ -24,7 +24,9 @@ import androidx.fragment.app.Fragment;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.auth.LoginActivity;
+import com.cloudchewie.client.activity.create.DraftActivity;
 import com.cloudchewie.client.activity.message.NoticeActivity;
+import com.cloudchewie.client.activity.settings.FeedbackActivity;
 import com.cloudchewie.client.activity.settings.SettingsActivity;
 import com.cloudchewie.client.activity.user.FavoritesListActivity;
 import com.cloudchewie.client.activity.user.FollowListActivity;
@@ -38,18 +40,27 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 public class UserFragment extends Fragment implements View.OnClickListener {
     View mainView;
     RefreshLayout swipeRefreshLayout;
+    //Profile
     EntryItem fansEntry;
     EntryItem followingEntry;
     EntryItem collectionEntry;
     EntryItem footprintEntry;
+    //Creation
     EntryItem centerEntry;
     EntryItem managerEntry;
     EntryItem draftEntry;
     EntryItem hostEntry;
+    //Notice
     EntryItem commentEntry;
     EntryItem thumbupEntry;
     EntryItem newFansEntry;
     EntryItem systemEntry;
+    //Application
+    EntryItem feedbackEntry;
+    EntryItem helpEntry;
+    EntryItem activityEntry;
+    EntryItem giftEntry;
+    EntryItem opensourceEntry;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +87,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         thumbupEntry = mainView.findViewById(R.id.fragment_user_entry_message_thumbup);
         newFansEntry = mainView.findViewById(R.id.fragment_user_entry_message_new_fans);
         systemEntry = mainView.findViewById(R.id.fragment_user_entry_message_system);
+        activityEntry = mainView.findViewById(R.id.fragment_user_entry_application_activity_center);
+        helpEntry = mainView.findViewById(R.id.fragment_user_entry_application_help_center);
+        feedbackEntry = mainView.findViewById(R.id.fragment_user_entry_application_feedback);
+        giftEntry = mainView.findViewById(R.id.fragment_user_entry_application_gift);
+        opensourceEntry = mainView.findViewById(R.id.fragment_user_entry_application_opensource);
         footprintEntry.setOnClickListener(this);
         followingEntry.setOnClickListener(this);
         fansEntry.setOnClickListener(this);
@@ -88,6 +104,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         thumbupEntry.setOnClickListener(this);
         newFansEntry.setOnClickListener(this);
         systemEntry.setOnClickListener(this);
+        activityEntry.setOnClickListener(this);
+        helpEntry.setOnClickListener(this);
+        feedbackEntry.setOnClickListener(this);
+        giftEntry.setOnClickListener(this);
+        opensourceEntry.setOnClickListener(this);
         mainView.findViewById(R.id.fragment_user_username).setOnClickListener(this);
         mainView.findViewById(R.id.fragment_user_avatar).setOnClickListener(this);
         initSwipeRefresh();
@@ -116,13 +137,14 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         } else if (view == collectionEntry) {
             Intent intent = new Intent(getActivity(), FavoritesListActivity.class);
             startActivity(intent);
+        } else if (view == draftEntry) {
+            Intent intent = new Intent(getActivity(), DraftActivity.class);
+            startActivity(intent);
         } else if (view == centerEntry) {
-            IToast.makeTextBottom(getContext(), "系统维护中,暂时无法进入创作中心", Toast.LENGTH_SHORT).show();
         } else if (view == followingEntry) {
             Intent intent = new Intent(getActivity(), FollowListActivity.class);
             startActivity(intent);
         } else if (view == footprintEntry) {
-            IToast.makeTextBottom(getContext(), "功能维护中,暂时无法查看我的足迹", Toast.LENGTH_SHORT).show();
         } else if (view == mainView.findViewById(R.id.entry_home_page)) {
             Intent intent = new Intent(getActivity(), HomePageActivity.class);
             Bundle bundle = new Bundle();
@@ -150,8 +172,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             bundle.putSerializable("type", NoticeActivity.NOTICE_TYPE.FOLLOW);
             intent.putExtras(bundle);
             getContext().startActivity(intent);
-        } else if (view == systemEntry) {
-            IToast.makeTextBottom(getContext(), "系统维护中,暂时无法查看系统通知", Toast.LENGTH_SHORT).show();
+        } else if (view == feedbackEntry) {
+            Intent intent = new Intent(getActivity(), FeedbackActivity.class);
+            startActivity(intent);
         }
     }
 }

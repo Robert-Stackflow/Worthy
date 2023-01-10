@@ -148,7 +148,7 @@
             android:layout_marginStart="10dp"
             android:clickable="true"
             android:focusable="true"
-            app:icon_text_item_icon="@drawable/ic_light_redo"
+            app:icon_text_item_icon="@drawable/ic_light_share_arrow"
             app:icon_text_item_icon_color="@color/color_gray"
             app:icon_text_item_text=""
             app:icon_text_item_text_color="@color/color_gray"

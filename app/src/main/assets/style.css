@@ -37,6 +37,11 @@ body {
   background-size: cover;
 }
 
+b,
+strong {
+   font-weight: bold;
+}
+
 #editor[placeholder]:empty:not(:focus):before {
   content: attr(placeholder);
   opacity: .5;

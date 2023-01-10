@@ -4,17 +4,18 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
 import com.lzy.imagepicker.bean.ImageFolder;
 import com.lzy.imagepicker.bean.ImageItem;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
 
 /**
  * ================================================
@@ -40,14 +41,13 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private FragmentActivity activity;
     private OnImagesLoadedListener loadedListener;                     //图片加载完成的回调接口
-//    private ArrayList<ImageFolder> imageMainFolders = new ArrayList<>();   //所有的图片文件夹
 
     /**
      * @param activity       用于初始化LoaderManager，需要兼容到2.3
      * @param path           指定扫描的文件夹目录，可以为 null，表示扫描所有图片
      * @param loadedListener 图片加载完成的监听
      */
-    public ImageDataSource(FragmentActivity activity, String path, OnImagesLoadedListener loadedListener) {
+    public ImageDataSource(@NonNull FragmentActivity activity, String path, OnImagesLoadedListener loadedListener) {
         this.activity = activity;
         this.loadedListener = loadedListener;
 
@@ -62,6 +62,7 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
         }
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cursorLoader = null;
@@ -76,8 +77,7 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-//        imageFolders.clear();
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         ArrayList<ImageFolder> imageFolders = new ArrayList<>();
         if (data != null) {
             ArrayList<ImageItem> allImages = new ArrayList<>();   //所有图片的集合,不分文件夹
@@ -136,15 +136,15 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
         }
 
         //回调接口，通知图片数据准备完成
-        if (imageFolders.size()!=0){
+        if (imageFolders.size() != 0) {
             ImagePicker.getInstance().setImageFolders(imageFolders);
             loadedListener.onImagesLoaded(imageFolders);
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        System.out.println("--------");
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+
     }
 
     /**

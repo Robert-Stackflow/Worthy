@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.bean.ImageFolder;
+import com.lzy.imagepicker.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,8 +87,11 @@ public class ImageFolderAdapter extends BaseAdapter {
         } else {
             holder.folderCheck.setVisibility(View.INVISIBLE);
         }
-
         return convertView;
+    }
+
+    public int getSelectIndex() {
+        return lastSelected;
     }
 
     public void setSelectIndex(int i) {
@@ -97,10 +100,6 @@ public class ImageFolderAdapter extends BaseAdapter {
         }
         lastSelected = i;
         notifyDataSetChanged();
-    }
-
-    public int getSelectIndex() {
-        return lastSelected;
     }
 
     private class ViewHolder {

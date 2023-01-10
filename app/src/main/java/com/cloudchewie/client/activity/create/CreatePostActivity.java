@@ -10,9 +10,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,12 +22,13 @@ import com.blankj.utilcode.util.VibrateUtils;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.global.BaseActivity;
 import com.cloudchewie.client.adapter.MyNineGridImageViewAdapter;
+import com.cloudchewie.client.bean.ListBottomSheetBean;
 import com.cloudchewie.client.entity.Post;
 import com.cloudchewie.client.util.image.ImageUrlUtil;
 import com.cloudchewie.client.util.image.ImageViewInfo;
 import com.cloudchewie.client.util.image.NineGridUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
-import com.cloudchewie.client.util.widget.CommonPopupWindow;
+import com.cloudchewie.client.util.widget.ListBottomSheet;
 import com.cloudchewie.ninegrid.NineGridImageView;
 import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.MyDialog;
@@ -41,6 +40,7 @@ import com.yalantis.ucrop.UCropActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CreatePostActivity extends BaseActivity {
@@ -55,7 +55,7 @@ public class CreatePostActivity extends BaseActivity {
     int currentEditIndex;
     int maxSize = 200;
     List<ImageItem> selectImages = new ArrayList<>();
-    private CommonPopupWindow popupWindow;
+    private ListBottomSheet popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,36 +135,33 @@ public class CreatePostActivity extends BaseActivity {
         pickImage.setOnClickListener(v -> selectImage(104));
         nineGridImageView.setAdapter(new MyNineGridImageViewAdapter());
         nineGridImageView.setItemImageLongClickListener((context, imageView, index, list) -> {
-            @SuppressLint("InflateParams")
-            View view = LayoutInflater.from(CreatePostActivity.this).inflate(R.layout.layout_post_image_operation, null);
-            view.findViewById(R.id.linear_cancle).setOnClickListener(v -> popupWindow.dismiss());
-            view.findViewById(R.id.linear_editor).setOnClickListener(v -> {
-                Intent intent = new Intent(CreatePostActivity.this, UCropActivity.class);
-                intent.putExtra("filePath", list.get(index).getUrl());
-                String destDir = getFilesDir().getAbsolutePath();
-                String fileName = "img_" + System.currentTimeMillis() + ".png";
-                intent.putExtra("outPath", destDir + fileName);
-                startActivityForResult(intent, 11);
-                currentEditIndex = index;
-                popupWindow.dismiss();
+
+            List<String> operations = Arrays.asList(getResources().getStringArray(R.array.creation_image_operation));
+            popupWindow = new ListBottomSheet(this, ListBottomSheetBean.strToBean(operations));
+            popupWindow.setOnItemClickedListener(position -> {
+                if (position == 0) {
+                    nineGridImageView.deleteImage(index);
+                    selectImages.remove(index);
+                    if (nineGridImageView.getChildCount() >= 9)
+                        pickImage.setVisibility(View.GONE);
+                    else
+                        pickImage.setVisibility(View.VISIBLE);
+                    popupWindow.dismiss();
+                } else if (position == 1) {
+                    Intent intent = new Intent(CreatePostActivity.this, UCropActivity.class);
+                    intent.putExtra("filePath", list.get(index).getUrl());
+                    String destDir = getFilesDir().getAbsolutePath();
+                    String fileName = "img_" + System.currentTimeMillis() + ".png";
+                    intent.putExtra("outPath", destDir + fileName);
+                    startActivityForResult(intent, 11);
+                    currentEditIndex = index;
+                    popupWindow.dismiss();
+                } else if (position == 2) {
+                    IToast.makeTextBottom(this, "图片保存成功", Toast.LENGTH_SHORT).show();
+                    popupWindow.dismiss();
+                }
             });
-            view.findViewById(R.id.linear_delete_pic).setOnClickListener(v -> {
-                nineGridImageView.deleteImage(index);
-                selectImages.remove(index);
-                if (nineGridImageView.getChildCount() >= 9)
-                    pickImage.setVisibility(View.GONE);
-                else
-                    pickImage.setVisibility(View.VISIBLE);
-                popupWindow.dismiss();
-            });
-            view.findViewById(R.id.linear_download_pic).setVisibility(View.GONE);
-            popupWindow = new CommonPopupWindow.Builder(CreatePostActivity.this)
-                    .setView(view)
-                    .setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                    .setOutsideTouchable(true)
-                    .setAnimationStyle(R.style.UpDownAnimation)
-                    .create();
-            popupWindow.showBottom(getWindow().getDecorView().findViewById(android.R.id.content), 1f);
+            popupWindow.show();
             VibrateUtils.vibrate(50);
             return false;
         });

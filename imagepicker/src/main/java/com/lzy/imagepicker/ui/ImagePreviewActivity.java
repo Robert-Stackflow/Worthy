@@ -1,24 +1,23 @@
 package com.lzy.imagepicker.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.Formatter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.cloudchewie.ui.IToast;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.util.NavigationBarChangeListener;
 import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.SuperCheckBox;
-
-import androidx.viewpager.widget.ViewPager;
 
 /**
  * ================================================
@@ -60,13 +59,11 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
         mCbOrigin.setOnCheckedChangeListener(this);
         mCbOrigin.setChecked(isOrigin);
 
-        //初始化当前页面的状态
         onImageSelected(0, null, false);
         ImageItem item = mImageItems.get(mCurrentPosition);
         boolean isSelected = imagePicker.isSelect(item);
         mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
         mCbCheck.setChecked(isSelected);
-        //滑动ViewPager的时候，根据外界的数据改变当前的选中状态和当前的图片的位置描述文本
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -77,18 +74,14 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
                 mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
             }
         });
-        //当点击当前选中按钮的时候，需要根据当前的选中状态添加和移除图片
-        mCbCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageItem imageItem = mImageItems.get(mCurrentPosition);
-                int selectLimit = imagePicker.getSelectLimit();
-                if (mCbCheck.isChecked() && selectedImages.size() >= selectLimit) {
-                    Toast.makeText(ImagePreviewActivity.this, getString(R.string.ip_select_limit, selectLimit), Toast.LENGTH_SHORT).show();
-                    mCbCheck.setChecked(false);
-                } else {
-                    imagePicker.addSelectedImageItem(mCurrentPosition, imageItem, mCbCheck.isChecked());
-                }
+        mCbCheck.setOnClickListener(v -> {
+            ImageItem imageItem = mImageItems.get(mCurrentPosition);
+            int selectLimit = imagePicker.getSelectLimit();
+            if (mCbCheck.isChecked() && selectedImages.size() >= selectLimit) {
+                IToast.makeTextBottom(ImagePreviewActivity.this, getString(R.string.ip_select_limit, selectLimit), Toast.LENGTH_SHORT).show();
+                mCbCheck.setChecked(false);
+            } else {
+                imagePicker.addSelectedImageItem(mCurrentPosition, imageItem, mCbCheck.isChecked());
             }
         });
         NavigationBarChangeListener.with(this).setListener(new NavigationBarChangeListener.OnSoftInputStateChangeListener() {
@@ -122,7 +115,6 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
                     }
                 });
     }
-
 
 
     /**
@@ -206,22 +198,16 @@ public class ImagePreviewActivity extends ImagePreviewBaseActivity implements Im
      */
     @Override
     public void onImageSingleTap() {
-        if (topBar.getVisibility() == View.VISIBLE) {
-            topBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.top_out));
-            bottomBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out));
-            topBar.setVisibility(View.GONE);
-            bottomBar.setVisibility(View.GONE);
-            tintManager.setStatusBarTintResource(Color.TRANSPARENT);//通知栏所需颜色
-            //给最外层布局加上这个属性表示，Activity全屏显示，且状态栏被隐藏覆盖掉。
-//            if (Build.VERSION.SDK_INT >= 16) content.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        } else {
-            topBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.top_in));
-            bottomBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
-            topBar.setVisibility(View.VISIBLE);
-            bottomBar.setVisibility(View.VISIBLE);
-            tintManager.setStatusBarTintResource(R.color.ip_color_primary_dark);//通知栏所需颜色
-            //Activity全屏显示，但状态栏不会被隐藏覆盖，状态栏依然可见，Activity顶端布局部分会被状态遮住
-//            if (Build.VERSION.SDK_INT >= 16) content.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
+//        if (topBar.getVisibility() == View.VISIBLE) {
+//            topBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.top_out));
+//            bottomBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out));
+//            topBar.setVisibility(View.GONE);
+//            bottomBar.setVisibility(View.GONE);
+//        } else {
+//            topBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.top_in));
+//            bottomBar.setAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
+//            topBar.setVisibility(View.VISIBLE);
+//            bottomBar.setVisibility(View.VISIBLE);
+//        }
     }
 }

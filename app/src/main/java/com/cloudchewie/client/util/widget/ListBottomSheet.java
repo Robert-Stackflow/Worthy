@@ -58,7 +58,7 @@ public class ListBottomSheet extends BottomSheet {
         if (adapter != null) adapter.setOnItemClickedListener(listener);
         return this;
     }
-
+    
     public interface OnCancelListener {
         void OnCancle();
     }

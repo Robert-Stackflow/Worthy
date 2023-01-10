@@ -142,6 +142,14 @@ public class SettingItem extends ConstraintLayout {
         tip_view.setTextColor(tipColor);
     }
 
+    public void setTitlePadding(int left, int top, int right, int bottom) {
+        title_view.setPadding(left, top, right, bottom);
+    }
+
+    public String getTip() {
+        return tip_view.getText().toString();
+    }
+
     public void setTipText(String tip) {
         tip_view.setText(tip);
     }

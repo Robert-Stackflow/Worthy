@@ -1,20 +1,17 @@
 package com.lzy.imagepicker.ui;
 
-import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
-
-import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.R;
-import com.lzy.imagepicker.view.SystemBarTintManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.cloudchewie.ui.IToast;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.R;
+import com.lzy.imagepicker.util.StatusBarUtil;
 
 /**
  * ================================================
@@ -27,30 +24,12 @@ import androidx.core.app.ActivityCompat;
  */
 public class ImageBaseActivity extends AppCompatActivity {
 
-    protected SystemBarTintManager tintManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(true);
-        }
-        tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintResource(R.color.ip_color_primary_dark);  //设置上方状态栏的颜色
-    }
-
-    @TargetApi(19)
-    private void setTranslucentStatus(boolean on) {
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
+        StatusBarUtil.setStatusBarTransparent(this);
+        StatusBarUtil.setStatusBarColor(this, getColor(R.color.ip_camera_pre));
+        StatusBarUtil.setStatusBarTextColor(this, true);
     }
 
     public boolean checkPermission(@NonNull String permission) {
@@ -58,7 +37,7 @@ public class ImageBaseActivity extends AppCompatActivity {
     }
 
     public void showToast(String toastText) {
-        Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_SHORT).show();
+        IToast.makeTextBottom(getApplicationContext(), toastText, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -68,7 +47,7 @@ public class ImageBaseActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         ImagePicker.getInstance().saveInstanceState(outState);
     }

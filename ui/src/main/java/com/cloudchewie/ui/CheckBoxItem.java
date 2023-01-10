@@ -83,6 +83,10 @@ public class CheckBoxItem extends ConstraintLayout {
             mainLayout.setBackground(AppCompatResources.getDrawable(getContext(), R.drawable.shape_round_top_dp10));
     }
 
+    public void setTitlePadding(int left, int top, int right, int bottom) {
+        title_view.setPadding(left, top, right, bottom);
+    }
+
     private void setTitle(String title, int titleColor) {
         title_view.setText(title);
         title_view.setTextColor(titleColor);

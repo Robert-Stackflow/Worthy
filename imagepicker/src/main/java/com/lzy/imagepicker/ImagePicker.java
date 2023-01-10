@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 
 import com.lzy.imagepicker.bean.ImageFolder;
@@ -24,6 +25,8 @@ import com.lzy.imagepicker.loader.ImageLoader;
 import com.lzy.imagepicker.util.ProviderUtil;
 import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.CropImageView;
+
+import org.jetbrains.annotations.Contract;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -96,7 +99,9 @@ public class ImagePicker {
     /**
      * 根据系统时间、前缀、后缀产生一个文件
      */
-    public static File createFile(File folder, String prefix, String suffix) {
+    @NonNull
+    @Contract("_, _, _ -> new")
+    public static File createFile(@NonNull File folder, String prefix, String suffix) {
         if (!folder.exists() || !folder.isDirectory()) folder.mkdirs();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA);
         String filename = prefix + dateFormat.format(new Date(System.currentTimeMillis())) + suffix;
@@ -106,7 +111,7 @@ public class ImagePicker {
     /**
      * 扫描图片
      */
-    public static void galleryAddPic(Context context, File file) {
+    public static void galleryAddPic(@NonNull Context context, File file) {
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         Uri contentUri = Uri.fromFile(file);
         mediaScanIntent.setData(contentUri);
@@ -281,7 +286,7 @@ public class ImagePicker {
      * 拍照的方法
      */
     @SuppressLint("QueryPermissionsNeeded")
-    public void takePicture(Activity activity, int requestCode) {
+    public void takePicture(@NonNull Activity activity, int requestCode) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         takePictureIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (takePictureIntent.resolveActivity(activity.getPackageManager()) != null) {
@@ -346,7 +351,7 @@ public class ImagePicker {
     /**
      * 用于手机内存不足，进程被系统回收，重启时的状态恢复
      */
-    public void restoreInstanceState(Bundle savedInstanceState) {
+    public void restoreInstanceState(@NonNull Bundle savedInstanceState) {
         cropCacheFolder = (File) savedInstanceState.getSerializable("cropCacheFolder");
         takeImageFile = (File) savedInstanceState.getSerializable("takeImageFile");
         imageLoader = (ImageLoader) savedInstanceState.getSerializable("imageLoader");
@@ -365,7 +370,7 @@ public class ImagePicker {
     /**
      * 用于手机内存不足，进程被系统回收时的状态保存
      */
-    public void saveInstanceState(Bundle outState) {
+    public void saveInstanceState(@NonNull Bundle outState) {
         outState.putSerializable("cropCacheFolder", cropCacheFolder);
         outState.putSerializable("takeImageFile", takeImageFile);
         outState.putSerializable("imageLoader", imageLoader);

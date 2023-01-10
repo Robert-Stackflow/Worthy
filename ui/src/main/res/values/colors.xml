@@ -26,6 +26,9 @@
     <color name="content_background">#FFFFFF</color>
     <color name="content_background_below">@color/background</color>
     <color name="content_pressed_background">#E5E5E5</color>
+    <color name="bottomsheet_background">@color/background</color>
+    <color name="entry_background">@color/card_background</color>
+    <color name="entry_pressed_background">@color/card_pressed_background</color>
     <color name="tag_background">#EFF1F4</color>
     <color name="button_background_gray">#F1F1F1</color>
     <color name="titlebar_background">@color/background</color>
@@ -40,7 +43,7 @@
     <color name="text_color_black">#000000</color>
     <color name="text_color_entry">#444444</color>
     <!--显式颜色-->
-    <color name="color_red">#FF6C93</color>
+    <color name="color_red">#FF6875</color>
     <color name="color_gray">#999999</color>
     <color name="color_light_gray">#CCCCCC</color>
     <color name="color_blue">#2E77E5</color>

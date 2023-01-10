@@ -9,6 +9,10 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.cloudchewie.ui.IToast;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -19,18 +23,15 @@ import com.lzy.imagepicker.view.SuperCheckBox;
 
 import java.util.ArrayList;
 
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * 加载相册图片的RecyclerView适配器
- *
+ * <p>
  * 用于替换原项目的GridView，使用局部刷新解决选中照片出现闪动问题
- *
+ * <p>
  * 替换为RecyclerView后只是不再会导致全局刷新，
- *
+ * <p>
  * 但还是会出现明显的重新加载图片，可能是picasso图片加载框架的问题
- *
+ * <p>
  * Author: nanchen
  * Email: liushilin520@foxmail.com
  * Date: 2017-04-05  10:04
@@ -50,20 +51,6 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     private LayoutInflater mInflater;
     private OnImageItemClickListener listener;   //图片被点击的监听
 
-    public void setOnImageItemClickListener(OnImageItemClickListener listener) {
-        this.listener = listener;
-    }
-
-    public interface OnImageItemClickListener {
-        void onImageItemClick(View view, ImageItem imageItem, int position);
-    }
-
-    public void refreshData(ArrayList<ImageItem> images) {
-        if (images == null || images.size() == 0) this.images = new ArrayList<>();
-        else this.images = images;
-        notifyDataSetChanged();
-    }
-
     /**
      * 构造方法
      */
@@ -79,20 +66,30 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         mInflater = LayoutInflater.from(activity);
     }
 
+    public void setOnImageItemClickListener(OnImageItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void refreshData(ArrayList<ImageItem> images) {
+        if (images == null || images.size() == 0) this.images = new ArrayList<>();
+        else this.images = images;
+        notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == ITEM_TYPE_CAMERA){
-            return new CameraViewHolder(mInflater.inflate(R.layout.adapter_camera_item,parent,false));
+        if (viewType == ITEM_TYPE_CAMERA) {
+            return new CameraViewHolder(mInflater.inflate(R.layout.adapter_camera_item, parent, false));
         }
-        return new ImageViewHolder(mInflater.inflate(R.layout.adapter_image_list_item,parent,false));
+        return new ImageViewHolder(mInflater.inflate(R.layout.adapter_image_list_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof CameraViewHolder){
-            ((CameraViewHolder)holder).bindCamera();
-        }else if (holder instanceof ImageViewHolder){
-            ((ImageViewHolder)holder).bind(position);
+        if (holder instanceof CameraViewHolder) {
+            ((CameraViewHolder) holder).bindCamera();
+        } else if (holder instanceof ImageViewHolder) {
+            ((ImageViewHolder) holder).bind(position);
         }
     }
 
@@ -121,6 +118,10 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    public interface OnImageItemClickListener {
+        void onImageItemClick(View view, ImageItem imageItem, int position);
+    }
+
     private class ImageViewHolder extends RecyclerView.ViewHolder {
 
         View rootView;
@@ -135,12 +136,12 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             rootView = itemView;
             ivThumb = (ImageView) itemView.findViewById(R.id.iv_thumb);
             mask = itemView.findViewById(R.id.mask);
-            checkView=itemView.findViewById(R.id.checkView);
+            checkView = itemView.findViewById(R.id.checkView);
             cbCheck = (SuperCheckBox) itemView.findViewById(R.id.cb_check);
             itemView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mImageSize)); //让图片是个正方形
         }
 
-        void bind(final int position){
+        void bind(final int position) {
             final ImageItem imageItem = getItem(position);
             ivThumb.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -154,7 +155,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                     cbCheck.setChecked(!cbCheck.isChecked());
                     int selectLimit = imagePicker.getSelectLimit();
                     if (cbCheck.isChecked() && mSelectedImages.size() >= selectLimit) {
-                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.ip_select_limit, selectLimit), Toast.LENGTH_SHORT).show();
+                        IToast.makeTextBottom(mActivity.getApplicationContext(), mActivity.getString(R.string.ip_select_limit, selectLimit), Toast.LENGTH_SHORT).show();
                         cbCheck.setChecked(false);
                         mask.setVisibility(View.GONE);
                     } else {
@@ -191,7 +192,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             mItemView = itemView;
         }
 
-        void bindCamera(){
+        void bindCamera() {
             mItemView.setLayoutParams(new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mImageSize)); //让图片是个正方形
             mItemView.setTag(null);
             mItemView.setOnClickListener(new View.OnClickListener() {

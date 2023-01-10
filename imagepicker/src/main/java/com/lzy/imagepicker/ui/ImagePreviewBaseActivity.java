@@ -1,17 +1,16 @@
 package com.lzy.imagepicker.ui;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.lzy.imagepicker.DataHolder;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.R;
 import com.lzy.imagepicker.adapter.ImagePageAdapter;
 import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.util.Utils;
 import com.lzy.imagepicker.view.ViewPagerFixed;
 
 import java.util.ArrayList;
@@ -62,29 +61,14 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
 
         //因为状态栏透明后，布局整体会上移，所以给头部加上状态栏的margin值，保证头部不会被覆盖
         topBar = findViewById(R.id.top_bar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) topBar.getLayoutParams();
-            params.topMargin = Utils.getStatusHeight(this);
-            topBar.setLayoutParams(params);
-        }
         topBar.findViewById(R.id.btn_ok).setVisibility(View.GONE);
-        topBar.findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        topBar.findViewById(R.id.btn_back).setOnClickListener(v -> finish());
 
         mTitleCount = (TextView) findViewById(R.id.tv_des);
 
         mViewPager = (ViewPagerFixed) findViewById(R.id.viewpager);
         mAdapter = new ImagePageAdapter(this, mImageItems);
-        mAdapter.setPhotoViewClickListener(new ImagePageAdapter.PhotoViewClickListener() {
-            @Override
-            public void OnPhotoTapListener(View view, float v, float v1) {
-                onImageSingleTap();
-            }
-        });
+        mAdapter.setPhotoViewClickListener((view, v, v1) -> onImageSingleTap());
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(mCurrentPosition, false);
 
@@ -92,7 +76,9 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
         mTitleCount.setText(getString(R.string.ip_preview_image_count, mCurrentPosition + 1, mImageItems.size()));
     }
 
-    /** 单击时，隐藏头和尾 */
+    /**
+     * 单击时，隐藏头和尾
+     */
     public abstract void onImageSingleTap();
 
     @Override
@@ -102,7 +88,7 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         ImagePicker.getInstance().saveInstanceState(outState);
     }

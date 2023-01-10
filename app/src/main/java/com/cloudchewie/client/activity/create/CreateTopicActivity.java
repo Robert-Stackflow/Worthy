@@ -10,7 +10,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,28 +171,10 @@ public class CreateTopicActivity extends BaseActivity {
 
             }
         });
-        nameEdit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                updatePublishState();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         Intent intent = getIntent();
         if (intent != null) {
             Serializable object = intent.getSerializableExtra("request_topic");
             if (object instanceof RequestTopic) {
-                Log.d("xuruida", "enter");
                 requestTopic = (RequestTopic) object;
                 if (requestTopic.getTopic() != null) {
                     Topic topic = requestTopic.getTopic();

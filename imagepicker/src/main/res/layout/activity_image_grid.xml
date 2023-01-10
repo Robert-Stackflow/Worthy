@@ -2,8 +2,7 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-    android:fitsSystemWindows="true"
+    android:background="#1B1B1B"
     android:orientation="vertical">
 
     <include
@@ -14,7 +13,7 @@
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#111111">
+        android:background="#000000">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
@@ -31,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/ip_color_primary">
+            android:background="#1B1B1B">
 
             <RelativeLayout
                 android:id="@+id/ll_dir"
@@ -50,35 +49,32 @@
                     android:includeFontPadding="false"
                     android:maxLines="1"
                     android:text="@string/ip_all_images"
-                    android:textColor="#CFCFCF"
+                    android:textColor="@color/text_color_white"
                     android:textSize="16sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/tv_dir"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_toRightOf="@id/tv_dir"
+                    android:layout_toEndOf="@id/tv_dir"
                     android:src="@mipmap/text_indicator" />
-
             </RelativeLayout>
-
 
             <TextView
                 android:id="@+id/btn_preview"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="预览(3)"
                 android:textAllCaps="false"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_color_white"
                 android:textSize="16sp" />
 
         </RelativeLayout>
-
     </RelativeLayout>
 </LinearLayout>

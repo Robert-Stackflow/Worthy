@@ -2,6 +2,7 @@ package com.cloudchewie.client.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.bean.ListBottomSheetBean;
+import com.cloudchewie.client.util.ui.SizeUtil;
 
 import java.util.List;
 
@@ -64,13 +66,16 @@ public class ListBottomSheetAdapter extends RecyclerView.Adapter<ListBottomSheet
         }
         if (position == 0) {
             holder.textView.setBackgroundResource(R.drawable.shape_round_top_dp10);
-            holder.textView.setBackgroundTintList(context.getColorStateList(R.color.color_selector_content));
+            holder.textView.setBackgroundTintList(context.getColorStateList(R.color.color_selector_card));
         }
         holder.textView.setText(cityBean.getText());
         holder.mItemView.setOnClickListener(v -> {
             if (listener != null)
                 listener.onItemClicked(position);
         });
+        holder.textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        holder.textView.setPadding(0, SizeUtil.dp2px(context, 15), 0, SizeUtil.dp2px(context, 15));
+        holder.textView.setBackgroundTintList(context.getColorStateList(R.color.color_selector_card));
     }
 
     @Override

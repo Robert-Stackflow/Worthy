@@ -13,9 +13,8 @@ import android.text.Html;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,13 +27,14 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.cloudchewie.client.R;
 import com.cloudchewie.client.activity.discover.ArticleDetailActivity;
 import com.cloudchewie.client.activity.global.BaseActivity;
+import com.cloudchewie.client.bean.ListBottomSheetBean;
 import com.cloudchewie.client.entity.Article;
 import com.cloudchewie.client.util.basic.DomainUtil;
 import com.cloudchewie.client.util.image.BitmapUtil;
 import com.cloudchewie.client.util.ui.KeyBoardUtil;
 import com.cloudchewie.client.util.ui.RichEditorUtil;
 import com.cloudchewie.client.util.ui.StatusBarUtil;
-import com.cloudchewie.client.util.widget.CommonPopupWindow;
+import com.cloudchewie.client.util.widget.ListBottomSheet;
 import com.cloudchewie.client.util.widget.RichEditor;
 import com.cloudchewie.ui.IToast;
 import com.cloudchewie.ui.MyDialog;
@@ -48,6 +48,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -60,7 +61,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
     ConstraintLayout operationLayout;
     String currentImageUrl = "";
     String currentImageHtml = "";
-    CommonPopupWindow popupWindow;
+    ListBottomSheet popupWindow;
     TextView cancelButton;
     TextView publishButton;
     TextView previewButton;
@@ -121,6 +122,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
         richEditor.setPlaceholder("分享你的打卡经历");
         richEditor.setInputEnabled(true);
         richEditor.setOnTextChangeListener(text -> {
+            Log.d("xuruida", richEditor.getHtml());
             if (TextUtils.isEmpty(title.getText().toString().trim())) {
                 setPublishEnabled(false);
                 return;
@@ -223,41 +225,40 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             }
             currentImageUrl = imageUrl;
             currentImageHtml = getImageHtml(currentImageUrl);
-            popupWindow.showBottom(getWindow().getDecorView().findViewById(android.R.id.content), 0.5f);
+            popupWindow.show();
         });
     }
 
     private void initImagePopupWindow() {
-        @SuppressLint("InflateParams") View view = LayoutInflater.from(CreateArticleActivity.this).inflate(R.layout.layout_post_image_operation, null);
-        view.findViewById(R.id.linear_cancle).setOnClickListener(v -> popupWindow.dismiss());
-        view.findViewById(R.id.linear_editor).setOnClickListener(v -> {
-            if (currentImageUrl.endsWith(".gif")) {
-                IToast.makeTextBottom(this, "暂不支持编辑.gif类型的图片", Toast.LENGTH_SHORT).show();
-            } else {
-                Intent intent = new Intent(CreateArticleActivity.this, UCropActivity.class);
-                intent.putExtra("filePath", currentImageUrl);
-                String destDir = getFilesDir().getAbsolutePath();
-                String fileName = "img_" + System.currentTimeMillis() + ".png";
-                intent.putExtra("outPath", destDir + fileName);
-                startActivityForResult(intent, 11);
+        List<String> operations = Arrays.asList(getResources().getStringArray(R.array.creation_image_operation));
+        popupWindow = new ListBottomSheet(this, ListBottomSheetBean.strToBean(operations));
+        popupWindow.setOnItemClickedListener(position -> {
+            if (position == 0) {
+                richEditor.setHtml(richEditor.getHtml().replace(currentImageHtml, ""));
+                if (RichEditorUtil.isEmpty(richEditor.getHtml())) richEditor.setHtml("");
+                currentImageUrl = "";
+                currentImageHtml = "";
                 popupWindow.dismiss();
+            } else if (position == 1) {
+                if (currentImageUrl.endsWith(".gif")) {
+                    IToast.makeTextBottom(this, "暂不支持编辑.gif类型的图片", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(CreateArticleActivity.this, UCropActivity.class);
+                    intent.putExtra("filePath", currentImageUrl);
+                    String destDir = getFilesDir().getAbsolutePath();
+                    String fileName = "img_" + System.currentTimeMillis() + ".png";
+                    intent.putExtra("outPath", destDir + fileName);
+                    startActivityForResult(intent, 11);
+                    popupWindow.dismiss();
+                }
+            } else if (position == 2) {
+                IToast.makeTextBottom(this, "图片保存成功", Toast.LENGTH_SHORT).show();
+                popupWindow.dismiss();
+                currentImageUrl = "";
+                currentImageHtml = "";
             }
         });
-        view.findViewById(R.id.linear_delete_pic).setOnClickListener(v -> {
-            richEditor.setHtml(richEditor.getHtml().replace(currentImageHtml, ""));
-            if (RichEditorUtil.isEmpty(richEditor.getHtml())) richEditor.setHtml("");
-            currentImageUrl = "";
-            currentImageHtml = "";
-            popupWindow.dismiss();
-        });
-        view.findViewById(R.id.linear_download_pic).setOnClickListener(v -> {
-            IToast.makeTextBottom(this, "图片保存成功", Toast.LENGTH_SHORT).show();
-            popupWindow.dismiss();
-            currentImageUrl = "";
-            currentImageHtml = "";
-        });
-        popupWindow = new CommonPopupWindow.Builder(CreateArticleActivity.this).setView(view).setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).setOutsideTouchable(true).setAnimationStyle(R.style.UpDownAnimation).create();
-        popupWindow.setOnDismissListener(() -> richEditor.setInputEnabled(true));
+        popupWindow.setOnDismissListener(dialog -> richEditor.setInputEnabled(true));
     }
 
     String getImageHtml(String url) {
@@ -303,7 +304,7 @@ public class CreateArticleActivity extends BaseActivity implements View.OnClickL
             startActivity(intent);
         });
         publishButton.setOnClickListener(v -> {
-            if (richEditor.getHtml().length() < 200)
+            if (RichEditorUtil.getPlainText(richEditor.getHtml()).length() < 200)
                 IToast.makeTextTop(this, "您的文章字数过少,暂时无法发布!", Toast.LENGTH_SHORT).show();
             else {
                 IToast.makeTextBottom(this, "文章发布成功", Toast.LENGTH_SHORT).show();

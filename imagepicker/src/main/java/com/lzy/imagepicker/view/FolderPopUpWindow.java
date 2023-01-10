@@ -28,15 +28,15 @@ import com.lzy.imagepicker.R;
  */
 public class FolderPopUpWindow extends PopupWindow implements View.OnClickListener {
 
-    private ListView listView;
-    private OnItemClickListener onItemClickListener;
     private final View masker;
     private final View marginView;
+    private ListView listView;
+    private OnItemClickListener onItemClickListener;
     private int marginPx;
 
     public FolderPopUpWindow(Context context, BaseAdapter adapter) {
         super(context);
-
+        setClippingEnabled(false);
         final View view = View.inflate(context, R.layout.pop_folder, null);
         masker = view.findViewById(R.id.masker);
         masker.setOnClickListener(this);
@@ -46,7 +46,7 @@ public class FolderPopUpWindow extends PopupWindow implements View.OnClickListen
         listView.setAdapter(adapter);
 
         setContentView(view);
-        setWidth(ViewGroup.LayoutParams.MATCH_PARENT);  //如果不设置，就是 AnchorView 的宽度
+        setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         setFocusable(true);
         setOutsideTouchable(true);
@@ -59,7 +59,7 @@ public class FolderPopUpWindow extends PopupWindow implements View.OnClickListen
                 int maxHeight = view.getHeight() * 5 / 8;
                 int realHeight = listView.getHeight();
                 ViewGroup.LayoutParams listParams = listView.getLayoutParams();
-                listParams.height = realHeight > maxHeight ? maxHeight : realHeight;
+                listParams.height = Math.min(realHeight, maxHeight);
                 listView.setLayoutParams(listParams);
                 LinearLayout.LayoutParams marginParams = (LinearLayout.LayoutParams) marginView.getLayoutParams();
                 marginParams.height = marginPx;
@@ -67,11 +67,9 @@ public class FolderPopUpWindow extends PopupWindow implements View.OnClickListen
                 enterAnimator();
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (onItemClickListener != null) onItemClickListener.onItemClick(adapterView, view, position, l);
-            }
+        listView.setOnItemClickListener((adapterView, view1, position, l) -> {
+            if (onItemClickListener != null)
+                onItemClickListener.onItemClick(adapterView, view1, position, l);
         });
     }
 

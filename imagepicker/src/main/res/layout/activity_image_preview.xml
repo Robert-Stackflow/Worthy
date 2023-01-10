@@ -3,13 +3,13 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="#1B1B1B">
 
     <com.lzy.imagepicker.view.ViewPagerFixed
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000" />
+        android:background="#000000" />
 
     <include
         android:id="@+id/top_bar"
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#cc22292c"
+        android:background="#1B1B1B"
         android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="visible">
@@ -34,25 +34,27 @@
                 style="@style/SuperCheckboxTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:paddingLeft="8dp"
+                android:layout_marginStart="10dp"
+                android:paddingStart="8dp"
                 android:text="原图(3.07M)"
                 android:textColor="#FFF"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                tools:ignore="RtlSymmetry" />
 
             <com.lzy.imagepicker.view.SuperCheckBox
                 android:id="@+id/cb_check"
                 style="@style/SuperCheckboxTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="12dp"
+                android:layout_marginEnd="12dp"
                 android:drawablePadding="4dp"
                 android:includeFontPadding="true"
-                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
                 android:text="选择"
-                android:textColor="#ffffff" />
+                android:textColor="@color/text_color_white"
+                tools:ignore="RtlSymmetry" />
         </RelativeLayout>
 
         <View

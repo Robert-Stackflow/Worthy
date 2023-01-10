@@ -1,5 +1,6 @@
 package com.lzy.imagepicker.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -25,6 +26,7 @@ public class ViewPagerFixed extends ViewPager {
         super(context, attrs);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         try {

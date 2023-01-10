@@ -56,15 +56,9 @@
         <!--主界面-->
         <activity android:name=".activity.MainActivity" />
         <!--通用-->
-        <activity
-            android:name=".activity.auth.LoginActivity"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activity.auth.LoginByMobileActivity"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activity.auth.SignupActivity"
-            android:launchMode="singleInstance" />
+        <activity android:name=".activity.auth.LoginActivity" />
+        <activity android:name=".activity.auth.LoginByMobileActivity" />
+        <activity android:name=".activity.auth.SignupActivity" />
         <!--地图-->
         <activity android:name=".activity.map.SelectCityActivity" />
         <activity android:name=".activity.map.SelectLocationActivity" />
@@ -104,6 +98,7 @@
         <!--设置-->
         <activity android:name=".activity.settings.AboutActivity" />
         <activity android:name=".activity.settings.SettingsActivity" />
+        <activity android:name=".activity.settings.FeedbackActivity" />
         <activity android:name=".activity.settings.ChangePasswordActivity" />
         <activity android:name=".activity.settings.GeneralSettingsActivity" />
         <activity android:name=".activity.settings.PrivacySettingsActivity" />
